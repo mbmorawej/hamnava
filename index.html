@@ -641,6 +641,7 @@ function route(){
  document.body.classList.add('hn-ready');
  document.querySelectorAll('[data-page]').forEach(n=>n.classList.toggle('hn-current',!!user && n.dataset.page===page));
  $('home').classList.toggle('hidden',!user || page!=='home');
+ $('home').classList.toggle('hn-current',!!user && page==='home');
  document.querySelectorAll('.side-link[href^="#"]').forEach(n=>n.classList.toggle('active',n.getAttribute('href')==='#'+page));
  document.body.classList.remove('nav-open');$('menuToggle').setAttribute('aria-expanded','false');
  if(page==='home' && user)renderHome();if(page==='users' && user && isAdmin)hnLoadUsers(true);
