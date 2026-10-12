@@ -551,7 +551,26 @@ body .side-link.active{background:linear-gradient(105deg,#6b2caa,#a23c9f,#ed7951
   #homeMusic > .hn-section-heading > a { font-size: 12px !important; }
 }
 </style>
-</head><body class="logged-out"><div class="hn-topbar" id="hnTopbar" role="navigation" aria-label="Hauptnavigation"><button type="button" id="hnMobileNavButton" aria-label="Seitenmenü öffnen" aria-controls="siteSidebar" aria-expanded="false">☰</button><a class="hn-home" href="#home" aria-label="Startseite">⌂</a><label class="hn-search-wrap"><span class="hn-search-icon">⌕</span><input id="hnGlobalSearch" type="search" placeholder="Was möchtest du hören?" autocomplete="off" aria-label="Musik durchsuchen"/><button id="hnAdvancedToggle" type="button" aria-expanded="false" aria-controls="hnAdvancedPanel" title="Erweiterte Suche">☷ <span>Filter</span></button></label><div class="hn-actions"><a class="hn-desktop-action" href="#playlists">Meine Playlists</a><a class="hn-desktop-action" href="#favorites" aria-label="Favoriten" title="Favoriten">♡</a><button class="hn-avatar" id="hnProfile" type="button" title="Mein Profil" aria-label="Profil">☺</button></div></div><aside class="sidebar" dir="ltr" id="siteSidebar"><a class="brand" href="#home"><img class="brand-mark" src="hamnava-logo.webp" alt="HamNava Logo"/><span>HamNava</span></a><div class="side-caption">Deine Bibliothek</div><a class="side-link active" href="#home"><span>⌂</span><span>Startseite</span></a><a class="side-link" href="#library"><span>♫</span><span>Musikbibliothek</span></a><a class="side-link" href="#artists"><span>♬</span><span>Künstler A–Z</span></a><a class="side-link" href="#favorites"><span>♥</span><span>Favoriten</span></a><a class="side-link" href="#playlists"><span>▤</span><span>Meine Playlists</span></a><a class="side-link" href="#ai"><span>✨</span><span>AI Music Studio</span></a><a class="side-link hidden" id="hnUsersNav" href="#users"><span>🛡</span><span>Benutzerverwaltung</span></a><a class="side-link" href="add-song.html"><span>＋</span><span>Lied hinzufügen</span></a><div class="hn-create-area"><div class="hn-library-head"><span>▤ Bibliothek</span><button id="hnCreateBtn" type="button" aria-expanded="false">＋ Erstellen</button></div><div id="hnCreateMenu" class="hn-create-menu" hidden><button id="hnCreatePlaylist" type="button">♫ &nbsp; Playlist erstellen</button><button type="button" disabled title="Benötigt Datenbank-Erweiterung">♧ &nbsp; Gemeinsamer Mix · bald</button><button type="button" disabled title="Benötigt Datenbank-Erweiterung">▱ &nbsp; Ordner · bald</button></div></div><div id="hnPlaylistSidebar" class="hn-playlist-sidebar" aria-label="Meine Playlists"></div><div class="hn-genre-sidebar"><div class="side-caption">Musikrichtungen</div><div id="hnGenreSidebarLinks" class="hn-genre-sidebar-links"></div></div>
+<style id="hn-docked-mini-player-v37">
+/* Minimiert: direkt unter der Hauptnavigation fest angedockt. */
+body.hn-playing.hn-player-mini:not(.hn-player-fullscreen) .hn-player-window {
+ position:fixed!important;
+ top:var(--hn-dock-top,80px)!important;
+ left:var(--hn-dock-left,0px)!important;
+ right:auto!important;bottom:auto!important;
+ width:var(--hn-dock-width,100vw)!important;
+ max-width:none!important;
+ height:auto!important;min-height:0!important;
+ border-radius:0 0 15px 15px!important;
+ z-index:90!important;
+ box-shadow:0 9px 24px rgba(0,0,0,.32)!important;
+ transform:none!important;
+}
+body.hn-player-mini:not(.hn-player-fullscreen) .hn-player-label{cursor:default!important;touch-action:auto!important}
+body.hn-player-mini:not(.hn-player-fullscreen) .hn-drag-hint{display:none!important}
+body.hn-player-mini:not(.hn-player-fullscreen) .hn-player-content{max-width:1100px;margin:auto}
+@media(max-width:760px){body.hn-playing.hn-player-mini:not(.hn-player-fullscreen) .hn-player-window{border-radius:0 0 12px 12px!important}}
+</style></head><body class="logged-out"><div class="hn-topbar" id="hnTopbar" role="navigation" aria-label="Hauptnavigation"><button type="button" id="hnMobileNavButton" aria-label="Seitenmenü öffnen" aria-controls="siteSidebar" aria-expanded="false">☰</button><a class="hn-home" href="#home" aria-label="Startseite">⌂</a><label class="hn-search-wrap"><span class="hn-search-icon">⌕</span><input id="hnGlobalSearch" type="search" placeholder="Was möchtest du hören?" autocomplete="off" aria-label="Musik durchsuchen"/><button id="hnAdvancedToggle" type="button" aria-expanded="false" aria-controls="hnAdvancedPanel" title="Erweiterte Suche">☷ <span>Filter</span></button></label><div class="hn-actions"><a class="hn-desktop-action" href="#playlists">Meine Playlists</a><a class="hn-desktop-action" href="#favorites" aria-label="Favoriten" title="Favoriten">♡</a><button class="hn-avatar" id="hnProfile" type="button" title="Mein Profil" aria-label="Profil">☺</button></div></div><aside class="sidebar" dir="ltr" id="siteSidebar"><a class="brand" href="#home"><img class="brand-mark" src="hamnava-logo.webp" alt="HamNava Logo"/><span>HamNava</span></a><div class="side-caption">Deine Bibliothek</div><a class="side-link active" href="#home"><span>⌂</span><span>Startseite</span></a><a class="side-link" href="#library"><span>♫</span><span>Musikbibliothek</span></a><a class="side-link" href="#artists"><span>♬</span><span>Künstler A–Z</span></a><a class="side-link" href="#favorites"><span>♥</span><span>Favoriten</span></a><a class="side-link" href="#playlists"><span>▤</span><span>Meine Playlists</span></a><a class="side-link" href="#ai"><span>✨</span><span>AI Music Studio</span></a><a class="side-link hidden" id="hnUsersNav" href="#users"><span>🛡</span><span>Benutzerverwaltung</span></a><a class="side-link" href="add-song.html"><span>＋</span><span>Lied hinzufügen</span></a><div class="hn-create-area"><div class="hn-library-head"><span>▤ Bibliothek</span><button id="hnCreateBtn" type="button" aria-expanded="false">＋ Erstellen</button></div><div id="hnCreateMenu" class="hn-create-menu" hidden><button id="hnCreatePlaylist" type="button">♫ &nbsp; Playlist erstellen</button><button type="button" disabled title="Benötigt Datenbank-Erweiterung">♧ &nbsp; Gemeinsamer Mix · bald</button><button type="button" disabled title="Benötigt Datenbank-Erweiterung">▱ &nbsp; Ordner · bald</button></div></div><div id="hnPlaylistSidebar" class="hn-playlist-sidebar" aria-label="Meine Playlists"></div><div class="hn-genre-sidebar"><div class="side-caption">Musikrichtungen</div><div id="hnGenreSidebarLinks" class="hn-genre-sidebar-links"></div></div>
 <div id="hnSidebarManage" class="hn-sidebar-manage"></div><div class="side-footer">Musik, Freunde, Erinnerungen<br/>HamNava · Version 36</div></aside><div id="navBackdrop" class="nav-backdrop" hidden></div><main><header><button id="menuToggle" class="menu-toggle alt" type="button" aria-label="Menü öffnen" aria-expanded="false">☰</button><div><h1><img class="logo" src="hamnava-logo.webp" alt=""/> Ham<span class="gold">Nava</span></h1><p>Gute Songs, gute Freunde, gemeinsame Erinnerungen</p></div><div id="identity"></div></header><div id="hnAdvancedPanel" hidden role="region" aria-label="Erweiterte Suche"><div class="hn-filter-grid"><label>Song oder Interpret<input id="hnAdvText" type="search" placeholder="Songtitel oder Künstlername"></label><label>Interpret<select id="hnAdvArtist"><option value="">Alle Interpreten</option></select></label><label>Musikrichtung<select id="hnAdvGenre"><option value="">Alle Musikrichtungen</option></select></label><label>Quelle<select id="hnAdvSource"><option value="">Alle Quellen</option><option value="hosted">MP3</option><option value="youtube">YouTube</option><option value="spotify">Spotify</option></select></label><label>Sortieren<select id="hnAdvSort"><option value="newest">Neueste zuerst</option><option value="oldest">Älteste zuerst</option><option value="az">Titel A–Z</option><option value="artist">Interpret A–Z</option></select></label></div><div class="hn-filter-actions"><button type="button" id="hnAdvApply">⌕ Suchen</button><button type="button" id="hnAdvReset">↺ Zurücksetzen</button></div></div>
 <section class="hero hidden hn-hero-carousel" dir="ltr" id="home" aria-label="HamNava Highlights"><div class="hn-hero-slides" aria-hidden="true"><div class="hn-hero-slide is-active"></div><div class="hn-hero-slide"></div><div class="hn-hero-slide"></div></div><div class="hero-copy"><div class="eyebrow">MUSIK · FREUNDE · ERINNERUNGEN</div><h2>Willkommen bei<br/><em>HamNava</em></h2><p>Entdecke Musik, die verbindet.</p><a href="#homeMusic" id="heroDiscover">Jetzt Musik entdecken ↗</a></div><img class="hero-portrait" src="hero-artist.webp" alt="Illustration eines Sängers"/><div class="hero-quote">„Gute Musik verbindet Menschen – heute und immer.“</div><div class="hn-hero-controls"><button type="button" id="hnHeroPrev" aria-label="Vorheriger Banner">‹</button><div id="hnHeroDots" aria-label="Banner auswählen"></div><button type="button" id="hnHeroNext" aria-label="Nächster Banner">›</button></div></section>
 <section class="panel" id="homeMusic" data-page="home"><div class="home-heading"><div><h2>Entdecke deine Musik</h2><p>Musik, Freunde und gemeinsame Erinnerungen.</p></div></div><label class="home-search">Songs oder Künstler suchen<input id="homeSearch" type="search" placeholder="Songtitel oder Künstlername eingeben" autocomplete="off"></label><h2>🔥 Meistgehörte Songs</h2><p class="home-hint" id="popularHint">Beliebte Lieder aus der Musikbibliothek</p><div class="songs featured-songs" id="popularSongs"></div><div class="hn-section-heading"><h2>💿 Beliebte Alben und Singles</h2><a href="#library">Alle anzeigen →</a></div><p class="hn-section-note">Singles aus unserer Musikbibliothek</p><div id="hnSingles" class="hn-shelf"></div><div class="hn-section-heading"><h2>📈 Empfohlene Charts</h2><a href="#library">Alle anzeigen →</a></div><div id="hnCharts" class="hn-shelf"></div><div class="hn-section-heading"><h2>📻 Beliebte Radios</h2><a href="#library">Alle anzeigen →</a></div><div id="hnRadios" class="hn-shelf"></div><div class="hn-section-heading"><h2>🎤 Künstler von A–Z</h2><a href="#artists">Alle anzeigen →</a></div><div id="homeArtists" class="artist-chips artist-portraits"></div><div class="hn-section-heading"><h2>🆕 Neu hinzugefügt</h2><a href="#library">Alle anzeigen →</a></div><div class="songs" id="homeSongs"></div></section>
@@ -1070,10 +1089,36 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.class
 
 // HamNava 17: minimierbarer und frei verschiebbarer Player.
 const hnPlayerWindow=document.querySelector('.hn-player-window');
+let hnSavedFloatingPosition=null;
+function hnUpdateDockPosition(){
+ if(!document.body.classList.contains('hn-player-mini'))return;
+ const nav=document.getElementById('hnTopbar');
+ const rect=nav?.getBoundingClientRect();
+ // Dock beneath the visible fixed main menu, not beneath the scrollable page header.
+ const bottom=rect?Math.max(0,rect.bottom):0;
+ const sidebar=document.querySelector('aside');
+ const desktop=window.matchMedia('(min-width: 761px)').matches;
+ const sideRect=desktop?sidebar?.getBoundingClientRect():null;
+ const left=sideRect&&sideRect.width>0&&sideRect.right>0?Math.min(innerWidth,sideRect.right):0;
+ hnPlayerWindow.style.setProperty('--hn-dock-top',bottom+'px');
+ hnPlayerWindow.style.setProperty('--hn-dock-left',left+'px');
+ hnPlayerWindow.style.setProperty('--hn-dock-width',Math.max(200,innerWidth-left)+'px');
+}
 const hnMiniButton=$('hnPlayerMinimize');
 hnMiniButton.addEventListener('click',()=>{
  if(document.body.classList.contains('hn-player-fullscreen'))hnSetFullscreen(false);
  const mini=document.body.classList.toggle('hn-player-mini');
+ if(mini){
+  hnSavedFloatingPosition={left:hnPlayerWindow.style.getPropertyValue('--hn-player-left'),top:hnPlayerWindow.style.getPropertyValue('--hn-player-top')};
+  hnUpdateDockPosition();
+ }
+ else {
+  // Restore the former floating position without restarting playback.
+  if(hnSavedFloatingPosition){
+   hnPlayerWindow.style.setProperty('--hn-player-left',hnSavedFloatingPosition.left);
+   hnPlayerWindow.style.setProperty('--hn-player-top',hnSavedFloatingPosition.top);
+  }
+ }
  hnMiniButton.textContent=mini?'□ Vergrößern':'− Minimieren';
  hnMiniButton.setAttribute('aria-label',mini?'Player vergrößern':'Player minimieren');
  hnMiniButton.setAttribute('aria-pressed',String(mini));
@@ -1081,6 +1126,7 @@ hnMiniButton.addEventListener('click',()=>{
 });
 function hnKeepPlayerInViewport(){
  if(!document.body.classList.contains('hn-playing'))return;
+ if(document.body.classList.contains('hn-player-mini')){hnUpdateDockPosition();return;}
  const r=hnPlayerWindow.getBoundingClientRect();
  if(r.width===0)return;
  const left=Math.max(0,Math.min(r.left,innerWidth-r.width));
@@ -1092,7 +1138,7 @@ function hnKeepPlayerInViewport(){
 }
 let hnDrag=null;
 $('hnPlayerDrag').addEventListener('pointerdown',e=>{
- if(document.body.classList.contains('hn-player-fullscreen'))return;
+ if(document.body.classList.contains('hn-player-fullscreen')||document.body.classList.contains('hn-player-mini'))return;
  if(e.button!==0)return;
  const r=hnPlayerWindow.getBoundingClientRect();
  hnDrag={id:e.pointerId,x:e.clientX,y:e.clientY,left:r.left,top:r.top};
@@ -1109,7 +1155,7 @@ $('hnPlayerDrag').addEventListener('pointermove',e=>{
 function hnEndDrag(e){if(hnDrag?.id===e.pointerId)hnDrag=null}
 $('hnPlayerDrag').addEventListener('pointerup',hnEndDrag);
 $('hnPlayerDrag').addEventListener('pointercancel',hnEndDrag);
-window.addEventListener('resize',hnKeepPlayerInViewport);
+window.addEventListener('resize',()=>{hnUpdateDockPosition();hnKeepPlayerInViewport()});
 
 
 
