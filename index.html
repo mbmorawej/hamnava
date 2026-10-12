@@ -340,7 +340,7 @@ body.hn-ready main > #hnFooter:not(.hn-current),body.logged-out main > #hnFooter
 </style><style id="hn-hybrid-phase2-css">
 #hnExternalAdd{margin:18px 0 24px;border:1px solid #34536b;border-radius:17px;background:#13273b;padding:20px}
 #hnExternalAdd[hidden]{display:none!important}#hnExternalAdd h3{margin:0 0 8px;color:#f2ad52}#hnExternalAdd .hn-ext-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}#hnExternalAdd .hn-ext-help{font-size:12px;color:#aec4d5;line-height:1.7}#hnExternalAdd .hn-ext-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}#hnExternalAddStatus{min-height:25px;white-space:pre-wrap}#hnExternalAdd input,#hnExternalAdd select{margin-top:6px}#hnExternalAdd input[type=checkbox]{width:auto;display:inline;margin:0 8px 0 0}#hnExternalAdd .hn-confirm{display:flex;align-items:flex-start;gap:5px;line-height:1.6;margin-top:14px}#hnExternalAddToggle{margin:12px 0;background:#1d4654!important;color:#fff!important}#hnExternalAddToggle[hidden]{display:none!important}@media(max-width:650px){#hnExternalAdd .hn-ext-grid{grid-template-columns:1fr}#hnExternalAdd{padding:14px}}
-</style><style id="hn-phase3-images">.hn-img-hint{display:block;color:#a8bfd0;font-size:12px;margin:7px 0}.hn-ext-preview{display:block;max-width:190px;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;margin-top:9px;border:1px solid #34516a}.hn-ext-preview[hidden]{display:none!important}#hnExtArtistUpload{font-size:13px;padding:10px!important;max-width:100%}</style></head><body class="logged-out"><div class="hn-topbar" id="hnTopbar" role="navigation" aria-label="Hauptnavigation"><button type="button" id="hnMobileNavButton" aria-label="Seitenmenü öffnen" aria-controls="siteSidebar" aria-expanded="false">☰</button><a class="hn-home" href="#home" aria-label="Startseite">⌂</a><label class="hn-search-wrap"><span class="hn-search-icon">⌕</span><input id="hnGlobalSearch" type="search" placeholder="Was möchtest du hören?" autocomplete="off" aria-label="Musik durchsuchen"/><a href="#library" title="Bibliothek" aria-label="Bibliothek">▣</a></label><div class="hn-actions"><a class="hn-desktop-action" href="#playlists">Meine Playlists</a><a class="hn-desktop-action" href="#favorites" aria-label="Favoriten" title="Favoriten">♡</a><button class="hn-avatar" id="hnProfile" type="button" title="Mein Profil" aria-label="Profil">☺</button></div></div><aside class="sidebar" dir="ltr" id="siteSidebar"><a class="brand" href="#home"><img class="brand-mark" src="hamnava-logo.webp" alt="HamNava Logo"/><span>HamNava</span></a><div class="side-caption">Deine Bibliothek</div><a class="side-link active" href="#home"><span>⌂</span><span>Startseite</span></a><a class="side-link" href="#library"><span>♫</span><span>Musikbibliothek</span></a><a class="side-link" href="#artists"><span>♬</span><span>Künstler A–Z</span></a><a class="side-link" href="#favorites"><span>♥</span><span>Favoriten</span></a><a class="side-link" href="#playlists"><span>▤</span><span>Meine Playlists</span></a><a class="side-link" href="#ai"><span>✨</span><span>AI Music Studio</span></a><a class="side-link hidden" id="hnUsersNav" href="#users"><span>🛡</span><span>Benutzerverwaltung</span></a><a class="side-link" href="add-song.html"><span>＋</span><span>Lied hinzufügen</span></a><div class="hn-create-area"><div class="hn-library-head"><span>▤ Bibliothek</span><button id="hnCreateBtn" type="button" aria-expanded="false">＋ Erstellen</button></div><div id="hnCreateMenu" class="hn-create-menu" hidden><button id="hnCreatePlaylist" type="button">♫ &nbsp; Playlist erstellen</button><button type="button" disabled title="Benötigt Datenbank-Erweiterung">♧ &nbsp; Gemeinsamer Mix · bald</button><button type="button" disabled title="Benötigt Datenbank-Erweiterung">▱ &nbsp; Ordner · bald</button></div></div><div id="hnPlaylistSidebar" class="hn-playlist-sidebar" aria-label="Meine Playlists"></div><div class="hn-genre-sidebar"><div class="side-caption">Musikrichtungen</div><div id="hnGenreSidebarLinks" class="hn-genre-sidebar-links"></div></div>
+</style><style id="hn-phase3-images">.hn-img-hint{display:block;color:#a8bfd0;font-size:12px;margin:7px 0}.hn-ext-preview{display:block;max-width:190px;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;margin-top:9px;border:1px solid #34516a}.hn-ext-preview[hidden]{display:none!important}#hnExtArtistUpload{font-size:13px;padding:10px!important;max-width:100%}</style><style id="hn-bulk-css">#hnBulkPanel{margin:20px 0;padding:18px;border:1px solid #3b6574;border-radius:15px;background:#102438}#hnBulkPanel[hidden]{display:none!important}#hnBulkPanel textarea{width:100%;min-height:130px;font:13px/1.5 monospace;resize:vertical}#hnBulkPanel .hn-bulk-actions{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}#hnBulkStatus{white-space:pre-wrap;line-height:1.6}#hnBulkPreview{max-height:260px;overflow:auto}#hnBulkPreview table{width:100%;font-size:12px;border-collapse:collapse}#hnBulkPreview td,#hnBulkPreview th{border-bottom:1px solid #385064;padding:6px;text-align:left}#hnBulkPanel small{color:#afc7d7}</style></head><body class="logged-out"><div class="hn-topbar" id="hnTopbar" role="navigation" aria-label="Hauptnavigation"><button type="button" id="hnMobileNavButton" aria-label="Seitenmenü öffnen" aria-controls="siteSidebar" aria-expanded="false">☰</button><a class="hn-home" href="#home" aria-label="Startseite">⌂</a><label class="hn-search-wrap"><span class="hn-search-icon">⌕</span><input id="hnGlobalSearch" type="search" placeholder="Was möchtest du hören?" autocomplete="off" aria-label="Musik durchsuchen"/><a href="#library" title="Bibliothek" aria-label="Bibliothek">▣</a></label><div class="hn-actions"><a class="hn-desktop-action" href="#playlists">Meine Playlists</a><a class="hn-desktop-action" href="#favorites" aria-label="Favoriten" title="Favoriten">♡</a><button class="hn-avatar" id="hnProfile" type="button" title="Mein Profil" aria-label="Profil">☺</button></div></div><aside class="sidebar" dir="ltr" id="siteSidebar"><a class="brand" href="#home"><img class="brand-mark" src="hamnava-logo.webp" alt="HamNava Logo"/><span>HamNava</span></a><div class="side-caption">Deine Bibliothek</div><a class="side-link active" href="#home"><span>⌂</span><span>Startseite</span></a><a class="side-link" href="#library"><span>♫</span><span>Musikbibliothek</span></a><a class="side-link" href="#artists"><span>♬</span><span>Künstler A–Z</span></a><a class="side-link" href="#favorites"><span>♥</span><span>Favoriten</span></a><a class="side-link" href="#playlists"><span>▤</span><span>Meine Playlists</span></a><a class="side-link" href="#ai"><span>✨</span><span>AI Music Studio</span></a><a class="side-link hidden" id="hnUsersNav" href="#users"><span>🛡</span><span>Benutzerverwaltung</span></a><a class="side-link" href="add-song.html"><span>＋</span><span>Lied hinzufügen</span></a><div class="hn-create-area"><div class="hn-library-head"><span>▤ Bibliothek</span><button id="hnCreateBtn" type="button" aria-expanded="false">＋ Erstellen</button></div><div id="hnCreateMenu" class="hn-create-menu" hidden><button id="hnCreatePlaylist" type="button">♫ &nbsp; Playlist erstellen</button><button type="button" disabled title="Benötigt Datenbank-Erweiterung">♧ &nbsp; Gemeinsamer Mix · bald</button><button type="button" disabled title="Benötigt Datenbank-Erweiterung">▱ &nbsp; Ordner · bald</button></div></div><div id="hnPlaylistSidebar" class="hn-playlist-sidebar" aria-label="Meine Playlists"></div><div class="hn-genre-sidebar"><div class="side-caption">Musikrichtungen</div><div id="hnGenreSidebarLinks" class="hn-genre-sidebar-links"></div></div>
 <div id="hnSidebarManage" class="hn-sidebar-manage"></div><div class="side-footer">Musik, Freunde, Erinnerungen<br/>HamNava · Version 36</div></aside><div id="navBackdrop" class="nav-backdrop" hidden></div><main><header><button id="menuToggle" class="menu-toggle alt" type="button" aria-label="Menü öffnen" aria-expanded="false">☰</button><div><h1><img class="logo" src="hamnava-logo.webp" alt=""/> Ham<span class="gold">Nava</span></h1><p>Gute Songs, gute Freunde, gemeinsame Erinnerungen</p></div><div id="identity"></div></header><section class="hero hidden" dir="ltr" id="home"><div class="hero-copy"><div class="eyebrow">MUSIK · FREUNDE · ERINNERUNGEN</div><h2>Willkommen bei<br/><em>HamNava</em></h2><p>Entdecke Musik, die verbindet.</p><a href="#homeMusic" id="heroDiscover">Jetzt Musik entdecken ↗</a></div><img class="hero-portrait" src="hero-artist.webp" alt="Illustration eines Sängers"/><div class="hero-quote">„Gute Musik verbindet Menschen – heute und immer.“</div></section>
 <section class="panel" id="homeMusic" data-page="home"><div class="home-heading"><div><h2>Entdecke deine Musik</h2><p>Musik, Freunde und gemeinsame Erinnerungen.</p></div></div><label class="home-search">Songs oder Künstler suchen<input id="homeSearch" type="search" placeholder="Songtitel oder Künstlername eingeben" autocomplete="off"></label><h2>🔥 Meistgehörte Songs</h2><p class="home-hint" id="popularHint">Beliebte Lieder aus der Musikbibliothek</p><div class="songs featured-songs" id="popularSongs"></div><div class="hn-section-heading"><h2>💿 Beliebte Alben und Singles</h2><a href="#library">Alle anzeigen →</a></div><p class="hn-section-note">Singles aus unserer Musikbibliothek</p><div id="hnSingles" class="hn-shelf"></div><div class="hn-section-heading"><h2>📈 Empfohlene Charts</h2><a href="#library">Alle anzeigen →</a></div><div id="hnCharts" class="hn-shelf"></div><div class="hn-section-heading"><h2>📻 Beliebte Radios</h2><a href="#library">Alle anzeigen →</a></div><div id="hnRadios" class="hn-shelf"></div><div class="hn-section-heading"><h2>🎤 Künstler von A–Z</h2><a href="#artists">Alle anzeigen →</a></div><div id="homeArtists" class="artist-chips artist-portraits"></div><div class="hn-section-heading"><h2>🆕 Neu hinzugefügt</h2><a href="#library">Alle anzeigen →</a></div><div class="songs" id="homeSongs"></div></section>
 <section class="panel" id="artists" data-page="artists"><h2>🎤 Künstler von A–Z</h2><p>Wähle einen Künstler, um seine Lieder anzuhören.</p><div id="artistsList" class="artist-chips"></div><div id="artistSongs" class="songs"></div></section>
@@ -349,6 +349,16 @@ body.hn-ready main > #hnFooter:not(.hn-current),body.logged-out main > #hnFooter
 <section class="panel hidden" id="auth"><h2>Anmelden oder registrieren</h2><div class="grid"><label>E-Mail<input autocomplete="email" id="email" type="email"/></label><label>Passwort<input autocomplete="current-password" id="password" minlength="6" type="password"/></label></div><div class="actions"><button id="login">Anmelden</button><button class="alt" id="signup">Registrieren</button><button class="alt" id="hnForgotPassword" type="button">Passwort vergessen?</button><button class="alt" id="changeConfig">Verbindung ändern</button></div><p class="status" id="authStatus" role="status"></p><div id="hnRecoveryBox" hidden><h3>Neues Passwort festlegen</h3><label>Neues Passwort<input id="hnRecoveryPassword" type="password" autocomplete="new-password" minlength="12" placeholder="Mindestens 12 Zeichen"></label><button id="hnRecoverySave" type="button">Neues Passwort speichern</button><p id="hnRecoveryStatus" class="status" role="status"></p></div></section>
 <div class="hidden" id="app">
 <div class="add-tile" data-page="library"><div><strong>Einen neuen Song?</strong><p>Füge einen Song oder eine MP3 auf einer eigenen Seite hinzu.</p></div><a href="add-song.html">＋ Neuen Lied hinzufügen ↗</a></div><section class="panel" id="library" data-page="library"><button type="button" id="hnExternalAddToggle" hidden>＋ YouTube / Spotify hinzufügen</button>
+<button type="button" id="hnBulkToggle" hidden>📥 Bulk Import (CSV)</button><div id="hnBulkPanel" hidden>
+<h3>📥 Mehrere Songs importieren (CSV)</h3>
+<p>Nur YouTube- und Spotify-Links. Es werden keine MP3-Dateien kopiert. Maximal 300 Zeilen pro Import.</p>
+<p><small>CSV-Spalten: <code>source_type,title,artist,url,cover_url,artist_image_url,genre</code>. Pflicht: source_type, title, artist, url. Trennzeichen Komma oder Semikolon. UTF-8.</small></p>
+<div class="hn-bulk-actions"><button type="button" id="hnBulkSample" class="alt">CSV-Muster herunterladen</button><label style="display:inline-block">CSV-Datei wählen <input id="hnBulkFile" type="file" accept=".csv,text/csv,text/plain"></label></div>
+<label>Oder CSV hier einfügen<textarea id="hnBulkText" placeholder="source_type,title,artist,url,cover_url,artist_image_url,genre"></textarea></label>
+<label class="hn-confirm"><input type="checkbox" id="hnBulkRights"> Ich bestätige, dass die Verlinkung und Einbettung aller Einträge zulässig ist.</label>
+<div class="hn-bulk-actions"><button type="button" id="hnBulkCheck">Prüfen &amp; Vorschau</button><button type="button" id="hnBulkImport" disabled>✓ Geprüfte Songs importieren</button><button type="button" class="alt" id="hnBulkClose">Schließen</button></div>
+<p id="hnBulkStatus" role="status" aria-live="polite"></p><div id="hnBulkPreview"></div>
+</div>
 <div id="hnExternalAdd" hidden><h3>🎶 Externe Musik hinzufügen</h3><p class="hn-ext-help">Nur für Administratoren. Externe Inhalte werden über den offiziellen Player des Anbieters abgespielt; keine Audiodateien werden kopiert.</p>
 <form id="hnExternalAddForm" autocomplete="off"><div class="hn-ext-grid">
 <label>Quelle<select id="hnExtProvider" required><option value="youtube">YouTube</option><option value="spotify">Spotify (Track)</option></select></label>
@@ -409,7 +419,7 @@ async function hnRefreshMfa(){if(!db||!user)return;try{const {data,error}=await 
 $('hnMfaStart').onclick=async()=>{if(!db||!user)return;const b=$('hnMfaStart');b.disabled=true;try{const {data,error}=await db.auth.mfa.enroll({factorType:'totp',friendlyName:'HamNava Authenticator'});if(error)throw error;hnMfaFactorId=data.id;$('hnMfaQr').replaceChildren();if(data.totp?.qr_code){const img=document.createElement('img');img.src=data.totp.qr_code;img.alt='QR-Code für Authenticator-App';img.style.cssText='width:200px;max-width:100%;background:white;padding:10px;border-radius:12px';$('hnMfaQr').append(img)}$('hnMfaSecret').textContent='Alternativer Einrichtungsschlüssel: '+(data.totp?.secret||'–');$('hnMfaEnroll').hidden=false;$('hnMfaStatus').textContent='Scanne den QR-Code und bestätige mit dem aktuellen Code.';}catch(e){$('hnMfaStatus').textContent='Fehler: '+e.message}finally{b.disabled=false}};
 $('hnMfaConfirm').onclick=async()=>{const code=$('hnMfaEnrollCode').value.trim();if(!/^\d{6}$/.test(code)||!hnMfaFactorId){$('hnMfaStatus').textContent='Bitte einen gültigen sechsstelligen Code eingeben.';return;}const b=$('hnMfaConfirm');b.disabled=true;try{const {data,error}=await db.auth.mfa.challenge({factorId:hnMfaFactorId});if(error)throw error;const result=await db.auth.mfa.verify({factorId:hnMfaFactorId,challengeId:data.id,code});if(result.error)throw result.error;$('hnMfaEnroll').hidden=true;$('hnMfaEnrollCode').value='';$('hnMfaSecret').textContent='';$('hnMfaQr').replaceChildren();$('hnMfaStatus').textContent='MFA erfolgreich aktiviert.';await hnRefreshMfa();}catch(e){$('hnMfaStatus').textContent='Bestätigung fehlgeschlagen: '+e.message}finally{b.disabled=false}};
 
-async function loadAll(){if(!user)return;let [s,f,p,a]=await Promise.all([db.from('songs').select('*').order('created_at',{ascending:false}).limit(1000),db.from('favorites').select('song_id'),db.from('playlists').select('*').order('created_at',{ascending:false}),db.from('admins').select('user_id').eq('user_id',user.id)]);if(s.error){songs=[];say('Musikbibliothek konnte nicht geladen werden: '+s.error.message+' (Supabase API-Berechtigungen prüfen)');return;}const optionalErrors=[['Favoriten',f],['Playlists',p],['Administratorprüfung',a]].filter(([name,result])=>result.error).map(([name,result])=>name+': '+result.error.message);songs=s.data||[];try{let pc=await db.from('hamnava_play_counts').select('song_id,play_count');if(!pc.error){playCounts=Object.fromEntries((pc.data||[]).map(x=>[x.song_id,x.play_count]));$('popularHint').textContent='Nach tatsächlichen Wiedergaben sortiert'}else{$('popularHint').textContent='Die Statistik wird nach Einrichtung der Wiedergabezähler angezeigt'}}catch(e){}favorites=new Set((f.data||[]).map(x=>x.song_id));playlists=(p.data||[]).filter(x=>x.owner_id===user.id);isAdmin=!!a.data?.length;document.getElementById('hnExternalAddToggle').hidden=!isAdmin;if(!isAdmin)document.getElementById('hnExternalAdd').hidden=true;show('admin',isAdmin);$('hnUsersNav').classList.toggle('hidden',!isAdmin);$('hnUsersPanel').classList.toggle('hidden',!isAdmin);$('ai').classList.toggle('hidden',!isAdmin);document.querySelector('.side-link[href="#ai"]').classList.toggle('hidden',!isAdmin);if(isAdmin)hnStudioRender();let prev=$('artistFilter').value;opt($('artistFilter'),[...new Set(songs.map(x=>x.artist))].sort((a,b)=>a.localeCompare(b,'fa')).map(x=>({label:x,value:x})),'Alle Interpreten');$('artistFilter').value=prev;opt($('playlistSong'),songs.map(x=>({label:x.artist+' — '+x.title,value:x.id})),'Lied auswählen');let old=$('playlistSelect').value;opt($('playlistSelect'),playlists.map(x=>({label:x.name,value:x.id})),'Playlist auswählen');$('playlistSelect').value=old;hnRenderGenreSidebar();renderEverything();await loadPlaylist();route();say(optionalErrors.length?'Musikbibliothek geladen ('+songs.length+' Songs). Andere Funktionen eingeschränkt: '+optionalErrors.join(' | '):'Lieder und Playlists wurden aktualisiert ('+songs.length+' Songs)')}
+async function loadAll(){if(!user)return;let [s,f,p,a]=await Promise.all([db.from('songs').select('*').order('created_at',{ascending:false}).limit(1000),db.from('favorites').select('song_id'),db.from('playlists').select('*').order('created_at',{ascending:false}),db.from('admins').select('user_id').eq('user_id',user.id)]);if(s.error){songs=[];say('Musikbibliothek konnte nicht geladen werden: '+s.error.message+' (Supabase API-Berechtigungen prüfen)');return;}const optionalErrors=[['Favoriten',f],['Playlists',p],['Administratorprüfung',a]].filter(([name,result])=>result.error).map(([name,result])=>name+': '+result.error.message);songs=s.data||[];try{let pc=await db.from('hamnava_play_counts').select('song_id,play_count');if(!pc.error){playCounts=Object.fromEntries((pc.data||[]).map(x=>[x.song_id,x.play_count]));$('popularHint').textContent='Nach tatsächlichen Wiedergaben sortiert'}else{$('popularHint').textContent='Die Statistik wird nach Einrichtung der Wiedergabezähler angezeigt'}}catch(e){}favorites=new Set((f.data||[]).map(x=>x.song_id));playlists=(p.data||[]).filter(x=>x.owner_id===user.id);isAdmin=!!a.data?.length;document.getElementById('hnExternalAddToggle').hidden=!isAdmin;document.getElementById('hnBulkToggle').hidden=!isAdmin;if(!isAdmin)document.getElementById('hnExternalAdd').hidden=true;show('admin',isAdmin);$('hnUsersNav').classList.toggle('hidden',!isAdmin);$('hnUsersPanel').classList.toggle('hidden',!isAdmin);$('ai').classList.toggle('hidden',!isAdmin);document.querySelector('.side-link[href="#ai"]').classList.toggle('hidden',!isAdmin);if(isAdmin)hnStudioRender();let prev=$('artistFilter').value;opt($('artistFilter'),[...new Set(songs.map(x=>x.artist))].sort((a,b)=>a.localeCompare(b,'fa')).map(x=>({label:x,value:x})),'Alle Interpreten');$('artistFilter').value=prev;opt($('playlistSong'),songs.map(x=>({label:x.artist+' — '+x.title,value:x.id})),'Lied auswählen');let old=$('playlistSelect').value;opt($('playlistSelect'),playlists.map(x=>({label:x.name,value:x.id})),'Playlist auswählen');$('playlistSelect').value=old;hnRenderGenreSidebar();renderEverything();await loadPlaylist();route();say(optionalErrors.length?'Musikbibliothek geladen ('+songs.length+' Songs). Andere Funktionen eingeschränkt: '+optionalErrors.join(' | '):'Lieder und Playlists wurden aktualisiert ('+songs.length+' Songs)')}
 
 function hnStopPlayer(){const a=$('audioPlayer');a.pause();a.removeAttribute('src');a.load();playingSongId=null;document.body.classList.remove('hn-playing','hn-player-mini','hn-player-fullscreen');$('hnPlayerFullscreen').textContent='⛶ Vollbild';$('hnPlayerFullscreen').setAttribute('aria-pressed','false');$('hnPlayerMinimize').textContent='− Minimieren';$('hnPlayerMinimize').setAttribute('aria-pressed','false');$('hnPlayerBackground').style.backgroundImage='';$('nowPlaying').textContent='Musikplayer';$('hnPlayerArtist').textContent='';}
 $('hnPlayerStop').addEventListener('click',hnStopPlayer);
@@ -469,6 +479,11 @@ function hnEditSongGenres(song){
 }
 
 // Hybrid Phase 2: administrative external-link import, using existing Supabase auth and RLS.
+window.hnBulkAccess=()=>!!user&&isAdmin;
+window.hnBulkUserId=()=>user?.id;
+window.hnBulkExisting=()=>songs;
+window.hnBulkDb=()=>db;
+window.hnBulkRefresh=()=>loadAll();
 $('hnExternalAddToggle').addEventListener('click',()=>{$('hnExternalAdd').hidden=!$('hnExternalAdd').hidden;if(!$('hnExternalAdd').hidden)$('hnExtTitle').focus()});
 $('hnExtCancel').addEventListener('click',()=>{$('hnExternalAdd').hidden=true});
 $('hnExtProvider').addEventListener('change',()=>{$('hnExtUrl').placeholder=$('hnExtProvider').value==='spotify'?'https://open.spotify.com/track/...':'https://www.youtube.com/watch?v=...'});
@@ -929,5 +944,108 @@ document.addEventListener('DOMContentLoaded',function(){
  document.addEventListener('keydown',function(e){if(e.key==='Escape')setOpen(false)});
  window.addEventListener('hashchange',function(){setOpen(false)});
 });
+</script>
+
+<script id="hn-bulk-script">
+(function(){
+ const byId=id=>document.getElementById(id);
+ let prepared=[];
+ const panel=byId('hnBulkPanel'), status=byId('hnBulkStatus'), importBtn=byId('hnBulkImport');
+ function reset(){prepared=[];importBtn.disabled=true;byId('hnBulkPreview').replaceChildren();}
+ byId('hnBulkToggle').onclick=()=>{panel.hidden=!panel.hidden;reset();};
+ byId('hnBulkClose').onclick=()=>{panel.hidden=true;reset();};
+ function parseCSV(input){
+  input=input.replace(/^\uFEFF/,'');
+  const firstLine=input.split(/\r?\n/,1)[0]||'';
+  const delim=(firstLine.match(/;/g)||[]).length>(firstLine.match(/,/g)||[]).length?';':',';
+  const rows=[];let row=[],field='',quoted=false;
+  for(let i=0;i<input.length;i++){
+   const c=input[i];
+   if(quoted){if(c==='"'&&input[i+1]==='"'){field+='"';i++;}else if(c==='"')quoted=false;else field+=c;}
+   else if(c==='"'){if(field==='')quoted=true;else field+=c;}
+   else if(c===delim){row.push(field.trim());field='';}
+   else if(c==='\n'||c==='\r'){if(c==='\r'&&input[i+1]==='\n')i++;row.push(field.trim());if(row.some(x=>x!==''))rows.push(row);row=[];field='';}
+   else field+=c;
+  }
+  if(quoted)throw Error('Nicht geschlossenes Anführungszeichen in CSV.');
+  row.push(field.trim());if(row.some(x=>x!==''))rows.push(row);
+  return rows;
+ }
+ function extract(source,raw){
+  const u=new URL(raw);
+  if(u.protocol!=='https:')throw Error('Nur HTTPS-Links erlaubt');
+  const host=u.hostname.toLowerCase().replace(/^www\./,'');
+  let id;
+  if(source==='youtube'){
+   if(host==='youtu.be')id=u.pathname.split('/')[1];
+   else if(['youtube.com','m.youtube.com','music.youtube.com'].includes(host))
+    id=u.pathname==='/watch'?u.searchParams.get('v'):(u.pathname.match(/^\/(?:shorts|embed)\/([^/]+)/)||[])[1];
+   if(!/^[\w-]{11}$/.test(id||''))throw Error('Ungültige YouTube-Video-ID');
+   return {id,url:'https://www.youtube.com/watch?v='+id,cover:'https://img.youtube.com/vi/'+id+'/hqdefault.jpg'};
+  }
+  if(source==='spotify'){
+   if(host!=='open.spotify.com')throw Error('Spotify-Link muss von open.spotify.com sein');
+   id=(u.pathname.match(/^\/track\/([a-zA-Z0-9]+)\/?$/)||[])[1];
+   if(!/^[a-zA-Z0-9]{22}$/.test(id||''))throw Error('Ungültige Spotify-Track-ID');
+   return {id,url:'https://open.spotify.com/track/'+id,cover:''};
+  }
+  throw Error('Quelle muss youtube oder spotify sein');
+ }
+ byId('hnBulkFile').onchange=async e=>{reset();const f=e.target.files[0];if(!f)return;if(f.size>250000){status.textContent='CSV-Datei zu groß (max. 250 KB).';return;}byId('hnBulkText').value=await f.text();status.textContent='Datei geladen. Jetzt Prüfen & Vorschau wählen.';};
+ byId('hnBulkText').oninput=reset;
+ byId('hnBulkSample').onclick=()=>{
+  const csv='source_type,title,artist,url,cover_url,artist_image_url,genre\nyoutube,Beispieltitel,Beispielkünstler,https://www.youtube.com/watch?v=dQw4w9WgXcQ,,,Pop\n';
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'}));a.download='hamnava_bulk_muster.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+ };
+ byId('hnBulkCheck').onclick=()=>{
+  reset();status.textContent='';
+  try{
+   if(!window.hnBulkAccess || !window.hnBulkAccess()){throw Error('Nur Administratoren können importieren.');}
+   const rows=parseCSV(byId('hnBulkText').value);
+   if(rows.length<2)throw Error('CSV muss Kopfzeile und mindestens einen Song enthalten.');
+   if(rows.length>301)throw Error('Maximal 300 Songs pro Import.');
+   const headers=rows.shift().map(h=>h.toLowerCase().trim());
+   for(const col of ['source_type','title','artist','url'])if(!headers.includes(col))throw Error('Spalte fehlt: '+col);
+   const seen=new Set(), errors=[], accepted=[];
+   rows.forEach((cells,index)=>{
+    try{
+     const o={};headers.forEach((h,i)=>o[h]=(cells[i]||'').trim());
+     if(!o.title||!o.artist||o.title.length>180||o.artist.length>180)throw Error('Titel/Künstler fehlt oder ist zu lang');
+     const source=o.source_type.toLowerCase(),ext=extract(source,o.url);
+     const key=source+':'+ext.id;
+     if(seen.has(key))throw Error('Doppelt in CSV');
+     seen.add(key);
+     const existing=(window.hnBulkExisting?.()||[]).some(s=>(s.source_type===source&&s.external_id===ext.id)||s.url===ext.url);
+     if(existing)throw Error('Bereits in der geladenen Bibliothek');
+     for(const field of ['cover_url','artist_image_url'])if(o[field]&&(!/^https:\/\//i.test(o[field])||o[field].length>1200))throw Error('Ungültige '+field);
+     accepted.push({user_id:window.hnBulkUserId(),title:o.title,artist:o.artist,url:ext.url,source_type:source,external_id:ext.id,license_status:'external_embed',audio_path:null,cover_url:o.cover_url||ext.cover||null,artist_image_url:o.artist_image_url||null,genres:o.genre?[o.genre]:[]});
+    }catch(e){errors.push('Zeile '+(index+2)+': '+e.message);}
+   });
+   prepared=accepted;
+   status.textContent=accepted.length+' gültig, '+errors.length+' übersprungen.\n'+errors.slice(0,20).join('\n')+(errors.length>20?'\n…':'');
+   const table=document.createElement('table'),head=document.createElement('tr');
+   for(const h of ['Quelle','Titel','Künstler']){const th=document.createElement('th');th.textContent=h;head.append(th);}table.append(head);
+   for(const r of accepted.slice(0,20)){const tr=document.createElement('tr');for(const v of [r.source_type,r.title,r.artist]){const td=document.createElement('td');td.textContent=v;tr.append(td);}table.append(tr);}
+   byId('hnBulkPreview').append(table);
+   importBtn.disabled=!accepted.length;
+  }catch(e){status.textContent='Prüfung fehlgeschlagen: '+e.message;}
+ };
+ byId('hnBulkImport').onclick=async()=>{
+  if(!prepared.length||!byId('hnBulkRights').checked){status.textContent='Bitte zuerst CSV prüfen und Bestätigung aktivieren.';return;}
+  if(!window.hnBulkAccess?.()){status.textContent='Keine Administratorberechtigung.';return;}
+  importBtn.disabled=true;byId('hnBulkCheck').disabled=true;
+  let done=0;const failures=[];
+  for(let i=0;i<prepared.length;i++){
+   const r=prepared[i];
+   const result=await window.hnBulkDb().from('songs').insert(r);
+   if(result.error)failures.push('Zeile '+(i+1)+' ('+r.title+'): '+result.error.message);
+   else done++;
+   status.textContent='Importiere: '+(i+1)+'/'+prepared.length+' · Gespeichert: '+done+' · Fehler: '+failures.length;
+  }
+  status.textContent='Fertig: '+done+' gespeichert, '+failures.length+' Fehler.\n'+failures.slice(0,15).join('\n');
+  prepared=[];byId('hnBulkCheck').disabled=false;
+  if(done)await window.hnBulkRefresh();
+ };
+})();
 </script>
 </body></html>
