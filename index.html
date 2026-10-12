@@ -352,6 +352,45 @@ body.hn-ready main > #hnFooter:not(.hn-current),body.logged-out main > #hnFooter
 .artist-chip img, .artist-placeholder {width:82px!important;height:82px!important;aspect-ratio:1!important;}
 .song .avatar {aspect-ratio:1!important;}
 .artist-chip {background:transparent!important;box-shadow:none!important;}
+</style><style id="hn-artist-cards-no-turquoise-final">
+/* Stronger than the site's global button color rules. */
+body #artistsList button.artist-chip,
+body #homeArtists button.artist-chip,
+body .artist-chips button.artist-chip,
+body #artistsList button.artist-chip:hover,
+body #homeArtists button.artist-chip:hover,
+body .artist-chips button.artist-chip:hover,
+body #artistsList button.artist-chip:focus,
+body #homeArtists button.artist-chip:focus {
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  box-shadow:none!important;
+  outline-color:transparent;
+  color:#f5f8ff!important;
+  transform:none!important;
+}
+body #artistsList button.artist-chip img,
+body #homeArtists button.artist-chip img,
+body .artist-chips button.artist-chip img,
+body .artist-chips .artist-placeholder {
+  display:block!important;
+  width:116px!important;
+  height:116px!important;
+  max-width:100%!important;
+  aspect-ratio:1/1!important;
+  border-radius:50%!important;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+  object-fit:cover!important;
+  overflow:hidden!important;
+}
+body .artist-chips button.artist-chip {width:154px!important;min-width:140px!important;max-width:170px!important;gap:10px!important;justify-content:flex-start!important;}
+body .artist-chips button.artist-chip > span:last-child {text-align:center;overflow-wrap:anywhere;}
+@media(max-width:760px){body .artist-chips button.artist-chip {width:135px!important;min-width:130px!important;}body .artist-chips button.artist-chip img,body .artist-chips .artist-placeholder{width:105px!important;height:105px!important;}}
 </style></head><body class="logged-out"><div class="hn-topbar" id="hnTopbar" role="navigation" aria-label="Hauptnavigation"><button type="button" id="hnMobileNavButton" aria-label="Seitenmenü öffnen" aria-controls="siteSidebar" aria-expanded="false">☰</button><a class="hn-home" href="#home" aria-label="Startseite">⌂</a><label class="hn-search-wrap"><span class="hn-search-icon">⌕</span><input id="hnGlobalSearch" type="search" placeholder="Was möchtest du hören?" autocomplete="off" aria-label="Musik durchsuchen"/><a href="#library" title="Bibliothek" aria-label="Bibliothek">▣</a></label><div class="hn-actions"><a class="hn-desktop-action" href="#playlists">Meine Playlists</a><a class="hn-desktop-action" href="#favorites" aria-label="Favoriten" title="Favoriten">♡</a><button class="hn-avatar" id="hnProfile" type="button" title="Mein Profil" aria-label="Profil">☺</button></div></div><aside class="sidebar" dir="ltr" id="siteSidebar"><a class="brand" href="#home"><img class="brand-mark" src="hamnava-logo.webp" alt="HamNava Logo"/><span>HamNava</span></a><div class="side-caption">Deine Bibliothek</div><a class="side-link active" href="#home"><span>⌂</span><span>Startseite</span></a><a class="side-link" href="#library"><span>♫</span><span>Musikbibliothek</span></a><a class="side-link" href="#artists"><span>♬</span><span>Künstler A–Z</span></a><a class="side-link" href="#favorites"><span>♥</span><span>Favoriten</span></a><a class="side-link" href="#playlists"><span>▤</span><span>Meine Playlists</span></a><a class="side-link" href="#ai"><span>✨</span><span>AI Music Studio</span></a><a class="side-link hidden" id="hnUsersNav" href="#users"><span>🛡</span><span>Benutzerverwaltung</span></a><a class="side-link" href="add-song.html"><span>＋</span><span>Lied hinzufügen</span></a><div class="hn-create-area"><div class="hn-library-head"><span>▤ Bibliothek</span><button id="hnCreateBtn" type="button" aria-expanded="false">＋ Erstellen</button></div><div id="hnCreateMenu" class="hn-create-menu" hidden><button id="hnCreatePlaylist" type="button">♫ &nbsp; Playlist erstellen</button><button type="button" disabled title="Benötigt Datenbank-Erweiterung">♧ &nbsp; Gemeinsamer Mix · bald</button><button type="button" disabled title="Benötigt Datenbank-Erweiterung">▱ &nbsp; Ordner · bald</button></div></div><div id="hnPlaylistSidebar" class="hn-playlist-sidebar" aria-label="Meine Playlists"></div><div class="hn-genre-sidebar"><div class="side-caption">Musikrichtungen</div><div id="hnGenreSidebarLinks" class="hn-genre-sidebar-links"></div></div>
 <div id="hnSidebarManage" class="hn-sidebar-manage"></div><div class="side-footer">Musik, Freunde, Erinnerungen<br/>HamNava · Version 36</div></aside><div id="navBackdrop" class="nav-backdrop" hidden></div><main><header><button id="menuToggle" class="menu-toggle alt" type="button" aria-label="Menü öffnen" aria-expanded="false">☰</button><div><h1><img class="logo" src="hamnava-logo.webp" alt=""/> Ham<span class="gold">Nava</span></h1><p>Gute Songs, gute Freunde, gemeinsame Erinnerungen</p></div><div id="identity"></div></header><section class="hero hidden" dir="ltr" id="home"><div class="hero-copy"><div class="eyebrow">MUSIK · FREUNDE · ERINNERUNGEN</div><h2>Willkommen bei<br/><em>HamNava</em></h2><p>Entdecke Musik, die verbindet.</p><a href="#homeMusic" id="heroDiscover">Jetzt Musik entdecken ↗</a></div><img class="hero-portrait" src="hero-artist.webp" alt="Illustration eines Sängers"/><div class="hero-quote">„Gute Musik verbindet Menschen – heute und immer.“</div></section>
 <section class="panel" id="homeMusic" data-page="home"><div class="home-heading"><div><h2>Entdecke deine Musik</h2><p>Musik, Freunde und gemeinsame Erinnerungen.</p></div></div><label class="home-search">Songs oder Künstler suchen<input id="homeSearch" type="search" placeholder="Songtitel oder Künstlername eingeben" autocomplete="off"></label><h2>🔥 Meistgehörte Songs</h2><p class="home-hint" id="popularHint">Beliebte Lieder aus der Musikbibliothek</p><div class="songs featured-songs" id="popularSongs"></div><div class="hn-section-heading"><h2>💿 Beliebte Alben und Singles</h2><a href="#library">Alle anzeigen →</a></div><p class="hn-section-note">Singles aus unserer Musikbibliothek</p><div id="hnSingles" class="hn-shelf"></div><div class="hn-section-heading"><h2>📈 Empfohlene Charts</h2><a href="#library">Alle anzeigen →</a></div><div id="hnCharts" class="hn-shelf"></div><div class="hn-section-heading"><h2>📻 Beliebte Radios</h2><a href="#library">Alle anzeigen →</a></div><div id="hnRadios" class="hn-shelf"></div><div class="hn-section-heading"><h2>🎤 Künstler von A–Z</h2><a href="#artists">Alle anzeigen →</a></div><div id="homeArtists" class="artist-chips artist-portraits"></div><div class="hn-section-heading"><h2>🆕 Neu hinzugefügt</h2><a href="#library">Alle anzeigen →</a></div><div class="songs" id="homeSongs"></div></section>
