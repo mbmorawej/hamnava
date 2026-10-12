@@ -477,6 +477,13 @@ body .hn-section-heading a{color:#d78aff!important}
 body .hn-topbar .hn-actions .hn-avatar{background:linear-gradient(125deg,#7428bb,#d64b9c,#ff854a)!important;color:#fff!important}
 body .side-link.active{background:linear-gradient(105deg,#6b2caa,#a23c9f,#ed7951)!important;color:#fff!important;border-color:#a45ac7!important}
 </style>
+<style id="hn-discover-source-badges">
+.hn-discover-art{position:relative;display:block;width:100%;min-width:0}
+.hn-discover-art>img{display:block;width:100%;height:auto}
+.hn-discover-art>.hn-art{width:100%}
+.hn-discover-art>.hn-source-badge{position:absolute;left:9px;top:9px;z-index:4;max-width:calc(100% - 18px);white-space:normal;text-align:left;line-height:1.25;pointer-events:none;font-size:11px}
+.hn-discover-art>.hn-source-badge[data-provider="mixed"]{background:#552b85!important;color:#fff!important}
+</style>
 </head><body class="logged-out"><div class="hn-topbar" id="hnTopbar" role="navigation" aria-label="Hauptnavigation"><button type="button" id="hnMobileNavButton" aria-label="Seitenmenü öffnen" aria-controls="siteSidebar" aria-expanded="false">☰</button><a class="hn-home" href="#home" aria-label="Startseite">⌂</a><label class="hn-search-wrap"><span class="hn-search-icon">⌕</span><input id="hnGlobalSearch" type="search" placeholder="Was möchtest du hören?" autocomplete="off" aria-label="Musik durchsuchen"/><button id="hnAdvancedToggle" type="button" aria-expanded="false" aria-controls="hnAdvancedPanel" title="Erweiterte Suche">☷ <span>Filter</span></button></label><div class="hn-actions"><a class="hn-desktop-action" href="#playlists">Meine Playlists</a><a class="hn-desktop-action" href="#favorites" aria-label="Favoriten" title="Favoriten">♡</a><button class="hn-avatar" id="hnProfile" type="button" title="Mein Profil" aria-label="Profil">☺</button></div></div><aside class="sidebar" dir="ltr" id="siteSidebar"><a class="brand" href="#home"><img class="brand-mark" src="hamnava-logo.webp" alt="HamNava Logo"/><span>HamNava</span></a><div class="side-caption">Deine Bibliothek</div><a class="side-link active" href="#home"><span>⌂</span><span>Startseite</span></a><a class="side-link" href="#library"><span>♫</span><span>Musikbibliothek</span></a><a class="side-link" href="#artists"><span>♬</span><span>Künstler A–Z</span></a><a class="side-link" href="#favorites"><span>♥</span><span>Favoriten</span></a><a class="side-link" href="#playlists"><span>▤</span><span>Meine Playlists</span></a><a class="side-link" href="#ai"><span>✨</span><span>AI Music Studio</span></a><a class="side-link hidden" id="hnUsersNav" href="#users"><span>🛡</span><span>Benutzerverwaltung</span></a><a class="side-link" href="add-song.html"><span>＋</span><span>Lied hinzufügen</span></a><div class="hn-create-area"><div class="hn-library-head"><span>▤ Bibliothek</span><button id="hnCreateBtn" type="button" aria-expanded="false">＋ Erstellen</button></div><div id="hnCreateMenu" class="hn-create-menu" hidden><button id="hnCreatePlaylist" type="button">♫ &nbsp; Playlist erstellen</button><button type="button" disabled title="Benötigt Datenbank-Erweiterung">♧ &nbsp; Gemeinsamer Mix · bald</button><button type="button" disabled title="Benötigt Datenbank-Erweiterung">▱ &nbsp; Ordner · bald</button></div></div><div id="hnPlaylistSidebar" class="hn-playlist-sidebar" aria-label="Meine Playlists"></div><div class="hn-genre-sidebar"><div class="side-caption">Musikrichtungen</div><div id="hnGenreSidebarLinks" class="hn-genre-sidebar-links"></div></div>
 <div id="hnSidebarManage" class="hn-sidebar-manage"></div><div class="side-footer">Musik, Freunde, Erinnerungen<br/>HamNava · Version 36</div></aside><div id="navBackdrop" class="nav-backdrop" hidden></div><main><header><button id="menuToggle" class="menu-toggle alt" type="button" aria-label="Menü öffnen" aria-expanded="false">☰</button><div><h1><img class="logo" src="hamnava-logo.webp" alt=""/> Ham<span class="gold">Nava</span></h1><p>Gute Songs, gute Freunde, gemeinsame Erinnerungen</p></div><div id="identity"></div></header><div id="hnAdvancedPanel" hidden role="region" aria-label="Erweiterte Suche"><div class="hn-filter-grid"><label>Song oder Interpret<input id="hnAdvText" type="search" placeholder="Songtitel oder Künstlername"></label><label>Interpret<select id="hnAdvArtist"><option value="">Alle Interpreten</option></select></label><label>Musikrichtung<select id="hnAdvGenre"><option value="">Alle Musikrichtungen</option></select></label><label>Quelle<select id="hnAdvSource"><option value="">Alle Quellen</option><option value="hosted">MP3</option><option value="youtube">YouTube</option><option value="spotify">Spotify</option></select></label><label>Sortieren<select id="hnAdvSort"><option value="newest">Neueste zuerst</option><option value="oldest">Älteste zuerst</option><option value="az">Titel A–Z</option><option value="artist">Interpret A–Z</option></select></label></div><div class="hn-filter-actions"><button type="button" id="hnAdvApply">⌕ Suchen</button><button type="button" id="hnAdvReset">↺ Zurücksetzen</button></div></div>
 <section class="hero hidden hn-hero-carousel" dir="ltr" id="home" aria-label="HamNava Highlights"><div class="hn-hero-slides" aria-hidden="true"><div class="hn-hero-slide is-active"></div><div class="hn-hero-slide"></div><div class="hn-hero-slide"></div></div><div class="hero-copy"><div class="eyebrow">MUSIK · FREUNDE · ERINNERUNGEN</div><h2>Willkommen bei<br/><em>HamNava</em></h2><p>Entdecke Musik, die verbindet.</p><a href="#homeMusic" id="heroDiscover">Jetzt Musik entdecken ↗</a></div><img class="hero-portrait" src="hero-artist.webp" alt="Illustration eines Sängers"/><div class="hero-quote">„Gute Musik verbindet Menschen – heute und immer.“</div><div class="hn-hero-controls"><button type="button" id="hnHeroPrev" aria-label="Vorheriger Banner">‹</button><div id="hnHeroDots" aria-label="Banner auswählen"></div><button type="button" id="hnHeroNext" aria-label="Nächster Banner">›</button></div></section>
@@ -746,17 +753,44 @@ function route(){
  if(page==='home' && user)renderHome();if(page==='users' && user && isAdmin)hnLoadUsers(true);
 }
 function renderEverything(){renderSongs('songs','library');renderSongs('favoriteSongs','favorites');renderHome();renderArtists();}
-function hnTile(root,title,subtitle,imageUrl,icon,onClick){const tile=el('button',null,'hn-tile');tile.type='button';if(imageUrl){const img=el('img');img.src=imageUrl;img.alt='';img.loading='lazy';img.referrerPolicy='no-referrer';tile.append(img)}else tile.append(el('div',icon,'hn-art'));tile.append(el('strong',title),el('small',subtitle));tile.onclick=onClick;root.append(tile)}
+function hnDiscoverProvider(song){
+ const source=String(song?.source_type||'').toLowerCase();
+ if(source==='youtube'||source==='spotify')return source;
+ const url=String(song?.url||'').toLowerCase();
+ if(/youtu\\.be|youtube\\.com/.test(url))return 'youtube';
+ if(/open\\.spotify\\.com/.test(url))return 'spotify';
+ return 'hosted';
+}
+function hnDiscoverLabels(songList){
+ const providers=[...new Set((songList||[]).map(hnDiscoverProvider))];
+ const names={youtube:'YouTube',spotify:'Spotify',hosted:'MP3'};
+ return providers.length===1
+  ?{label:names[providers[0]],provider:providers[0]}
+  :{label:'Mix: '+providers.map(p=>names[p]).join(' + '),provider:'mixed'};
+}
+function hnTile(root,title,subtitle,imageUrl,icon,onClick,songList){
+ const tile=el('button',null,'hn-tile');tile.type='button';
+ const art=el('div',null,'hn-discover-art');
+ if(imageUrl){const img=el('img');img.src=imageUrl;img.alt='';img.loading='lazy';img.referrerPolicy='no-referrer';art.append(img)}
+ else art.append(el('div',icon,'hn-art'));
+ if(songList?.length){
+  const info=hnDiscoverLabels(songList);
+  const badge=el('span',info.provider==='youtube'?'▶ '+info.label:'♫ '+info.label,'hn-source-badge');
+  badge.dataset.provider=info.provider;
+  art.append(badge);
+ }
+ tile.append(art,el('strong',title),el('small',subtitle));tile.onclick=onClick;root.append(tile);
+}
 function renderDiscover(){
  const q=$('homeSearch').value.trim().toLocaleLowerCase();const matched=songs.filter(x=>(x.title+' '+x.artist).toLocaleLowerCase().includes(q));
  const singles=$('hnSingles'),charts=$('hnCharts'),radios=$('hnRadios');singles.replaceChildren();charts.replaceChildren();radios.replaceChildren();
- for(const song of [...matched].sort((a,b)=>(playCounts[b.id]||0)-(playCounts[a.id]||0)).slice(0,12))hnTile(singles,song.title,song.artist,song.cover_url||song.artist_image_url,'♫',()=>play(song));
+ for(const song of [...matched].sort((a,b)=>(playCounts[b.id]||0)-(playCounts[a.id]||0)).slice(0,12))hnTile(singles,song.title,song.artist,song.cover_url||song.artist_image_url,'♫',()=>play(song),[song]);
  if(!matched.length)singles.append(el('p','Keine Singles gefunden.'));
  const ranked=[...matched].sort((a,b)=>(playCounts[b.id]||0)-(playCounts[a.id]||0));
  const groups=[{name:'Top Songs · HamNava',desc:'Nach Wiedergaben',list:ranked},{name:'Neu bei HamNava',desc:'Neueste Veröffentlichungen in unserer Bibliothek',list:[...matched].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at))},{name:'Entdecken',desc:'Musik aus unserer Community',list:[...matched].sort((a,b)=>(a.artist||'').localeCompare(b.artist||'','de'))}];
- for(const g of groups)if(g.list.length)hnTile(charts,g.name,g.desc,g.list[0].cover_url||g.list[0].artist_image_url,'📈',()=>{chosenArtist='';location.hash='#library';$('search').value='';renderSongs('songs','library')});
+ for(const g of groups)if(g.list.length)hnTile(charts,g.name,g.desc,g.list[0].cover_url||g.list[0].artist_image_url,'📈',()=>{chosenArtist='';location.hash='#library';$('search').value='';renderSongs('songs','library')},g.list);
  const artistGroups=new Map();for(const song of matched){const a=song.artist||'Unbekannt';if(!artistGroups.has(a))artistGroups.set(a,[]);artistGroups.get(a).push(song)}
- for(const [artist,list] of [...artistGroups].sort((a,b)=>b[1].length-a[1].length).slice(0,8))hnTile(radios,'Radio: '+artist,list.length+' Songs · automatischer Musikmix',list[0].artist_image_url||list[0].cover_url,'📻',()=>{chosenArtist=artist;location.hash='#artists';renderArtists();play(list[0])});
+ for(const [artist,list] of [...artistGroups].sort((a,b)=>b[1].length-a[1].length).slice(0,8))hnTile(radios,'Radio: '+artist,list.length+' Songs · automatischer Musikmix',list[0].artist_image_url||list[0].cover_url,'📻',()=>{chosenArtist=artist;location.hash='#artists';renderArtists();play(list[0])},list);
  if(!artistGroups.size)radios.append(el('p','Noch keine Radios verfügbar.'));
 }
 function renderHome(){renderSongs('homeSongs','home');renderSongs('popularSongs','popular');renderArtistChips('homeArtists',true);renderDiscover();}
