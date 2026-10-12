@@ -421,8 +421,8 @@ body .hn-hero-carousel{position:relative;overflow:hidden!important;min-height:31
 :root{--hn-sunset-purple:#9638c5;--hn-sunset-violet:#6726a9;--hn-sunset-orange:#ff824a;--hn-sunset-pink:#e24c9d}
 body .hn-hero-carousel{min-height:300px!important;border:1px solid #8336b9!important;border-radius:20px!important;background:#170d32!important;box-shadow:0 15px 45px #09051777!important}
 body .hn-hero-slide:nth-child(1){background-image:linear-gradient(90deg,rgba(8,7,30,.73),rgba(18,8,38,.18) 75%),url('hamnava-sunset-banner.jpeg')!important}
-body .hn-hero-slide:nth-child(2){background-image:linear-gradient(90deg,rgba(8,7,30,.67),rgba(18,8,38,.12) 75%),url('hamnava-banner-2.jpg')!important;background-position:65% 45%!important;filter:hue-rotate(18deg)}
-body .hn-hero-slide:nth-child(3){background-image:linear-gradient(90deg,rgba(8,7,30,.7),rgba(18,8,38,.14) 75%),url('hamnava-banner-3.jpg')!important;background-position:35% 60%!important;filter:hue-rotate(-22deg)}
+body .hn-hero-slide:nth-child(2){background-image:linear-gradient(90deg,rgba(8,7,30,.67),rgba(18,8,38,.12) 75%),url('hamnava-banner-2.jpg')!important;background-position:center!important;filter:none}
+body .hn-hero-slide:nth-child(3){background-image:linear-gradient(90deg,rgba(8,7,30,.7),rgba(18,8,38,.14) 75%),url('hamnava-banner-3.jpg')!important;background-position:center!important;filter:none}
 body .hn-hero-carousel .hero-portrait,body .hn-hero-carousel .hero-quote{display:none!important}
 body .hn-hero-carousel .hero-copy{z-index:3;position:relative;max-width:75%}
 body .hn-hero-carousel .hero-copy h2{color:#fff!important;text-shadow:0 3px 18px #09051a}
@@ -1317,6 +1317,39 @@ async function hnRenderAllUserPlaylists(){
  if(error){root.textContent='Fehler: '+error.message;return}
  for(const p of data||[]){
   const row=el('div',null,'hn-v38-row');row.append(el('span',p.name+' · '+p.owner_id.slice(0,8)+'… · '+hnV38Date(p.created_at)));
+  const publish=el('button','🌍 Als öffentliche Playlist freigeben','alt small');
+  publish.onclick=async()=>{
+    if(!isAdmin)return;
+    const {data:links,error:linksError}=await db.from('playlist_songs').select('song_id').eq('playlist_id',p.id);
+    if(linksError){say(linksError.message);return}
+    const linkedIds=[...new Set((links||[]).map(x=>x.song_id))];
+    if(!linkedIds.length){say('Diese Playlist enthält keine Songs.');return}
+    const {data:allowed,error:allowedError}=await db.from('songs').select('id,visibility').in('id',linkedIds);
+    if(allowedError){say(allowedError.message);return}
+    const publicIds=(allowed||[]).filter(x=>x.visibility==='public').map(x=>x.id);
+    if(!publicIds.length){say('Keine freigegebenen Songs vorhanden. Bitte zuerst die Rechte und Song-Freigaben prüfen.');return}
+    const skipped=linkedIds.length-publicIds.length;
+    if(!confirm('Playlist „'+p.name+'“ öffentlich bereitstellen? '+publicIds.length+' freigegebene Songs werden übernommen.'+(skipped?' '+skipped+' private/nicht sichtbare Songs bleiben ausgeschlossen.':'')))return;
+    const {data:existing,error:findError}=await db.from('hn_public_playlists').select('id').eq('source_playlist_id',p.id).maybeSingle();
+    if(findError){say('SQL-Update V39 erforderlich: '+findError.message);return}
+    let targetId=existing?.id;
+    if(!targetId){
+      const {data:created,error:createError}=await db.from('hn_public_playlists').insert({name:p.name,created_by:user.id,source_playlist_id:p.id}).select('id').single();
+      if(createError){say(createError.message);return}
+      targetId=created.id;
+    }
+    const {data:already,error:alreadyError}=await db.from('hn_public_playlist_songs').select('song_id').eq('playlist_id',targetId);
+    if(alreadyError){say(alreadyError.message);return}
+    const alreadyIds=new Set((already||[]).map(x=>x.song_id));
+    const missing=publicIds.filter(id=>!alreadyIds.has(id));
+    if(missing.length){
+      const {error:addError}=await db.from('hn_public_playlist_songs').insert(missing.map(song_id=>({playlist_id:targetId,song_id})));
+      if(addError){say(addError.message);return}
+    }
+    await hnLoadPublicPlaylists();
+    say('Öffentliche Playlist bereitgestellt: '+p.name+'. '+publicIds.length+' Songs; '+skipped+' ausgeschlossen.');
+  };
+  row.append(publish);
   const view=el('button','Songs anzeigen','alt small');view.onclick=async()=>{
    const {data,error}=await db.from('playlist_songs').select('song_id').eq('playlist_id',p.id);
    if(error){say(error.message);return}
