@@ -600,7 +600,7 @@ body.hn-player-mini:not(.hn-player-fullscreen) .hn-player-content{max-width:1100
 <label>Oder CSV hier einfügen<textarea id="hnBulkText" placeholder="source_type,title,artist,url,cover_url,artist_image_url,genre"></textarea></label>
 <label class="hn-confirm"><input type="checkbox" id="hnBulkRights"> Ich bestätige, dass die Verlinkung und Einbettung aller Einträge zulässig ist.</label>
 <div class="hn-bulk-actions"><button type="button" id="hnBulkCheck">Prüfen &amp; Vorschau</button><button type="button" id="hnBulkImport" disabled>✓ Geprüfte Songs importieren</button><button type="button" class="alt" id="hnBulkClose">Schließen</button></div>
-<p id="hnBulkStatus" role="status" aria-live="polite"></p><div id="hnBulkPreview"></div>
+<p id="hnBulkStatus" role="status" aria-live="polite"></p><div id="hnBulkPreview"></div><button type="button" id="hnSpotifyBackfill" class="alt">🎨 Fehlende Spotify-Cover nachladen (bestehende Songs)</button>
 </div>
 <div id="hnExternalAdd" hidden><h3>🎶 Externe Musik hinzufügen</h3><p class="hn-ext-help">Nur für Administratoren. Externe Inhalte werden über den offiziellen Player des Anbieters abgespielt; keine Audiodateien werden kopiert.</p>
 <form id="hnExternalAddForm" autocomplete="off"><div class="hn-ext-grid">
@@ -780,7 +780,7 @@ $('hnExternalAddForm').addEventListener('submit',async event=>{
  finally{save.disabled=false}
 });
 
-function renderSongs(target='songs',mode='library'){let q=$('search').value.trim().toLocaleLowerCase(),artist=$('artistFilter').value,favOnly=$('view').value==='favorites';$(target).replaceChildren();let filtered=songs.filter(s=>(!artist||s.artist===artist)&&(!favOnly||favorites.has(s.id))&&(!q||(s.title+' '+s.artist).toLocaleLowerCase().includes(q)));if(mode==='home'||mode==='popular'){q=$('homeSearch').value.trim().toLocaleLowerCase();filtered=songs.filter(s=>!q||(s.title+' '+s.artist).toLocaleLowerCase().includes(q));if(mode==='popular'){filtered=filtered.sort((a,b)=>(playCounts[b.id]||0)-(playCounts[a.id]||0)).slice(0,8)}}else if(mode==='favorites'){filtered=filtered.filter(s=>favorites.has(s.id))}else if(mode==='artist'){filtered=filtered.filter(s=>s.artist===chosenArtist)}if(mode==='library'){const heading=document.querySelector('#library > h2');if(heading)heading.textContent=hnSelectedGenre?'🎶 Musikrichtung: '+hnSelectedGenre:'🎶 Musikbibliothek';if(hnSelectedGenre)filtered=filtered.filter(s=>hnSongGenres(s).includes(hnSelectedGenre))}if(!filtered.length){$(target).append(el('p','Noch keine Lieder gefunden.'));return}if(mode==='home')filtered.sort((a,b)=>(a.artist||'').localeCompare(b.artist||'','de')||(a.title||'').localeCompare(b.title||'','de'));for(let s of filtered){let card=el('article',null,'song');let provider=s.source_type==='youtube'?'youtube':s.source_type==='spotify'?'spotify':'hosted';let artWrap=el('div',null,'hn-song-art-wrap');if(s.cover_url){let img=el('img',null,'art');img.src=s.cover_url;img.alt='Cover: '+s.title;img.loading='lazy';img.referrerPolicy='no-referrer';artWrap.append(img)}else artWrap.append(el('div','♫','art'));let badge=el('span',provider==='youtube'?'▶ YouTube':provider==='spotify'?'♫ Spotify':'♫ MP3','hn-source-badge');badge.dataset.provider=provider;artWrap.append(badge);card.append(artWrap);let body=el('div',null,'songBody');body.append(el('h3',s.title));let artistRow=el('div',null,'artist');if(s.artist_image_url){let img=el('img',null,'avatar');img.src=s.artist_image_url;img.alt=s.artist;img.loading='lazy';artistRow.append(img)}artistRow.append(el('span',s.artist));body.append(artistRow,el('small',s.shared_by?'Hinzugefügt von: '+s.shared_by:''));body.append(el('small',provider==='hosted'?'Direkt bei HamNava hochgeladen':provider==='youtube'?'Externer YouTube-Link':'Externer Spotify-Link','hn-song-type'));if(hnSongGenres(s).length)body.append(el('small',hnSongGenres(s).join(' · '),'hn-genre-tags'));let actions=el('div',null,'actions');let p=el('button','▶ Abspielen','small');p.onclick=()=>play(s);actions.append(p);let f=el('button',favorites.has(s.id)?'♥ Favorit':'♡ Favorit','alt small');f.onclick=async()=>{let result=favorites.has(s.id)?await db.from('favorites').delete().eq('song_id',s.id).eq('user_id',user.id):await db.from('favorites').insert({song_id:s.id,user_id:user.id});if(result.error)say(result.error.message);else{if(favorites.has(s.id))favorites.delete(s.id);else favorites.add(s.id);renderSongs()}};actions.append(f);let addTo=el('button','＋ Zu meiner Playlist','alt small');addTo.onclick=()=>hnOpenPlaylistDialog(s);actions.append(addTo);let open=el('button','↗ Link öffnen','alt small');open.onclick=()=>window.open(s.url,'_blank','noopener,noreferrer');open.disabled=!s.url;if(isAdmin)actions.append(open);if(s.user_id===user.id||isAdmin){let editGenres=el('button','🎵 Genres bearbeiten','alt small');editGenres.onclick=()=>hnEditSongGenres(s);if(isAdmin)actions.append(editGenres);let del=el('button','Löschen','warn small');del.onclick=async()=>{if(!confirm('Lied wirklich löschen?'))return;let {error}=await db.from('songs').delete().eq('id',s.id);if(error){say(error.message);return}if(s.audio_path){let {error:storageError}=await db.storage.from('hamnava-audio').remove([s.audio_path]);if(storageError)say('Lied gelöscht, aber die MP3-Datei konnte nicht entfernt werden: '+storageError.message)}await loadAll()};actions.append(del)}body.append(actions);card.append(body);$(target).append(card)}}
+function renderSongs(target='songs',mode='library'){let q=$('search').value.trim().toLocaleLowerCase(),artist=$('artistFilter').value,favOnly=$('view').value==='favorites';$(target).replaceChildren();let filtered=songs.filter(s=>(!artist||s.artist===artist)&&(!favOnly||favorites.has(s.id))&&(!q||(s.title+' '+s.artist).toLocaleLowerCase().includes(q)));if(mode==='home'||mode==='popular'){q=$('homeSearch').value.trim().toLocaleLowerCase();filtered=songs.filter(s=>!q||(s.title+' '+s.artist).toLocaleLowerCase().includes(q));if(mode==='popular'){filtered=filtered.sort((a,b)=>(playCounts[b.id]||0)-(playCounts[a.id]||0)).slice(0,8)}}else if(mode==='favorites'){filtered=filtered.filter(s=>favorites.has(s.id))}else if(mode==='artist'){filtered=filtered.filter(s=>s.artist===chosenArtist)}if(mode==='library'){const heading=document.querySelector('#library > h2');if(heading)heading.textContent=hnSelectedGenre?'🎶 Musikrichtung: '+hnSelectedGenre:'🎶 Musikbibliothek';if(hnSelectedGenre)filtered=filtered.filter(s=>hnSongGenres(s).includes(hnSelectedGenre))}if(!filtered.length){$(target).append(el('p','Noch keine Lieder gefunden.'));return}if(mode==='home')filtered.sort((a,b)=>(a.artist||'').localeCompare(b.artist||'','de')||(a.title||'').localeCompare(b.title||'','de'));for(let s of filtered){let card=el('article',null,'song');let provider=s.source_type==='youtube'?'youtube':s.source_type==='spotify'?'spotify':'hosted';let artWrap=el('div',null,'hn-song-art-wrap');if(s.cover_url){let img=el('img',null,'art');img.src=s.cover_url;img.alt='Cover: '+s.title;img.loading='lazy';img.referrerPolicy='no-referrer';artWrap.append(img)}else artWrap.append(el('div','♫','art'));let badge=el('span',provider==='youtube'?'▶ YouTube':provider==='spotify'?'♫ Spotify':'♫ MP3','hn-source-badge');badge.dataset.provider=provider;artWrap.append(badge);card.append(artWrap);if(provider==='spotify'&&!s.cover_url)window.hnSpotifyCoverAuto?.(s,artWrap);let body=el('div',null,'songBody');body.append(el('h3',s.title));let artistRow=el('div',null,'artist');if(s.artist_image_url){let img=el('img',null,'avatar');img.src=s.artist_image_url;img.alt=s.artist;img.loading='lazy';artistRow.append(img)}artistRow.append(el('span',s.artist));body.append(artistRow,el('small',s.shared_by?'Hinzugefügt von: '+s.shared_by:''));body.append(el('small',provider==='hosted'?'Direkt bei HamNava hochgeladen':provider==='youtube'?'Externer YouTube-Link':'Externer Spotify-Link','hn-song-type'));if(hnSongGenres(s).length)body.append(el('small',hnSongGenres(s).join(' · '),'hn-genre-tags'));let actions=el('div',null,'actions');let p=el('button','▶ Abspielen','small');p.onclick=()=>play(s);actions.append(p);let f=el('button',favorites.has(s.id)?'♥ Favorit':'♡ Favorit','alt small');f.onclick=async()=>{let result=favorites.has(s.id)?await db.from('favorites').delete().eq('song_id',s.id).eq('user_id',user.id):await db.from('favorites').insert({song_id:s.id,user_id:user.id});if(result.error)say(result.error.message);else{if(favorites.has(s.id))favorites.delete(s.id);else favorites.add(s.id);renderSongs()}};actions.append(f);let addTo=el('button','＋ Zu meiner Playlist','alt small');addTo.onclick=()=>hnOpenPlaylistDialog(s);actions.append(addTo);let open=el('button','↗ Link öffnen','alt small');open.onclick=()=>window.open(s.url,'_blank','noopener,noreferrer');open.disabled=!s.url;if(isAdmin)actions.append(open);if(s.user_id===user.id||isAdmin){let editGenres=el('button','🎵 Genres bearbeiten','alt small');editGenres.onclick=()=>hnEditSongGenres(s);if(isAdmin)actions.append(editGenres);let del=el('button','Löschen','warn small');del.onclick=async()=>{if(!confirm('Lied wirklich löschen?'))return;let {error}=await db.from('songs').delete().eq('id',s.id);if(error){say(error.message);return}if(s.audio_path){let {error:storageError}=await db.storage.from('hamnava-audio').remove([s.audio_path]);if(storageError)say('Lied gelöscht, aber die MP3-Datei konnte nicht entfernt werden: '+storageError.message)}await loadAll()};actions.append(del)}body.append(actions);card.append(body);$(target).append(card)}}
 
 // HamNava unified advanced search: integrates with existing songs/renderSongs and keeps old controls wired.
 window.hnAdvancedSearchApply=function(filters){
@@ -878,6 +878,14 @@ function hnTile(root,title,subtitle,imageUrl,icon,onClick,songList){
   art.append(badge);
  }
  tile.append(art,el('strong',title),el('small',subtitle));tile.onclick=onClick;root.append(tile);
+ if(!imageUrl&&songList?.length&&songList[0].source_type==='spotify'){
+  window.hnSpotifyCoverLookup?.(songList[0].url).then(url=>{
+   if(!url||!art.isConnected)return;
+   const fallback=art.querySelector('.hn-art');if(!fallback)return;
+   const img=el('img');img.src=url;img.alt='';img.loading='lazy';img.referrerPolicy='no-referrer';
+   img.onerror=()=>img.replaceWith(fallback);fallback.replaceWith(img);
+  });
+ }
 }
 function renderDiscover(){
  const q=$('homeSearch').value.trim().toLocaleLowerCase();const matched=songs.filter(x=>(x.title+' '+x.artist).toLocaleLowerCase().includes(q));
@@ -1515,6 +1523,63 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 </script>
 
+
+<script id="hn-spotify-cover-v40">
+(()=>{
+ const cache=new Map();
+ const pending=new Map();
+ function spotifyId(url){
+  try{const u=new URL(url);if(u.hostname!=='open.spotify.com')return null;
+   const m=u.pathname.match(/^\/track\/([A-Za-z0-9]{22})\/?$/);return m?m[1]:null;
+  }catch{return null}
+ }
+ async function lookup(url){
+  const id=spotifyId(url);if(!id)return null;
+  if(cache.has(id))return cache.get(id);
+  if(pending.has(id))return pending.get(id);
+  const promise=(async()=>{
+   try{
+    const db=window.hnBulkDb?.();if(!db)return null;
+    const {data,error}=await db.functions.invoke('hamnava-spotify-cover',{body:{track_id:id}});
+    if(error||!data?.cover_url||!/^https:\/\//.test(data.cover_url))return null;
+    cache.set(id,data.cover_url);return data.cover_url;
+   }catch{return null}finally{pending.delete(id)}
+  })();
+  pending.set(id,promise);return promise;
+ }
+ window.hnSpotifyCoverLookup=lookup;
+ window.hnSpotifyCoverAuto=async(song,wrap)=>{
+  if(song?.source_type!=='spotify'||song.cover_url||!wrap)return;
+  const url=await lookup(song.url);if(!url||!wrap.isConnected)return;
+  const old=wrap.querySelector('.art');if(!old)return;
+  const img=document.createElement('img');img.className='art';img.src=url;img.alt='Cover: '+song.title;img.loading='lazy';img.referrerPolicy='no-referrer';
+  img.onerror=()=>img.replaceWith(old);
+  old.replaceWith(img);
+  song.cover_url=url;
+ };
+ window.hnSpotifyCoverBackfill=async()=>{
+  const db=window.hnBulkDb?.();if(!db||!window.hnBulkAccess?.())return;
+  const {data,error}=await db.from('songs').select('id,url,source_type,cover_url').eq('source_type','spotify').limit(1000);
+  if(error)return;
+  const missing=(data||[]).filter(x=>!x.cover_url);
+  let updated=0;
+  for(const song of missing){
+   const cover=await lookup(song.url);if(!cover)continue;
+   const result=await db.from('songs').update({cover_url:cover}).eq('id',song.id);
+   if(!result.error)updated++;
+  }
+  if(updated)await window.hnBulkRefresh?.();
+  return {updated,total:missing.length};
+ };
+document.addEventListener('click',async e=>{
+  if(e.target?.id!=='hnSpotifyBackfill')return;
+  const btn=e.target;btn.disabled=true;const old=btn.textContent;btn.textContent='Spotify-Cover werden geladen…';
+  try{const result=await window.hnSpotifyCoverBackfill();btn.textContent=result?`${result.updated} von ${result.total} Cover aktualisiert`: 'Nicht verfügbar (Admin/Verbindung prüfen)';}
+  catch(e){btn.textContent='Fehler: '+e.message}
+  setTimeout(()=>{btn.textContent=old;btn.disabled=false},5000);
+ });
+})();
+</script>
 <script id="hn-bulk-script">
 (function(){
  const byId=id=>document.getElementById(id);
@@ -1606,6 +1671,7 @@ document.addEventListener('DOMContentLoaded',function(){
   let done=0;const failures=[];
   for(let i=0;i<prepared.length;i++){
    const r=prepared[i];
+   if(r.source_type==='spotify'&&!r.cover_url){r.cover_url=await window.hnSpotifyCoverLookup?.(r.url)||null;}
    const result=await window.hnBulkDb().from('songs').insert(r);
    if(result.error)failures.push('Zeile '+(i+1)+' ('+r.title+'): '+result.error.message);
    else done++;
