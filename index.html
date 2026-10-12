@@ -149,20 +149,13 @@ body.hn-ai-off .hn-ai-canvas{display:none} body.hn-player-fullscreen .hn-ai-canv
 body.hn-player-mini .hn-ai-controls{display:none}
 @media(max-width:480px){.hn-ai-controls{gap:5px}.hn-ai-controls button,.hn-ai-controls select{font-size:11px!important;padding:7px 9px!important}}
 @media(prefers-reduced-motion:reduce){.hn-ai-canvas{display:none!important}}
-</style><style id="hamnava-v22-visible-effects">
-/* Sichtbare, API-freie CSS-Effekte als robuste Alternative zum Canvas. */
-.hn-player-window .hn-v22-effects{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden;isolation:isolate}
-.hn-v22-effects::before,.hn-v22-effects::after{content:"";position:absolute;inset:-35%;display:block;pointer-events:none;will-change:transform,opacity}
-.hn-v22-effects::before{background:radial-gradient(ellipse at 25% 38%,rgba(21,255,224,.78),transparent 35%),radial-gradient(ellipse at 72% 65%,rgba(242,173,82,.62),transparent 32%),radial-gradient(ellipse at 55% 22%,rgba(102,96,255,.66),transparent 38%);filter:blur(18px);mix-blend-mode:screen;animation:hnV22Float 7s ease-in-out infinite alternate}
-.hn-v22-effects::after{background:repeating-linear-gradient(115deg,transparent 0 32px,rgba(34,255,222,.25) 34px 39px,transparent 44px 75px);filter:blur(10px);transform:rotate(-15deg);animation:hnV22Sweep 9s linear infinite}
-.hn-player-window .hn-ai-canvas{z-index:4!important;mix-blend-mode:screen}
+</style><style id="hamnava-v23-cinematic">
+/* No opaque overlays or giant equalizer bars: cover stays visible. */
+.hn-player-window .hn-v22-effects{display:none!important}
+.hn-player-window .hn-ai-canvas{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;z-index:4!important;opacity:1!important;mix-blend-mode:screen!important;pointer-events:none!important}
 .hn-player-window .hn-player-content{z-index:5!important}
-body.hn-ai-off .hn-v22-effects,body.hn-player-mini .hn-v22-effects{display:none!important}
-body.hn-v22-particles .hn-v22-effects::before{background-image:radial-gradient(circle,rgba(255,235,149,.95) 0 2px,transparent 5px),radial-gradient(circle,rgba(32,255,235,.95) 0 3px,transparent 7px);background-size:59px 61px,87px 93px;filter:drop-shadow(0 0 9px #21fce0)}
-body.hn-v22-bars .hn-v22-effects::before{background:repeating-linear-gradient(90deg,transparent 0 8px,rgba(27,255,230,.85) 9px 16px,transparent 17px 25px);clip-path:polygon(0 70%,8% 38%,17% 62%,25% 15%,34% 48%,42% 25%,51% 75%,60% 20%,70% 48%,80% 13%,90% 57%,100% 31%,100% 100%,0 100%);filter:drop-shadow(0 0 12px #1ef3dc)}
-@keyframes hnV22Float{0%{transform:translate(-9%,-8%) rotate(-7deg) scale(.9);opacity:.65}100%{transform:translate(11%,8%) rotate(12deg) scale(1.2);opacity:1}}
-@keyframes hnV22Sweep{0%{transform:translateX(-22%) rotate(-15deg)}100%{transform:translateX(22%) rotate(-15deg)}}
-@media(prefers-reduced-motion:reduce){.hn-v22-effects::before,.hn-v22-effects::after{animation:none!important}}
+body.hn-ai-off .hn-ai-canvas,body.hn-player-mini .hn-ai-canvas{display:none!important}
+@media(prefers-reduced-motion:reduce){.hn-ai-canvas{display:none!important}}
 </style></head><body class="logged-out"><div class="hn-topbar" id="hnTopbar" role="navigation" aria-label="Hauptnavigation"><a class="hn-home" href="#home" aria-label="Startseite">⌂</a><label class="hn-search-wrap"><span class="hn-search-icon">⌕</span><input id="hnGlobalSearch" type="search" placeholder="Was möchtest du hören?" autocomplete="off" aria-label="Musik durchsuchen"/><a href="#library" title="Bibliothek" aria-label="Bibliothek">▣</a></label><div class="hn-actions"><a class="hn-desktop-action" href="#playlists">Meine Playlists</a><a class="hn-desktop-action" href="#favorites" aria-label="Favoriten" title="Favoriten">♡</a><button class="hn-avatar" id="hnProfile" type="button" title="Mein Profil" aria-label="Profil">☺</button></div></div><aside class="sidebar" dir="ltr" id="siteSidebar"><a class="brand" href="#home"><img class="brand-mark" src="hamnava-logo.webp" alt="HamNava Logo"/><span>HamNava</span></a><div class="side-caption">Deine Bibliothek</div><a class="side-link active" href="#home"><span>⌂</span><span>Startseite</span></a><a class="side-link" href="#library"><span>♫</span><span>Musikbibliothek</span></a><a class="side-link" href="#artists"><span>♬</span><span>Künstler A–Z</span></a><a class="side-link" href="#favorites"><span>♥</span><span>Favoriten</span></a><a class="side-link" href="#playlists"><span>▤</span><span>Meine Playlists</span></a><a class="side-link" href="#ai"><span>✨</span><span>KI-DJ</span></a><a class="side-link" href="add-song.html"><span>＋</span><span>Lied hinzufügen</span></a><div class="hn-create-area"><div class="hn-library-head"><span>▤ Bibliothek</span><button id="hnCreateBtn" type="button" aria-expanded="false">＋ Erstellen</button></div><div id="hnCreateMenu" class="hn-create-menu" hidden><button id="hnCreatePlaylist" type="button">♫ &nbsp; Playlist erstellen</button><button type="button" disabled title="Benötigt Datenbank-Erweiterung">♧ &nbsp; Gemeinsamer Mix · bald</button><button type="button" disabled title="Benötigt Datenbank-Erweiterung">▱ &nbsp; Ordner · bald</button></div></div><div id="hnPlaylistSidebar" class="hn-playlist-sidebar" aria-label="Meine Playlists"></div><div class="side-footer">Musik, Freunde, Erinnerungen<br/>HamNava · Version 22</div></aside><div id="navBackdrop" class="nav-backdrop" hidden></div><main><header><button id="menuToggle" class="menu-toggle alt" type="button" aria-label="Menü öffnen" aria-expanded="false">☰</button><div><h1><img class="logo" src="hamnava-logo.webp" alt=""/> Ham<span class="gold">Nava</span></h1><p>Gute Songs, gute Freunde, gemeinsame Erinnerungen</p></div><div id="identity"></div></header><section class="hero hidden" dir="ltr" id="home"><div class="hero-copy"><div class="eyebrow">MUSIK · FREUNDE · ERINNERUNGEN</div><h2>Willkommen bei<br/><em>HamNava</em></h2><p>Entdecke Musik, die verbindet.</p><a href="#homeMusic" id="heroDiscover">Jetzt Musik entdecken ↗</a></div><img class="hero-portrait" src="hero-artist.webp" alt="Illustration eines Sängers"/><div class="hero-quote">„Gute Musik verbindet Menschen – heute und immer.“</div></section>
 <section class="panel" id="homeMusic" data-page="home"><div class="home-heading"><div><h2>Entdecke deine Musik</h2><p>Musik, Freunde und gemeinsame Erinnerungen.</p></div></div><label class="home-search">Songs oder Künstler suchen<input id="homeSearch" type="search" placeholder="Songtitel oder Künstlername eingeben" autocomplete="off"></label><h2>🔥 Meistgehörte Songs</h2><p class="home-hint" id="popularHint">Beliebte Lieder aus der Musikbibliothek</p><div class="songs featured-songs" id="popularSongs"></div><div class="hn-section-heading"><h2>💿 Beliebte Alben und Singles</h2><a href="#library">Alle anzeigen →</a></div><p class="hn-section-note">Singles aus unserer Musikbibliothek</p><div id="hnSingles" class="hn-shelf"></div><div class="hn-section-heading"><h2>📈 Empfohlene Charts</h2><a href="#library">Alle anzeigen →</a></div><div id="hnCharts" class="hn-shelf"></div><div class="hn-section-heading"><h2>📻 Beliebte Radios</h2><a href="#library">Alle anzeigen →</a></div><div id="hnRadios" class="hn-shelf"></div><div class="hn-section-heading"><h2>🎤 Künstler von A–Z</h2><a href="#artists">Alle anzeigen →</a></div><div id="homeArtists" class="artist-chips artist-portraits"></div><div class="hn-section-heading"><h2>🆕 Neu hinzugefügt</h2><a href="#library">Alle anzeigen →</a></div><div class="songs" id="homeSongs"></div></section>
 <section class="panel" id="artists" data-page="artists"><h2>🎤 Künstler von A–Z</h2><p>Wähle einen Künstler, um seine Lieder anzuhören.</p><div id="artistsList" class="artist-chips"></div><div id="artistSongs" class="songs"></div></section>
@@ -393,29 +386,48 @@ $('hnPlayerDrag').addEventListener('pointercancel',hnEndDrag);
 window.addEventListener('resize',hnKeepPlayerInViewport);
 
 
-// HamNava 20: Browserbasierte visuelle Effekte – keine API, keine Uploads, keine Kosten.
-// Zeitgesteuerte Animation: Für echtes Frequenztracking benötigen externe Audiodateien passende CORS-Header.
+// HamNava 23: Cinematic Canvas visuals, transparent and genuinely frame-animated.
+// Animation is time-based, not falsely advertised as frequency/beat detection.
 const hnAiCanvas=$('hnAiCanvas'),hnAiCtx=hnAiCanvas.getContext('2d',{alpha:true});
-const hnAiAudio=$('audioPlayer');let hnAiEnabled=true,hnAiFrame=0,hnAiLast=0;
+const hnAiAudio=$('audioPlayer');let hnAiEnabled=true,hnAiFrame=0;
 const hnAiReduced=window.matchMedia('(prefers-reduced-motion: reduce)');
-function hnAiSize(){const r=hnAiCanvas.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);if(!r.width||!r.height)return null;const w=Math.round(r.width*d),h=Math.round(r.height*d);if(hnAiCanvas.width!==w||hnAiCanvas.height!==h){hnAiCanvas.width=w;hnAiCanvas.height=h}hnAiCtx.setTransform(d,0,0,d,0,0);return {w:r.width,h:r.height}}
+const hnAiStars=Array.from({length:75},(_,i)=>({x:(i*0.61803398875)%1,y:(i*0.7548776662)%1,r:.5+(i%5)*.24,phase:i*2.31,speed:.25+(i%7)*.09}));
+function hnAiSize(){const r=hnAiCanvas.getBoundingClientRect(),d=Math.min(window.devicePixelRatio||1,2);if(!r.width||!r.height)return null;const w=Math.round(r.width*d),h=Math.round(r.height*d);if(hnAiCanvas.width!==w||hnAiCanvas.height!==h){hnAiCanvas.width=w;hnAiCanvas.height=h}hnAiCtx.setTransform(d,0,0,d,0,0);return {w:r.width,h:r.height}}
 function hnAiDraw(now){hnAiFrame=0;if(!hnAiEnabled||hnAiReduced.matches||!document.body.classList.contains('hn-playing'))return;
- const size=hnAiSize();if(!size)return;const {w,h}=size,c=hnAiCtx;c.clearRect(0,0,w,h);
- const t=hnAiAudio.currentTime||now/1000,active=!hnAiAudio.paused;const motion=active?1:.13,style=$('hnAiStyle').value;
- if(style==='bars'){
-  const n=Math.max(18,Math.min(65,Math.floor(w/11))),bw=w/n;
-  for(let i=0;i<n;i++){const x=(i+.5)*bw;const v=(.2+.8*Math.abs(Math.sin(i*.46+t*2.8)*Math.cos(i*.17-t*1.1)))*motion;const bh=12+v*h*.48;const g=c.createLinearGradient(0,h-bh,0,h);g.addColorStop(0,'rgba(255,192,81,.98)');g.addColorStop(1,'rgba(34,255,228,.95)');c.fillStyle=g;c.fillRect(x-bw*.3,h-bh,bw*.6,bh)}
- }else if(style==='particles'){
-  for(let i=0;i<100;i++){const a=i*2.39996,rad=Math.sqrt(i/100)*Math.max(w,h)*.6;const x=w/2+Math.cos(a+t*.07*motion)*rad,y=h/2+Math.sin(a+t*.08*motion)*rad*.65;const r=2.2+(1+Math.sin(i+t*2*motion))*2.4;c.beginPath();c.arc((x+w)%w,(y+h)%h,r,0,Math.PI*2);c.fillStyle=i%3?'rgba(40,255,229,.94)':'rgba(255,201,90,.96)';c.fill()}
+ const size=hnAiSize();if(!size)return;const {w,h}=size,c=hnAiCtx;
+ c.clearRect(0,0,w,h);
+ const t=now*.001,mode=$('hnAiStyle').value,playing=!hnAiAudio.paused;
+ if(mode==='particles'){
+  for(const star of hnAiStars){const x=(star.x*w+Math.sin(t*star.speed+star.phase)*19+w)%w,y=(star.y*h-t*star.speed*11%h+h)%h;
+   const glow=.35+.65*(.5+.5*Math.sin(t*1.7+star.phase));c.beginPath();c.arc(x,y,star.r*2,0,Math.PI*2);c.fillStyle=`rgba(106,255,226,${glow*.55})`;c.shadowBlur=11;c.shadowColor='#17b8ae';c.fill()}
+  c.shadowBlur=0;
+ }else if(mode==='bars'){
+  // Low, gently animated waveform only at the bottom, preserving artwork and faces.
+  const base=h*.88;for(let layer=0;layer<3;layer++){
+   c.beginPath();for(let x=0;x<=w+4;x+=4){const u=x/w;
+    const envelope=Math.pow(Math.sin(Math.PI*u),1.4);
+    const v=(Math.sin(u*15-t*(1.3+layer*.17)+layer)*.55+Math.sin(u*29+t*.8+layer)*.22)*envelope;
+    const y=base+layer*10+v*Math.min(h*.085,26);
+    if(x===0)c.moveTo(x,y);else c.lineTo(x,y)}
+   c.lineWidth=layer===0?2.5:1.3;c.strokeStyle=['rgba(42,255,227,.7)','rgba(242,173,82,.55)','rgba(105,185,255,.5)'][layer];c.shadowBlur=8;c.shadowColor='#17b8ae';c.stroke()}
+  c.shadowBlur=0;
  }else{
-  for(let j=0;j<5;j++){c.beginPath();const baseline=h*(.28+j*.13);for(let x=0;x<=w+8;x+=8){const y=baseline+Math.sin(x/w*10+t*(.35+j*.12)*motion+j)*h*.07+Math.sin(x/w*21-t*.22*motion+j)*h*.025;if(x===0)c.moveTo(x,y);else c.lineTo(x,y)}c.lineWidth=2+j*.6;c.strokeStyle=j%2?'rgba(255,195,85,.9)':'rgba(38,255,225,.96)';c.shadowBlur=22;c.shadowColor=j%2?'#f2ad52':'#17b8ae';c.stroke()}c.shadowBlur=0
+  // Soft aurora glows slowly float along lower third; no flat opaque polygons.
+  for(let j=0;j<3;j++){
+   const x=w*(.23+j*.29)+Math.sin(t*(.32+j*.09)+j)*w*.13;
+   const y=h*(.76+j*.035)+Math.cos(t*.4+j)*h*.055;
+   const rad=Math.max(w*.26,100),g=c.createRadialGradient(x,y,0,x,y,rad);
+   const color=j===1?'242,173,82':'23,184,174';g.addColorStop(0,`rgba(${color},.17)`);g.addColorStop(.48,`rgba(${color},.065)`);g.addColorStop(1,`rgba(${color},0)`);
+   c.fillStyle=g;c.fillRect(x-rad,y-rad,rad*2,rad*2);
+  }
+  c.beginPath();for(let x=0;x<=w+5;x+=5){const y=h*.86+Math.sin(x/w*11-t*.95)*Math.min(h*.045,19)+Math.sin(x/w*19+t*.48)*5;if(x===0)c.moveTo(x,y);else c.lineTo(x,y)}
+  c.strokeStyle='rgba(95,255,229,.55)';c.lineWidth=1.7;c.shadowBlur=10;c.shadowColor='#17b8ae';c.stroke();c.shadowBlur=0;
  }
- if(active)hnAiFrame=requestAnimationFrame(hnAiDraw);
+ if(playing)hnAiFrame=requestAnimationFrame(hnAiDraw);
 }
-function hnAiRefresh(){cancelAnimationFrame(hnAiFrame);hnAiFrame=0;hnAiCtx.clearRect(0,0,hnAiCanvas.width,hnAiCanvas.height);if(hnAiEnabled&&!hnAiReduced.matches&&document.body.classList.contains('hn-playing'))hnAiFrame=requestAnimationFrame(hnAiDraw)}
+function hnAiRefresh(){cancelAnimationFrame(hnAiFrame);hnAiFrame=0;const size=hnAiSize();if(size)hnAiCtx.clearRect(0,0,size.w,size.h);if(hnAiEnabled&&!hnAiReduced.matches&&document.body.classList.contains('hn-playing'))hnAiFrame=requestAnimationFrame(hnAiDraw)}
 $('hnAiToggle').addEventListener('click',()=>{hnAiEnabled=!hnAiEnabled;document.body.classList.toggle('hn-ai-off',!hnAiEnabled);$('hnAiToggle').textContent=hnAiEnabled?'✦ Visual Studio: An':'✦ Visual Studio: Aus';$('hnAiToggle').setAttribute('aria-pressed',String(hnAiEnabled));hnAiRefresh()});
-function hnV22SyncStyle(){document.body.classList.remove('hn-v22-particles','hn-v22-bars');const mode=$('hnAiStyle').value;if(mode==='particles')document.body.classList.add('hn-v22-particles');if(mode==='bars')document.body.classList.add('hn-v22-bars');}
-$('hnAiStyle').addEventListener('change',()=>{hnV22SyncStyle();hnAiRefresh()});hnV22SyncStyle();
+$('hnAiStyle').addEventListener('change',hnAiRefresh);
 hnAiAudio.addEventListener('play',()=>{hnAiEnabled=true;document.body.classList.remove('hn-ai-off');$('hnAiToggle').textContent='✦ Visual Studio: An';$('hnAiToggle').setAttribute('aria-pressed','true');hnAiRefresh()});
 for(const ev of ['pause','seeked','loadedmetadata','emptied'])hnAiAudio.addEventListener(ev,hnAiRefresh);
 hnAiReduced.addEventListener('change',hnAiRefresh);
