@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="de"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>HamNava | Musik, Freunde, Erinnerungen</title><style>
+:root{color-scheme:dark;--bg:#080a0d;--panel:#17191e;--line:#2b3038;--ink:#f5f7fa;--muted:#a6abb5;--mint:#1ed760}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:15px Tahoma,Arial,sans-serif}button,input,select{font:inherit}button{cursor:pointer;background:var(--mint);color:#08110b;border:0;border-radius:24px;padding:11px 20px;font-weight:800;transition:transform .18s,filter .18s}button:hover{transform:translateY(-2px);filter:brightness(1.1)}button.alt{background:#30343c;color:#fff}button.warn{background:#6e2630;color:#fff}a{color:inherit;text-decoration:none}main{max-width:none;margin:0 0 0 248px;padding:26px 32px 150px;min-height:100vh}header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 0 22px}header h1{font-size:28px;margin:0}header p{color:var(--muted);margin:7px 0}header small{font-size:13px;color:var(--mint)}.logo{display:inline-grid;place-items:center;width:42px;height:42px;background:var(--mint);color:#09150b;border-radius:50%;font-size:26px}.sidebar{position:fixed;top:0;left:0;bottom:94px;width:248px;background:#101216;padding:28px 17px;display:flex;flex-direction:column;gap:12px;border-right:1px solid #23262b;z-index:3}.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:23px;letter-spacing:-1px}.brand-mark{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--mint);color:#0b150e}.side-caption{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#777f8b;margin:25px 10px 8px}.side-link{display:flex;align-items:center;gap:13px;border-radius:9px;padding:14px 13px;color:#bec3ca;font-weight:700}.side-link:hover,.side-link.active{background:#252a2d;color:#fff}.side-link.active{border-right:3px solid var(--mint)}.side-footer{margin-top:auto;color:#848c95;font-size:12px;line-height:1.8;padding:12px}.hero{border-radius:18px;padding:38px 38px 35px;background:linear-gradient(115deg,#184e35,#17362b 48%,#1a1e25);margin:0 0 22px;position:relative;overflow:hidden}.hero:after{content:'♫';position:absolute;left:8%;top:-70px;font-size:270px;opacity:.09;transform:rotate(-17deg)}.hero .eyebrow{font-size:12px;letter-spacing:2px;color:#9ef5b8}.hero h2{font-size:clamp(29px,4vw,53px);margin:12px 0}.hero p{max-width:580px;color:#d6e5da;line-height:1.9}.hero a{display:inline-block;background:var(--mint);color:#092013;border-radius:30px;padding:12px 23px;font-weight:900;margin-top:8px}.panel{background:var(--panel);border:1px solid #252a30;border-radius:16px;padding:24px;margin:0 0 20px;box-shadow:0 8px 22px #0002}.panel h2{margin:0 0 23px;font-size:22px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}label{display:block;color:#d4d8dd;font-weight:600;font-size:13px}input,select{display:block;width:100%;margin-top:9px;padding:13px 14px;border-radius:9px;border:1px solid #383e48;background:#101216;color:white;outline:0;min-width:0}input:focus,select:focus{border-color:var(--mint);box-shadow:0 0 0 2px #1ed76022}input[type=file]{padding:12px}input::placeholder{color:#777e89}.actions,.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:16px 0}.toolbar input{flex:1;margin:0;min-width:180px}.muted,.status{color:var(--muted);line-height:1.8}.status{padding:10px}.hidden{display:none!important}.songs{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:16px;margin-top:22px}.songs>div,.songs>article{background:#23262c;border-radius:13px;padding:15px;min-width:0;transition:background .2s}.songs>div:hover,.songs>article:hover{background:#30343a}.songs img{max-width:100%;object-fit:cover;border-radius:10px}.songs button{margin:4px;padding:9px 12px;font-size:12px}.player{position:fixed;bottom:0;left:0;right:0;z-index:10;display:flex;align-items:center;gap:18px;background:#171a1e;border-top:1px solid #343a40;min-height:94px;padding:13px 26px;box-shadow:0 -10px 30px #0006}.player strong{min-width:175px;font-size:14px}.player audio{flex:1;min-width:150px;height:42px;accent-color:var(--mint)}.player small{max-width:320px;color:#9198a2;font-size:11px;line-height:1.6}#identity{color:#b1eec8}#identity button{margin:4px}#playlistTracks{margin-top:20px}#playlistTracks>*{padding:10px;border-bottom:1px solid #35383d}#app{display:block}.library-toolbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:15px}.pill{font-size:12px;color:#b7f3cb;background:#1b4430;border-radius:30px;padding:7px 13px}.panel:target{outline:1px solid #2d8a54}@media(max-width:1000px){.sidebar{width:75px;padding:18px 9px}.brand span:last-child,.side-link span:last-child,.side-caption,.side-footer{display:none}.side-link{justify-content:center}.sidebar .brand{justify-content:center}main{margin-left:75px;padding:20px 20px 140px}.player small{display:none}}@media(max-width:650px){.sidebar{position:sticky;top:0;left:0;right:0;bottom:auto;width:100%;height:58px;flex-direction:row;align-items:center;justify-content:space-around;padding:6px;z-index:12}.brand{font-size:17px}.brand span:last-child{display:none}.side-link{padding:8px;font-size:21px}main{margin:0;padding:16px 13px 155px}header{display:block}header h1{font-size:22px}.hero{padding:22px}.grid{grid-template-columns:1fr}.panel{padding:17px}.songs{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.player{min-height:105px;flex-wrap:wrap;gap:6px;padding:8px 12px}.player strong{min-width:0;flex:1}.player audio{flex-basis:100%}}
+
+/* HamNava 4 - streaming-inspired navigation and cards */
+body{background:#090909!important} .sidebar{background:#080808!important;border-left:1px solid #252525!important}.side-link{border-radius:9px!important}.side-link:hover{background:#242424!important}.side-link.active{background:#292929!important;color:#fff!important}.brand-mark{background:#1ed760!important;color:#06140a!important} main{background:linear-gradient(180deg,#202e29 0,#101010 420px)!important}.hero{background:linear-gradient(125deg,#145a39,#202b27 50%,#151515)!important;border:0!important;border-radius:12px!important}.panel{background:#181818!important;border:1px solid #282828!important;border-radius:12px!important}.song{background:#232323!important;border:0!important;transition:background .2s,transform .2s!important}.song:hover{background:#333!important;transform:translateY(-2px)}button:not(.alt):not(.warn){background:#1ed760!important;color:#08160d!important;font-weight:750!important}button:hover{filter:brightness(1.08)}.player{background:#101010!important;border-top:1px solid #343434!important}.panel h2{letter-spacing:-.5px}.songs{gap:14px!important}
+.add-tile{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;background:linear-gradient(110deg,#214734,#202020);border-radius:12px;margin:18px 0}.add-tile a{display:inline-block;background:#1ed760;color:#062010;padding:12px 20px;border-radius:999px;text-decoration:none;font-weight:800}.add-tile p{margin:4px 0;color:#c6d3c9}
+</style><style id="hamnava-language-style">#languageControl{position:fixed;right:18px;top:14px;z-index:9999;display:flex;align-items:center;gap:8px;background:#22272c;color:#fff;border:1px solid #3e444c;border-radius:14px;padding:8px 12px;box-shadow:0 5px 24px #0008;font:13px Arial,sans-serif}#languageControl select{color:white;background:#11181c;border:1px solid #4b5659;border-radius:9px;padding:7px;max-width:145px}#languageControl label{white-space:nowrap}body{padding-top:48px}body.ltr{text-align:left}body.ltr .sidebar{direction:ltr}body.ltr .side-link.active{border-right:0;border-left:3px solid #1ed760}body.ltr input,body.ltr select{direction:ltr}body.ltr .panel,body.ltr .hero,body.ltr .add-tile{direction:ltr}body.ltr header{direction:ltr}body.ltr .grid{direction:ltr}@media(max-width:650px){#languageControl{top:6px;right:6px;padding:5px;font-size:11px}#languageControl label{display:none}#languageControl select{max-width:125px}body{padding-top:42px}}</style><style id="hamnava-v7-style">[data-page]{display:none!important}body.hn-ready [data-page].hn-current{display:block!important}body.hn-ready .add-tile.hn-current{display:flex!important}body.hn-ready #home:not(.hn-current){display:none!important}body.hn-ready #home.hn-current{display:block!important}.home-search{display:block;margin:18px 0 26px}.home-search input{width:100%;margin-top:10px}.artist-chips{display:flex;flex-wrap:wrap;gap:10px;margin:15px 0 25px}.artist-chips button{background:#262a30;color:#f5f5f5;border:1px solid #3b4049;border-radius:25px;padding:10px 16px}.artist-chips button:hover{border-color:#1ed760;color:#1ed760}.home-hint{color:#a6abb5}.home-heading h2{margin-bottom:4px}#homeMusic h2{margin-top:28px}#homeMusic .songs{margin-bottom:24px}@media(max-width:650px){#homeMusic{padding:18px 12px}#homeMusic h2{font-size:22px}}</style>
+<style id="hamnava-v8-design">
+:root{--bg:#071120;--panel:#0e1b2d;--line:#23354a;--ink:#f5f8ff;--muted:#a8b8ce;--mint:#17b8ae;--gold:#f2ad52}
+html{scroll-padding-top:80px}body,body.ltr{background:var(--bg)!important;color:var(--ink);font-family:system-ui,-apple-system,'Segoe UI',Arial,sans-serif!important;padding-top:0!important;overflow-x:hidden}
+body main{background:radial-gradient(ellipse at 70% 0%,#192d45 0%,#071120 48%,#071120 100%)!important;min-width:0;max-width:none;margin-left:258px;padding:28px clamp(18px,3vw,48px) 145px}
+.sidebar{background:#07101e!important;border-right:1px solid #1c3046!important;border-left:0!important;width:258px;bottom:100px;padding:25px 17px;gap:8px}
+.brand{font-size:24px;letter-spacing:-.5px;margin-bottom:17px;white-space:nowrap}.brand-mark{width:48px;height:48px;border-radius:50%;object-fit:cover;background:#081626!important}
+.side-caption{color:#839ab1;letter-spacing:1.5px}.side-link{border-radius:13px!important;color:#b9c8db!important;font-size:14px;gap:12px}.side-link span:first-child{font-size:22px;min-width:24px;text-align:center}.side-link.active{background:linear-gradient(105deg,#8a4735,#513629)!important;border:1px solid #db8652!important;border-left:3px solid var(--gold)!important;color:#fff!important}.side-link:hover{background:#182b3c!important}.side-footer{color:#8b9db2}
+header{padding:0 0 22px;min-height:58px}header h1{display:flex;align-items:center;gap:10px;font-size:23px}header h1 .logo{width:38px;height:38px;object-fit:cover;background:transparent;border-radius:50%}.gold{color:var(--gold)}header p{font-size:13px}#identity{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end;max-width:55%;overflow-wrap:anywhere}#identity button{background:#1b3046!important;color:white!important}
+.hero{display:flex!important;align-items:center;min-height:clamp(275px,30vw,390px);border:1px solid #294158!important;border-radius:24px!important;padding:clamp(22px,4vw,55px)!important;background:radial-gradient(circle at 65% 20%,#63402d 0%,#142438 45%,#091827 80%)!important;isolation:isolate;margin-bottom:24px!important}.hero.hidden{display:none!important}.hero:after{display:none}.hero-copy{z-index:2;position:relative;max-width:57%}.hero .eyebrow{color:var(--gold);font-size:11px;font-weight:700;letter-spacing:2px}.hero h2{font-size:clamp(34px,4.2vw,65px);line-height:1.09;margin:14px 0 15px}.hero h2 em{font-style:normal;background:linear-gradient(90deg,#f2bd65,#f17857);background-clip:text;-webkit-background-clip:text;color:transparent}.hero p{font-size:clamp(14px,1.6vw,19px);color:#e1e7f0}.hero a{background:linear-gradient(90deg,var(--gold),#f18b59)!important;color:#172130!important;margin-top:15px}.hero-portrait{position:absolute;right:11%;top:0;height:100%;width:41%;object-fit:cover;object-position:50% 25%;opacity:.88;z-index:0;mask-image:linear-gradient(90deg,transparent,#000 30%,#000 80%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 30%,#000 80%,transparent)}.hero-quote{position:absolute;right:3%;bottom:30px;max-width:200px;font-family:Georgia,serif;font-style:italic;color:#fff;font-size:clamp(12px,1.4vw,18px);line-height:1.5;text-align:right;z-index:2;text-shadow:0 2px 10px #000}
+.panel{background:#0d1a2b!important;border:1px solid #203248!important;border-radius:20px!important;padding:clamp(17px,2.5vw,28px);box-shadow:0 12px 28px #0002}.panel h2{font-size:clamp(20px,2vw,26px);letter-spacing:-.4px}.panel p{color:var(--muted)}button:not(.alt):not(.warn){background:var(--mint)!important;color:#051d22!important}button,.add-tile a{border-radius:12px!important}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold)!important;outline-offset:3px}.alt{background:#1a2b41!important}.warn{background:#712f3c!important}input,select{background:#0a1524;border-color:#2c4159;border-radius:12px;color:#fff}input:focus,select:focus{border-color:var(--mint);box-shadow:0 0 0 3px #17b8ae25}
+#homeMusic{background:transparent!important;border:0!important;box-shadow:none;padding:0!important}.home-heading{display:none}.home-search{max-width:720px;margin:0 0 28px!important}.home-search input{background:#122139;border:1px solid #4c7c9e;padding:16px 20px;border-radius:15px;font-size:16px}.home-search{font-size:0}#homeMusic>h2{margin:30px 0 12px!important}.home-hint{font-size:13px}
+.songs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,190px),1fr));gap:16px!important}.songs>article.song{background:#102137!important;border:1px solid #24374e!important;border-radius:17px!important;padding:10px!important;display:flex;flex-direction:column;min-width:0;overflow:hidden}.song .art{width:100%;aspect-ratio:1.22/1;object-fit:cover;display:grid;place-items:center;background:linear-gradient(140deg,#1c5365,#473652);border-radius:12px;font-size:55px}.song .songBody{padding:8px 3px;min-width:0;display:flex;flex:1;flex-direction:column}.song h3{font-size:15px;margin:3px 0 9px;overflow-wrap:anywhere}.song .artist{display:flex;align-items:center;gap:7px;color:#bcc9d8;font-size:13px}.song .avatar{width:25px;height:25px;object-fit:cover;border-radius:50%}.song small{color:#8799ac;font-size:11px;margin:7px 0}.song .actions{margin-top:auto;gap:5px}.song .actions button{font-size:11px;padding:8px 10px;margin:2px 0}.song:hover{transform:translateY(-3px)}
+.artist-portraits,.artist-chips{display:flex;gap:14px;flex-wrap:wrap;margin:15px 0 28px}.artist-chip{background:transparent!important;border:0!important;display:flex;flex-direction:column;align-items:center;gap:8px;color:#fff!important;width:110px;padding:8px!important;white-space:normal;overflow-wrap:anywhere;font-size:13px!important}.artist-chip img,.artist-placeholder{width:82px;height:82px;aspect-ratio:1;object-fit:cover;border-radius:50%;border:2px solid #38536c;display:grid;place-items:center;background:#1b3851;font-size:32px}.artist-chip:hover img{border-color:var(--gold)}
+.player{background:#0a1728!important;border:1px solid #273d56!important;border-radius:22px 22px 0 0;box-shadow:0 -8px 40px #0009;min-height:100px;gap:18px;padding:15px clamp(12px,2.5vw,32px)}.player-title{display:flex;align-items:center;gap:10px;min-width:190px;max-width:26%}.player-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(145deg,#17b8ae,#f2ad52);display:grid;place-items:center;font-size:26px;color:#061324}.player strong{min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.player audio{min-width:0;flex:1;accent-color:var(--mint)}.player-note{font-size:11px;color:#8da4bb;max-width:190px}
+#languageControl{background:#122239!important;border:1px solid #3c536b!important;box-shadow:0 6px 25px #0007!important;top:12px!important;right:20px!important;border-radius:15px!important}#languageControl select{background:#0c1829!important}body{padding-top:0!important}.menu-toggle,.nav-backdrop{display:none}
+.add-tile{background:linear-gradient(120deg,#173e47,#1c293a)}.add-tile a{background:var(--mint)!important;color:#051b1c}
+body.logged-out .sidebar,body.logged-out .hero,body.logged-out #homeMusic,body.logged-out .player{display:none!important}body.logged-out main{margin-left:0;min-height:100vh;max-width:850px;margin-right:auto;margin-left:auto}body.logged-out header{padding-top:62px}body.logged-out #auth,body.logged-out #setup{max-width:560px;margin:30px auto}
+@media(max-width:1100px){body main{margin-left:210px;padding:25px 20px 135px}.sidebar{width:210px;padding:19px 10px}.side-link{font-size:13px;padding:12px 9px}.hero-quote{display:none}.hero-portrait{right:0;width:47%}.player-note{display:none}}
+@media(max-width:760px){body main{margin-left:0!important;padding:78px 14px 155px!important}.sidebar{width:min(84vw,300px);height:100dvh;bottom:0;transform:translateX(-105%);transition:transform .22s ease;z-index:90;padding:25px 16px 125px;overflow-y:auto}.nav-open .sidebar{transform:translateX(0)}.nav-open .nav-backdrop{display:block;position:fixed;inset:0;background:#000a;z-index:80}.menu-toggle{display:inline-grid;place-items:center;position:fixed;left:12px;top:12px;z-index:70;width:44px;height:44px;padding:0;font-size:23px;border:1px solid #35506a!important;background:#13283d!important;color:#fff!important}.nav-open .menu-toggle{z-index:95;left:min(calc(84vw - 55px),245px)}header{gap:10px;align-items:center;padding-bottom:15px}header h1{font-size:20px}header p{font-size:12px}#identity{max-width:50%}#identity small{display:none}#languageControl{right:10px!important;top:10px!important;padding:5px!important}#languageControl label{display:none}.hero{min-height:285px;padding:25px!important}.hero-copy{max-width:77%}.hero h2{font-size:clamp(29px,7vw,42px)}.hero-portrait{width:62%;opacity:.38;right:0;mask-image:linear-gradient(90deg,transparent,#000 35%);-webkit-mask-image:linear-gradient(90deg,transparent,#000 35%)}.songs{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}.song .actions{flex-wrap:wrap}.song .actions button{font-size:10px;padding:8px}.artist-portraits,.artist-chips{flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:10px}.artist-chip{min-width:100px;scroll-snap-align:start}.grid{grid-template-columns:1fr}.player{min-height:112px;padding:10px 12px 15px;gap:6px;flex-wrap:wrap}.player-title{max-width:100%;width:100%;min-width:0}.player-icon{width:30px;height:30px;font-size:18px}.player audio{flex:1 0 100%;height:45px}.player strong{font-size:12px}.player-note{display:none}body.logged-out main{padding-top:85px!important}}
+@media(max-width:390px){body main{padding-left:10px!important;padding-right:10px!important}.hero{min-height:245px;padding:20px!important}.hero-copy{max-width:90%}.hero h2{font-size:29px}.hero p{font-size:13px}.songs{gap:8px!important}.songs>article.song{padding:7px!important}.song .art{aspect-ratio:1/1}.song h3{font-size:13px}.song .actions button{padding:7px 8px;font-size:10px}.panel{padding:15px}.player{border-radius:14px 14px 0 0}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+<style id="hamnava-v9">
+:root{--mint:#17b8ae;--gold:#f2ad52} .hn-section-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:32px 0 12px}.hn-section-heading h2{margin:0!important}.hn-section-heading a{color:#b8c7db;text-decoration:none;font-size:14px;white-space:nowrap}.hn-section-heading a:hover{color:#f2ad52}.hn-section-note{font-size:13px;color:#9baec4;margin:0 0 10px}.hn-shelf{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x proximity;padding:4px 2px 18px;scrollbar-width:thin;scrollbar-color:#34536a transparent}.hn-tile{min-width:160px;width:clamp(160px,18vw,225px);flex:0 0 auto;scroll-snap-align:start;border:1px solid #294058;border-radius:16px;background:#112239;padding:10px;color:#f7f9ff;text-align:left;cursor:pointer;transition:transform .15s,border-color .15s}.hn-tile:hover{transform:translateY(-3px);border-color:#17b8ae}.hn-tile img,.hn-tile .hn-art{display:block;width:100%;aspect-ratio:1;object-fit:cover;border-radius:11px;background:linear-gradient(145deg,#184457,#8b6234);margin-bottom:11px}.hn-tile .hn-art{display:grid;place-items:center;font-size:46px}.hn-tile strong{display:block;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.hn-tile small{display:block;color:#a7b7cb;margin-top:5px;line-height:1.4}.hn-footer{margin:65px 0 0;border-top:1px solid #2a3b50;padding:36px 6px 15px}.hn-footer-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}.hn-footer h3{font-size:16px;margin:0 0 14px}.hn-footer a,.hn-footer span{display:block;color:#aab7c7;text-decoration:none;font-size:13px;margin:10px 0;line-height:1.5}.hn-footer a:hover{color:#f2ad52}.hn-footer-bottom{border-top:1px solid #26384d;margin-top:30px;padding-top:16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.hn-footer-bottom span{font-size:12px;margin:0}body.logged-out .hn-footer{display:none!important}body.hn-ready .hn-footer:not(.hn-current){display:none!important}
+@media(max-width:760px){.hn-section-heading{margin-top:25px}.hn-section-heading h2{font-size:19px!important}.hn-section-heading a{font-size:12px}.hn-tile{width:155px;min-width:155px}.hn-footer-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:25px 12px}.hn-footer{margin-top:35px;padding-bottom:35px}}
+@media(max-width:360px){.hn-footer-grid{grid-template-columns:1fr}.hn-tile{width:145px;min-width:145px}}
+</style><style id="hamnava-v10">
+:root{--mint:#17b8ae!important;--gold:#f2ad52!important;--bg:#0b1424!important;--panel:#122035!important}
+body{background:#0b1424!important;padding-top:0!important}body main{background:linear-gradient(180deg,#14283d,#0b1424 440px)!important;padding-top:98px!important}
+.sidebar{background:#0a1525!important;top:75px!important;bottom:95px!important}.brand-mark{background:transparent!important}
+.side-link.active{border-color:#17b8ae!important}.panel{background:#122035!important;border-color:#24374d!important}.hero{background:linear-gradient(120deg,#103c4a,#132e42 65%,#152238)!important}
+button:not(.alt):not(.warn){background:#17b8ae!important;color:#061b25!important}.pill{background:#17454a;color:#b8fffa}
+#languageControl{top:auto!important;bottom:106px!important;right:14px!important;z-index:20!important}
+.hn-topbar{position:fixed;z-index:85;top:0;left:0;right:0;height:75px;background:#07101c;border-bottom:1px solid #23354a;display:flex;align-items:center;gap:13px;padding:9px 24px}
+.hn-topbar .hn-home{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;font-size:24px;text-decoration:none;background:#243346;color:white;flex:none}
+.hn-topbar .hn-search-wrap{display:flex;align-items:center;gap:12px;background:#1d2b3e;border:1px solid #34445a;border-radius:36px;padding:0 18px;min-width:0;flex:1;max-width:620px;height:48px}
+.hn-topbar .hn-search-wrap:focus-within{border-color:#17b8ae;box-shadow:0 0 0 2px #17b8ae33}
+.hn-topbar .hn-search-wrap input{border:0;box-shadow:none!important;background:transparent!important;margin:0;padding:10px 0;color:white;width:100%;font-size:15px}
+.hn-topbar .hn-search-icon{font-size:22px;color:#17b8ae}.hn-topbar .hn-actions{margin-left:auto;display:flex;align-items:center;gap:9px}.hn-topbar .hn-actions a,.hn-topbar .hn-actions button{border-radius:30px;background:#1c2d40!important;color:#edf7ff!important;padding:10px 13px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;white-space:nowrap;font-size:14px}
+.hn-topbar .hn-actions .hn-avatar{background:#17b8ae!important;color:#07131e!important;border-radius:50%;width:42px;height:42px;padding:0;font-weight:900}
+.hn-topbar .hn-topbrand{font-weight:900;color:#f2ad52;white-space:nowrap}.hn-topbar button{transform:none!important}
+.hn-create-area{position:relative;margin:6px 0}.hn-library-head{display:flex;align-items:center;justify-content:space-between;gap:6px;color:#fff;font-weight:800;font-size:14px}.hn-library-head button{background:#24364a!important;color:#fff!important;padding:8px 12px;font-size:13px}.hn-create-menu{position:absolute;top:100%;left:0;right:-140px;z-index:100;background:#223044;border:1px solid #38506b;box-shadow:0 14px 35px #0009;border-radius:14px;padding:8px;max-width:310px}.hn-create-menu[hidden]{display:none}.hn-create-menu button{width:100%;background:transparent!important;color:#fff!important;border-radius:8px;text-align:left;padding:12px;font-weight:600}.hn-create-menu button:hover{background:#34455b!important}.hn-create-menu button:disabled{opacity:.48;cursor:not-allowed}.hn-playlist-sidebar{overflow-y:auto;min-height:60px;max-height:35vh;border-top:1px solid #23354a;margin-top:5px;padding-top:7px}.hn-playlist-link{display:flex;align-items:center;gap:10px;padding:9px 7px;border-radius:9px;color:#dce7f4;text-decoration:none;overflow:hidden}.hn-playlist-link:hover,.hn-playlist-link.active{background:#24364a}.hn-playlist-thumb{display:grid;place-items:center;background:linear-gradient(140deg,#1b706f,#e1a451);width:42px;height:42px;flex:none;border-radius:6px;font-size:22px}.hn-playlist-text{min-width:0}.hn-playlist-text strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px}.hn-playlist-text small{display:block;color:#a4b4c6;font-size:11px}
+.hn-playlist-hero{border-radius:14px;background:linear-gradient(115deg,#205a66,#23364d 75%);padding:24px;display:flex;gap:22px;align-items:end;margin-bottom:20px}.hn-cover{display:grid;place-items:center;width:150px;height:150px;flex:none;border-radius:9px;background:linear-gradient(135deg,#0c8e93,#d6a04c);font-size:65px;box-shadow:0 8px 24px #0005}.hn-playlist-hero h2{font-size:clamp(25px,4vw,42px)!important;margin:8px 0!important;overflow-wrap:anywhere}.hn-playlist-hero p{color:#c3d3e0;margin:6px 0}.hn-playlist-row{display:grid;grid-template-columns:35px minmax(0,1fr) auto;align-items:center;gap:12px;padding:12px 8px;border-bottom:1px solid #263b51}.hn-playlist-row:hover{background:#1d3148}.hn-playlist-row strong{display:block}.hn-playlist-row small{color:#a6b8ca}.hn-playlist-row .actions{margin:0}.hn-playlist-row button{padding:8px 12px!important}.hn-playlist-tools{background:#0e1b2c;padding:14px;border-radius:12px;margin-top:16px}.hn-playlist-tools summary{cursor:pointer;font-weight:700}.hn-playlist-tools .toolbar{margin:12px 0}.hn-create-inline{margin-bottom:20px}
+body.logged-out .hn-topbar{display:none!important}body.logged-out main{padding-top:35px!important}body.logged-out .sidebar{display:none!important}
+@media(max-width:1100px){.hn-topbar{padding:9px 13px}.hn-topbar .hn-topbrand{display:none}.sidebar .hn-library-head,.sidebar .hn-create-area,.sidebar .hn-playlist-sidebar{display:none}}
+@media(max-width:760px){.hn-topbar{height:65px;padding:7px 10px;gap:8px}.hn-topbar .hn-home{width:40px;height:40px;font-size:19px}.hn-topbar .hn-search-wrap{height:42px;padding:0 12px}.hn-topbar .hn-search-wrap input{font-size:13px}.hn-topbar .hn-actions{gap:4px}.hn-topbar .hn-actions .hn-desktop-action{display:none}.hn-topbar .hn-actions a,.hn-topbar .hn-actions button{padding:9px}.hn-topbar .hn-actions .hn-avatar{width:38px;height:38px}body main{padding-top:85px!important}.sidebar{top:65px!important;bottom:0!important;height:calc(100dvh - 65px)!important}.nav-open .sidebar .hn-library-head,.nav-open .sidebar .hn-create-area,.nav-open .sidebar .hn-playlist-sidebar{display:block}.hn-playlist-hero{align-items:center;padding:16px;gap:14px}.hn-cover{width:95px;height:95px;font-size:42px}.hn-playlist-row{grid-template-columns:24px minmax(0,1fr);gap:8px}.hn-playlist-row .actions{grid-column:2}.hn-playlist-row button{font-size:12px!important}.hn-topbar .hn-search-wrap{max-width:none}}
+
+/* HamNava 12: Playlist-Auswahl bleibt auch bei schmalem Fenster sichtbar. */
+.hn-playlist-quick{display:flex;gap:10px;overflow-x:auto;padding:4px 0 16px;scrollbar-width:thin}
+.hn-playlist-quick button{flex:0 0 auto;max-width:240px;background:#203249!important;color:#eaf3fb!important;border:1px solid #35506a!important;border-radius:12px!important;text-align:left;padding:12px 16px!important}
+.hn-playlist-quick button[aria-pressed="true"]{background:#126f75!important;border-color:#17b8ae!important}
+.hn-playlist-quick .hn-empty{color:#b9c7d7;margin:8px 0}
+@media(min-width:761px) and (max-width:1100px){.sidebar .hn-library-head,.sidebar .hn-create-area,.sidebar .hn-playlist-sidebar{display:flex!important}.sidebar .hn-library-head{flex-direction:column;align-items:stretch}.sidebar .hn-playlist-sidebar{display:block!important}.sidebar .hn-library-head{font-size:11px}.sidebar .hn-create-area button{font-size:11px!important;padding:6px!important}.sidebar .hn-playlist-link{flex-direction:column;gap:3px;text-align:center}.sidebar .hn-playlist-text strong{font-size:10px}}
+</style><style id="hamnava-v13-playlist-dialog">.hn-modal[hidden]{display:none!important}.hn-modal{position:fixed;inset:0;z-index:10000;display:grid;place-items:center;padding:18px}.hn-modal-backdrop{position:absolute;inset:0;background:#030912d9;backdrop-filter:blur(6px)}.hn-modal-panel{position:relative;width:min(100%,530px);max-height:min(88dvh,780px);overflow:auto;background:#112036;border:1px solid #3a526b;border-radius:23px;box-shadow:0 25px 85px #000b;padding:25px;color:#f4f8fc}.hn-modal-head{display:flex;align-items:start;justify-content:space-between;gap:12px}.hn-modal-head small{color:#f2ad52;letter-spacing:1.5px;font-size:11px}.hn-modal-head h2{margin:8px 0 0;font-size:25px}.hn-modal-close{background:#263950!important;color:white!important;border-radius:50%!important;width:40px;height:40px;padding:0!important}.hn-modal-song{color:#b4c7dc;line-height:1.5;margin:12px 0 18px}.hn-modal-search-label{font-size:13px;color:#c9d8e8}.hn-modal-search-label input{margin:7px 0 14px;background:#0b1729}.hn-modal-list{display:grid;gap:8px;max-height:330px;overflow-y:auto;padding:2px}.hn-modal-option{display:flex;align-items:center;gap:12px;width:100%;background:#1a2d44!important;color:#eef5fd!important;border:1px solid #324c67!important;border-radius:13px!important;text-align:left;padding:11px!important;transform:none!important}.hn-modal-option[aria-checked="true"]{background:#174b54!important;border-color:#17b8ae!important}.hn-modal-option .hn-modal-thumb{width:46px;height:46px;display:grid;place-items:center;flex:none;border-radius:9px;background:linear-gradient(135deg,#146f78,#b27c3e);font-size:23px}.hn-modal-option .hn-modal-option-name{flex:1;min-width:0;overflow-wrap:anywhere}.hn-modal-option .hn-modal-check{font-size:21px;color:#17b8ae}.hn-modal-feedback{min-height:22px;color:#b7e9e6;font-size:13px;line-height:1.5}.hn-modal-actions{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}.hn-modal-actions button{flex:1;min-width:165px}.hn-modal-actions button:disabled{opacity:.55;cursor:not-allowed}@media(max-width:600px){.hn-modal{padding:8px;align-items:end}.hn-modal-panel{width:100%;max-height:90dvh;border-radius:22px 22px 12px 12px;padding:18px}.hn-modal-head h2{font-size:21px}.hn-modal-actions button{min-width:0;font-size:12px;padding:12px 9px!important}}</style><style id="hamnava-v15-player">
+/* Aktiver Player direkt unter dem Header, ohne Inhalte zu verdecken. */
+body.hn-playing main{padding-top:195px!important}
+body.hn-playing .player{top:75px!important;bottom:auto!important;left:258px;right:0;min-height:94px;height:auto;z-index:75;border-radius:0 0 20px 20px;background:linear-gradient(110deg,#142c40,#0d1c30)!important;border:1px solid #31516a!important;box-shadow:0 14px 35px #0008;display:flex!important}
+body.hn-playing .player-icon{overflow:hidden;flex:none}
+body.hn-playing .player-icon img{width:100%;height:100%;object-fit:cover;border-radius:10px}
+body.hn-playing .player-title{min-width:175px}
+body.hn-playing .player-note{display:none}
+body.hn-playing .hero{margin-top:8px}
+body.logged-out .player{display:none!important}
+@media(max-width:1100px) and (min-width:761px){body.hn-playing .player{left:210px}}
+@media(max-width:760px){body.hn-playing .player{top:65px!important;left:0;right:0;min-height:105px;padding:9px 14px 12px;border-radius:0 0 16px 16px}body.hn-playing main{padding-top:205px!important}body.hn-playing .player-title{max-width:100%;width:100%;min-width:0}body.hn-playing .player audio{width:100%;flex-basis:100%}}
+</style><style id="hamnava-v16-player-window">
+/* Eigenständiges Cover-Fenster: nur sichtbar, wenn ein Lied gestartet wurde. */
+body .hn-player-window{display:none!important}
+body.hn-playing .hn-player-window{display:block!important;position:fixed!important;top:86px!important;bottom:auto!important;left:max(278px,calc(50vw - 270px))!important;right:auto!important;width:min(540px,calc(100vw - 310px))!important;height:auto!important;min-height:0!important;padding:0!important;border-radius:24px!important;overflow:hidden!important;z-index:78!important;border:1px solid #547083!important;background:#12253b!important;box-shadow:0 24px 75px #000c!important}
+.hn-player-background{position:absolute;inset:-12px;background:linear-gradient(135deg,#174354,#3a294b);background-position:center;background-size:cover;filter:blur(12px);transform:scale(1.09);opacity:.8;pointer-events:none}
+.hn-player-window:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#071321a8,#071321c9 60%,#071321ed);z-index:1;pointer-events:none}
+.hn-player-content{position:relative;z-index:2;display:flex;flex-direction:column;gap:16px;padding:20px 23px 23px}
+.hn-player-header{display:flex;justify-content:space-between;align-items:center;gap:12px}.hn-player-label{font-size:11px;font-weight:800;letter-spacing:2px;color:#f2bd71}.hn-player-stop{font-size:12px!important;padding:8px 12px!important;border-radius:999px!important;background:#263a50!important;color:#fff!important}
+.hn-player-center{display:flex;align-items:center;gap:16px;min-width:0}.hn-player-window .player-icon{display:grid;place-items:center;width:90px;height:90px;flex:none;border-radius:15px;background:#1d5164;overflow:hidden;font-size:38px}.hn-player-window .player-icon img{width:100%;height:100%;object-fit:cover;border-radius:15px}.hn-player-meta{min-width:0;display:flex;flex-direction:column;gap:8px}.hn-player-window #nowPlaying{display:block;white-space:normal;overflow-wrap:anywhere;font-size:19px;line-height:1.3}.hn-player-meta span{font-size:14px;color:#c9dbe9}.hn-player-window audio{width:100%;height:44px;min-width:0;flex:none;border-radius:25px}
+body.hn-playing main{padding-top:98px!important}
+@media(max-width:760px){body.hn-playing .hn-player-window{top:73px!important;left:10px!important;right:10px!important;width:calc(100vw - 20px)!important;border-radius:20px!important}body.hn-playing main{padding-top:85px!important}.hn-player-content{padding:15px;gap:12px}.hn-player-window .player-icon{width:70px;height:70px}.hn-player-window #nowPlaying{font-size:16px}}
+</style><style id="hamnava-v17-movable-player">
+/* Player lässt sich am Griff ziehen, ohne Audiosteuerung zu beeinträchtigen. */
+body.hn-playing .hn-player-window{left:var(--hn-player-left,max(278px,calc(50vw - 270px)))!important;top:var(--hn-player-top,86px)!important;right:auto!important;width:min(540px,calc(100vw - 28px))!important;max-width:calc(100vw - 16px)!important;touch-action:auto}
+.hn-player-header{gap:8px;min-width:0}
+.hn-player-label{cursor:grab;touch-action:none;user-select:none;flex:1;min-width:0;padding:9px 3px;white-space:nowrap}
+.hn-player-label:active{cursor:grabbing}
+.hn-drag-hint{font-size:10px;letter-spacing:0;color:#b2c4d7}
+.hn-player-buttons{display:flex;gap:6px;align-items:center;flex-shrink:0}
+.hn-player-minimize{font-size:12px!important;padding:8px 10px!important;border-radius:999px!important;background:#28465b!important;color:#fff!important}
+body.hn-playing.hn-player-mini .hn-player-window{width:min(365px,calc(100vw - 20px))!important;border-radius:16px!important}
+body.hn-player-mini .hn-player-content{padding:9px 12px;gap:5px}
+body.hn-player-mini .hn-player-center{display:none}
+body.hn-player-mini .hn-player-window audio{height:36px}
+body.hn-player-mini .hn-player-label{font-size:10px;letter-spacing:.5px}
+@media(max-width:760px){body.hn-playing .hn-player-window{left:var(--hn-player-left,10px)!important;top:var(--hn-player-top,73px)!important;right:auto!important;width:min(540px,calc(100vw - 20px))!important}.hn-drag-hint{display:none}.hn-player-buttons button{font-size:11px!important;padding:7px 9px!important}}
+@media(max-width:390px){.hn-player-label{font-size:10px;letter-spacing:0}.hn-player-buttons{gap:3px}.hn-player-buttons button{padding:6px!important;font-size:10px!important}}
+</style><style id="hamnava-v18-full-cover">
+/* Albumcover füllt das gesamte Player-Fenster, ohne Unschärfe. */
+.hn-player-window .hn-player-background{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important;filter:none!important;transform:none!important;opacity:1!important;pointer-events:none}
+.hn-player-window::before{background:linear-gradient(180deg,rgba(3,12,23,.46) 0%,rgba(3,12,23,.25) 35%,rgba(3,12,23,.77) 75%,rgba(3,12,23,.91) 100%)!important}
+.hn-player-window .hn-player-content{min-height:245px;justify-content:space-between;text-shadow:0 2px 12px rgba(0,0,0,.9)}
+.hn-player-window .hn-player-meta span{color:#f0f5fa!important}
+.hn-player-window .player-icon{display:none!important}
+.hn-player-window .hn-player-center{min-height:95px;align-items:end}
+.hn-player-window .hn-player-meta{width:100%;padding:8px 0}
+body.hn-player-mini .hn-player-window .hn-player-content{min-height:0!important}
+body.hn-player-mini .hn-player-window::before{background:rgba(3,12,23,.68)!important}
+@media(max-width:760px){.hn-player-window .hn-player-content{min-height:220px}}
+</style><style id="hamnava-v19-fullscreen-queue">
+/* Fullscreen mode: album art spans the entire viewport. */
+body.hn-playing.hn-player-fullscreen .hn-player-window,
+body.hn-playing.hn-player-fullscreen.hn-player-mini .hn-player-window{
+ position:fixed!important;inset:0!important;left:0!important;top:0!important;right:0!important;bottom:0!important;
+ width:100vw!important;max-width:none!important;height:100dvh!important;min-height:100vh!important;
+ border:0!important;border-radius:0!important;z-index:200!important;
+}
+body.hn-player-fullscreen .hn-player-content,
+body.hn-player-fullscreen.hn-player-mini .hn-player-content{
+ min-height:100dvh!important;height:100dvh!important;max-width:900px;margin:0 auto;
+ padding:clamp(16px,4vw,40px)!important;justify-content:space-between!important;gap:15px!important;
+}
+body.hn-player-fullscreen .hn-player-center,body.hn-player-fullscreen.hn-player-mini .hn-player-center{
+ display:flex!important;align-items:flex-end;flex:1;min-height:0!important;
+}
+body.hn-player-fullscreen .hn-player-meta strong{font-size:clamp(25px,5vw,52px)!important}
+body.hn-player-fullscreen .hn-player-meta span{font-size:clamp(16px,2.2vw,23px)!important}
+body.hn-player-fullscreen .hn-player-window::before{background:linear-gradient(180deg,#07132199,#07132111 35%,#07132166 65%,#071321ef)!important}
+.hn-player-transport{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;position:relative;z-index:2}
+.hn-player-transport button{min-width:44px;min-height:42px;padding:9px 13px!important;border-radius:999px!important;background:#10283fcf!important;color:#fff!important;border:1px solid #ffffff50!important}
+.hn-player-transport button[aria-pressed="true"]{background:#17b8ae!important;color:#06242c!important;border-color:#17b8ae!important}
+.hn-player-fullscreen-btn{background:#28465b!important;color:#fff!important;font-size:12px!important;padding:8px 10px!important;border-radius:999px!important}
+body.hn-player-fullscreen .hn-player-label{cursor:default;touch-action:auto}
+body.hn-player-fullscreen .hn-player-window audio{max-width:100%}
+@media(max-width:480px){.hn-player-buttons{gap:3px;flex-wrap:wrap;justify-content:flex-end}.hn-player-header{align-items:flex-start}.hn-player-label{font-size:10px;white-space:normal}.hn-player-buttons button{font-size:10px!important;padding:7px!important}.hn-player-transport{gap:7px}.hn-player-transport button{min-width:42px;padding:8px!important}}
+</style><style id="hamnava-v25-sidebar-scroll">
+/* Eigenständiger vertikaler Scrollbereich für die gesamte linke Bibliothek. */
+.sidebar{
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  overscroll-behavior-y:contain;
+  scrollbar-width:thin;
+  scrollbar-color:#3b6376 #0a1525;
+  min-height:0;
+}
+.sidebar::-webkit-scrollbar{width:8px}
+.sidebar::-webkit-scrollbar-track{background:#0a1525}
+.sidebar::-webkit-scrollbar-thumb{background:#3b6376;border-radius:10px}
+/* Playlist-Liste nicht auf 35vh begrenzen: die ganze Sidebar scrollt. */
+.sidebar .hn-playlist-sidebar{
+  max-height:none!important;
+  overflow-y:visible!important;
+  flex-shrink:0;
+}
+.sidebar .side-footer{margin-top:20px;flex-shrink:0}
+.sidebar .side-link,.sidebar .hn-create-area,.sidebar .hn-library-head{flex-shrink:0}
+@media(max-width:760px){
+ .sidebar{overflow-y:auto!important;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+}
+</style><style id="hamnava-v26-users">.hn-users-list{display:grid;gap:10px}.hn-user-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px;border:1px solid #304760;background:#15283d;border-radius:13px;flex-wrap:wrap}.hn-user-row strong{display:block;overflow-wrap:anywhere}.hn-user-row small{display:block;color:#a9bdd0;margin-top:5px}.hn-user-row button{font-size:12px!important;padding:9px 12px!important}.hn-user-row .hn-user-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.hn-user-state{font-size:12px;color:#b8e4d7}#hnUsersSearch{max-width:460px}#hnUsersPanel.hidden{display:none!important}</style><style id="hamnava-v27-language-top">
+/* Sprache als kompakter Globus oben rechts in der Hauptnavigation */
+.hn-topbar .hn-actions #languageControl{position:relative!important;inset:auto!important;top:auto!important;right:auto!important;bottom:auto!important;left:auto!important;z-index:1!important;margin:0!important;padding:0!important;width:43px;height:43px;min-width:43px;display:flex!important;align-items:center;justify-content:center;border-radius:50%!important;background:#1c2d40!important;border:1px solid #344b64!important;box-shadow:none!important;overflow:hidden;flex:none}
+.hn-topbar .hn-actions #languageControl::before{content:"";position:absolute;inset:0;display:grid;place-items:center;font-size:22px;pointer-events:none}
+.hn-topbar .hn-actions #languageControl label{display:none!important}
+.hn-topbar .hn-actions #languageControl select{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;margin:0!important;padding:0!important;opacity:0!important;cursor:pointer;z-index:2;appearance:none!important;-webkit-appearance:none!important}
+.hn-topbar .hn-actions #languageControl:focus-within{outline:2px solid #f2ad52!important;outline-offset:2px}
+@media(max-width:760px){.hn-topbar .hn-actions #languageControl{width:38px;height:38px;min-width:38px}.hn-topbar .hn-actions #languageControl::before{font-size:19px}}
+</style><style id="hamnava-v28-flags">
+.hn-topbar .hn-actions #languageControl::before{display:none!important}
+.hn-topbar .hn-actions #languageControl .hn-language-flag{position:absolute;inset:0;display:grid;place-items:center;font-size:25px;pointer-events:none;line-height:1}
+@media(max-width:760px){.hn-topbar .hn-actions #languageControl .hn-language-flag{font-size:23px}}
+</style><style id="hamnava-v29-sidebar-playlists">
+/* All playlist selection and editing stays in the left library. */
+.hn-sidebar-playlist-item{display:flex;align-items:center;gap:3px;min-width:0}
+.hn-sidebar-playlist-item>.hn-playlist-link{flex:1;min-width:0}
+.hn-sidebar-playlist-item>.hn-playlist-rename{flex:none;background:#20364b!important;color:#e8f5ff!important;padding:7px 9px!important;font-size:15px!important;border-radius:9px!important}
+.hn-sidebar-manage{margin:14px 0 20px;flex-shrink:0;min-width:0}
+.hn-sidebar-manage .hn-playlist-tools{padding:10px!important;margin:0!important}
+.hn-sidebar-manage .hn-playlist-tools summary{font-size:12px;line-height:1.5}
+.hn-sidebar-manage .hn-playlist-tools .grid{display:block}
+.hn-sidebar-manage .hn-playlist-tools label{margin:10px 0}
+.hn-sidebar-manage .hn-playlist-tools .toolbar{display:flex;flex-direction:column;align-items:stretch}
+.hn-sidebar-manage .hn-playlist-tools input,.hn-sidebar-manage .hn-playlist-tools select{min-width:0;width:100%}
+.hn-sidebar-manage .hn-playlist-tools button{width:100%;white-space:normal;font-size:12px!important}
+#playlists #hnPlaylistQuickList{display:none!important}
+@media(min-width:761px) and (max-width:1100px){.hn-sidebar-playlist-item{flex-wrap:wrap}.hn-sidebar-playlist-item>.hn-playlist-rename{width:100%;padding:4px!important}}
+</style><style id="hamnava-v30-playlist-overview">
+#playlists #hnPlaylistQuickList.hn-playlist-overview{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin:20px 0}
+#playlists #hnPlaylistQuickList[hidden],#playlists #playlistTracks[hidden],#playlists .hn-playlist-hero[hidden]{display:none!important}
+#playlists #hnPlaylistQuickList button{width:100%;min-height:90px;text-align:left;padding:18px;border-radius:15px;background:#20364b;color:#f5faff;border:1px solid #3b5970;white-space:normal;overflow-wrap:anywhere}
+#playlists #hnPlaylistQuickList button:hover{border-color:#17b8ae;background:#28465b}
+#hnPlaylistBack{background:transparent!important;border:1px solid #476078!important;color:#e6f4fa!important;margin:12px 0}
+</style><style id="hamnava-v31-flags-only">
+.hn-topbar .hn-actions #languageControl{overflow:visible!important;position:relative!important}
+.hn-topbar .hn-actions #languageControl select{display:none!important}
+.hn-topbar .hn-actions #languageControl .hn-language-flag{display:none!important}
+#hnFlagButton{width:100%;height:100%;padding:0;border:0;border-radius:50%;background:transparent;color:inherit;font-size:26px;cursor:pointer;display:grid;place-items:center}
+#hnFlagMenu{position:absolute;right:0;top:calc(100% + 9px);z-index:10010;background:#14243a;border:1px solid #3a5670;border-radius:12px;padding:6px;box-shadow:0 14px 35px #0009;display:grid;gap:4px;min-width:52px}
+#hnFlagMenu[hidden]{display:none!important}
+#hnFlagMenu button{display:grid;place-items:center;background:transparent;color:#fff;border:0;border-radius:8px;font-size:25px;width:42px;height:38px;padding:0;cursor:pointer}
+#hnFlagButton img,#hnFlagMenu button img{display:block;width:38px;height:25px;object-fit:cover;border-radius:3px;box-shadow:0 1px 4px #0008}\n#hnFlagMenu button:hover,#hnFlagMenu button:focus-visible{background:#30485e;outline:2px solid #17b8ae}
+</style><style id="hnProfileStyles">
+#hnAccountDialog[hidden]{display:none!important}#hnAccountDialog{position:fixed;inset:0;z-index:30000;display:grid;place-items:center;padding:14px}#hnAccountDialog .hn-account-shade{position:absolute;inset:0;background:#020916dd;backdrop-filter:blur(7px)}#hnAccountDialog .hn-account-card{position:relative;background:#102238;color:#f4f8ff;border:1px solid #35516b;border-radius:22px;padding:24px;width:min(530px,100%);max-height:92dvh;overflow:auto;box-shadow:0 24px 70px #0009}#hnAccountDialog h2{margin:0 0 8px}#hnAccountDialog h3{font-size:16px;margin:20px 0 10px}#hnAccountDialog label{display:block;margin:10px 0;font-size:13px;color:#b8cde0}#hnAccountDialog input{display:block;width:100%;margin-top:5px;padding:11px;border:1px solid #3b5268;background:#091829;color:#fff;border-radius:10px}#hnAccountDialog .hn-account-row{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}#hnAccountDialog button{border-radius:11px;padding:10px 14px}#hnAccountDialog .hn-account-muted{color:#a9bfd2;font-size:13px;overflow-wrap:anywhere}#hnAccountDialog .hn-account-buttons{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}#hnAccountDialog .hn-account-buttons button{flex:1}#hnAccountDialog .hn-account-status{min-height:22px;color:#70e6d5;margin-top:12px;font-size:13px}#hnProfile{cursor:pointer}
+</style><style id="hamnava-v35-playlist-cover">
+.hn-playlist-thumb,.hn-quick-cover{overflow:hidden}
+.hn-playlist-thumb img{display:block;width:100%;height:100%;object-fit:cover}
+.hn-quick-cover{width:38px;height:38px;flex:none;border-radius:6px;background:linear-gradient(135deg,#0c8e93,#d6a04c);display:inline-flex;align-items:center;justify-content:center}
+.hn-quick-cover img{display:block;width:100%;height:100%;object-fit:cover}
+#hnPlaylistQuickList button{display:inline-flex;align-items:center;gap:9px}
+#playlists .hn-cover img{width:100%;height:100%;object-fit:cover;border-radius:inherit}
+</style><style id="hamnava-v36-studio">#hnStudioForm textarea{display:block;width:100%;margin:9px 0 17px;padding:13px 14px;background:#0a1524;color:white;border:1px solid #2c4159;border-radius:12px;font:inherit;resize:vertical}#hnStudioForm>label{margin-top:15px}.hn-studio-tabs{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}.hn-studio-tabs button[aria-pressed="true"]{outline:2px solid #f2ad52;outline-offset:2px}.hn-studio-drafts{display:grid;gap:10px}.hn-studio-draft{padding:15px;background:#172c41;border:1px solid #36516b;border-radius:13px}.hn-studio-draft strong,.hn-studio-draft small{display:block}.hn-studio-draft small{color:#b2c6d9;margin-top:8px;overflow-wrap:anywhere}.hn-studio-notice{padding:16px;border:1px solid #5c5061;border-radius:13px;background:#242337;color:#e7d8c8;margin-top:20px;line-height:1.7}#hnStudioCoverFields[hidden]{display:none!important}</style><style id="hamnava-v39-genre-editor">.hn-genre-tags{color:#85ded7!important;line-height:1.5}.hn-genre-shade{position:fixed;inset:0;z-index:40000;background:#020914dc;display:grid;place-items:center;padding:16px}.hn-genre-dialog{background:#102238;color:#fff;border:1px solid #42627c;border-radius:20px;padding:24px;width:min(560px,100%);max-height:90dvh;overflow:auto;box-shadow:0 20px 60px #000b}.hn-genre-dialog h2{margin:0 0 8px}.hn-genre-dialog p{color:#bdcfdf}.hn-genre-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.hn-genre-options label{display:flex;align-items:center;gap:9px;padding:11px;background:#192e45;border-radius:10px;font-size:13px;cursor:pointer}.hn-genre-options input{width:auto;margin:0;accent-color:#17b8ae}.hn-genre-controls{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}.hn-genre-message{font-size:12px;min-height:18px}@media(max-width:460px){.hn-genre-options{grid-template-columns:1fr}.hn-genre-dialog{padding:16px}}</style></head><body class="logged-out"><div class="hn-topbar" id="hnTopbar" role="navigation" aria-label="Hauptnavigation"><a class="hn-home" href="#home" aria-label="Startseite">⌂</a><label class="hn-search-wrap"><span class="hn-search-icon">⌕</span><input id="hnGlobalSearch" type="search" placeholder="Was möchtest du hören?" autocomplete="off" aria-label="Musik durchsuchen"/><a href="#library" title="Bibliothek" aria-label="Bibliothek">▣</a></label><div class="hn-actions"><a class="hn-desktop-action" href="#playlists">Meine Playlists</a><a class="hn-desktop-action" href="#favorites" aria-label="Favoriten" title="Favoriten">♡</a><button class="hn-avatar" id="hnProfile" type="button" title="Mein Profil" aria-label="Profil">☺</button></div></div><aside class="sidebar" dir="ltr" id="siteSidebar"><a class="brand" href="#home"><img class="brand-mark" src="hamnava-logo.webp" alt="HamNava Logo"/><span>HamNava</span></a><div class="side-caption">Deine Bibliothek</div><a class="side-link active" href="#home"><span>⌂</span><span>Startseite</span></a><a class="side-link" href="#library"><span>♫</span><span>Musikbibliothek</span></a><a class="side-link" href="#artists"><span>♬</span><span>Künstler A–Z</span></a><a class="side-link" href="#favorites"><span>♥</span><span>Favoriten</span></a><a class="side-link" href="#playlists"><span>▤</span><span>Meine Playlists</span></a><a class="side-link" href="#ai"><span>✨</span><span>AI Music Studio</span></a><a class="side-link hidden" id="hnUsersNav" href="#users"><span>🛡</span><span>Benutzerverwaltung</span></a><a class="side-link" href="add-song.html"><span>＋</span><span>Lied hinzufügen</span></a><div class="hn-create-area"><div class="hn-library-head"><span>▤ Bibliothek</span><button id="hnCreateBtn" type="button" aria-expanded="false">＋ Erstellen</button></div><div id="hnCreateMenu" class="hn-create-menu" hidden><button id="hnCreatePlaylist" type="button">♫ &nbsp; Playlist erstellen</button><button type="button" disabled title="Benötigt Datenbank-Erweiterung">♧ &nbsp; Gemeinsamer Mix · bald</button><button type="button" disabled title="Benötigt Datenbank-Erweiterung">▱ &nbsp; Ordner · bald</button></div></div><div id="hnPlaylistSidebar" class="hn-playlist-sidebar" aria-label="Meine Playlists"></div>
+<div id="hnSidebarManage" class="hn-sidebar-manage"></div><div class="side-footer">Musik, Freunde, Erinnerungen<br/>HamNava · Version 36</div></aside><div id="navBackdrop" class="nav-backdrop" hidden></div><main><header><button id="menuToggle" class="menu-toggle alt" type="button" aria-label="Menü öffnen" aria-expanded="false">☰</button><div><h1><img class="logo" src="hamnava-logo.webp" alt=""/> Ham<span class="gold">Nava</span></h1><p>Gute Songs, gute Freunde, gemeinsame Erinnerungen</p></div><div id="identity"></div></header><section class="hero hidden" dir="ltr" id="home"><div class="hero-copy"><div class="eyebrow">MUSIK · FREUNDE · ERINNERUNGEN</div><h2>Willkommen bei<br/><em>HamNava</em></h2><p>Entdecke Musik, die verbindet.</p><a href="#homeMusic" id="heroDiscover">Jetzt Musik entdecken ↗</a></div><img class="hero-portrait" src="hero-artist.webp" alt="Illustration eines Sängers"/><div class="hero-quote">„Gute Musik verbindet Menschen – heute und immer.“</div></section>
+<section class="panel" id="homeMusic" data-page="home"><div class="home-heading"><div><h2>Entdecke deine Musik</h2><p>Musik, Freunde und gemeinsame Erinnerungen.</p></div></div><label class="home-search">Songs oder Künstler suchen<input id="homeSearch" type="search" placeholder="Songtitel oder Künstlername eingeben" autocomplete="off"></label><h2>🔥 Meistgehörte Songs</h2><p class="home-hint" id="popularHint">Beliebte Lieder aus der Musikbibliothek</p><div class="songs featured-songs" id="popularSongs"></div><div class="hn-section-heading"><h2>💿 Beliebte Alben und Singles</h2><a href="#library">Alle anzeigen →</a></div><p class="hn-section-note">Singles aus unserer Musikbibliothek</p><div id="hnSingles" class="hn-shelf"></div><div class="hn-section-heading"><h2>📈 Empfohlene Charts</h2><a href="#library">Alle anzeigen →</a></div><div id="hnCharts" class="hn-shelf"></div><div class="hn-section-heading"><h2>📻 Beliebte Radios</h2><a href="#library">Alle anzeigen →</a></div><div id="hnRadios" class="hn-shelf"></div><div class="hn-section-heading"><h2>🎤 Künstler von A–Z</h2><a href="#artists">Alle anzeigen →</a></div><div id="homeArtists" class="artist-chips artist-portraits"></div><div class="hn-section-heading"><h2>🆕 Neu hinzugefügt</h2><a href="#library">Alle anzeigen →</a></div><div class="songs" id="homeSongs"></div></section>
+<section class="panel" id="artists" data-page="artists"><h2>🎤 Künstler von A–Z</h2><p>Wähle einen Künstler, um seine Lieder anzuhören.</p><div id="artistsList" class="artist-chips"></div><div id="artistSongs" class="songs"></div></section>
+<section class="panel" id="favoritesPage" data-page="favorites"><h2>♥ Meine Favoriten</h2><p>Deine gespeicherten Lieblingslieder</p><div id="favoriteSongs" class="songs"></div></section>
+<section class="panel hidden" id="setup"><h2>Mit Supabase verbinden</h2><p>Projekt-URL und öffentlichen Publishable/anon-Key eingeben. Niemals Secret oder service_role verwenden.</p><label>Project URL<input id="url" placeholder="https://xxxx.supabase.co"/></label><label>Publishable / anon key<input id="key"/></label><button id="connect">Verbinden</button></section>
+<section class="panel hidden" id="auth"><h2>Anmelden oder registrieren</h2><div class="grid"><label>E-Mail<input autocomplete="email" id="email" type="email"/></label><label>Passwort<input autocomplete="current-password" id="password" minlength="6" type="password"/></label></div><div class="actions"><button id="login">Anmelden</button><button class="alt" id="signup">Registrieren</button><button class="alt" id="changeConfig">Verbindung ändern</button></div><p class="status" id="authStatus" role="status"></p></section>
+<div class="hidden" id="app">
+<div class="add-tile" data-page="library"><div><strong>Einen neuen Song?</strong><p>Füge einen Song oder eine MP3 auf einer eigenen Seite hinzu.</p></div><a href="add-song.html">＋ Neuen Lied hinzufügen ↗</a></div><section class="panel" id="library" data-page="library"><h2>🎶 Musikbibliothek</h2><div class="grid"><label>Suche<input id="search" placeholder="Song oder Interpret"/></label><label>Interpret<select id="artistFilter"><option value="">Alle Interpreten</option></select></label><label>Ansicht<select id="view"><option value="all">Alle Songs</option><option value="favorites">Meine Favoriten</option></select></label></div><div class="actions"><button class="alt" id="refresh">Aktualisieren</button></div><div class="songs" id="songs"></div></section>
+<section class="panel" id="playlists" data-page="playlists"><button id="hnPlaylistBack" type="button" hidden>← Alle Playlists</button><div class="hn-playlist-hero"><div class="hn-cover">♫</div><div><small>DEINE MUSIKBIBLIOTHEK</small><h2 id="hnPlaylistTitle">Meine Playlists</h2><p id="hnPlaylistDescription">Wähle links eine Playlist oder erstelle eine neue.</p><button id="hnPlaylistPlay" type="button">▶ Playlist abspielen</button></div></div><details class="hn-playlist-tools" id="hnPlaylistTools"><summary>＋ Playlist erstellen und Songs verwalten</summary><form class="toolbar" id="playlistForm"><input id="playlistName" maxlength="100" placeholder="Name der neuen Playlist" required=""/><button type="submit">Playlist erstellen</button></form><div class="grid"><label>Playlist<select id="playlistSelect"></select></label><label>Lied hinzufügen<select id="playlistSong"></select></label></div><div class="actions"><button id="playlistAdd">Zur Playlist hinzufügen</button><button class="warn" id="playlistDelete">Playlist löschen (Besitzer/Admin)</button></div></details><div id="hnPlaylistQuickList" class="hn-playlist-overview"></div><div id="playlistTracks"></div></section>
+<section class="panel hidden" id="ai" data-page="ai" aria-label="AI Music Studio">
+<h2>🎵 HamNava AI Music &amp; Cover Studio</h2>
+<p>Admin-Bereich · Songideen und Cover-Projekte zunächst privat vorbereiten. <strong>Eine echte KI-Audiogenerierung ist noch nicht angeschlossen.</strong></p>
+<div class="hn-studio-tabs" role="group" aria-label="Projektart"><button type="button" id="hnStudioNew" aria-pressed="true">🎼 Neuen Song planen</button><button type="button" class="alt" id="hnStudioCover" aria-pressed="false">🎤 AI-Cover planen</button></div>
+<form id="hnStudioForm" autocomplete="off"><div class="grid">
+<label>Songtitel<input id="hnStudioTitle" maxlength="120" required placeholder="Titel deines Songs"></label>
+<label>Sprache<select id="hnStudioLanguage"><option value="Persisch">Persisch</option><option value="Deutsch">Deutsch</option><option value="Englisch">Englisch</option><option value="Arabisch">Arabisch</option></select></label>
+<label>Musikstil<select id="hnStudioStyle"><option>Pop</option><option>Traditionell</option><option>Rock</option><option>Rap</option><option>Ballade</option><option>Elektronisch</option><option>Klassisch</option></select></label>
+<label>Gesang<select id="hnStudioVoice"><option>Neutrale KI-Männerstimme</option><option>Neutrale KI-Frauenstimme</option><option>Duett</option><option>Instrumental</option><option>Eigene autorisierte Stimme</option></select></label>
+</div><div id="hnStudioCoverFields" hidden><label>Vorhandener Song / Originaltitel<input id="hnStudioOriginal" maxlength="180" placeholder="z. B. Titel und Künstler"></label><p class="muted">Verwende nur Aufnahmen, Texte und Stimmen, für die du die erforderlichen Rechte oder Zustimmungen hast. Keine Imitation erkennbarer Künstlerstimmen ohne Zustimmung.</p></div>
+<label>Songbeschreibung / gewünschte Stimmung<textarea id="hnStudioPrompt" rows="3" maxlength="3000" placeholder="Beschreibe Musik, Instrumente, Stimmung und Arrangement ..."></textarea></label>
+<label>Liedtext (optional)<textarea id="hnStudioLyrics" rows="6" maxlength="12000" placeholder="Eigener oder lizenzierter Liedtext ..."></textarea></label>
+<div class="actions"><button type="submit">💾 Privaten Entwurf speichern</button><button type="reset" class="alt">Felder leeren</button></div><p class="status" id="hnStudioStatus" role="status"></p></form>
+<h3>🔒 Meine privaten Entwürfe</h3><p class="muted">Diese Entwürfe werden nur in diesem Browser gespeichert, nicht in Supabase. Andere Geräte können sie nicht sehen.</p><div id="hnStudioDrafts" class="hn-studio-drafts"></div>
+<div class="hn-studio-notice">⏳ <strong>KI-Audio generieren und veröffentlichen:</strong> Noch nicht verfügbar. Dafür richten wir später ein KI-Backend mit serverseitiger Admin-Prüfung, privatem Audiospeicher und Freigabeprozess ein.</div>
+</section>
+<section class="panel hidden" id="hnUsersPanel" data-page="users"><h2>🛡 Benutzerverwaltung</h2><p>Nur für Administratoren. Benutzerkonten anzeigen, suchen und sperren oder entsperren.</p><div class="toolbar"><input id="hnUsersSearch" type="search" placeholder="E-Mail-Adresse suchen" aria-label="Benutzer suchen"><button type="button" id="hnUsersRefresh">↻ Benutzer laden</button></div><p class="status" id="hnUsersStatus" role="status"></p><div id="hnUsersList" class="hn-users-list"></div><div class="toolbar"><button class="alt" type="button" id="hnUsersMore" hidden>Weitere Benutzer laden</button></div><p class="muted">Hinweis: Zum Aktivieren muss die mitgelieferte Supabase Edge Function bereitgestellt werden. Administratorrechte werden auf dem Server geprüft.</p></section><section class="panel hidden" id="admin" data-page="admin"><h2>🛡 Verwaltung</h2><p>Als Admin kannst du Songs und Playlists anderer Mitglieder löschen.</p></section>
+<section class="player hn-player-window" aria-label="Aktueller Musikplayer"><div class="hn-player-background" id="hnPlayerBackground" aria-hidden="true"></div><div class="hn-player-content"><div class="hn-player-header"><span class="hn-player-label" id="hnPlayerDrag" title="Hier ziehen, um das Fenster zu verschieben">⠿ ♫ JETZT LÄUFT <small class="hn-drag-hint">· Ziehen</small></span><div class="hn-player-buttons"><button class="alt hn-player-fullscreen-btn" id="hnPlayerFullscreen" type="button" aria-label="Player als Vollbild anzeigen" aria-pressed="false">⛶ Vollbild</button><button class="alt hn-player-minimize" id="hnPlayerMinimize" type="button" aria-label="Player minimieren" aria-pressed="false">− Minimieren</button><button class="hn-player-stop alt" id="hnPlayerStop" type="button" aria-label="Wiedergabe stoppen und Player schließen">■ Stoppen ×</button></div></div><div class="hn-player-center"><span class="player-icon">♫</span><div class="hn-player-meta"><strong id="nowPlaying">Musikplayer</strong><span id="hnPlayerArtist"></span></div></div><div class="hn-player-transport" aria-label="Songsteuerung"><button type="button" id="hnPreviousSong" aria-label="Vorheriger Song" title="Vorheriger Song">⏮</button><button type="button" id="hnNextSong" aria-label="Nächster Song" title="Nächster Song">⏭</button><button type="button" id="hnShuffleSongs" aria-label="Zufallswiedergabe einschalten" aria-pressed="false" title="Zufallswiedergabe">🔀 Zufall</button></div><audio controls id="audioPlayer" preload="none" aria-label="Wiedergabesteuerung"></audio></div></section></div><p class="status" id="status" role="status"></p><footer id="hnFooter" class="hn-footer" data-page="home"><div class="hn-footer-grid"><div><h3>HamNava</h3><span>Kontakt – in Vorbereitung</span><span>Über uns – in Vorbereitung</span><span>Impressum – in Vorbereitung</span><span>Datenschutz – in Vorbereitung</span></div><div><h3>Community</h3><a href="#artists">Künstler</a><a href="#playlists">Meine Playlists</a><span>Freunde – in Vorbereitung</span></div><div><h3>Hilfe &amp; Support</h3><span>Hilfe-Center – in Vorbereitung</span><span>FAQ – in Vorbereitung</span><span>Nutzungsbedingungen – in Vorbereitung</span></div><div><h3>Entdecken</h3><a href="#home">Beliebte Songs</a><a href="#home">Empfohlene Charts</a><a href="#home">Beliebte Radios</a><a href="#ai">KI-DJ</a></div></div><div class="hn-footer-bottom"><span>© 2026 HamNava · Musik, Freunde, Erinnerungen</span><span>Deutsch · فارسی · English · العربية</span></div></footer></main>
+<div id="hnPlaylistDialog" class="hn-modal" hidden aria-hidden="true"><div class="hn-modal-backdrop" data-close-playlist></div><section class="hn-modal-panel" role="dialog" aria-modal="true" aria-labelledby="hnModalTitle"><div class="hn-modal-head"><div><small>HAMNAVA · DEINE MUSIK</small><h2 id="hnModalTitle">Zu Playlist hinzufügen</h2></div><button type="button" id="hnModalClose" class="hn-modal-close" aria-label="Schließen">✕</button></div><p id="hnModalSong" class="hn-modal-song"></p><label class="hn-modal-search-label">Playlist suchen<input id="hnModalSearch" type="search" placeholder="Playlist suchen …" autocomplete="off"></label><div id="hnModalList" class="hn-modal-list" role="radiogroup" aria-label="Playlist auswählen"></div><p id="hnModalFeedback" class="hn-modal-feedback" role="status" aria-live="polite"></p><div class="hn-modal-actions"><button type="button" id="hnModalNew" class="alt">＋ Neue Playlist</button><button type="button" id="hnModalSave">Zur Playlist hinzufügen</button></div></section></div>
+<div id="hnAccountDialog" hidden role="dialog" aria-modal="true" aria-labelledby="hnAccountTitle"><div class="hn-account-shade" id="hnAccountShade"></div><section class="hn-account-card"><div class="hn-account-row"><h2 id="hnAccountTitle">👤 Mein Profil</h2><button type="button" id="hnAccountClose" class="alt" aria-label="Profil schließen">✕</button></div><p class="hn-account-muted">Deine persönlichen Kontoinformationen</p><label>Anzeigename<input id="hnAccountName" maxlength="80" autocomplete="nickname" placeholder="Dein Name"></label><label>E-Mail-Adresse<input id="hnAccountEmail" type="email" autocomplete="email"></label><div class="hn-account-row hn-account-muted"><span id="hnAccountJoined"></span><span id="hnAccountRole"></span></div><p class="hn-account-muted" id="hnAccountId"></p><div class="hn-account-buttons"><button id="hnAccountSave" type="button">Profil speichern</button></div><h3>🔒 Passwort ändern</h3><label>Neues Passwort<input id="hnAccountPassword" type="password" autocomplete="new-password" minlength="8" placeholder="Mindestens 8 Zeichen"></label><div class="hn-account-buttons"><button id="hnAccountChangePassword" type="button" class="alt">Passwort aktualisieren</button></div><div class="hn-account-buttons"><button id="hnAccountLogout" type="button" class="warn">Abmelden</button></div><p id="hnAccountStatus" class="hn-account-status" role="status"></p></section></div>
+<script type="module">
+import {createClient} from 'https://esm.sh/@supabase/supabase-js@2';
+const $=id=>document.getElementById(id),show=(id,v)=>$(id).classList.toggle('hidden',!v),say=(s)=>$('status').textContent=s;
+let db,user,songs=[],favorites=new Set(),playlists=[],items=[],isAdmin=false,playCounts={},chosenArtist='',playingSongId=null;
+const urlOk=v=>!v||/^https:\/\/[^\s]+$/i.test(v);
+function el(tag,txt,cls){let x=document.createElement(tag);if(txt!=null)x.textContent=txt;if(cls)x.className=cls;return x}
+function opt(select,rows,placeholder){select.replaceChildren(new Option(placeholder,''),...rows.map(x=>new Option(x.label,x.value)))}
+function cfg(){let u=localStorage.getItem('music_url'),k=localStorage.getItem('music_key');if(!u||!k){show('setup',true);return}try{db=createClient(u,k);show('setup',false);db.auth.onAuthStateChange((_event,session)=>{user=session?.user||null;renderAuth();if(user)setTimeout(loadAll,0)});db.auth.getSession().then(({data})=>{user=data.session?.user||null;renderAuth();if(user)loadAll()})}catch(e){show('setup',true);say(e.message)}}
+function hnDisplayName(){return (user?.user_metadata?.display_name||user?.user_metadata?.full_name||user?.user_metadata?.name||'').trim()||'Benutzer'}
+function renderAuth(){if(!user && document.body.classList.contains('hn-playing'))hnStopPlayer();document.body.classList.toggle('logged-out',!user);show('auth',!user);show('app',!!user);show('home',!!user && (!location.hash || location.hash==='#home'));$('identity').replaceChildren();if(user){$('identity').append(el('small',hnDisplayName()+' '));let out=el('button','Abmelden','alt small');out.onclick=()=>db.auth.signOut();$('identity').append(out)}else{songs=[];favorites.clear()}route()}
+$('connect').onclick=()=>{let u=$('url').value.trim().replace(/\/$/,''),k=$('key').value.trim();if(!/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(u)||!k){say('Projekt-URL oder Schlüssel ungültig');return}localStorage.setItem('music_url',u);localStorage.setItem('music_key',k);cfg()};
+$('changeConfig').onclick=()=>{localStorage.removeItem('music_url');localStorage.removeItem('music_key');location.reload()};
+$('login').onclick=async()=>{let {error}=await db.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});$('authStatus').textContent=error?.message||'Erfolgreich angemeldet'};
+$('signup').onclick=async()=>{let {error}=await db.auth.signUp({email:$('email').value.trim(),password:$('password').value});$('authStatus').textContent=error?.message||'Registriert – bitte Bestätigungs-E-Mail prüfen'};
+async function loadAll(){if(!user)return;let [s,f,p,a]=await Promise.all([db.from('songs').select('*').order('created_at',{ascending:false}).limit(1000),db.from('favorites').select('song_id'),db.from('playlists').select('*').order('created_at',{ascending:false}),db.from('admins').select('user_id').eq('user_id',user.id)]);for(let r of [s,f,p,a])if(r.error){say('Fehler: '+r.error.message);return}songs=s.data||[];try{let pc=await db.from('hamnava_play_counts').select('song_id,play_count');if(!pc.error){playCounts=Object.fromEntries((pc.data||[]).map(x=>[x.song_id,x.play_count]));$('popularHint').textContent='Nach tatsächlichen Wiedergaben sortiert'}else{$('popularHint').textContent='Die Statistik wird nach Einrichtung der Wiedergabezähler angezeigt'}}catch(e){}favorites=new Set((f.data||[]).map(x=>x.song_id));playlists=(p.data||[]).filter(x=>x.owner_id===user.id);isAdmin=!!a.data?.length;show('admin',isAdmin);$('hnUsersNav').classList.toggle('hidden',!isAdmin);$('hnUsersPanel').classList.toggle('hidden',!isAdmin);$('ai').classList.toggle('hidden',!isAdmin);document.querySelector('.side-link[href="#ai"]').classList.toggle('hidden',!isAdmin);if(isAdmin)hnStudioRender();let prev=$('artistFilter').value;opt($('artistFilter'),[...new Set(songs.map(x=>x.artist))].sort((a,b)=>a.localeCompare(b,'fa')).map(x=>({label:x,value:x})),'Alle Interpreten');$('artistFilter').value=prev;opt($('playlistSong'),songs.map(x=>({label:x.artist+' — '+x.title,value:x.id})),'Lied auswählen');let old=$('playlistSelect').value;opt($('playlistSelect'),playlists.map(x=>({label:x.name,value:x.id})),'Playlist auswählen');$('playlistSelect').value=old;renderEverything();await loadPlaylist();route();say('Lieder und Playlists wurden aktualisiert')}
+
+function hnStopPlayer(){const a=$('audioPlayer');a.pause();a.removeAttribute('src');a.load();playingSongId=null;document.body.classList.remove('hn-playing','hn-player-mini','hn-player-fullscreen');$('hnPlayerFullscreen').textContent='⛶ Vollbild';$('hnPlayerFullscreen').setAttribute('aria-pressed','false');$('hnPlayerMinimize').textContent='− Minimieren';$('hnPlayerMinimize').setAttribute('aria-pressed','false');$('hnPlayerBackground').style.backgroundImage='';$('nowPlaying').textContent='Musikplayer';$('hnPlayerArtist').textContent='';}
+$('hnPlayerStop').addEventListener('click',hnStopPlayer);
+$('audioPlayer').addEventListener('ended',()=>{hnPlayAdjacent(1,true)});
+
+async function play(song){$('nowPlaying').textContent=song.title; $('hnPlayerArtist').textContent=song.artist;let link=song.url;if(song.audio_path){let {data,error}=await db.storage.from('hamnava-audio').createSignedUrl(song.audio_path,3600);if(error){say(error.message);return}link=data.signedUrl}else if(!link){say('Für dieses Lied ist kein Audiolink vorhanden');return}else if(!/\.(mp3|ogg|wav|m4a)(\?|#|$)/i.test(link)){window.open(link,'_blank','noopener,noreferrer');say('Dieser Link wird auf der Originalseite geöffnet');return}playingSongId=song.id;const playerBg=$('hnPlayerBackground');playerBg.style.backgroundImage=(song.cover_url && /^https:\/\//i.test(song.cover_url))?'url('+JSON.stringify(song.cover_url)+')':'';document.body.classList.add('hn-playing');const coverNode=document.querySelector('.player-icon');if(coverNode){coverNode.replaceChildren();if(song.cover_url && /^https:\/\//i.test(song.cover_url)){const pic=document.createElement('img');pic.src=song.cover_url;pic.alt='Albumcover';pic.onerror=()=>{coverNode.textContent='♫'};coverNode.append(pic)}else coverNode.textContent='♫'}$('audioPlayer').src=link;$('audioPlayer').play().then(()=>db.rpc('record_hamnava_play',{p_song_id:song.id}).catch(()=>{})).catch(()=>say('Zum Abspielen auf Play klicken'))}
+const hnGenreOptions=['Pop','Jazz','Rock','Klassik','Hip-Hop / Rap','Electronic / EDM','R&B / Soul','Blues','Folk / Traditionell','Persischer Pop','Afghanische Musik','Instrumental'];
+function hnSongGenres(song){return Array.isArray(song.genres)?song.genres:[]}
+function hnEditSongGenres(song){
+ if(!user||!(isAdmin||song.user_id===user.id)){say('Keine Berechtigung zum Bearbeiten.');return}
+ const shade=el('div');shade.className='hn-genre-shade';shade.setAttribute('role','presentation');
+ const dialog=el('section');dialog.className='hn-genre-dialog';dialog.setAttribute('role','dialog');dialog.setAttribute('aria-modal','true');dialog.setAttribute('aria-label','Musikrichtungen bearbeiten');
+ const title=el('h2','Musikrichtungen bearbeiten');const subtitle=el('p',song.artist+' — '+song.title);
+ const options=el('div');options.className='hn-genre-options';const selected=new Set(hnSongGenres(song));
+ hnGenreOptions.forEach(g=>{const label=el('label');const input=document.createElement('input');input.type='checkbox';input.value=g;input.checked=selected.has(g);label.append(input,document.createTextNode(' '+g));options.append(label)});
+ const msg=el('p','Mindestens eine Musikrichtung auswählen.');msg.className='hn-genre-message';
+ const controls=el('div');controls.className='hn-genre-controls';const cancel=el('button','Abbrechen','alt');const save=el('button','Speichern');
+ const close=()=>{document.removeEventListener('keydown',onKey);shade.remove()};const onKey=e=>{if(e.key==='Escape')close()};document.addEventListener('keydown',onKey);cancel.onclick=close;shade.addEventListener('click',e=>{if(e.target===shade)close()});
+ save.onclick=async()=>{const genres=[...options.querySelectorAll('input:checked')].map(x=>x.value);if(!genres.length){msg.textContent='Bitte mindestens eine Musikrichtung auswählen.';return}save.disabled=true;msg.textContent='Wird gespeichert …';
+ const {data,error}=await db.from('songs').update({genres}).eq('id',song.id).select('id,genres');
+ if(error){msg.textContent='Fehler: '+error.message;save.disabled=false;return}
+ if(!data?.length){msg.textContent='Nicht gespeichert: Bitte die UPDATE-Berechtigung (RLS) in Supabase prüfen.';save.disabled=false;return}
+ song.genres=genres;close();renderEverything();say('Musikrichtungen gespeichert: '+genres.join(', '))};
+ controls.append(cancel,save);dialog.append(title,subtitle,options,msg,controls);shade.append(dialog);document.body.append(shade);cancel.focus();
+}
+function renderSongs(target='songs',mode='library'){let q=$('search').value.trim().toLocaleLowerCase(),artist=$('artistFilter').value,favOnly=$('view').value==='favorites';$(target).replaceChildren();let filtered=songs.filter(s=>(!artist||s.artist===artist)&&(!favOnly||favorites.has(s.id))&&(!q||(s.title+' '+s.artist).toLocaleLowerCase().includes(q)));if(mode==='home'||mode==='popular'){q=$('homeSearch').value.trim().toLocaleLowerCase();filtered=songs.filter(s=>!q||(s.title+' '+s.artist).toLocaleLowerCase().includes(q));if(mode==='popular'){filtered=filtered.sort((a,b)=>(playCounts[b.id]||0)-(playCounts[a.id]||0)).slice(0,8)}}else if(mode==='favorites'){filtered=filtered.filter(s=>favorites.has(s.id))}else if(mode==='artist'){filtered=filtered.filter(s=>s.artist===chosenArtist)}if(!filtered.length){$(target).append(el('p','Noch keine Lieder gefunden.'));return}if(mode==='home')filtered.sort((a,b)=>(a.artist||'').localeCompare(b.artist||'','de')||(a.title||'').localeCompare(b.title||'','de'));for(let s of filtered){let card=el('article',null,'song');if(s.cover_url){let img=el('img',null,'art');img.src=s.cover_url;img.alt='Cover: '+s.title;img.loading='lazy';img.referrerPolicy='no-referrer';card.append(img)}else card.append(el('div','♫','art'));let body=el('div',null,'songBody');body.append(el('h3',s.title));let artistRow=el('div',null,'artist');if(s.artist_image_url){let img=el('img',null,'avatar');img.src=s.artist_image_url;img.alt=s.artist;img.loading='lazy';artistRow.append(img)}artistRow.append(el('span',s.artist));body.append(artistRow,el('small',s.shared_by?'Hinzugefügt von: '+s.shared_by:''));if(hnSongGenres(s).length)body.append(el('small',hnSongGenres(s).join(' · '),'hn-genre-tags'));let actions=el('div',null,'actions');let p=el('button','▶ Abspielen','small');p.onclick=()=>play(s);actions.append(p);let f=el('button',favorites.has(s.id)?'♥ Favorit':'♡ Favorit','alt small');f.onclick=async()=>{let result=favorites.has(s.id)?await db.from('favorites').delete().eq('song_id',s.id).eq('user_id',user.id):await db.from('favorites').insert({song_id:s.id,user_id:user.id});if(result.error)say(result.error.message);else{if(favorites.has(s.id))favorites.delete(s.id);else favorites.add(s.id);renderSongs()}};actions.append(f);let addTo=el('button','＋ Zu meiner Playlist','alt small');addTo.onclick=()=>hnOpenPlaylistDialog(s);actions.append(addTo);let open=el('button','↗ Link öffnen','alt small');open.onclick=()=>window.open(s.url,'_blank','noopener,noreferrer');open.disabled=!s.url;actions.append(open);if(s.user_id===user.id||isAdmin){let editGenres=el('button','🎵 Genres bearbeiten','alt small');editGenres.onclick=()=>hnEditSongGenres(s);actions.append(editGenres);let del=el('button','Löschen','warn small');del.onclick=async()=>{if(!confirm('Lied wirklich löschen?'))return;let {error}=await db.from('songs').delete().eq('id',s.id);if(error){say(error.message);return}if(s.audio_path){let {error:storageError}=await db.storage.from('hamnava-audio').remove([s.audio_path]);if(storageError)say('Lied gelöscht, aber die MP3-Datei konnte nicht entfernt werden: '+storageError.message)}await loadAll()};actions.append(del)}body.append(actions);card.append(body);$(target).append(card)}}
+$('search').oninput=renderSongs;$('artistFilter').onchange=renderSongs;$('view').onchange=renderSongs;$('refresh').onclick=loadAll;
+$('playlistForm').onsubmit=async e=>{e.preventDefault();let {error}=await db.from('playlists').insert({name:$('playlistName').value.trim(),owner_id:user.id});if(error)say(error.message);else{$('playlistName').value='';await loadAll()}};
+$('playlistAdd').onclick=async()=>{let playlist_id=$('playlistSelect').value,song_id=$('playlistSong').value;if(!playlist_id||!song_id){say('Bitte Playlist und Lied auswählen');return}let {error}=await db.from('playlist_songs').insert({playlist_id,song_id,added_by:user.id});if(error)say(error.code==='23505'?'Dieser Song ist bereits in dieser Playlist.':error.message);else {await loadPlaylist();await hnRefreshPlaylistCovers()}};
+$('playlistDelete').onclick=async()=>{let id=$('playlistSelect').value,p=playlists.find(x=>x.id===id);if(!p||!(p.owner_id===user.id||isAdmin)){say('Nur Eigentümer oder Administrator dürfen Playlists löschen');return}if(!confirm('Playlist wirklich löschen?'))return;let {error}=await db.from('playlists').delete().eq('id',id);if(error)say(error.message);else await loadAll()};
+$('playlistSelect').onchange=loadPlaylist;
+async function loadPlaylist(){let id=$('playlistSelect').value;$('playlistTracks').replaceChildren();if(!id)return;let {data,error}=await db.from('playlist_songs').select('song_id,added_by').eq('playlist_id',id);if(error){say(error.message);return}items=data||[];let list=el('div');for(let item of items){let s=songs.find(x=>x.id===item.song_id);if(!s)continue;let row=el('div',null,'toolbar');row.style.marginTop='10px';row.append(el('span',s.artist+' — '+s.title));let p=el('button','▶','alt small');p.onclick=()=>play(s);row.append(p);let owner=playlists.find(x=>x.id===id)?.owner_id;if(item.added_by===user.id||owner===user.id||isAdmin){let del=el('button','Aus Playlist entfernen','warn small');del.onclick=async()=>{let {error}=await db.from('playlist_songs').delete().eq('playlist_id',id).eq('song_id',s.id);if(error)say(error.message);else {await loadPlaylist();await hnRefreshPlaylistCovers()}};row.append(del)}list.append(row)}$('playlistTracks').append(list);if(!items.length)$('playlistTracks').append(el('p','Diese Playlist enthält noch keine Lieder'))}
+
+// HamNava 36: Browser-lokale Admin-Entwürfe; keine angebliche Audiogenerierung.
+let hnStudioMode='song';
+function hnStudioAdminCheck(){return !!user && isAdmin;}
+function hnStudioKey(){return 'hamnava_studio_drafts_'+user.id;}
+function hnStudioRead(){if(!hnStudioAdminCheck())return [];try{const value=JSON.parse(localStorage.getItem(hnStudioKey())||'[]');return Array.isArray(value)?value:[]}catch{return []}}
+function hnStudioModeSet(mode){hnStudioMode=mode;const cover=mode==='cover';$('hnStudioCoverFields').hidden=!cover;$('hnStudioNew').setAttribute('aria-pressed',String(!cover));$('hnStudioCover').setAttribute('aria-pressed',String(cover));$('hnStudioNew').classList.toggle('alt',cover);$('hnStudioCover').classList.toggle('alt',!cover);}
+$('hnStudioNew').onclick=()=>hnStudioModeSet('song');
+$('hnStudioCover').onclick=()=>hnStudioModeSet('cover');
+$('hnStudioForm').addEventListener('reset',()=>setTimeout(()=>{$('hnStudioStatus').textContent='';},0));
+$('hnStudioForm').onsubmit=e=>{e.preventDefault();if(!hnStudioAdminCheck())return;const title=$('hnStudioTitle').value.trim();const original=$('hnStudioOriginal').value.trim();if(!title||(hnStudioMode==='cover'&&!original)){$('hnStudioStatus').textContent='Bitte Songtitel und gegebenenfalls Originalsong angeben.';return;}const draft={id:crypto.randomUUID(),mode:hnStudioMode,title,original,language:$('hnStudioLanguage').value,style:$('hnStudioStyle').value,voice:$('hnStudioVoice').value,prompt:$('hnStudioPrompt').value.trim(),lyrics:$('hnStudioLyrics').value.trim(),created:new Date().toISOString(),status:'Privater Entwurf'};try{const list=hnStudioRead();list.unshift(draft);localStorage.setItem(hnStudioKey(),JSON.stringify(list));$('hnStudioStatus').textContent='Entwurf nur in diesem Browser gespeichert. Es wurde noch kein Audio erzeugt.';hnStudioRender()}catch(err){$('hnStudioStatus').textContent='Speichern fehlgeschlagen: '+err.message}};
+function hnStudioRender(){const root=$('hnStudioDrafts');root.replaceChildren();if(!hnStudioAdminCheck())return;const drafts=hnStudioRead();if(!drafts.length){root.append(el('p','Noch keine Entwürfe vorhanden.','muted'));return;}for(const d of drafts){const card=el('article',null,'hn-studio-draft');const head=el('strong',(d.mode==='cover'?'🎤 Cover: ':'🎼 Song: ')+d.title);const desc=el('small',[d.language,d.style,d.voice,d.original?'Original: '+d.original:''].filter(Boolean).join(' · '));const buttons=el('div',null,'actions');const edit=el('button','Bearbeiten','alt');edit.type='button';edit.onclick=()=>{hnStudioModeSet(d.mode);$('hnStudioTitle').value=d.title;$('hnStudioOriginal').value=d.original||'';$('hnStudioLanguage').value=d.language;$('hnStudioStyle').value=d.style;$('hnStudioVoice').value=d.voice;$('hnStudioPrompt').value=d.prompt||'';$('hnStudioLyrics').value=d.lyrics||'';$('hnStudioStatus').textContent='Entwurf geladen. Beim Speichern wird eine neue Version angelegt.';$('hnStudioForm').scrollIntoView({behavior:'smooth'});};const remove=el('button','Löschen','warn');remove.type='button';remove.onclick=()=>{if(!confirm('Diesen lokalen Entwurf löschen?'))return;localStorage.setItem(hnStudioKey(),JSON.stringify(hnStudioRead().filter(x=>x.id!==d.id)));hnStudioRender()};buttons.append(edit,remove);card.append(head,desc,buttons);root.append(card)}}
+
+// Navigation und Startseite: keine zusätzlichen Datenbanktabellen erforderlich.
+function route(){
+ const key=(location.hash||'#home').slice(1);
+ const page=['home','library','artists','favorites','playlists','ai','admin','users'].includes(key)?key:'home';
+ if((page==='users'||page==='ai') && !isAdmin){location.hash='#home';return}
+ document.body.classList.add('hn-ready');
+ document.querySelectorAll('[data-page]').forEach(n=>n.classList.toggle('hn-current',!!user && n.dataset.page===page));
+ $('home').classList.toggle('hidden',!user || page!=='home');
+ document.querySelectorAll('.side-link[href^="#"]').forEach(n=>n.classList.toggle('active',n.getAttribute('href')==='#'+page));
+ document.body.classList.remove('nav-open');$('menuToggle').setAttribute('aria-expanded','false');
+ if(page==='home' && user)renderHome();if(page==='users' && user && isAdmin)hnLoadUsers(true);
+}
+function renderEverything(){renderSongs('songs','library');renderSongs('favoriteSongs','favorites');renderHome();renderArtists();}
+function hnTile(root,title,subtitle,imageUrl,icon,onClick){const tile=el('button',null,'hn-tile');tile.type='button';if(imageUrl){const img=el('img');img.src=imageUrl;img.alt='';img.loading='lazy';img.referrerPolicy='no-referrer';tile.append(img)}else tile.append(el('div',icon,'hn-art'));tile.append(el('strong',title),el('small',subtitle));tile.onclick=onClick;root.append(tile)}
+function renderDiscover(){
+ const q=$('homeSearch').value.trim().toLocaleLowerCase();const matched=songs.filter(x=>(x.title+' '+x.artist).toLocaleLowerCase().includes(q));
+ const singles=$('hnSingles'),charts=$('hnCharts'),radios=$('hnRadios');singles.replaceChildren();charts.replaceChildren();radios.replaceChildren();
+ for(const song of [...matched].sort((a,b)=>(playCounts[b.id]||0)-(playCounts[a.id]||0)).slice(0,12))hnTile(singles,song.title,song.artist,song.cover_url||song.artist_image_url,'♫',()=>play(song));
+ if(!matched.length)singles.append(el('p','Keine Singles gefunden.'));
+ const ranked=[...matched].sort((a,b)=>(playCounts[b.id]||0)-(playCounts[a.id]||0));
+ const groups=[{name:'Top Songs · HamNava',desc:'Nach Wiedergaben',list:ranked},{name:'Neu bei HamNava',desc:'Neueste Veröffentlichungen in unserer Bibliothek',list:[...matched].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at))},{name:'Entdecken',desc:'Musik aus unserer Community',list:[...matched].sort((a,b)=>(a.artist||'').localeCompare(b.artist||'','de'))}];
+ for(const g of groups)if(g.list.length)hnTile(charts,g.name,g.desc,g.list[0].cover_url||g.list[0].artist_image_url,'📈',()=>{chosenArtist='';location.hash='#library';$('search').value='';renderSongs('songs','library')});
+ const artistGroups=new Map();for(const song of matched){const a=song.artist||'Unbekannt';if(!artistGroups.has(a))artistGroups.set(a,[]);artistGroups.get(a).push(song)}
+ for(const [artist,list] of [...artistGroups].sort((a,b)=>b[1].length-a[1].length).slice(0,8))hnTile(radios,'Radio: '+artist,list.length+' Songs · automatischer Musikmix',list[0].artist_image_url||list[0].cover_url,'📻',()=>{chosenArtist=artist;location.hash='#artists';renderArtists();play(list[0])});
+ if(!artistGroups.size)radios.append(el('p','Noch keine Radios verfügbar.'));
+}
+function renderHome(){renderSongs('homeSongs','home');renderSongs('popularSongs','popular');renderArtistChips('homeArtists',true);renderDiscover();}
+function renderArtists(){renderArtistChips('artistsList',false);renderSongs('artistSongs','artist');}
+function renderArtistChips(id,limit){
+ const root=$(id);root.replaceChildren();
+ const artists=[...new Set(songs.map(s=>s.artist).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'de'));
+ if(!artists.length){root.append(el('p','Noch keine Künstler vorhanden.'));return;}
+ for(const name of (limit?artists.slice(0,12):artists)){
+  const sample=songs.find(s=>s.artist===name);const btn=el('button',null,'artist-chip');btn.type='button';
+  if(sample?.artist_image_url || sample?.cover_url){const img=el('img');img.src=sample.artist_image_url||sample.cover_url;img.alt='';img.loading='lazy';btn.append(img)}
+  else btn.append(el('span','♫','artist-placeholder'));
+  btn.append(el('span',name));
+  btn.onclick=()=>{chosenArtist=name;location.hash='#artists';renderArtists()};root.append(btn);
+ }
+}
+$('homeSearch').addEventListener('input',renderHome);
+window.addEventListener('hashchange',route);
+$('menuToggle').addEventListener('click',()=>{const open=document.body.classList.toggle('nav-open');$('menuToggle').setAttribute('aria-expanded',String(open))});
+$('navBackdrop').addEventListener('click',()=>document.body.classList.remove('nav-open'));
+$('heroDiscover').addEventListener('click',e=>{e.preventDefault();$('homeMusic').scrollIntoView({behavior:'smooth'})});
+
+
+
+// HamNava 10: Suchleiste und persönliche Playlist-Bibliothek.
+const hnSearch=$('hnGlobalSearch');
+hnSearch.addEventListener('input',()=>{if(!user)return;const q=hnSearch.value;$('homeSearch').value=q;$('search').value=q;if(location.hash==='#home'||!location.hash)renderHome();else if(location.hash==='#library')renderSongs('songs','library');else{location.hash='#library';renderSongs('songs','library')}});
+$('hnProfile').onclick=()=>hnOpenProfile();
+
+function hnOpenProfile(){
+ if(!user)return;
+ const dlg=$('hnAccountDialog');
+ $('hnAccountName').value=user.user_metadata?.display_name||user.user_metadata?.full_name||'';
+ $('hnAccountEmail').value=user.email||'';
+ $('hnAccountPassword').value='';
+ $('hnAccountJoined').textContent='Registriert: '+(user.created_at?new Date(user.created_at).toLocaleDateString('de-DE'):'–');
+ $('hnAccountRole').textContent=isAdmin?'🛡 Administrator':'Benutzer';
+ $('hnAccountId').textContent='Benutzer-ID: '+user.id;
+ $('hnAccountStatus').textContent='';dlg.hidden=false;document.body.style.overflow='hidden';$('hnAccountClose').focus();
+}
+function hnCloseProfile(){ $('hnAccountDialog').hidden=true;document.body.style.overflow=''; }
+$('hnAccountClose').onclick=hnCloseProfile;
+$('hnAccountShade').onclick=hnCloseProfile;
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('hnAccountDialog').hidden)hnCloseProfile()});
+$('hnAccountSave').onclick=async()=>{
+ if(!user||!db)return;
+ const status=$('hnAccountStatus'),name=$('hnAccountName').value.trim(),email=$('hnAccountEmail').value.trim();
+ if(!email||!$('hnAccountEmail').validity.valid){status.textContent='Bitte eine gültige E-Mail-Adresse eingeben.';return}
+ const save=$('hnAccountSave');save.disabled=true;
+ try{
+   const {data,error}=await db.auth.updateUser({data:{display_name:name}});
+   if(error)throw error;
+   user=data.user||user;renderAuth();
+   if(email!==user.email){const change=await db.auth.updateUser({email});if(change.error)throw change.error;status.textContent='Profil gespeichert. Bitte bestätige die neue E-Mail-Adresse über die Bestätigungsnachricht.'}
+   else status.textContent='Profil gespeichert.';
+ }catch(e){status.textContent='Fehler: '+e.message}finally{save.disabled=false}
+};
+$('hnAccountChangePassword').onclick=async()=>{
+ const status=$('hnAccountStatus'),password=$('hnAccountPassword').value;
+ if(password.length<8){status.textContent='Das neue Passwort muss mindestens 8 Zeichen lang sein.';return}
+ const b=$('hnAccountChangePassword');b.disabled=true;
+ try{const {error}=await db.auth.updateUser({password});if(error)throw error;$('hnAccountPassword').value='';status.textContent='Passwort aktualisiert.'}
+ catch(e){status.textContent='Passwortänderung fehlgeschlagen: '+e.message}finally{b.disabled=false}
+};
+$('hnAccountLogout').onclick=async()=>{hnCloseProfile();if(db)await db.auth.signOut()};
+
+$('hnCreateBtn').onclick=()=>{const menu=$('hnCreateMenu');menu.hidden=!menu.hidden;$('hnCreateBtn').setAttribute('aria-expanded',String(!menu.hidden))};
+$('hnCreatePlaylist').onclick=()=>{location.hash='#playlists';$('hnCreateMenu').hidden=true;$('hnPlaylistTools').open=true;$('playlistName').focus()};
+// Playlist management belongs to the library sidebar, not the song view.
+document.getElementById('hnSidebarManage').append(document.getElementById('hnPlaylistTools'));
+// HamNava 35: cover of the first song for every playlist.
+const hnPlaylistFirstCovers=new Map();
+function hnCoverForPlaylist(id){return hnPlaylistFirstCovers.get(String(id))||''}
+function hnApplyPlaylistCover(node,url){
+ node.replaceChildren();
+ if(url && /^https:\/\//i.test(url)){
+   const img=document.createElement('img');img.src=url;img.alt='Playlist-Cover';img.loading='lazy';img.referrerPolicy='no-referrer';
+   img.onerror=()=>{node.replaceChildren(document.createTextNode('♫'))};
+   node.append(img);
+ }else node.textContent='♫';
+}
+async function hnRefreshPlaylistCovers(){
+ hnPlaylistFirstCovers.clear();
+ if(!db||!user||!playlists.length)return;
+ const ids=playlists.map(p=>p.id);
+ const {data,error}=await db.from('playlist_songs').select('playlist_id,song_id').in('playlist_id',ids);
+ if(error){console.warn('Playlist-Cover:',error.message);return}
+ const first=new Map();
+ for(const row of data||[])if(!first.has(String(row.playlist_id)))first.set(String(row.playlist_id),row.song_id);
+ for(const [pid,sid] of first){
+   const song=songs.find(s=>String(s.id)===String(sid));
+   if(song?.cover_url)hnPlaylistFirstCovers.set(pid,song.cover_url);
+ }
+ hnRenderPlaylistSidebar();
+ hnRenderPlaylistQuick();
+ hnUpdatePlaylistHero();
+}
+function hnRenderPlaylistSidebar(){const root=$('hnPlaylistSidebar');root.replaceChildren();if(!user)return;if(!playlists.length){const msg=el('small','Noch keine Playlists. Klicke auf + Erstellen.');msg.className='muted';root.append(msg);return}for(const p of playlists){const a=el('a',null,'hn-playlist-link');a.href='#playlists';if(p.id===$('playlistSelect').value)a.classList.add('active');const thumb=el('span',null,'hn-playlist-thumb');hnApplyPlaylistCover(thumb,hnCoverForPlaylist(p.id));a.append(thumb);const t=el('span',null,'hn-playlist-text');t.append(el('strong',p.name),el('small','Private Playlist'));a.append(t);a.onclick=()=>{ $('playlistSelect').value=p.id;hnPlaylistOverview=false;loadPlaylist();document.body.classList.remove('nav-open')};
+const rename=el('button','✎','hn-playlist-rename');rename.type='button';rename.title='Playlist umbenennen';rename.setAttribute('aria-label','Playlist '+p.name+' umbenennen');
+rename.onclick=async(ev)=>{ev.preventDefault();ev.stopPropagation();const name=prompt('Neuer Name für die Playlist:',p.name);if(name===null||!name.trim()||name.trim()===p.name)return;const {error}=await db.from('playlists').update({name:name.trim()}).eq('id',p.id).eq('owner_id',user.id);if(error){say('Umbenennen fehlgeschlagen: '+error.message);return}await loadAll();say('Playlist umbenannt')};
+const item=el('div',null,'hn-sidebar-playlist-item');item.append(a,rename);root.append(item)}}
+function hnRenderPlaylistQuick(){
+ const root=$('hnPlaylistQuickList');if(!root)return;root.replaceChildren();
+ if(!playlists.length){root.append(el('p','Noch keine Playlist vorhanden. Erstelle deine erste Playlist über „+ Erstellen“.','hn-empty'));return}
+ for(const p of playlists){const btn=el('button',null);const thumb=el('span',null,'hn-quick-cover');hnApplyPlaylistCover(thumb,hnCoverForPlaylist(p.id));btn.append(thumb,el('span',p.name));btn.type='button';btn.setAttribute('aria-pressed',String(p.id===$('playlistSelect').value));btn.onclick=async()=>{$('playlistSelect').value=p.id;hnPlaylistOverview=false;await loadPlaylist()};root.append(btn)}
+}
+let hnPlaylistOverview=true;
+function hnShowPlaylistOverview(){hnPlaylistOverview=true;$('playlistSelect').value='';items=[];hnUpdatePlaylistHero()}
+$('hnPlaylistBack').onclick=hnShowPlaylistOverview;
+document.querySelectorAll('a[href="#playlists"]').forEach(a=>a.addEventListener('click',()=>{hnShowPlaylistOverview()}));
+function hnUpdatePlaylistHero(){const p=playlists.find(x=>x.id===$('playlistSelect').value);$('hnPlaylistTitle').textContent=p?p.name:'Meine Playlists';$('hnPlaylistDescription').textContent=p?'Private Playlist · '+items.length+' Songs':'Wähle eine Playlist oder erstelle eine neue.';$('hnPlaylistPlay').disabled=!p||!items.length;hnRenderPlaylistSidebar();hnRenderPlaylistQuick();hnApplyPlaylistCover(document.querySelector('#playlists .hn-cover'),p?hnCoverForPlaylist(p.id):'');const overview=hnPlaylistOverview||!p;$('hnPlaylistQuickList').hidden=!overview;$('playlistTracks').hidden=overview;$('hnPlaylistBack').hidden=overview;document.querySelector('#playlists .hn-playlist-hero').hidden=overview}
+$('hnPlaylistPlay').onclick=()=>{const first=items.map(x=>songs.find(s=>s.id===x.song_id)).find(Boolean);if(first)play(first)};
+// Bei vorhandenen Supabase-Daten die UI aktualisieren, ohne neue Tabellen vorauszusetzen.
+const hnOriginalLoadAll=loadAll;
+loadAll=async function(){
+ await hnOriginalLoadAll();
+ if(user && playlists.length && !playlists.some(p=>p.id===$('playlistSelect').value)){
+   $('playlistSelect').value=playlists[0].id;
+   await loadPlaylist();
+ }
+ hnUpdatePlaylistHero();
+ await hnRefreshPlaylistCovers();
+};
+const hnOriginalLoadPlaylist=loadPlaylist;
+loadPlaylist=async function(){await hnOriginalLoadPlaylist();hnUpdatePlaylistHero()};
+
+
+// HamNava 13: eigene Playlist-Auswahl statt Browser-prompt().
+let hnDialogSong=null,hnDialogPlaylistId=null,hnDialogBusy=false;
+function hnRenderDialogOptions(){
+ const root=$('hnModalList'),query=$('hnModalSearch').value.trim().toLocaleLowerCase();root.replaceChildren();
+ const matches=playlists.filter(p=>p.name.toLocaleLowerCase().includes(query));
+ if(!matches.length){root.append(el('p',playlists.length?'Keine passende Playlist gefunden.':'Noch keine Playlist vorhanden. Erstelle zuerst eine Playlist.','muted'));return}
+ for(const p of matches){const btn=el('button',null,'hn-modal-option');btn.type='button';btn.setAttribute('role','radio');btn.setAttribute('aria-checked',String(p.id===hnDialogPlaylistId));btn.append(el('span','♫','hn-modal-thumb'),el('span',p.name,'hn-modal-option-name'),el('span',p.id===hnDialogPlaylistId?'✓':'○','hn-modal-check'));btn.onclick=()=>{hnDialogPlaylistId=p.id;hnRenderDialogOptions();$('hnModalSave').disabled=false};root.append(btn)}
+}
+function hnOpenPlaylistDialog(song){if(!user){say('Bitte zuerst anmelden.');return}hnDialogSong=song;hnDialogPlaylistId=playlists[0]?.id||null;hnDialogBusy=false;$('hnModalSong').textContent=song.artist+' — '+song.title;$('hnModalSearch').value='';$('hnModalFeedback').textContent='';$('hnModalSave').disabled=!hnDialogPlaylistId;hnRenderDialogOptions();$('hnPlaylistDialog').hidden=false;$('hnPlaylistDialog').setAttribute('aria-hidden','false');document.body.style.overflow='hidden';$('hnModalSearch').focus()}
+function hnClosePlaylistDialog(){if(hnDialogBusy)return;$('hnPlaylistDialog').hidden=true;$('hnPlaylistDialog').setAttribute('aria-hidden','true');document.body.style.overflow='';hnDialogSong=null}
+$('hnModalClose').onclick=hnClosePlaylistDialog;document.querySelector('[data-close-playlist]').onclick=hnClosePlaylistDialog;$('hnModalSearch').oninput=hnRenderDialogOptions;
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('hnPlaylistDialog').hidden)hnClosePlaylistDialog()});
+$('hnModalSave').onclick=async()=>{if(hnDialogBusy||!hnDialogSong||!hnDialogPlaylistId)return;hnDialogBusy=true;$('hnModalSave').disabled=true;$('hnModalFeedback').textContent='Song wird hinzugefügt …';try{const {error}=await db.from('playlist_songs').insert({playlist_id:hnDialogPlaylistId,song_id:hnDialogSong.id,added_by:user.id});if(error){$('hnModalFeedback').textContent=error.code==='23505'?'Dieser Song ist bereits in dieser Playlist. Wähle eine andere Playlist.':'Fehler: '+error.message;return}const chosen=playlists.find(p=>p.id===hnDialogPlaylistId);$('hnModalFeedback').textContent='✓ Song zu „'+(chosen?.name||'Playlist')+'“ hinzugefügt.';say('Song zur Playlist hinzugefügt.');if($('playlistSelect').value===hnDialogPlaylistId)await loadPlaylist();await hnRefreshPlaylistCovers();hnDialogBusy=false;hnClosePlaylistDialog()}catch(e){$('hnModalFeedback').textContent='Fehler: '+e.message}finally{hnDialogBusy=false;$('hnModalSave').disabled=false}};
+$('hnModalNew').onclick=()=>{hnClosePlaylistDialog();location.hash='#playlists';$('hnPlaylistTools').open=true;$('playlistName').focus();say('Neue Playlist erstellen und anschließend den Song hinzufügen.')};
+
+
+// HamNava 19: Vollbild, nächster/vorheriger Song und Zufallsmodus.
+let hnShuffle=false;
+let hnPlaySequence=0;
+function hnPlayableSongs(){return songs.filter(s=>s.audio_path || (s.url && /\.(mp3|ogg|wav|m4a)(\?|#|$)/i.test(s.url)));}
+async function hnPlayAdjacent(direction=1,fromEnd=false){
+ const available=hnPlayableSongs();
+ if(!available.length){say('Keine direkt abspielbaren Songs vorhanden.');if(fromEnd)hnStopPlayer();return}
+ const idx=available.findIndex(s=>s.id===playingSongId);
+ let next;
+ if(hnShuffle && available.length>1){
+  const choices=available.filter(s=>s.id!==playingSongId);
+  next=choices[Math.floor(Math.random()*choices.length)];
+ }else if(idx<0){next=available[0]}
+ else{next=available[(idx+direction+available.length)%available.length]}
+ await play(next);
+}
+$('hnNextSong').addEventListener('click',()=>hnPlayAdjacent(1));
+$('hnPreviousSong').addEventListener('click',()=>hnPlayAdjacent(-1));
+$('hnShuffleSongs').addEventListener('click',()=>{
+ hnShuffle=!hnShuffle;
+ $('hnShuffleSongs').setAttribute('aria-pressed',String(hnShuffle));
+ $('hnShuffleSongs').setAttribute('aria-label',hnShuffle?'Zufallswiedergabe ausschalten':'Zufallswiedergabe einschalten');
+ $('hnShuffleSongs').title=hnShuffle?'Zufall ist aktiv':'Zufall ist aus';
+ say(hnShuffle?'Zufallswiedergabe aktiviert':'Zufallswiedergabe deaktiviert');
+});
+function hnSetFullscreen(full){
+ document.body.classList.toggle('hn-player-fullscreen',full);
+ const b=$('hnPlayerFullscreen');
+ b.textContent=full?'⤢ Verkleinern':'⛶ Vollbild';
+ b.setAttribute('aria-pressed',String(full));
+ b.setAttribute('aria-label',full?'Vollbild schließen':'Player als Vollbild anzeigen');
+ if(full){document.body.classList.remove('hn-player-mini');$('hnPlayerMinimize').textContent='− Minimieren';$('hnPlayerMinimize').setAttribute('aria-pressed','false')}
+ else hnKeepPlayerInViewport();
+}
+$('hnPlayerFullscreen').addEventListener('click',()=>hnSetFullscreen(!document.body.classList.contains('hn-player-fullscreen')));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('hn-player-fullscreen'))hnSetFullscreen(false)});
+
+// HamNava 17: minimierbarer und frei verschiebbarer Player.
+const hnPlayerWindow=document.querySelector('.hn-player-window');
+const hnMiniButton=$('hnPlayerMinimize');
+hnMiniButton.addEventListener('click',()=>{
+ if(document.body.classList.contains('hn-player-fullscreen'))hnSetFullscreen(false);
+ const mini=document.body.classList.toggle('hn-player-mini');
+ hnMiniButton.textContent=mini?'□ Vergrößern':'− Minimieren';
+ hnMiniButton.setAttribute('aria-label',mini?'Player vergrößern':'Player minimieren');
+ hnMiniButton.setAttribute('aria-pressed',String(mini));
+ hnKeepPlayerInViewport();
+});
+function hnKeepPlayerInViewport(){
+ if(!document.body.classList.contains('hn-playing'))return;
+ const r=hnPlayerWindow.getBoundingClientRect();
+ if(r.width===0)return;
+ const left=Math.max(0,Math.min(r.left,innerWidth-r.width));
+ const top=Math.max(0,Math.min(r.top,innerHeight-Math.min(r.height,60)));
+ if(Math.abs(left-r.left)>1||Math.abs(top-r.top)>1){
+  hnPlayerWindow.style.setProperty('--hn-player-left',left+'px');
+  hnPlayerWindow.style.setProperty('--hn-player-top',top+'px');
+ }
+}
+let hnDrag=null;
+$('hnPlayerDrag').addEventListener('pointerdown',e=>{
+ if(document.body.classList.contains('hn-player-fullscreen'))return;
+ if(e.button!==0)return;
+ const r=hnPlayerWindow.getBoundingClientRect();
+ hnDrag={id:e.pointerId,x:e.clientX,y:e.clientY,left:r.left,top:r.top};
+ e.currentTarget.setPointerCapture(e.pointerId);
+ e.preventDefault();
+});
+$('hnPlayerDrag').addEventListener('pointermove',e=>{
+ if(!hnDrag||e.pointerId!==hnDrag.id)return;
+ const x=Math.max(0,Math.min(hnDrag.left+e.clientX-hnDrag.x,innerWidth-hnPlayerWindow.offsetWidth));
+ const y=Math.max(0,Math.min(hnDrag.top+e.clientY-hnDrag.y,innerHeight-Math.min(hnPlayerWindow.offsetHeight,60)));
+ hnPlayerWindow.style.setProperty('--hn-player-left',x+'px');
+ hnPlayerWindow.style.setProperty('--hn-player-top',y+'px');
+});
+function hnEndDrag(e){if(hnDrag?.id===e.pointerId)hnDrag=null}
+$('hnPlayerDrag').addEventListener('pointerup',hnEndDrag);
+$('hnPlayerDrag').addEventListener('pointercancel',hnEndDrag);
+window.addEventListener('resize',hnKeepPlayerInViewport);
+
+
+
+cfg();route();
+
+// HamNava 26 – geschützte Benutzerverwaltung (Supabase Edge Function).
+let hnUserRows=[],hnUserPage=1,hnUserLoading=false;
+async function hnUserRequest(action,payload={}){
+ if(!db||!user||!isAdmin)throw Error('Keine Administratorberechtigung.');
+ const {data,error}=await db.functions.invoke('hamnava-users',{body:{action,...payload}});
+ if(error)throw Error(error.message||'Verbindung zur Benutzerverwaltung fehlgeschlagen');
+ if(data?.error)throw Error(data.error);
+ return data;
+}
+function hnRenderUsers(){
+ const root=$('hnUsersList');root.replaceChildren();
+ const q=$('hnUsersSearch').value.trim().toLocaleLowerCase();
+ const shown=hnUserRows.filter(u=>(u.email||'').toLocaleLowerCase().includes(q));
+ if(!shown.length){root.append(el('p','Keine Benutzer gefunden.'));return}
+ for(const u of shown){
+  const row=el('div',null,'hn-user-row'),info=el('div'),actions=el('div',null,'hn-user-actions');
+  info.append(el('strong',u.email||'Ohne E-Mail'),el('small','Registriert: '+(u.created_at?new Date(u.created_at).toLocaleDateString('de-DE'):'–')));
+  const blocked=!!(u.banned_until&&new Date(u.banned_until)>new Date());
+  info.append(el('small',blocked?'Status: Gesperrt':'Status: Aktiv'));
+  if(u.is_admin)info.append(el('small','🛡 Administrator'));
+  const btn=el('button',blocked?'Entsperren':'Sperren',blocked?'alt':'warn');
+  btn.type='button';btn.disabled=u.id===user.id;
+  if(btn.disabled)btn.title='Eigenes Konto kann nicht gesperrt werden';
+  btn.onclick=async()=>{
+   if(!confirm('Benutzer '+(u.email||u.id)+' wirklich '+(blocked?'entsperren':'sperren')+'?'))return;
+   btn.disabled=true;$('hnUsersStatus').textContent='Änderung wird gespeichert …';
+   try{await hnUserRequest('set_ban',{user_id:u.id,ban:!blocked});await hnLoadUsers(true)}catch(e){$('hnUsersStatus').textContent='Fehler: '+e.message;btn.disabled=false}
+  };
+  actions.append(btn);row.append(info,actions);root.append(row);
+ }
+}
+async function hnLoadUsers(reset=false){
+ if(!isAdmin||hnUserLoading)return;
+ hnUserLoading=true;$('hnUsersRefresh').disabled=true;
+ if(reset){hnUserPage=1;hnUserRows=[]}
+ $('hnUsersStatus').textContent='Benutzer werden geladen …';
+ try{
+  const result=await hnUserRequest('list',{page:hnUserPage});
+  hnUserRows.push(...(result.users||[]));
+  $('hnUsersStatus').textContent=hnUserRows.length+' Benutzer geladen.';
+  $('hnUsersMore').hidden=(result.users||[]).length<50;
+  hnUserPage++;hnRenderUsers();
+ }catch(e){$('hnUsersStatus').textContent='Fehler: '+e.message+' – Prüfe, ob die Edge Function „hamnava-users“ bereitgestellt wurde.'}
+ finally{hnUserLoading=false;$('hnUsersRefresh').disabled=false}
+}
+$('hnUsersRefresh').onclick=()=>hnLoadUsers(true);
+$('hnUsersMore').onclick=()=>hnLoadUsers(false);
+$('hnUsersSearch').oninput=hnRenderUsers;
+</script><script src="languages.js?v=10.0.0" defer></script><script id="hamnava-v27-language-move">
+/* Vorhandene Sprachauswahl von languages.js verschieben, ohne ihre Funktion zu verändern. */
+(function(){
+  function moveLanguage(){
+    const control=document.getElementById('languageControl');
+    const actions=document.querySelector('.hn-topbar .hn-actions');
+    if(!control||!actions||control.parentElement===actions)return;
+    const avatar=document.getElementById('hnProfile');
+    actions.insertBefore(control,avatar&&avatar.parentElement===actions?avatar:null);
+    control.setAttribute('title','Sprache ändern');
+    const select=control.querySelector('select');
+    if(select){
+      select.setAttribute('aria-label','Sprache ändern');select.setAttribute('title','Sprache ändern');
+      let flag=control.querySelector('.hn-language-flag');
+      if(!flag){flag=document.createElement('span');flag.className='hn-language-flag';flag.setAttribute('aria-hidden','true');control.insertBefore(flag,select)}
+      const updateFlag=()=>{
+        const option=select.options[select.selectedIndex];
+        const value=(select.value+' '+(option?.textContent||'')).toLowerCase();
+        flag.textContent=/pers|فارسی|farsi|\bfa\b|iran/.test(value)?'🇮🇷':/arab|العرب|\bar\b/.test(value)?'🇸🇦':/engl|english|\ben\b/.test(value)?'🇬🇧':'🇩🇪';
+      };
+      if(!select.dataset.hnFlagBound){select.addEventListener('change',updateFlag);select.dataset.hnFlagBound='1'}
+      updateFlag();
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',moveLanguage);
+  else moveLanguage();
+  const observer=new MutationObserver(moveLanguage);
+  observer.observe(document.documentElement,{childList:true,subtree:true});
+  window.addEventListener('load',moveLanguage);
+})();
+</script><script id="hamnava-v31-flag-menu">
+(function(){
+ const flags={de:'de',fa:'ir',en:'gb',ar:'sa'};
+ const fallback={
+ de:'<rect width="60" height="12" fill="#111"/><rect y="12" width="60" height="12" fill="#dd0000"/><rect y="24" width="60" height="12" fill="#ffce00"/>',
+ fa:'<rect width="60" height="12" fill="#239f40"/><rect y="12" width="60" height="12" fill="#fff"/><rect y="24" width="60" height="12" fill="#da0000"/><text x="30" y="24" text-anchor="middle" font-size="15" fill="#da0000">☪</text>',
+ en:'<rect width="60" height="36" fill="#012169"/><path d="M0 0L60 36M60 0L0 36" stroke="#fff" stroke-width="10"/><path d="M0 0L60 36M60 0L0 36" stroke="#c8102e" stroke-width="4"/><path d="M30 0V36M0 18H60" stroke="#fff" stroke-width="13"/><path d="M30 0V36M0 18H60" stroke="#c8102e" stroke-width="7"/>',
+ ar:'<rect width="60" height="36" fill="#006c35"/><text x="30" y="17" text-anchor="middle" font-size="11" fill="#fff">لا إله إلا الله</text><path d="M12 27H49" stroke="#fff" stroke-width="2.4"/><path d="M11 27l4 -2" stroke="#fff" stroke-width="1.4"/>'
+ };
+ function flagImg(lang){
+   const img=document.createElement('img');img.alt='';img.setAttribute('aria-hidden','true');img.width=38;img.height=25;
+   img.src='https://flagcdn.com/w80/'+flags[lang]+'.png';
+   img.onerror=()=>{img.onerror=null;img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="60" height="36" viewBox="0 0 60 36">'+fallback[lang]+'</svg>')};
+   return img;
+ }
+ function langOf(option){const v=((option?.value||'')+' '+(option?.textContent||'')).toLowerCase();return /pers|فارسی|farsi|\bfa\b|iran/.test(v)?'fa':/arab|العرب|\bar\b/.test(v)?'ar':/engl|english|\ben\b/.test(v)?'en':'de'}
+ function init(){
+   const root=document.querySelector('.hn-topbar .hn-actions #languageControl');
+   const select=root?.querySelector('select');
+   if(!root||!select||root.querySelector('#hnFlagButton'))return;
+   const btn=document.createElement('button');btn.type='button';btn.id='hnFlagButton';btn.setAttribute('aria-label','Sprache auswählen');btn.setAttribute('aria-haspopup','true');btn.setAttribute('aria-expanded','false');
+   const menu=document.createElement('div');menu.id='hnFlagMenu';menu.hidden=true;menu.setAttribute('role','group');menu.setAttribute('aria-label','Sprache auswählen');
+   function sync(){btn.replaceChildren(flagImg(langOf(select.options[select.selectedIndex])))}
+   for(const lang of ['de','fa','en','ar']){
+     const opt=Array.from(select.options).find(o=>langOf(o)===lang);
+     if(!opt)continue;
+     const item=document.createElement('button');item.type='button';item.appendChild(flagImg(lang));item.title=({de:'Deutsch',fa:'فارسی',en:'English',ar:'العربية'})[lang];item.setAttribute('aria-label',item.title);
+     item.addEventListener('click',()=>{select.value=opt.value;select.dispatchEvent(new Event('change',{bubbles:true}));sync();menu.hidden=true;btn.setAttribute('aria-expanded','false');btn.focus()});menu.appendChild(item);
+   }
+   btn.addEventListener('click',()=>{menu.hidden=!menu.hidden;btn.setAttribute('aria-expanded',String(!menu.hidden))});
+   document.addEventListener('click',e=>{if(!root.contains(e.target)){menu.hidden=true;btn.setAttribute('aria-expanded','false')}});
+   document.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.hidden=true;btn.setAttribute('aria-expanded','false')}});
+   select.addEventListener('change',sync);root.append(btn,menu);sync();
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+ window.addEventListener('load',init);
+ const obs=new MutationObserver(()=>{if(document.querySelector('.hn-topbar .hn-actions #languageControl select'))init()});obs.observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script></body></html>
