@@ -273,7 +273,7 @@ function hnRenderGenreSidebar(){
   const btn=document.createElement('button');btn.type='button';btn.className='hn-genre-link';btn.setAttribute('aria-pressed',String(hnSelectedGenre===genre));
   const label=document.createElement('span');label.textContent=(genre?'♫ '+genre:'♫ Alle Musikrichtungen');btn.append(label);
   const number=document.createElement('span');number.className='hn-genre-count';number.textContent=String(count);btn.append(number);
-  btn.onclick=()=>{hnSelectedGenre=genre;document.getElementById('search').value='';document.getElementById('artistFilter').value='';document.getElementById('view').value='all';location.hash='#library';hnRenderGenreSidebar();renderSongs('songs','library');document.body.classList.remove('nav-open')};
+  btn.onclick=()=>{hnSelectedGenre=genre;document.getElementById('search').value='';document.getElementById('artistFilter').value='';document.getElementById('view').value='all';location.hash='#library';route();hnRenderGenreSidebar();renderSongs('songs','library');document.getElementById('library').scrollIntoView({behavior:'smooth',block:'start'});document.body.classList.remove('nav-open')};
   host.append(btn);
  }
 }
