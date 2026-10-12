@@ -286,6 +286,51 @@ body.hn-ready main > #hnFooter:not(.hn-current),body.logged-out main > #hnFooter
 }
 @media(min-width:761px){#hnMobileNavButton{display:none!important}}
 </style>
+
+<style id="hamnava-beautiful-mobile-menu-v4">
+@media(max-width:760px){
+ body:not(.logged-out) #siteSidebar{
+  display:flex!important;flex-direction:column!important;align-items:stretch!important;
+  justify-content:flex-start!important;gap:7px!important;
+  width:min(87vw,360px)!important;max-width:360px!important;
+  padding:18px 16px 40px!important;top:65px!important;bottom:0!important;
+  height:calc(100dvh - 65px)!important;overflow-y:auto!important;
+  background:linear-gradient(165deg,#14283e 0%,#0b1729 60%,#081321 100%)!important;
+  border-right:1px solid #34536b!important;
+  box-shadow:15px 0 40px #0008!important;
+ }
+ #siteSidebar>.brand{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:12px!important;
+   margin:2px 0 12px!important;padding:10px 10px 18px!important;border-bottom:1px solid #32455a!important;
+   font-size:23px!important;letter-spacing:0!important;flex-shrink:0!important}
+ #siteSidebar>.brand .brand-mark{width:48px!important;height:48px!important;object-fit:contain!important;flex:none!important}
+ #siteSidebar>.brand span:last-child{display:inline!important;font-size:23px!important;color:#f4b15b!important}
+ #siteSidebar .side-caption{display:block!important;font-size:11px!important;letter-spacing:1.6px!important;
+   margin:12px 8px 7px!important;color:#91aec5!important}
+ #siteSidebar>.side-link{display:flex!important;flex-direction:row!important;align-items:center!important;
+   justify-content:flex-start!important;gap:13px!important;width:100%!important;
+   min-height:49px!important;padding:11px 13px!important;border-radius:13px!important;
+   color:#e1ebf5!important;font-size:14px!important;line-height:1.25!important;flex-shrink:0!important}
+ #siteSidebar>.side-link span:first-child{display:inline-flex!important;align-items:center!important;justify-content:center!important;
+   width:28px!important;min-width:28px!important;font-size:21px!important}
+ #siteSidebar>.side-link span:last-child{display:inline!important;font-size:14px!important;white-space:normal!important}
+ #siteSidebar>.side-link.active{background:linear-gradient(100deg,#126e79,#14505e)!important;
+   border:1px solid #31c4c3!important;border-left:3px solid #31c4c3!important;color:white!important}
+ #siteSidebar>.side-link:hover{background:#243d54!important}
+ #siteSidebar .hn-create-area,#siteSidebar .hn-library-head,#siteSidebar .hn-playlist-sidebar{
+   display:block!important;flex-shrink:0!important}
+ #siteSidebar .hn-library-head{display:flex!important;align-items:center!important;justify-content:space-between!important}
+ #siteSidebar .hn-playlist-sidebar{max-height:none!important;min-height:0!important;overflow:visible!important}
+ #siteSidebar .hn-genre-sidebar{display:block!important;flex-shrink:0!important;width:100%!important}
+ #siteSidebar .hn-genre-sidebar-links{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+ #siteSidebar .hn-genre-link{display:flex!important;min-width:0!important;min-height:94px!important;border-radius:13px!important}
+ #siteSidebar .hn-genre-link .hn-genre-name{display:block!important;font-size:12px!important}
+ #siteSidebar .hn-sidebar-manage{display:block!important}
+ #siteSidebar .side-footer{display:block!important;margin-top:14px!important;padding:14px 8px!important;
+   border-top:1px solid #293e53!important;color:#8fa7bd!important}
+ #siteSidebar .hidden{display:none!important}
+ body.nav-open{overflow:hidden!important}
+}
+</style>
 </head><body class="logged-out"><div class="hn-topbar" id="hnTopbar" role="navigation" aria-label="Hauptnavigation"><button type="button" id="hnMobileNavButton" aria-label="Seitenmenü öffnen" aria-controls="siteSidebar" aria-expanded="false">☰</button><a class="hn-home" href="#home" aria-label="Startseite">⌂</a><label class="hn-search-wrap"><span class="hn-search-icon">⌕</span><input id="hnGlobalSearch" type="search" placeholder="Was möchtest du hören?" autocomplete="off" aria-label="Musik durchsuchen"/><a href="#library" title="Bibliothek" aria-label="Bibliothek">▣</a></label><div class="hn-actions"><a class="hn-desktop-action" href="#playlists">Meine Playlists</a><a class="hn-desktop-action" href="#favorites" aria-label="Favoriten" title="Favoriten">♡</a><button class="hn-avatar" id="hnProfile" type="button" title="Mein Profil" aria-label="Profil">☺</button></div></div><aside class="sidebar" dir="ltr" id="siteSidebar"><a class="brand" href="#home"><img class="brand-mark" src="hamnava-logo.webp" alt="HamNava Logo"/><span>HamNava</span></a><div class="side-caption">Deine Bibliothek</div><a class="side-link active" href="#home"><span>⌂</span><span>Startseite</span></a><a class="side-link" href="#library"><span>♫</span><span>Musikbibliothek</span></a><a class="side-link" href="#artists"><span>♬</span><span>Künstler A–Z</span></a><a class="side-link" href="#favorites"><span>♥</span><span>Favoriten</span></a><a class="side-link" href="#playlists"><span>▤</span><span>Meine Playlists</span></a><a class="side-link" href="#ai"><span>✨</span><span>AI Music Studio</span></a><a class="side-link hidden" id="hnUsersNav" href="#users"><span>🛡</span><span>Benutzerverwaltung</span></a><a class="side-link" href="add-song.html"><span>＋</span><span>Lied hinzufügen</span></a><div class="hn-create-area"><div class="hn-library-head"><span>▤ Bibliothek</span><button id="hnCreateBtn" type="button" aria-expanded="false">＋ Erstellen</button></div><div id="hnCreateMenu" class="hn-create-menu" hidden><button id="hnCreatePlaylist" type="button">♫ &nbsp; Playlist erstellen</button><button type="button" disabled title="Benötigt Datenbank-Erweiterung">♧ &nbsp; Gemeinsamer Mix · bald</button><button type="button" disabled title="Benötigt Datenbank-Erweiterung">▱ &nbsp; Ordner · bald</button></div></div><div id="hnPlaylistSidebar" class="hn-playlist-sidebar" aria-label="Meine Playlists"></div><div class="hn-genre-sidebar"><div class="side-caption">Musikrichtungen</div><div id="hnGenreSidebarLinks" class="hn-genre-sidebar-links"></div></div>
 <div id="hnSidebarManage" class="hn-sidebar-manage"></div><div class="side-footer">Musik, Freunde, Erinnerungen<br/>HamNava · Version 36</div></aside><div id="navBackdrop" class="nav-backdrop" hidden></div><main><header><button id="menuToggle" class="menu-toggle alt" type="button" aria-label="Menü öffnen" aria-expanded="false">☰</button><div><h1><img class="logo" src="hamnava-logo.webp" alt=""/> Ham<span class="gold">Nava</span></h1><p>Gute Songs, gute Freunde, gemeinsame Erinnerungen</p></div><div id="identity"></div></header><section class="hero hidden" dir="ltr" id="home"><div class="hero-copy"><div class="eyebrow">MUSIK · FREUNDE · ERINNERUNGEN</div><h2>Willkommen bei<br/><em>HamNava</em></h2><p>Entdecke Musik, die verbindet.</p><a href="#homeMusic" id="heroDiscover">Jetzt Musik entdecken ↗</a></div><img class="hero-portrait" src="hero-artist.webp" alt="Illustration eines Sängers"/><div class="hero-quote">„Gute Musik verbindet Menschen – heute und immer.“</div></section>
 <section class="panel" id="homeMusic" data-page="home"><div class="home-heading"><div><h2>Entdecke deine Musik</h2><p>Musik, Freunde und gemeinsame Erinnerungen.</p></div></div><label class="home-search">Songs oder Künstler suchen<input id="homeSearch" type="search" placeholder="Songtitel oder Künstlername eingeben" autocomplete="off"></label><h2>🔥 Meistgehörte Songs</h2><p class="home-hint" id="popularHint">Beliebte Lieder aus der Musikbibliothek</p><div class="songs featured-songs" id="popularSongs"></div><div class="hn-section-heading"><h2>💿 Beliebte Alben und Singles</h2><a href="#library">Alle anzeigen →</a></div><p class="hn-section-note">Singles aus unserer Musikbibliothek</p><div id="hnSingles" class="hn-shelf"></div><div class="hn-section-heading"><h2>📈 Empfohlene Charts</h2><a href="#library">Alle anzeigen →</a></div><div id="hnCharts" class="hn-shelf"></div><div class="hn-section-heading"><h2>📻 Beliebte Radios</h2><a href="#library">Alle anzeigen →</a></div><div id="hnRadios" class="hn-shelf"></div><div class="hn-section-heading"><h2>🎤 Künstler von A–Z</h2><a href="#artists">Alle anzeigen →</a></div><div id="homeArtists" class="artist-chips artist-portraits"></div><div class="hn-section-heading"><h2>🆕 Neu hinzugefügt</h2><a href="#library">Alle anzeigen →</a></div><div class="songs" id="homeSongs"></div></section>
