@@ -2343,7 +2343,7 @@ function syncMenu(){menu.replaceChildren();const add=(label,fn)=>{let b=document
 if(state==='private'){add('＋ Neue Playlist',()=>$('hnSimpleNew')?.click());add('▶ Playlist abspielen',()=>$('hnPlaylistPlay')?.click())}
 else if(state==='public'){if(!$('hnPublicAdmin')?.hidden){add('🛡 Playlists verwalten',()=>{$('hnPublicAdmin').open=true;$('hnPublicAdmin').scrollIntoView({block:'nearest'})})}add('▶ Playlist abspielen',()=>$('hnPublicPlay')?.click())}
 else if(state==='private-detail'){add('＋ Lied hinzufügen',()=>$('hnSimpleAdd')?.click());add('▶ Playlist abspielen',()=>$('hnPlaylistPlay')?.click());add('✎ Umbenennen',()=>$('hnSimpleRename')?.click());add('Playlist löschen',()=>$('hnSimpleDelete')?.click())}
-else if(state==='public-detail'){add('▶ Playlist abspielen',()=>$('hnPublicPlay')?.click());if(!$('hnPublicAdmin')?.hidden)add('🛡 Playlists verwalten',()=>{$('hnPublicAdmin').open=true;$('hnPublicAdmin').scrollIntoView({block:'nearest'})})}
+else if(state==='public-detail'){add('▶ Playlist abspielen',()=>$('hnPublicPlay')?.click());add('← Öffentliche Playlists',()=>{$('hnPublicBack')?.click()});add('⌂ Alle Playlists',()=>show('home'));if(!$('hnPublicAdmin')?.hidden)add('🛡 Playlists verwalten',()=>{$('hnPublicAdmin').open=true;$('hnPublicAdmin').scrollIntoView({block:'nearest'})})}
 $('hnV71SectionOptions').hidden=state==='home';}
 function show(which){state=which;panel.classList.toggle('hn-v71-home',which==='home');menu.hidden=true;$('hnV71Back').hidden=which==='home';$('hnV71SectionOptions').hidden=which==='home';
 if(which==='home'){landing.hidden=false;sw.style.display='none';$('hnPublicBack')?.click();$('hnPlaylistBack')?.click();renderLanding()}
