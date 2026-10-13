@@ -43,3 +43,31 @@ body #homeArtists button.artist-chip:focus-visible,body #artistsList button.arti
  :where(.panel){max-width:100%}
  :where(.song,.hn-tile){min-width:0}
 }
+
+/* V74 page-level visual consistency; preserve all controls and behavior. */
+body #homeMusic,body #artists,body #favoritesPage,body #library,body #playlists{
+ border-color:var(--hn74-line);
+}
+body #homeMusic .hn-section-heading,body #homeMusic .home-heading,
+body #artists .hn-artist-titlebar{min-width:0;gap:var(--hn74-space-3)}
+body #homeMusic .hn-section-heading h2,body #artists .hn-artist-titlebar h2{
+ overflow-wrap:anywhere;line-height:1.3;
+}
+body #homeMusic .hn-section-heading a{white-space:nowrap}
+body #homeMusic .home-search input,body #hnGlobalSearch{
+ border-radius:var(--hn74-radius-md);
+}
+body #artistsList .hn-artist-count,body #homeArtists .hn-artist-count{
+ color:var(--hn74-muted)!important;
+}
+body #playlists .hn-playlist-hero,body #playlists .hn-v71-item{
+ border-radius:var(--hn74-radius-lg);
+}
+body #playlists .hn-v71-item{min-width:0;overflow-wrap:anywhere}
+body .player{border-top-color:var(--hn74-line)!important}
+body .player button:focus-visible{outline:2px solid var(--hn74-purple)!important}
+@media(max-width:760px){
+ body #homeMusic .hn-section-heading{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap}
+ body #homeMusic .hn-section-heading a{font-size:12px}
+ body #artistsList .artist-chip,body #homeArtists .artist-chip{overflow:hidden}
+}
