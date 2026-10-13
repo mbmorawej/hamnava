@@ -601,17 +601,22 @@ body.hn-player-mini:not(.hn-player-fullscreen) .hn-player-content{max-width:1100
 #hnInviteDialog .hn-invite-actions button:disabled{opacity:.5;cursor:default}#hnInviteClose{position:absolute;top:10px;right:12px;background:transparent;color:white;border:0;font-size:24px;cursor:pointer}
 #hnInviteInstallHelp{margin-top:12px;background:#173a4c;border-radius:12px;padding:12px;text-align:left;font-size:14px;line-height:1.7}#hnInviteInstallHelp strong{color:#f7c66b}
 #hnInviteDialog input{width:100%;box-sizing:border-box;background:#071c2b;border:1px solid #3d858a;color:#fff;padding:11px;border-radius:9px}
-</style><style id="hamnava-v50-profile-invite">.hn-profile-invite{margin:20px 0;padding:16px;border:1px solid #2e6171;border-radius:15px;background:#142c41}.hn-profile-invite h3{margin:0 0 8px!important}.hn-profile-invite p{margin:8px 0 12px}.hn-profile-invite button{width:100%;background:#17b8ae!important;color:#06212a!important;font-weight:800}</style><style id="hn-v52-banner-full-image">
-/* V52: never crop original photographs. Letterboxing is intentional on narrow screens. */
-body .hn-hero-carousel{background:#120c22!important;}
-body .hn-hero-carousel .hn-hero-slide{background-size:contain!important;background-position:center center!important;background-repeat:no-repeat!important;transform:none!important;filter:none!important;}
-body .hn-hero-carousel .hn-hero-slide:nth-child(1){background-image:url('hamnava-sunset-banner.jpeg')!important;}
-body .hn-hero-carousel .hn-hero-slide:nth-child(2){background-image:url('hamnava-banner-2.jpg')!important;}
-body .hn-hero-carousel .hn-hero-slide:nth-child(3){background-image:url('hamnava-banner-3.jpg')!important;}
-/* Transparent gradient is independent from the actual photo. */
-body .hn-hero-carousel .hn-hero-slides::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;background:linear-gradient(90deg,rgba(9,6,24,.76),rgba(9,6,24,.37) 48%,rgba(9,6,24,.04) 90%);}
+</style><style id="hamnava-v50-profile-invite">.hn-profile-invite{margin:20px 0;padding:16px;border:1px solid #2e6171;border-radius:15px;background:#142c41}.hn-profile-invite h3{margin:0 0 8px!important}.hn-profile-invite p{margin:8px 0 12px}.hn-profile-invite button{width:100%;background:#17b8ae!important;color:#06212a!important;font-weight:800}</style><style id="hn-v53-banner-layout">
+/* V53 images are prepared at exactly 2.5:1. Fill hero with no letterboxing. */
+body .hn-hero-carousel{aspect-ratio:2.5/1;min-height:300px!important;max-height:620px;}
+body .hn-hero-carousel .hn-hero-slide{background-size:cover!important;background-position:center center!important;background-repeat:no-repeat!important;transform:none!important;filter:none!important;}
+body .hn-hero-carousel .hn-hero-slide:nth-child(1){background-image:url('hamnava-v53-banner-1.jpg')!important;}
+body .hn-hero-carousel .hn-hero-slide:nth-child(2){background-image:url('hamnava-v53-banner-2.jpg')!important;}
+body .hn-hero-carousel .hn-hero-slide:nth-child(3){background-image:url('hamnava-v53-banner-3.jpg')!important;}
+body .hn-hero-carousel .hn-hero-slides::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;background:linear-gradient(90deg,rgba(9,6,24,.78),rgba(9,6,24,.32) 52%,transparent 95%);}
 body .hn-hero-carousel .hero-copy{position:relative;z-index:3;text-shadow:0 2px 12px #08051b;}
-@media(max-width:650px){body .hn-hero-carousel .hn-hero-slides::after{background:linear-gradient(90deg,rgba(9,6,24,.8),rgba(9,6,24,.35) 80%);}}
+/* Only enlarge in-app branding, never installed PWA icon files */
+.sidebar .brand .brand-mark{width:58px!important;height:58px!important;object-fit:contain!important;flex-shrink:0;}
+header h1 .logo{width:54px!important;height:54px!important;object-fit:contain!important;}
+@media(max-width:760px){body .hn-hero-carousel{aspect-ratio:auto;min-height:300px!important;}body .hn-hero-carousel .hn-hero-slide{background-position:center center!important;}.sidebar .brand .brand-mark{width:46px!important;height:46px!important;}header h1 .logo{width:48px!important;height:48px!important;}}
+#hnRegisterDialog[hidden]{display:none!important}#hnRegisterDialog{position:fixed;inset:0;z-index:40000;display:grid;place-items:center;padding:16px;background:#020916df;backdrop-filter:blur(7px)}
+#hnRegisterDialog .hn-register-card{width:min(460px,100%);max-height:95dvh;overflow:auto;padding:24px;border-radius:20px;background:#102238;color:#fff;border:1px solid #3c5d76;box-shadow:0 20px 65px #000a}
+#hnRegisterDialog .hn-register-header{display:flex;justify-content:space-between;align-items:center;gap:12px}#hnRegisterDialog h2{margin:0}#hnRegisterDialog label{display:block;margin:13px 0;color:#dceaf5}#hnRegisterDialog input{width:100%;margin-top:6px}#hnRegisterDialog .hn-register-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}#hnRegisterStatus{color:#7ee4da;min-height:20px;line-height:1.6}#hnRegisterDialog small{color:#b8cad9}
 </style>
 </head><body class="logged-out"><div class="hn-topbar" id="hnTopbar" role="navigation" aria-label="Hauptnavigation"><button type="button" id="hnMobileNavButton" aria-label="Seitenmenü öffnen" aria-controls="siteSidebar" aria-expanded="false">☰</button><a class="hn-home" href="#home" aria-label="Startseite">⌂</a><label class="hn-search-wrap"><span class="hn-search-icon">⌕</span><input id="hnGlobalSearch" type="search" placeholder="Was möchtest du hören?" autocomplete="off" aria-label="Musik durchsuchen"/><button id="hnAdvancedToggle" type="button" aria-expanded="false" aria-controls="hnAdvancedPanel" title="Erweiterte Suche">☷ <span>Filter</span></button></label><div class="hn-actions"><a class="hn-desktop-action" href="#playlists">Meine Playlists</a><a class="hn-desktop-action" href="#favorites" aria-label="Favoriten" title="Favoriten">♡</a><button class="hn-avatar" id="hnProfile" type="button" title="Mein Profil" aria-label="Profil">☺</button></div></div><aside class="sidebar" dir="ltr" id="siteSidebar"><a class="brand" href="#home"><img class="brand-mark" src="hamnava-logo.webp" alt="HamNava Logo"/><span>HamNava</span></a><div class="side-caption">Deine Bibliothek</div><a class="side-link active" href="#home"><span>⌂</span><span>Startseite</span></a><a class="side-link" href="#library"><span>♫</span><span>Musikbibliothek</span></a><a class="side-link" href="#artists"><span>♬</span><span>Künstler A–Z</span></a><a class="side-link" href="#favorites"><span>♥</span><span>Favoriten</span></a><a class="side-link" href="#playlists"><span>▤</span><span>Meine Playlists</span></a><a class="side-link" href="#ai"><span>✨</span><span>AI Music Studio</span></a><a class="side-link hidden" id="hnManageNav" href="#admin"><span>⚙️</span><span>Verwaltung</span></a><a class="side-link" href="add-song.html"><span>＋</span><span>Lied hinzufügen</span></a><div class="hn-create-area"><div class="hn-library-head"><span>▤ Bibliothek</span><button id="hnCreateBtn" type="button" aria-expanded="false">＋ Erstellen</button></div><div id="hnCreateMenu" class="hn-create-menu" hidden><button id="hnCreatePlaylist" type="button">♫ &nbsp; Playlist erstellen</button><button type="button" disabled title="Benötigt Datenbank-Erweiterung">♧ &nbsp; Gemeinsamer Mix · bald</button><button type="button" disabled title="Benötigt Datenbank-Erweiterung">▱ &nbsp; Ordner · bald</button></div></div><div id="hnPlaylistSidebar" class="hn-playlist-sidebar" aria-label="Meine Playlists"></div><div class="hn-genre-sidebar"><div class="side-caption">Musikrichtungen</div><div id="hnGenreSidebarLinks" class="hn-genre-sidebar-links"></div></div>
 <div id="hnSidebarManage" class="hn-sidebar-manage"></div><div class="side-footer">Musik, Freunde, Erinnerungen<br/>HamNava · Version 36</div></aside><div id="navBackdrop" class="nav-backdrop" hidden></div><main><header><button id="menuToggle" class="menu-toggle alt" type="button" aria-label="Menü öffnen" aria-expanded="false">☰</button><div><h1><img class="logo" src="hamnava-logo.webp" alt=""/> Ham<span class="gold">Nava</span></h1><p>Gute Songs, gute Freunde, gemeinsame Erinnerungen</p></div><div id="identity"></div></header><div id="hnAdvancedPanel" hidden role="region" aria-label="Erweiterte Suche"><div class="hn-filter-grid"><label>Song oder Interpret<input id="hnAdvText" type="search" placeholder="Songtitel oder Künstlername"></label><label>Interpret<select id="hnAdvArtist"><option value="">Alle Interpreten</option></select></label><label>Musikrichtung<select id="hnAdvGenre"><option value="">Alle Musikrichtungen</option></select></label><label>Quelle<select id="hnAdvSource"><option value="">Alle Quellen</option><option value="hosted">MP3</option><option value="youtube">YouTube</option><option value="spotify">Spotify</option></select></label><label>Sortieren<select id="hnAdvSort"><option value="newest">Neueste zuerst</option><option value="oldest">Älteste zuerst</option><option value="az">Titel A–Z</option><option value="artist">Interpret A–Z</option></select></label></div><div class="hn-filter-actions"><button type="button" id="hnAdvApply">⌕ Suchen</button><button type="button" id="hnAdvReset">↺ Zurücksetzen</button></div></div>
@@ -683,7 +688,7 @@ $('connect').onclick=()=>{let u=$('url').value.trim().replace(/\/$/,''),k=$('key
 $('changeConfig').onclick=()=>{say('HamNava verbindet sich automatisch mit Supabase.');};
 $('changeConfig').hidden=true;
 $('login').onclick=async()=>{let {error}=await db.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});$('authStatus').textContent=error?.message||'Erfolgreich angemeldet'};
-$('signup').onclick=async()=>{let {error}=await db.auth.signUp({email:$('email').value.trim(),password:$('password').value});$('authStatus').textContent=error?.message||'Registriert – bitte Bestätigungs-E-Mail prüfen'};
+$('signup').onclick=null; // V53 registration dialog handles signup
 
 let hnRecoveryMode=false, hnMfaFactorId=null;
 function hnShowRecovery(){const b=$('hnRecoveryBox');b.hidden=false;show('auth',true);$('auth').classList.remove('hidden');$('auth').scrollIntoView({block:'center'});$('hnRecoveryStatus').textContent='Bitte lege ein neues Passwort fest.';}
@@ -1876,4 +1881,25 @@ window.hnManageOpen=function(which){
   // Deliberately no visibilitychange/pagehide pause. Never simulate a play click on backgrounding.
 })();
 </script>
-</body></html>
+<div id="hnRegisterDialog" hidden role="dialog" aria-modal="true" aria-labelledby="hnRegisterTitle"><div class="hn-register-card"><div class="hn-register-header"><h2 id="hnRegisterTitle">HamNava – Registrieren</h2><button id="hnRegisterClose" class="alt" type="button" aria-label="Schließen">✕</button></div><p>Erstelle dein kostenloses Konto.</p><form id="hnRegisterForm"><label>Vorname *<input id="hnRegFirst" required maxlength="60" autocomplete="given-name"></label><label>Nachname *<input id="hnRegLast" required maxlength="60" autocomplete="family-name"></label><label>E-Mail-Adresse *<input id="hnRegEmail" type="email" required autocomplete="email"></label><label>Telefonnummer *<input id="hnRegPhone" type="tel" required maxlength="30" autocomplete="tel" placeholder="+49 ..."></label><small>Du erhältst einen Anmeldelink per E-Mail. Kein Passwort erforderlich. Mit dem Link kannst du dich anmelden und später im Profil ein Passwort festlegen.</small><p id="hnRegisterStatus" role="status" aria-live="polite"></p><div class="hn-register-actions"><button id="hnRegisterSubmit" type="submit">Registrieren</button></div></form></div></div><script id="hnV53Register">
+(()=>{
+ const $=id=>document.getElementById(id),dialog=$('hnRegisterDialog'),form=$('hnRegisterForm');
+ function close(){dialog.hidden=true;document.body.style.overflow='';}
+ $('hnRegisterClose').addEventListener('click',close);
+ dialog.addEventListener('click',e=>{if(e.target===dialog)close()});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!dialog.hidden)close()});
+ $('signup').addEventListener('click',e=>{e.preventDefault();e.stopImmediatePropagation();$('hnRegEmail').value=$('email').value.trim();$('hnRegisterStatus').textContent='';dialog.hidden=false;document.body.style.overflow='hidden';$('hnRegFirst').focus()},true);
+ form.addEventListener('submit',async e=>{
+ e.preventDefault();if(!form.reportValidity())return;
+ const first=$('hnRegFirst').value.trim(),last=$('hnRegLast').value.trim(),email=$('hnRegEmail').value.trim(),phone=$('hnRegPhone').value.trim();
+ if(!first||!last||!email||!phone)return;
+ if(!window.hnV53DbReady && typeof db==='undefined'){$('hnRegisterStatus').textContent='Supabase ist noch nicht verbunden.';return;}
+ const button=$('hnRegisterSubmit');button.disabled=true;$('hnRegisterStatus').textContent='Registrierung wird gesendet …';
+ try{
+ const {error}=await db.auth.signInWithOtp({email,options:{shouldCreateUser:true,emailRedirectTo:location.origin+location.pathname,data:{first_name:first,last_name:last,full_name:first+' '+last,display_name:first+' '+last,phone_number:phone}}});
+ if(error)throw error;
+ $('hnRegisterStatus').textContent='Bitte prüfe deine E-Mails und öffne den Bestätigungs-/Anmeldelink. Falls die Adresse bereits registriert ist, wird möglicherweise ebenfalls ein Link versendet.';
+ }catch(err){$('hnRegisterStatus').textContent='Fehler: '+(err.message||String(err));}finally{button.disabled=false;}
+ });
+})();
+</script></body></html>
