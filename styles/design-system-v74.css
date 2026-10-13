@@ -1,0 +1,45 @@
+/* HamNava V74 — Design System, experimental branch only.
+   Additive visual layer: no changes to data, permissions, playback or routing. */
+:root{
+ --hn74-bg:#08111f;--hn74-surface:#132238;--hn74-surface-raised:#192a41;
+ --hn74-line:#35445b;--hn74-text:#f5f7fb;--hn74-muted:#a9b7c9;
+ --hn74-purple:#a277e8;--hn74-orange:#f2a54a;
+ --hn74-radius-sm:10px;--hn74-radius-md:15px;--hn74-radius-lg:22px;
+ --hn74-space-1:4px;--hn74-space-2:8px;--hn74-space-3:12px;
+ --hn74-space-4:16px;--hn74-space-5:24px;--hn74-space-6:32px;
+ --hn74-focus:0 0 0 3px rgba(162,119,232,.42);
+}
+html{scroll-behavior:smooth}
+body{background:var(--hn74-bg);color:var(--hn74-text);overflow-x:clip}
+button,a,input,select,textarea{touch-action:manipulation}
+:where(button,a,input,select,textarea):focus-visible{outline:2px solid var(--hn74-purple)!important;outline-offset:3px}
+:where(input,select,textarea){max-width:100%;border-radius:var(--hn74-radius-sm)}
+:where(.panel,.song,.hn-tile){min-width:0}
+:where(.song,.hn-tile){border-radius:var(--hn74-radius-md)}
+:where(.panel){border-radius:var(--hn74-radius-lg)}
+:where(.song,.hn-tile,.panel){overflow-wrap:anywhere}
+:where(.song img,.hn-tile img){max-width:100%}
+:where(.song .actions button){border-radius:var(--hn74-radius-sm)}
+:where(.muted,small){color:var(--hn74-muted)}
+/* Artist cards: preserve the approved V73 two-column layout. */
+body #homeArtists.artist-chips,body #artistsList.artist-chips{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:10px!important;overflow-x:hidden!important;max-width:100%!important;
+}
+body #homeArtists button.artist-chip,body #artistsList button.artist-chip{
+ background:transparent!important;background-image:none!important;
+ border:1px solid var(--hn74-line)!important;border-radius:var(--hn74-radius-md)!important;
+ box-shadow:none!important;min-width:0!important;max-width:100%!important;
+}
+body #homeArtists button.artist-chip:focus-visible,body #artistsList button.artist-chip:focus-visible{
+ outline:2px solid var(--hn74-purple)!important;outline-offset:2px!important;
+}
+/* Respect motion sensitivity; no decorative animation required. */
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto!important}
+ *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+@media(max-width:480px){
+ :where(.panel){max-width:100%}
+ :where(.song,.hn-tile){min-width:0}
+}
