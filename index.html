@@ -797,7 +797,7 @@ async function hnRefreshMfa(){if(!db||!user)return;try{const {data,error}=await 
 $('hnMfaStart').onclick=async()=>{if(!db||!user)return;const b=$('hnMfaStart');b.disabled=true;try{const {data,error}=await db.auth.mfa.enroll({factorType:'totp',friendlyName:'HamNava Authenticator'});if(error)throw error;hnMfaFactorId=data.id;$('hnMfaQr').replaceChildren();if(data.totp?.qr_code){const img=document.createElement('img');img.src=data.totp.qr_code;img.alt='QR-Code für Authenticator-App';img.style.cssText='width:200px;max-width:100%;background:white;padding:10px;border-radius:12px';$('hnMfaQr').append(img)}$('hnMfaSecret').textContent='Alternativer Einrichtungsschlüssel: '+(data.totp?.secret||'–');$('hnMfaEnroll').hidden=false;$('hnMfaStatus').textContent='Scanne den QR-Code und bestätige mit dem aktuellen Code.';}catch(e){$('hnMfaStatus').textContent='Fehler: '+e.message}finally{b.disabled=false}};
 $('hnMfaConfirm').onclick=async()=>{const code=$('hnMfaEnrollCode').value.trim();if(!/^\d{6}$/.test(code)||!hnMfaFactorId){$('hnMfaStatus').textContent='Bitte einen gültigen sechsstelligen Code eingeben.';return;}const b=$('hnMfaConfirm');b.disabled=true;try{const {data,error}=await db.auth.mfa.challenge({factorId:hnMfaFactorId});if(error)throw error;const result=await db.auth.mfa.verify({factorId:hnMfaFactorId,challengeId:data.id,code});if(result.error)throw result.error;$('hnMfaEnroll').hidden=true;$('hnMfaEnrollCode').value='';$('hnMfaSecret').textContent='';$('hnMfaQr').replaceChildren();$('hnMfaStatus').textContent='MFA erfolgreich aktiviert.';await hnRefreshMfa();}catch(e){$('hnMfaStatus').textContent='Bestätigung fehlgeschlagen: '+e.message}finally{b.disabled=false}};
 
-async function loadAll(){if(!user)return;let [s,f,p,a]=await Promise.all([db.from('songs').select('*').order('created_at',{ascending:false}).limit(1000),db.from('favorites').select('song_id'),db.from('playlists').select('*').order('created_at',{ascending:false}),db.from('admins').select('user_id').eq('user_id',user.id)]);if(s.error){songs=[];say('Musikbibliothek konnte nicht geladen werden: '+s.error.message+' (Supabase API-Berechtigungen prüfen)');return;}const optionalErrors=[['Favoriten',f],['Playlists',p],['Administratorprüfung',a]].filter(([name,result])=>result.error).map(([name,result])=>name+': '+result.error.message);songs=s.data||[];try{let pc=await db.from('hamnava_play_counts').select('song_id,play_count');if(!pc.error){playCounts=Object.fromEntries((pc.data||[]).map(x=>[x.song_id,x.play_count]));$('popularHint').textContent='Nach tatsächlichen Wiedergaben sortiert'}else{$('popularHint').textContent='Die Statistik wird nach Einrichtung der Wiedergabezähler angezeigt'}}catch(e){}favorites=new Set((f.data||[]).map(x=>x.song_id));playlists=(p.data||[]).filter(x=>x.owner_id===user.id);isAdmin=!!a.data?.length;document.getElementById('hnExternalAddToggle').hidden=!isAdmin;document.getElementById('hnBulkToggle').hidden=!isAdmin;if(!isAdmin)document.getElementById('hnExternalAdd').hidden=true;show('admin',isAdmin);$('hnManageNav').classList.toggle('hidden',!isAdmin);$('ai').classList.toggle('hidden',!isAdmin);document.querySelector('.side-link[href="#ai"]').classList.toggle('hidden',!isAdmin);if(isAdmin)hnStudioRender();let prev=$('artistFilter').value;opt($('artistFilter'),[...new Set(songs.map(x=>x.artist))].sort((a,b)=>a.localeCompare(b,'fa')).map(x=>({label:x,value:x})),'Alle Interpreten');$('artistFilter').value=prev;opt($('playlistSong'),songs.map(x=>({label:x.artist+' — '+x.title,value:x.id})),'Lied auswählen');let old=$('playlistSelect').value;opt($('playlistSelect'),playlists.map(x=>({label:x.name,value:x.id})),'Playlist auswählen');$('playlistSelect').value=old;hnRenderGenreSidebar();renderEverything();await loadPlaylist();await hnLoadPublicPlaylists();if(isAdmin)hnRenderModeration();route();say(optionalErrors.length?'Musikbibliothek geladen ('+songs.length+' Songs). Andere Funktionen eingeschränkt: '+optionalErrors.join(' | '):'Lieder und Playlists wurden aktualisiert ('+songs.length+' Songs)')}
+async function loadAll(){if(!user)return;let [s,f,p,a]=await Promise.all([db.from('songs').select('*').order('created_at',{ascending:false}).limit(1000),db.from('favorites').select('song_id'),db.from('playlists').select('*').eq('owner_id',user.id).order('created_at',{ascending:false}),db.from('admins').select('user_id').eq('user_id',user.id)]);if(s.error){songs=[];say('Musikbibliothek konnte nicht geladen werden: '+s.error.message+' (Supabase API-Berechtigungen prüfen)');return;}const optionalErrors=[['Favoriten',f],['Playlists',p],['Administratorprüfung',a]].filter(([name,result])=>result.error).map(([name,result])=>name+': '+result.error.message);songs=s.data||[];try{let pc=await db.from('hamnava_play_counts').select('song_id,play_count');if(!pc.error){playCounts=Object.fromEntries((pc.data||[]).map(x=>[x.song_id,x.play_count]));$('popularHint').textContent='Nach tatsächlichen Wiedergaben sortiert'}else{$('popularHint').textContent='Die Statistik wird nach Einrichtung der Wiedergabezähler angezeigt'}}catch(e){}favorites=new Set((f.data||[]).map(x=>x.song_id));playlists=(p.data||[]).filter(x=>x.owner_id===user.id);isAdmin=!!a.data?.length;document.getElementById('hnExternalAddToggle').hidden=!isAdmin;document.getElementById('hnBulkToggle').hidden=!isAdmin;if(!isAdmin)document.getElementById('hnExternalAdd').hidden=true;show('admin',isAdmin);$('hnManageNav').classList.toggle('hidden',!isAdmin);$('ai').classList.toggle('hidden',!isAdmin);document.querySelector('.side-link[href="#ai"]').classList.toggle('hidden',!isAdmin);if(isAdmin)hnStudioRender();let prev=$('artistFilter').value;opt($('artistFilter'),[...new Set(songs.map(x=>x.artist))].sort((a,b)=>a.localeCompare(b,'fa')).map(x=>({label:x,value:x})),'Alle Interpreten');$('artistFilter').value=prev;opt($('playlistSong'),songs.map(x=>({label:x.artist+' — '+x.title,value:x.id})),'Lied auswählen');let old=$('playlistSelect').value;opt($('playlistSelect'),playlists.map(x=>({label:x.name,value:x.id})),'Playlist auswählen');$('playlistSelect').value=old;hnRenderGenreSidebar();renderEverything();await loadPlaylist();await hnLoadPublicPlaylists();if(isAdmin)hnRenderModeration();route();say(optionalErrors.length?'Musikbibliothek geladen ('+songs.length+' Songs). Andere Funktionen eingeschränkt: '+optionalErrors.join(' | '):'Lieder und Playlists wurden aktualisiert ('+songs.length+' Songs)')}
 
 function hnStopPlayer(){if(typeof hnStopPlaylistQueue==='function')hnStopPlaylistQueue();const a=$('audioPlayer');a.pause();a.removeAttribute('src');a.load();playingSongId=null;document.body.classList.remove('hn-playing','hn-player-mini','hn-player-fullscreen');$('hnPlayerFullscreen').textContent='⛶ Vollbild';$('hnPlayerFullscreen').setAttribute('aria-pressed','false');$('hnPlayerMinimize').textContent='− Minimieren';$('hnPlayerMinimize').setAttribute('aria-pressed','false');$('hnPlayerBackground').style.backgroundImage='';$('nowPlaying').textContent='Musikplayer';$('hnPlayerArtist').textContent='';}
 $('hnPlayerStop').addEventListener('click',hnStopPlayer);
@@ -1497,14 +1497,26 @@ async function hnLoadPublicPlaylists(){
  // Fetch memberships to determine which same-name playlist is empty.
  const {data:links,error:linksError}=await db.from('hn_public_playlist_songs').select('playlist_id');
  const counts=new Map();if(!linksError)for(const link of links||[])counts.set(String(link.playlist_id),(counts.get(String(link.playlist_id))||0)+1);
- const grouped=new Map();for(const p of hnPublicPlaylists){const key=hnPublicKey(p.name);if(!grouped.has(key))grouped.set(key,[]);grouped.get(key).push(p)}
- const hiddenIds=new Set(),duplicateEmpty=[];
- if(!linksError)for(const group of grouped.values())if(group.length>1){
-  // Keep the fullest playlist, including all its songs. Hide only other empty duplicates.
-  const sorted=[...group].sort((a,b)=>(counts.get(String(b.id))||0)-(counts.get(String(a.id))||0));
-  for(const p of sorted.slice(1))if(!(counts.get(String(p.id))||0)){hiddenIds.add(String(p.id));duplicateEmpty.push(p)}
+ // V62: Display exactly one public card per normalized name. Keep ALL database
+ // records untouched; prefer the record containing the most linked songs.
+ const grouped=new Map();
+ for(const p of hnPublicPlaylists){
+  const key=hnPublicKey(p.name);
+  if(!grouped.has(key))grouped.set(key,[]);
+  grouped.get(key).push(p);
  }
- const shown=hnPublicPlaylists.filter(p=>!hiddenIds.has(String(p.id)));
+ const shown=[],duplicateEmpty=[],duplicateHidden=[];
+ for(const group of grouped.values()){
+  const ranked=[...group].sort((a,b)=>{
+   const delta=(counts.get(String(b.id))||0)-(counts.get(String(a.id))||0);
+   return delta || String(a.id).localeCompare(String(b.id));
+  });
+  shown.push(ranked[0]);
+  for(const extra of ranked.slice(1)){
+   duplicateHidden.push(extra);
+   if(!linksError && (counts.get(String(extra.id))||0)===0)duplicateEmpty.push(extra);
+  }
+ }
  if(!shown.length)root.append(el('p','Noch keine öffentlichen Playlists vorhanden.','muted'));
  for(const p of shown){
   const b=el('button',null,'hn-public-cover-card');b.type='button';
@@ -1536,7 +1548,7 @@ async function hnLoadPublicPlaylists(){
   };
  }
  if(linksError)hnV38Msg('hnPublicStatus','Duplikate konnten nicht geprüft werden. Keine Playlist wurde entfernt.');
- else hnV38Msg('hnPublicStatus',duplicateEmpty.length?duplicateEmpty.length+' leere doppelte Playlist(s) ausgeblendet. Admin kann sie dauerhaft entfernen.':'');
+ else hnV38Msg('hnPublicStatus',duplicateHidden.length?duplicateHidden.length+' doppelte öffentliche Playlist(s) in der Übersicht ausgeblendet. Keine Daten gelöscht.'+(duplicateEmpty.length?' '+duplicateEmpty.length+' davon leer und für Admin-Löschung prüfbar.':''):'');
 }
 async function hnOpenPublicPlaylist(id){
  const p=hnPublicPlaylists.find(x=>x.id===id);if(!p)return;
@@ -1991,7 +2003,7 @@ document.addEventListener('click',async e=>{
  root.addEventListener('mouseenter',()=>clearInterval(timer));root.addEventListener('mouseleave',reset);show(0);reset();window.addEventListener('pagehide',()=>clearInterval(timer),{once:true});
 })();
 
-/* HamNava V60: vereinfachte private Playlists und Navigation */
+/* HamNava V62: public display deduplication and owner-scoped private playlists */
 function hnSimpleCreate(){
  const name=prompt('Name der neuen Playlist:');if(name===null||!name.trim())return;
  $('playlistName').value=name.trim();$('playlistForm').requestSubmit();
