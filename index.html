@@ -1881,26 +1881,38 @@ window.hnManageOpen=function(which){
   // Deliberately no visibilitychange/pagehide pause. Never simulate a play click on backgrounding.
 })();
 </script>
-<div id="hnRegisterDialog" hidden role="dialog" aria-modal="true" aria-labelledby="hnRegisterTitle"><div class="hn-register-card"><div class="hn-register-header"><h2 id="hnRegisterTitle">HamNava – Registrieren</h2><button id="hnRegisterClose" class="alt" type="button" aria-label="Schließen">✕</button></div><p>Erstelle dein kostenloses Konto.</p><form id="hnRegisterForm"><label>Vorname *<input id="hnRegFirst" required maxlength="60" autocomplete="given-name"></label><label>Nachname *<input id="hnRegLast" required maxlength="60" autocomplete="family-name"></label><label>E-Mail-Adresse *<input id="hnRegEmail" type="email" required autocomplete="email"></label><label>Telefonnummer *<input id="hnRegPhone" type="tel" required maxlength="30" autocomplete="tel" placeholder="+49 ..."></label><small>Du erhältst einen Anmeldelink per E-Mail. Kein Passwort erforderlich. Mit dem Link kannst du dich anmelden und später im Profil ein Passwort festlegen.</small><p id="hnRegisterStatus" role="status" aria-live="polite"></p><div class="hn-register-actions"><button id="hnRegisterSubmit" type="submit">Registrieren</button></div></form></div></div><script id="hnV53Register">
+<div id="hnRegisterDialog" hidden role="dialog" aria-modal="true" aria-labelledby="hnRegisterTitle"><div class="hn-register-card"><div class="hn-register-header"><h2 id="hnRegisterTitle">HamNava – Registrieren</h2><button id="hnRegisterClose" class="alt" type="button" aria-label="Schließen">✕</button></div><p>Erstelle dein kostenloses Konto.</p><form id="hnRegisterForm"><label>Vorname *<input id="hnRegFirst" required maxlength="60" autocomplete="given-name"></label><label>Nachname *<input id="hnRegLast" required maxlength="60" autocomplete="family-name"></label><label>E-Mail-Adresse *<input id="hnRegEmail" type="email" required autocomplete="email"></label><label>Telefonnummer *<input id="hnRegPhone" type="tel" required maxlength="30" autocomplete="tel" placeholder="+49 ..."></label><label>Passwort *<input id="hnRegPassword" type="password" required minlength="8" maxlength="128" autocomplete="new-password" placeholder="Mindestens 8 Zeichen"></label><label>Passwort wiederholen *<input id="hnRegPasswordConfirm" type="password" required minlength="8" maxlength="128" autocomplete="new-password"></label><small>Nach der Registrierung erhältst du eine E-Mail zur Bestätigung. Nach dem Klick auf den Bestätigungslink wirst du automatisch bei HamNava angemeldet, sofern der Rücksprung in Supabase korrekt freigegeben ist.</small><p id="hnRegisterStatus" role="status" aria-live="polite"></p><div class="hn-register-actions"><button id="hnRegisterSubmit" type="submit">Registrieren</button></div></form></div></div><script id="hnV53Register">
 (()=>{
  const $=id=>document.getElementById(id),dialog=$('hnRegisterDialog'),form=$('hnRegisterForm');
+ const REDIRECT='https://mbmorawej.github.io/hamnava/';
  function close(){dialog.hidden=true;document.body.style.overflow='';}
  $('hnRegisterClose').addEventListener('click',close);
  dialog.addEventListener('click',e=>{if(e.target===dialog)close()});
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!dialog.hidden)close()});
  $('signup').addEventListener('click',e=>{e.preventDefault();e.stopImmediatePropagation();$('hnRegEmail').value=$('email').value.trim();$('hnRegisterStatus').textContent='';dialog.hidden=false;document.body.style.overflow='hidden';$('hnRegFirst').focus()},true);
+ // The existing module handles Supabase auth state and the app's login UI.
+ // A verified signup returns to the real GitHub Pages site with an authenticated session.
+ function finishIfAuthenticated(){const db=window.hnBulkDb?.();if(!db?.auth)return;
+   db.auth.getSession().then(({data,error})=>{if(!error&&data?.session?.user){close();const status=$('authStatus');if(status)status.textContent='E-Mail bestätigt. Erfolgreich angemeldet.';}}).catch(()=>{});
+ }
+ window.addEventListener('load',()=>{setTimeout(finishIfAuthenticated,600);setTimeout(finishIfAuthenticated,1800);});
  form.addEventListener('submit',async e=>{
- e.preventDefault();if(!form.reportValidity())return;
- const first=$('hnRegFirst').value.trim(),last=$('hnRegLast').value.trim(),email=$('hnRegEmail').value.trim(),phone=$('hnRegPhone').value.trim();
- if(!first||!last||!email||!phone)return;
- const registrationDb=window.hnBulkDb?.();
- if(!registrationDb?.auth){$('hnRegisterStatus').textContent='Supabase-Verbindung nicht verfügbar. Bitte Seite neu laden.';return;}
- const button=$('hnRegisterSubmit');button.disabled=true;$('hnRegisterStatus').textContent='Registrierung wird gesendet …';
- try{
- const {error}=await registrationDb.auth.signInWithOtp({email,options:{shouldCreateUser:true,emailRedirectTo:location.origin+location.pathname,data:{first_name:first,last_name:last,full_name:first+' '+last,display_name:first+' '+last,phone_number:phone}}});
- if(error)throw error;
- $('hnRegisterStatus').textContent='Bitte prüfe deine E-Mails und öffne den Bestätigungs-/Anmeldelink. Falls die Adresse bereits registriert ist, wird möglicherweise ebenfalls ein Link versendet.';
- }catch(err){$('hnRegisterStatus').textContent='Fehler: '+(err.message||String(err));}finally{button.disabled=false;}
+   e.preventDefault();if(!form.reportValidity())return;
+   const first=$('hnRegFirst').value.trim(),last=$('hnRegLast').value.trim(),email=$('hnRegEmail').value.trim(),phone=$('hnRegPhone').value.trim();
+   const password=$('hnRegPassword').value,confirm=$('hnRegPasswordConfirm').value;
+   const status=$('hnRegisterStatus');
+   if(!first||!last||!email||!phone)return;
+   if(password.length<8){status.textContent='Das Passwort muss mindestens 8 Zeichen haben.';return;}
+   if(password!==confirm){status.textContent='Die Passwörter stimmen nicht überein.';return;}
+   const db=window.hnBulkDb?.();if(!db?.auth){status.textContent='Supabase-Verbindung nicht verfügbar. Bitte Seite neu laden.';return;}
+   const button=$('hnRegisterSubmit');button.disabled=true;status.textContent='Registrierung wird gesendet …';
+   try{
+     const {data,error}=await db.auth.signUp({email,password,options:{emailRedirectTo:REDIRECT,data:{first_name:first,last_name:last,full_name:first+' '+last,display_name:first+' '+last,phone_number:phone}}});
+     if(error)throw error;
+     if(data?.session){status.textContent='Registrierung erfolgreich. Du bist angemeldet.';setTimeout(close,700);}
+     else status.textContent='Bitte bestätige deine E-Mail über den neuen Link. Anschließend wirst du automatisch zu HamNava zurückgeleitet und angemeldet.';
+   }catch(err){status.textContent='Fehler: '+(err.message||String(err));}
+   finally{button.disabled=false;}
  });
 })();
 </script></body></html>
