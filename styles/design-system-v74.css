@@ -175,3 +175,38 @@ body .sidebar button,body .sidebar .hn-create-btn{accent-color:var(--hn74-purple
   width:30px!important;height:30px!important;padding:0!important;
  }
 }
+
+/* V74 mobile QA: unify active music controls with violet-orange palette. */
+body #hnPreviousSong,body #hnNextSong,body #hnShuffleSongs,
+body .song button:not(.favorite):not(.fav):not([aria-label*="Favorit"]),
+body .hn-external-nav button{
+ background:#6736a4!important;color:#fff!important;
+ border:1px solid #9d74d5!important;box-shadow:none!important;
+}
+body #hnShuffleSongs[aria-pressed="true"]{background:linear-gradient(110deg,#8239bd,#ef8258)!important}
+body #hnExternalPlayer .hn-external-close{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ width:auto!important;min-width:0!important;max-width:fit-content!important;
+ min-height:40px!important;padding:8px 13px!important;
+ font-size:13px!important;line-height:1.25!important;font-weight:650!important;
+ white-space:nowrap!important;border-radius:12px!important;
+ border:1px solid #a47bdc!important;background:#6736a4!important;color:#fff!important;
+}
+body #hnExternalPlayer .hn-external-original{color:#c9a5ff!important}
+@media(max-width:760px){
+ body #hnExternalPlayer{padding:12px!important}
+ body #hnExternalPlayer .hn-external-card{
+  width:100%!important;max-height:calc(100dvh - 30px)!important;
+  box-sizing:border-box!important;padding:14px!important;border-radius:18px!important;
+ }
+ body #hnExternalPlayer .hn-external-head{align-items:start!important;gap:8px!important}
+ body #hnExternalPlayer .hn-external-head>div{min-width:0!important;flex:1!important}
+ body #hnExternalPlayer .hn-external-head h2{font-size:18px!important;overflow-wrap:anywhere!important}
+ body #hnExternalPlayer .hn-external-close{flex:0 0 auto!important;font-size:12px!important;padding:8px 10px!important}
+ body #hnExternalPlayer .hn-external-frame{min-height:0!important;aspect-ratio:16/9!important}
+ body #hnExternalPlayer .hn-external-nav{display:flex!important;gap:8px!important;justify-content:center!important;flex-wrap:wrap!important}
+ body #hnExternalPlayer .hn-external-nav button{font-size:13px!important;padding:9px 11px!important;min-height:40px!important}
+ body .hn-player-transport{gap:8px!important;flex-wrap:wrap!important}
+ body #hnPreviousSong,body #hnNextSong{min-width:42px!important;min-height:42px!important}
+ body #hnShuffleSongs{min-height:42px!important}
+}
