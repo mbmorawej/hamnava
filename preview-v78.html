@@ -1168,7 +1168,7 @@ hnSearch.addEventListener('input',()=>{if(!user)return;const q=hnSearch.value;$(
 $('hnProfile').onclick=()=>hnOpenProfile();
 
 function hnOpenProfile(){
- if(!user)return;
+ if(!user){const authPanel=$('auth');if(authPanel){authPanel.classList.remove('hidden');authPanel.scrollIntoView({behavior:'smooth',block:'start'});$('email')?.focus()}else{location.hash='#home'}return;}
  const dlg=$('hnAccountDialog');
  $('hnAccountName').value=user.user_metadata?.display_name||user.user_metadata?.full_name||'';
  $('hnAccountEmail').value=user.email||'';
