@@ -692,7 +692,53 @@ $('signup').onclick=null; // V53 registration dialog handles signup
 
 let hnRecoveryMode=false, hnMfaFactorId=null;
 function hnShowRecovery(){const b=$('hnRecoveryBox');b.hidden=false;show('auth',true);$('auth').classList.remove('hidden');$('auth').scrollIntoView({block:'center'});$('hnRecoveryStatus').textContent='Bitte lege ein neues Passwort fest.';}
-$('hnForgotPassword').onclick=async()=>{if(!db){$('authStatus').textContent='Bitte zuerst Supabase verbinden.';return;}const email=$('email').value.trim();if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){$('authStatus').textContent='Bitte zuerst deine E-Mail-Adresse eingeben.';return;}const redirectTo=location.origin+location.pathname;const {error}=await db.auth.resetPasswordForEmail(email,{redirectTo});$('authStatus').textContent=error?'Fehler: '+error.message:'Falls die Adresse registriert ist, erhältst du eine E-Mail mit einem Link zum Zurücksetzen.';};
+// V55: Client-side protection against repeated recovery emails.
+let hnResetBusy=false;
+let hnResetNextAllowed=0;
+let hnResetTimer=null;
+const hnResetButton=$('hnForgotPassword');
+const hnResetOriginalLabel='Passwort vergessen?';
+function hnUpdateResetButton(){
+  const seconds=Math.max(0,Math.ceil((hnResetNextAllowed-Date.now())/1000));
+  hnResetButton.disabled=hnResetBusy||seconds>0;
+  hnResetButton.textContent=hnResetBusy?'Wird gesendet …':seconds>0?`Erneut in ${seconds}s`:hnResetOriginalLabel;
+  if(seconds===0&&hnResetTimer){clearInterval(hnResetTimer);hnResetTimer=null;}
+}
+function hnResetCooldown(seconds){
+  hnResetNextAllowed=Date.now()+seconds*1000;
+  if(hnResetTimer)clearInterval(hnResetTimer);
+  hnResetTimer=setInterval(hnUpdateResetButton,1000);
+  hnUpdateResetButton();
+}
+hnResetButton.onclick=async()=>{
+  if(hnResetBusy||Date.now()<hnResetNextAllowed)return;
+  if(!db){$('authStatus').textContent='Bitte zuerst Supabase verbinden.';return;}
+  const email=$('email').value.trim();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    $('authStatus').textContent='Bitte zuerst eine gültige E-Mail-Adresse eingeben.';return;
+  }
+  hnResetBusy=true;hnUpdateResetButton();
+  try{
+    const redirectTo='https://mbmorawej.github.io/hamnava/';
+    const {error}=await db.auth.resetPasswordForEmail(email,{redirectTo});
+    if(error){
+      const msg=String(error.message||'');
+      if(error.status===429||/rate.?limit|too many|over_email_send_rate_limit/i.test(msg)){
+        $('authStatus').textContent='Das E-Mail-Limit ist erreicht. Bitte warte mindestens eine Stunde und versuche es dann erneut. Fordere in dieser Zeit keine weiteren Links an.';
+        hnResetCooldown(3600);
+      }else{
+        $('authStatus').textContent='Passwort-Link konnte nicht versendet werden: '+msg;
+        hnResetCooldown(60);
+      }
+    }else{
+      $('authStatus').textContent='Falls die Adresse registriert ist, erhältst du eine E-Mail. Bitte prüfe auch den Spam-Ordner und fordere nicht mehrfach einen Link an.';
+      hnResetCooldown(120);
+    }
+  }catch(e){
+    $('authStatus').textContent='Netzwerkfehler. Bitte versuche es später erneut.';
+    hnResetCooldown(60);
+  }finally{hnResetBusy=false;hnUpdateResetButton();}
+};
 $('hnRecoverySave').onclick=async()=>{const password=$('hnRecoveryPassword').value;if(password.length<12){$('hnRecoveryStatus').textContent='Mindestens 12 Zeichen verwenden.';return;}const b=$('hnRecoverySave');b.disabled=true;try{const {error}=await db.auth.updateUser({password});if(error)throw error;$('hnRecoveryStatus').textContent='Passwort geändert. Du kannst dich jetzt erneut anmelden.';$('hnRecoveryPassword').value='';hnRecoveryMode=false;await db.auth.signOut();$('hnRecoveryBox').hidden=true;}catch(e){$('hnRecoveryStatus').textContent='Fehler: '+e.message}finally{b.disabled=false}};
 async function hnRefreshMfa(){if(!db||!user)return;try{const {data,error}=await db.auth.mfa.listFactors();if(error)throw error;const factors=data?.totp||[];const verified=factors.filter(x=>x.status==='verified');$('hnMfaState').textContent=verified.length?'Aktiv: '+verified.length+' Authenticator-Faktor(en)':'Noch kein bestätigter Authenticator eingerichtet.';$('hnMfaStart').disabled=verified.length>0;}catch(e){$('hnMfaState').textContent='MFA-Status konnte nicht geladen werden: '+e.message}}
 $('hnMfaStart').onclick=async()=>{if(!db||!user)return;const b=$('hnMfaStart');b.disabled=true;try{const {data,error}=await db.auth.mfa.enroll({factorType:'totp',friendlyName:'HamNava Authenticator'});if(error)throw error;hnMfaFactorId=data.id;$('hnMfaQr').replaceChildren();if(data.totp?.qr_code){const img=document.createElement('img');img.src=data.totp.qr_code;img.alt='QR-Code für Authenticator-App';img.style.cssText='width:200px;max-width:100%;background:white;padding:10px;border-radius:12px';$('hnMfaQr').append(img)}$('hnMfaSecret').textContent='Alternativer Einrichtungsschlüssel: '+(data.totp?.secret||'–');$('hnMfaEnroll').hidden=false;$('hnMfaStatus').textContent='Scanne den QR-Code und bestätige mit dem aktuellen Code.';}catch(e){$('hnMfaStatus').textContent='Fehler: '+e.message}finally{b.disabled=false}};
@@ -1905,14 +1951,14 @@ window.hnManageOpen=function(which){
    if(password.length<8){status.textContent='Das Passwort muss mindestens 8 Zeichen haben.';return;}
    if(password!==confirm){status.textContent='Die Passwörter stimmen nicht überein.';return;}
    const db=window.hnBulkDb?.();if(!db?.auth){status.textContent='Supabase-Verbindung nicht verfügbar. Bitte Seite neu laden.';return;}
-   const button=$('hnRegisterSubmit');button.disabled=true;status.textContent='Registrierung wird gesendet …';
+   const button=$('hnRegisterSubmit');if(button.disabled)return;button.disabled=true;status.textContent='Registrierung wird gesendet …';
    try{
      const {data,error}=await db.auth.signUp({email,password,options:{emailRedirectTo:REDIRECT,data:{first_name:first,last_name:last,full_name:first+' '+last,display_name:first+' '+last,phone_number:phone}}});
      if(error)throw error;
      if(data?.session){status.textContent='Registrierung erfolgreich. Du bist angemeldet.';setTimeout(close,700);}
      else status.textContent='Bitte bestätige deine E-Mail über den neuen Link. Anschließend wirst du automatisch zu HamNava zurückgeleitet und angemeldet.';
-   }catch(err){status.textContent='Fehler: '+(err.message||String(err));}
-   finally{button.disabled=false;}
+   }catch(err){const msg=String(err.message||err);if(err.status===429||/rate.?limit|too many|over_email_send_rate_limit/i.test(msg)){status.textContent='Das E-Mail-Limit ist erreicht. Bitte warte mindestens eine Stunde, bevor du es erneut versuchst.';button.dataset.cooldown='1';setTimeout(()=>{delete button.dataset.cooldown;button.disabled=false;},3600000);}else status.textContent='Fehler: '+msg;}
+   finally{if(!button.dataset.cooldown)button.disabled=false;}
  });
 })();
 </script></body></html>
