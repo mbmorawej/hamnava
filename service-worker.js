@@ -1,8 +1,8 @@
 /* HamNava PWA v44: only public app shell and local static assets.
    No Supabase/API/audio/Spotify/YouTube requests are cached. */
-const CACHE='hamnava-static-v44';
-const SHELL=['./','./index.html','./manifest.webmanifest','./icons/icon-192.png','./icons/icon-512.png'];
-const IMAGES=['./hamnava-sunset-banner.jpeg','./hamnava-banner-2.jpg','./hamnava-banner-3.jpg','./hayede-portrait.jpg'];
+const CACHE='hamnava-static-v47';
+const SHELL=['./','./index.html','./manifest.webmanifest','./icons/icon-180.png','./icons/icon-192.png','./icons/icon-512.png','./apple-touch-icon.png'];
+const IMAGES=['./hamnava-sunset-banner.jpeg','./hamnava-banner-2.jpg','./hamnava-banner-3.jpg','./hayede-portrait.jpg','./hamnava-logo.webp'];
 self.addEventListener('install',event=>{
  event.waitUntil(caches.open(CACHE).then(cache=>Promise.allSettled([...SHELL,...IMAGES].map(path=>cache.add(path)))));
  self.skipWaiting();
