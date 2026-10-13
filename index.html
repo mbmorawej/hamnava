@@ -1174,6 +1174,7 @@ function hnOpenProfile(){
  $('hnCommunityDisplayName').textContent='👤 '+($('hnAccountName').value.trim()||'Musikfreund');
  hnCommunityLoad();
  window.hnCommunityDirectoryLoad?.();
+ window.hnCommunityCheckOwnProfile?.();
  $('hnAccountEmail').value=user.email||'';
  $('hnAccountPassword').value='';
  $('hnAccountJoined').textContent='Registriert: '+(user.created_at?new Date(user.created_at).toLocaleDateString('de-DE'):'–');
@@ -2489,15 +2490,24 @@ btn.disabled=true;
 try{
 const {error}=await db.from('community_profiles').upsert({user_id:uid,display_name:name},{onConflict:'user_id'});
 if(error)throw error;
-safeText('hnCommunityPublishStatus','Öffentliches Profil gespeichert. Dein Anzeigename ist für angemeldete Mitglieder sichtbar.');
+await checkOwnProfile();
 await directory();
 }catch(e){safeText('hnCommunityPublishStatus','Profil konnte nicht erstellt werden: '+(e?.message||'Fehler'))}
 finally{btn.disabled=false}
 }
+async function checkOwnProfile(){
+const db=window.hnBulkDb?.(),uid=window.hnBulkUserId?.(),btn=$('hnCommunityPublish');
+if(!db||!uid||!btn)return;
+const {data,error}=await db.from('community_profiles').select('user_id,display_name').eq('user_id',uid).maybeSingle();
+if(error){safeText('hnCommunityPublishStatus','Profilstatus nicht lesbar: '+error.message);return}
+btn.textContent=data?'✎ Öffentliches Community-Profil bearbeiten':'＋ Öffentliches Community-Profil erstellen';
+safeText('hnCommunityPublishStatus',data?'Dein öffentliches Profil ist vorhanden: '+data.display_name+'. Es wird bei anderen Mitgliedern angezeigt.':'Noch kein öffentliches Profil vorhanden. Du kannst es freiwillig erstellen.');
+}
+window.hnCommunityCheckOwnProfile=checkOwnProfile;
 window.hnCommunityPublishProfile=publishProfile;
 $('hnCommunityPublish')?.addEventListener('click',publishProfile);
 window.hnCommunityLoad=load;
 window.hnCommunityDirectoryLoad=directory;
-$('hnCommunityRefresh')?.addEventListener('click',()=>{load();directory()});
+$('hnCommunityRefresh')?.addEventListener('click',()=>{load();directory();checkOwnProfile()});
 })();
 </script><style id="hn-v78-directory-style">.hn-community-directory{margin-top:16px}.hn-community-person{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #7775}.hn-community-person p{margin:4px 0}.hn-community-person button{flex-shrink:0}@media(max-width:440px){.hn-community-person{flex-direction:column;align-items:flex-start}}</style></body></html>
