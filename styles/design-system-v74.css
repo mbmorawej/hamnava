@@ -107,3 +107,47 @@ body .sidebar button,body .sidebar .hn-create-btn{accent-color:var(--hn74-purple
  body .hn-topbar .hn-home{flex-basis:34px!important;min-width:34px!important}
  body .hn-topbar #hnProfile{width:34px!important;min-width:34px!important}
 }
+
+/* V74 mobile final pass: accessible two-row navigation, compact brand and hero. */
+@media(max-width:760px){
+ body .hn-topbar{
+  box-sizing:border-box!important;height:116px!important;min-height:116px!important;
+  display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;
+  grid-template-rows:44px 48px!important;column-gap:10px!important;row-gap:8px!important;
+  align-content:center!important;padding:8px 14px!important;
+ }
+ body #hnMobileNavButton{grid-column:1!important;grid-row:1!important;justify-self:start!important}
+ body .hn-topbar .hn-home{grid-column:1!important;grid-row:1!important;justify-self:start!important;margin-left:52px!important}
+ body .hn-topbar .hn-actions{grid-column:2!important;grid-row:1!important;margin:0!important;justify-self:end!important}
+ body .hn-topbar .hn-search-wrap{
+  grid-column:1/-1!important;grid-row:2!important;width:100%!important;max-width:none!important;
+  box-sizing:border-box!important;min-width:0!important;height:46px!important;margin:0!important;
+ }
+ body .hn-topbar #hnGlobalSearch{font-size:15px!important;min-width:0!important}
+ body #hnAdvancedToggle{flex:0 0 42px!important}
+ /* Move the independent language selector into the first visual row. */
+ body #languageControl{
+  position:fixed!important;top:14px!important;right:66px!important;z-index:100!important;
+  max-width:46px!important;min-width:0!important;padding:4px!important;
+  background:transparent!important;border:0!important;box-shadow:none!important;
+ }
+ body #languageControl label{display:none!important}
+ body #languageControl select{width:42px!important;max-width:42px!important;padding:6px 0!important}
+ body .hn-topbar .hn-actions{margin-right:58px!important}
+ /* Existing fixed header was 75px; keep content below expanded mobile toolbar. */
+ body main{padding-top:calc(116px + 12px)!important}
+ body main>header{margin-top:0!important;margin-bottom:14px!important;padding-top:8px!important;padding-bottom:8px!important}
+ body main>header h1{font-size:23px!important;line-height:1.15!important;margin:0!important}
+ body main>header h1 .logo{width:36px!important;height:36px!important}
+ body main>header p{font-size:12px!important;line-height:1.35!important;margin:5px 0 0!important}
+ body .hn-hero-carousel{height:300px!important;max-height:300px!important;min-height:0!important}
+ body .hn-hero-carousel .hero-copy h2{font-size:clamp(25px,6.4vw,35px)!important}
+ body .hn-hero-carousel .hero-copy a{padding:10px 16px!important}
+}
+@media(max-width:380px){
+ body .hn-topbar{padding-inline:10px!important}
+ body .hn-topbar .hn-home{margin-left:46px!important}
+ body #languageControl{right:60px!important}
+ body .hn-topbar .hn-actions{margin-right:54px!important}
+ body .hn-hero-carousel{height:285px!important;max-height:285px!important}
+}
