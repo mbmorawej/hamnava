@@ -1493,10 +1493,11 @@ async function hnLoadPublicPlaylists(){
  const {data,error}=await db.from('hn_public_playlists').select('id,name,created_at').order('created_at',{ascending:false});
  if(error){hnV38Msg('hnPublicStatus','Öffentliche Playlists noch nicht eingerichtet. Bitte SQL-Setup ausführen.');return}
  hnPublicPlaylists=data||[];
- const root=hnV38El('hnPublicPlaylists');root.replaceChildren();
+ const root=hnV38El('hnPublicPlaylists');
  // Fetch memberships to determine which same-name playlist is empty.
  const {data:links,error:linksError}=await db.from('hn_public_playlist_songs').select('playlist_id');
  const counts=new Map();if(!linksError)for(const link of links||[])counts.set(String(link.playlist_id),(counts.get(String(link.playlist_id))||0)+1);
+ // V63: Race-safe rendering (clear after async fetch), one card per normalized name.
  // V62: Display exactly one public card per normalized name. Keep ALL database
  // records untouched; prefer the record containing the most linked songs.
  const grouped=new Map();
@@ -1505,6 +1506,8 @@ async function hnLoadPublicPlaylists(){
   if(!grouped.has(key))grouped.set(key,[]);
   grouped.get(key).push(p);
  }
+ // Clear immediately before rendering: concurrent async loads previously appended the same cards twice.
+ root.replaceChildren();
  const shown=[],duplicateEmpty=[],duplicateHidden=[];
  for(const group of grouped.values()){
   const ranked=[...group].sort((a,b)=>{
