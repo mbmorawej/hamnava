@@ -1893,10 +1893,11 @@ window.hnManageOpen=function(which){
  e.preventDefault();if(!form.reportValidity())return;
  const first=$('hnRegFirst').value.trim(),last=$('hnRegLast').value.trim(),email=$('hnRegEmail').value.trim(),phone=$('hnRegPhone').value.trim();
  if(!first||!last||!email||!phone)return;
- if(!window.hnV53DbReady && typeof db==='undefined'){$('hnRegisterStatus').textContent='Supabase ist noch nicht verbunden.';return;}
+ const registrationDb=window.hnBulkDb?.();
+ if(!registrationDb?.auth){$('hnRegisterStatus').textContent='Supabase-Verbindung nicht verfügbar. Bitte Seite neu laden.';return;}
  const button=$('hnRegisterSubmit');button.disabled=true;$('hnRegisterStatus').textContent='Registrierung wird gesendet …';
  try{
- const {error}=await db.auth.signInWithOtp({email,options:{shouldCreateUser:true,emailRedirectTo:location.origin+location.pathname,data:{first_name:first,last_name:last,full_name:first+' '+last,display_name:first+' '+last,phone_number:phone}}});
+ const {error}=await registrationDb.auth.signInWithOtp({email,options:{shouldCreateUser:true,emailRedirectTo:location.origin+location.pathname,data:{first_name:first,last_name:last,full_name:first+' '+last,display_name:first+' '+last,phone_number:phone}}});
  if(error)throw error;
  $('hnRegisterStatus').textContent='Bitte prüfe deine E-Mails und öffne den Bestätigungs-/Anmeldelink. Falls die Adresse bereits registriert ist, wird möglicherweise ebenfalls ein Link versendet.';
  }catch(err){$('hnRegisterStatus').textContent='Fehler: '+(err.message||String(err));}finally{button.disabled=false;}
