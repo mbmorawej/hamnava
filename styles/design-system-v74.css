@@ -71,3 +71,39 @@ body .player button:focus-visible{outline:2px solid var(--hn74-purple)!important
  body #homeMusic .hn-section-heading a{font-size:12px}
  body #artistsList .artist-chip,body #homeArtists .artist-chip{overflow:hidden}
 }
+
+/* V74 screenshot-driven responsive refinements (no DOM/feature removal). */
+body .hn-hero-carousel{aspect-ratio:auto!important;height:clamp(330px,32vw,420px)!important;min-height:0!important;max-height:420px!important}
+body .hn-hero-controls>button,body #hnHeroPrev,body #hnHeroNext{
+ background:#5f3199!important;border:1px solid #b18ce7!important;color:#fff!important;
+}
+body #hnHeroDots button[aria-current="true"]{background:var(--hn74-purple)!important}
+body .hn-search-icon{color:var(--hn74-purple)!important}
+body #hnAdvancedToggle{border-color:var(--hn74-purple)!important}
+body .sidebar button,body .sidebar .hn-create-btn{accent-color:var(--hn74-purple)}
+@media(max-width:760px){
+ body .hn-topbar{display:flex!important;align-items:center!important;gap:8px!important;padding:8px 12px!important;min-width:0!important}
+ body #hnMobileNavButton{flex:0 0 42px!important;min-width:42px!important}
+ body .hn-topbar .hn-home{flex:0 0 38px!important;min-width:38px!important}
+ body .hn-topbar .hn-search-wrap{flex:1 1 auto!important;min-width:0!important;width:auto!important;max-width:none!important}
+ body .hn-topbar #hnGlobalSearch{min-width:0!important;width:100%!important;font-size:13px!important}
+ body .hn-topbar .hn-actions{flex:0 0 auto!important;gap:6px!important}
+ body .hn-topbar .hn-desktop-action{display:none!important}
+ body .hn-topbar #hnProfile{width:38px!important;min-width:38px!important}
+ body #hnAdvancedToggle{padding:6px!important;min-width:38px!important}
+ body #hnAdvancedToggle span{display:none!important}
+ body .hn-hero-carousel{height:clamp(280px,65vw,380px)!important;min-height:0!important;max-height:380px!important}
+ body .hn-hero-carousel .hero-copy{max-width:100%!important}
+ body .hn-hero-carousel .hero-copy h2{font-size:clamp(27px,7vw,38px)!important;line-height:1.13!important}
+ body .hn-hero-carousel .hero-copy a{font-size:14px!important}
+ body .hn-hero-controls{bottom:12px!important}
+ body #homeMusic h2{font-size:clamp(21px,5vw,27px)!important}
+ body header h1{font-size:clamp(23px,6vw,30px)!important}
+ body header h1 .logo{width:40px!important;height:40px!important}
+}
+@media(max-width:380px){
+ body .hn-topbar{gap:5px!important;padding-inline:7px!important}
+ body #hnMobileNavButton{flex-basis:38px!important;min-width:38px!important}
+ body .hn-topbar .hn-home{flex-basis:34px!important;min-width:34px!important}
+ body .hn-topbar #hnProfile{width:34px!important;min-width:34px!important}
+}
