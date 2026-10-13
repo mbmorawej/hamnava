@@ -1178,7 +1178,7 @@ function hnOpenProfile(){
  $('hnAccountPassword').value='';
  $('hnAccountJoined').textContent='Registriert: '+(user.created_at?new Date(user.created_at).toLocaleDateString('de-DE'):'–');
  $('hnAccountRole').textContent=isAdmin?'🛡 Administrator':'Benutzer';
- $('hnAccountId').textContent='Benutzer-ID: '+user.id;
+ $('hnAccountId').textContent='';
  $('hnAccountStatus').textContent='';hnRefreshMfa();dlg.hidden=false;document.body.style.overflow='hidden';$('hnAccountClose').focus();
 }
 function hnCloseProfile(){ $('hnAccountDialog').hidden=true;document.body.style.overflow=''; }
@@ -2469,7 +2469,7 @@ try{
 const [profiles,following]=await Promise.all([db.from('community_profiles').select('user_id,display_name,bio').neq('user_id',uid).order('created_at',{ascending:false}).limit(40),db.from('community_follows').select('followed_id').eq('follower_id',uid)]);
 if(profiles.error||following.error)throw profiles.error||following.error;
 const ids=new Set((following.data||[]).map(p=>p.followed_id));target.replaceChildren();
-if(!profiles.data?.length){target.textContent='Noch keine öffentlichen Community-Profile vorhanden.';return}
+if(!profiles.data?.length){target.textContent='Noch keine öffentlichen Community-Profile vorhanden. Mitglieder müssen zunächst ein öffentliches Community-Profil erstellen.';return}
 for(const p of profiles.data){
 const row=document.createElement('div');row.className='hn-community-person';row.setAttribute('role','listitem');
 const info=document.createElement('div');const name=document.createElement('strong');name.textContent=p.display_name||'Musikfreund';info.append(name);
@@ -2478,7 +2478,7 @@ const btn=document.createElement('button');btn.type='button';btn.className='alt'
 btn.onclick=async()=>{btn.disabled=true;try{const isFollowing=ids.has(p.user_id);const result=isFollowing?await db.from('community_follows').delete().eq('follower_id',uid).eq('followed_id',p.user_id):await db.from('community_follows').insert({follower_id:uid,followed_id:p.user_id});if(result.error)throw result.error;if(isFollowing)ids.delete(p.user_id);else ids.add(p.user_id);sync();await load()}catch(e){safeText('hnCommunityFollowInfo','Follow fehlgeschlagen: '+(e?.message||'Fehler'))}finally{btn.disabled=false}};
 row.append(info,btn);target.append(row);
 }
-}catch(e){target.textContent='Community-Verzeichnis nicht verfügbar. Bitte V78-Supabase-Migration prüfen.'}
+}catch(e){const msg=e?.message||'Unbekannter Fehler';target.textContent='Community-Verzeichnis nicht verfügbar: '+msg+' (Supabase-Migration und RLS prüfen).';console.warn('HamNava Community directory:',e)}
 }
 window.hnCommunityLoad=load;
 window.hnCommunityDirectoryLoad=directory;
