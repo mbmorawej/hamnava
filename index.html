@@ -642,6 +642,14 @@ header h1 .logo{width:54px!important;height:54px!important;object-fit:contain!im
 #hnExternalPlayer .hn-external-nav button:disabled{opacity:.45;cursor:not-allowed}
 #hnExternalPlayer .hn-external-nav-status{font-size:12px;color:#c0d5e6;text-align:center;padding:4px 8px}
 @media(max-width:450px){#hnExternalPlayer .hn-external-nav button{min-width:105px;padding:11px 12px!important}}
+</style><style id="hn-v59-public-covers">
+.hn-public-wrap #hnPublicPlaylists button.hn-public-cover-card{position:relative!important;display:flex!important;align-items:flex-end!important;justify-content:flex-start!important;overflow:hidden!important;isolation:isolate;min-height:175px!important;padding:14px!important;border-radius:15px!important;background:linear-gradient(145deg,#0b5262,#50365e)!important;color:#fff!important;text-align:left!important;border:1px solid #375a72!important}
+.hn-public-cover-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.hn-public-cover-card:before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(3,12,25,.94),rgba(3,12,25,.15) 75%);z-index:-1}
+.hn-public-cover-card .hn-public-cover-name{position:relative;z-index:1;font-size:16px;font-weight:800;line-height:1.3;text-shadow:0 2px 8px #000}
+.hn-public-wrap #hnPublicPlaylists button.hn-public-cover-card:hover{border-color:#17b8ae!important;transform:translateY(-2px)}
+#hnPublicDuplicateCleanup{margin-top:12px}
+@media(max-width:600px){.hn-public-wrap #hnPublicPlaylists{grid-template-columns:repeat(2,minmax(0,1fr))!important}.hn-public-wrap #hnPublicPlaylists button.hn-public-cover-card{min-height:145px!important}}
 </style></head><body class="logged-out"><div class="hn-topbar" id="hnTopbar" role="navigation" aria-label="Hauptnavigation"><button type="button" id="hnMobileNavButton" aria-label="Seitenmenü öffnen" aria-controls="siteSidebar" aria-expanded="false">☰</button><a class="hn-home" href="#home" aria-label="Startseite">⌂</a><label class="hn-search-wrap"><span class="hn-search-icon">⌕</span><input id="hnGlobalSearch" type="search" placeholder="Was möchtest du hören?" autocomplete="off" aria-label="Musik durchsuchen"/><button id="hnAdvancedToggle" type="button" aria-expanded="false" aria-controls="hnAdvancedPanel" title="Erweiterte Suche">☷ <span>Filter</span></button></label><div class="hn-actions"><a class="hn-desktop-action" href="#playlists">Meine Playlists</a><a class="hn-desktop-action" href="#favorites" aria-label="Favoriten" title="Favoriten">♡</a><button class="hn-avatar" id="hnProfile" type="button" title="Mein Profil" aria-label="Profil">☺</button></div></div><aside class="sidebar" dir="ltr" id="siteSidebar"><a class="brand" href="#home"><img class="brand-mark" src="hamnava-logo.webp" alt="HamNava Logo"/><span>HamNava</span></a><div class="side-caption">Deine Bibliothek</div><a class="side-link active" href="#home"><span>⌂</span><span>Startseite</span></a><a class="side-link" href="#library"><span>♫</span><span>Musikbibliothek</span></a><a class="side-link" href="#artists"><span>♬</span><span>Künstler A–Z</span></a><a class="side-link" href="#favorites"><span>♥</span><span>Favoriten</span></a><a class="side-link" href="#playlists"><span>▤</span><span>Meine Playlists</span></a><a class="side-link" href="#ai"><span>✨</span><span>AI Music Studio</span></a><a class="side-link hidden" id="hnManageNav" href="#admin"><span>⚙️</span><span>Verwaltung</span></a><a class="side-link" href="add-song.html"><span>＋</span><span>Lied hinzufügen</span></a><div class="hn-create-area"><div class="hn-library-head"><span>▤ Bibliothek</span><button id="hnCreateBtn" type="button" aria-expanded="false">＋ Erstellen</button></div><div id="hnCreateMenu" class="hn-create-menu" hidden><button id="hnCreatePlaylist" type="button">♫ &nbsp; Playlist erstellen</button><button type="button" disabled title="Benötigt Datenbank-Erweiterung">♧ &nbsp; Gemeinsamer Mix · bald</button><button type="button" disabled title="Benötigt Datenbank-Erweiterung">▱ &nbsp; Ordner · bald</button></div></div><div id="hnPlaylistSidebar" class="hn-playlist-sidebar" aria-label="Meine Playlists"></div><div class="hn-genre-sidebar"><div class="side-caption">Musikrichtungen</div><div id="hnGenreSidebarLinks" class="hn-genre-sidebar-links"></div></div>
 <div id="hnSidebarManage" class="hn-sidebar-manage"></div><div class="side-footer">Musik, Freunde, Erinnerungen<br/>HamNava · Version 36</div></aside><div id="navBackdrop" class="nav-backdrop" hidden></div><main><header><button id="menuToggle" class="menu-toggle alt" type="button" aria-label="Menü öffnen" aria-expanded="false">☰</button><div><h1><img class="logo" src="hamnava-logo.webp" alt=""/> Ham<span class="gold">Nava</span></h1><p>Gute Songs, gute Freunde, gemeinsame Erinnerungen</p></div><div id="identity"></div></header><div id="hnAdvancedPanel" hidden role="region" aria-label="Erweiterte Suche"><div class="hn-filter-grid"><label>Song oder Interpret<input id="hnAdvText" type="search" placeholder="Songtitel oder Künstlername"></label><label>Interpret<select id="hnAdvArtist"><option value="">Alle Interpreten</option></select></label><label>Musikrichtung<select id="hnAdvGenre"><option value="">Alle Musikrichtungen</option></select></label><label>Quelle<select id="hnAdvSource"><option value="">Alle Quellen</option><option value="hosted">MP3</option><option value="youtube">YouTube</option><option value="spotify">Spotify</option></select></label><label>Sortieren<select id="hnAdvSort"><option value="newest">Neueste zuerst</option><option value="oldest">Älteste zuerst</option><option value="az">Titel A–Z</option><option value="artist">Interpret A–Z</option></select></label></div><div class="hn-filter-actions"><button type="button" id="hnAdvApply">⌕ Suchen</button><button type="button" id="hnAdvReset">↺ Zurücksetzen</button></div></div>
 <section class="hero hidden hn-hero-carousel" dir="ltr" id="home" aria-label="HamNava Highlights"><div class="hn-hero-slides" aria-hidden="true"><div class="hn-hero-slide is-active"></div><div class="hn-hero-slide"></div><div class="hn-hero-slide"></div></div><div class="hero-copy"><div class="eyebrow">MUSIK · FREUNDE · ERINNERUNGEN</div><h2>Willkommen bei<br/><em>HamNava</em></h2><p>Entdecke Musik, die verbindet.</p><a href="#homeMusic" id="heroDiscover">Jetzt Musik entdecken ↗</a></div><img class="hero-portrait" src="hero-artist.webp" alt="Illustration eines Sängers"/><div class="hero-quote">„Gute Musik verbindet Menschen – heute und immer.“</div><div class="hn-hero-controls"><button type="button" id="hnHeroPrev" aria-label="Vorheriger Banner">‹</button><div id="hnHeroDots" aria-label="Banner auswählen"></div><button type="button" id="hnHeroNext" aria-label="Nächster Banner">›</button></div></section>
@@ -1450,21 +1458,63 @@ let hnPublicPlaylists=[],hnPublicSongs=[],hnSessionId=null,hnSessionOwner=null,h
 const hnV38El=id=>document.getElementById(id);
 const hnV38Msg=(id,message)=>{const n=hnV38El(id);if(n)n.textContent=message};
 function hnV38Date(value){return value?new Intl.DateTimeFormat('de-DE',{timeZone:'Europe/Berlin',dateStyle:'short',timeStyle:'medium'}).format(new Date(value)):'—'}
+// V59: Public playlist artwork and safe duplicate cleanup.
+const hnPublicArt={
+ 'kinder':'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=640&q=80&fit=crop',
+ 'party & gute laune':'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=640&q=80&fit=crop',
+ 'entspannung & chillout':'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=640&q=80&fit=crop',
+ 'power & energie':'https://images.unsplash.com/photo-1538805060514-97d9cc17730c?w=640&q=80&fit=crop',
+ 'fokus & konzentration':'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=640&q=80&fit=crop'
+};
+const hnPublicKey=name=>(name||'').trim().toLocaleLowerCase('de-DE').replace(/\s+/g,' ');
 async function hnLoadPublicPlaylists(){
  const {data,error}=await db.from('hn_public_playlists').select('id,name,created_at').order('created_at',{ascending:false});
  if(error){hnV38Msg('hnPublicStatus','Öffentliche Playlists noch nicht eingerichtet. Bitte SQL-Setup ausführen.');return}
  hnPublicPlaylists=data||[];
  const root=hnV38El('hnPublicPlaylists');root.replaceChildren();
- if(!hnPublicPlaylists.length)root.append(el('p','Noch keine öffentlichen Playlists vorhanden.','muted'));
- for(const p of hnPublicPlaylists){
-  const b=el('button','🎶 '+p.name);b.type='button';b.onclick=()=>hnOpenPublicPlaylist(p.id);root.append(b);
+ // Fetch memberships to determine which same-name playlist is empty.
+ const {data:links,error:linksError}=await db.from('hn_public_playlist_songs').select('playlist_id');
+ const counts=new Map();if(!linksError)for(const link of links||[])counts.set(String(link.playlist_id),(counts.get(String(link.playlist_id))||0)+1);
+ const grouped=new Map();for(const p of hnPublicPlaylists){const key=hnPublicKey(p.name);if(!grouped.has(key))grouped.set(key,[]);grouped.get(key).push(p)}
+ const hiddenIds=new Set(),duplicateEmpty=[];
+ if(!linksError)for(const group of grouped.values())if(group.length>1){
+  // Keep the fullest playlist, including all its songs. Hide only other empty duplicates.
+  const sorted=[...group].sort((a,b)=>(counts.get(String(b.id))||0)-(counts.get(String(a.id))||0));
+  for(const p of sorted.slice(1))if(!(counts.get(String(p.id))||0)){hiddenIds.add(String(p.id));duplicateEmpty.push(p)}
+ }
+ const shown=hnPublicPlaylists.filter(p=>!hiddenIds.has(String(p.id)));
+ if(!shown.length)root.append(el('p','Noch keine öffentlichen Playlists vorhanden.','muted'));
+ for(const p of shown){
+  const b=el('button',null,'hn-public-cover-card');b.type='button';
+  const name=el('span',p.name,'hn-public-cover-name');
+  const cover=hnPublicArt[hnPublicKey(p.name)];
+  if(cover){const img=document.createElement('img');img.src=cover;img.alt='Cover: '+p.name;img.loading='lazy';img.onerror=()=>{img.remove();b.classList.add('hn-public-cover-fallback')};b.append(img)}
+  else b.classList.add('hn-public-cover-fallback');
+  b.append(name);b.onclick=()=>hnOpenPublicPlaylist(p.id);root.append(b);
  }
  hnV38El('hnPublicAdmin').hidden=!isAdmin;
  if(isAdmin){
   opt(hnV38El('hnPublicSelect'),hnPublicPlaylists.map(p=>({label:p.name,value:p.id})),'Playlist auswählen');
   opt(hnV38El('hnPublicSong'),songs.filter(x=>x.visibility==='public').map(x=>({label:x.artist+' — '+x.title,value:x.id})),'Öffentlichen Song auswählen');
+  let clean=hnV38El('hnPublicDuplicateCleanup');
+  if(!clean){clean=document.createElement('button');clean.id='hnPublicDuplicateCleanup';clean.type='button';clean.className='warn';hnV38El('hnPublicAdmin').append(clean)}
+  clean.hidden=!!linksError||!duplicateEmpty.length;
+  clean.textContent='Leere doppelte Playlists entfernen ('+duplicateEmpty.length+')';
+  clean.onclick=async()=>{
+   if(!duplicateEmpty.length||!confirm('Nur '+duplicateEmpty.length+' leere doppelte Playlist(s) dauerhaft löschen?'))return;
+   clean.disabled=true;
+   for(const item of duplicateEmpty){
+    // Recheck membership immediately before deleting to prevent loss of songs.
+    const {count,error:checkError}=await db.from('hn_public_playlist_songs').select('song_id',{count:'exact',head:true}).eq('playlist_id',item.id);
+    if(checkError||count!==0){hnV38Msg('hnPublicStatus','Löschen abgebrochen: Playlist nicht leer oder Prüfung fehlgeschlagen.');clean.disabled=false;return}
+    const {error:delError}=await db.from('hn_public_playlists').delete().eq('id',item.id);
+    if(delError){hnV38Msg('hnPublicStatus','Löschen fehlgeschlagen: '+delError.message);clean.disabled=false;return}
+   }
+   await hnLoadPublicPlaylists();hnV38Msg('hnPublicStatus','Leere doppelte Playlists gelöscht.');
+  };
  }
- hnV38Msg('hnPublicStatus','');
+ if(linksError)hnV38Msg('hnPublicStatus','Duplikate konnten nicht geprüft werden. Keine Playlist wurde entfernt.');
+ else hnV38Msg('hnPublicStatus',duplicateEmpty.length?duplicateEmpty.length+' leere doppelte Playlist(s) ausgeblendet. Admin kann sie dauerhaft entfernen.':'');
 }
 async function hnOpenPublicPlaylist(id){
  const p=hnPublicPlaylists.find(x=>x.id===id);if(!p)return;
