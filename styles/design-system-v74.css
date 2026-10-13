@@ -151,3 +151,27 @@ body .sidebar button,body .sidebar .hn-create-btn{accent-color:var(--hn74-purple
  body .hn-topbar .hn-actions{margin-right:54px!important}
  body .hn-hero-carousel{height:285px!important;max-height:285px!important}
 }
+
+/* V74 iPhone QA: fix hero hidden under fixed toolbar and tame PWA prompt. */
+@media(max-width:760px){
+ body:not(.logged-out) main{
+  padding-top:132px!important;
+  box-sizing:border-box!important;
+ }
+ body main>header{position:relative!important;z-index:1!important}
+ body .hn-hero-carousel{position:relative!important;margin-top:12px!important}
+ body #hnPwaInstall{
+  right:12px!important;left:12px!important;bottom:20px!important;
+  width:auto!important;max-width:420px!important;margin:0 auto!important;
+  box-sizing:border-box!important;padding:10px 12px!important;
+  border-color:var(--hn74-purple)!important;background:#15253a!important;
+  box-shadow:0 8px 26px #0009!important;font-size:13px!important;
+ }
+ body #hnPwaInstall strong{font-size:14px!important}
+ body #hnPwaInstall p{font-size:11px!important;line-height:1.35!important}
+ body #hnPwaInstall button{background:var(--hn74-purple)!important;color:white!important}
+ body #hnPwaInstall .hn-pwa-close{
+  background:#613b9b!important;color:#fff!important;border-radius:50%!important;
+  width:30px!important;height:30px!important;padding:0!important;
+ }
+}
