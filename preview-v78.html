@@ -2449,7 +2449,14 @@ html body.hn-playing:not(.hn-player-fullscreen) .hn-player-window #hnNextSong{di
 html body.hn-playing:not(.hn-player-fullscreen) .hn-player-window #hnShuffleSongs,
 html body.hn-playing:not(.hn-player-fullscreen) .hn-player-window #hnRepeatSongs{display:none!important}
 @media(max-width:600px){html body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-player-transport{gap:3px!important;padding:0 2px!important}html body.hn-playing:not(.hn-player-fullscreen) .hn-player-window #hnPreviousSong,html body.hn-playing:not(.hn-player-fullscreen) .hn-player-window #hnNextSong{flex-basis:30px!important;width:30px!important;height:30px!important}}
-</style><style id="hn-v72-playlist-dark-palette">
+</style><style id="hn-v137-dock-skip-controls">
+html body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-v137-prev,
+html body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-v137-next{display:inline-flex!important;align-items:center!important;justify-content:center!important;position:static!important;flex:0 0 37px!important;width:37px!important;height:37px!important;padding:0!important;border:1px solid #a46dd1!important;border-radius:50%!important;background:#7944b6!important;color:white!important;font-size:18px!important;cursor:pointer!important}
+</style><script id="hn-v137-dock-skip-script">(()=>{
+function install(){const dock=document.querySelector('.hn-player-window .hn-v79-actions');if(!dock||dock.querySelector('.hn-v137-prev'))return;const make=(cls,label,source)=>{const b=document.createElement('button');b.type='button';b.className=cls;b.textContent=label;b.setAttribute('aria-label',label==='⏮'?'Vorheriger Song':'Nächster Song');b.title=b.getAttribute('aria-label');b.addEventListener('click',()=>document.getElementById(source)?.click());return b};dock.prepend(make('hn-v137-prev','⏮','hnPreviousSong'));dock.insertBefore(make('hn-v137-next','⏭','hnNextSong'),dock.children[1]||null)}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install);else install();
+const observer=new MutationObserver(()=>install());observer.observe(document.documentElement,{childList:true,subtree:true});
+})();</script><style id="hn-v72-playlist-dark-palette">
 /* V72: scoped palette override for playlist navigation; retain all existing handlers. */
 #playlists #hnV71Landing .hn-v71-section{background:#152238!important;border:1px solid #47516c!important;box-shadow:0 10px 28px #050b1b35}
 #playlists #hnV71Landing .hn-v71-section:nth-child(2){border-color:#73517e!important}
