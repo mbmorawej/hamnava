@@ -2556,7 +2556,7 @@ async function render(){
    const button=document.createElement('button');button.type='button';
    const sync=()=>{button.textContent=following.has(person.user_id)?'✓ Gefolgt':'+ Folgen';button.setAttribute('aria-label',(following.has(person.user_id)?'Entfolgen: ':'Folgen: ')+(person.display_name||'Musikfreund'))};sync();
    button.onclick=async()=>{button.disabled=true;try{const was=following.has(person.user_id);const res=was?await db.from('community_follows').delete().eq('follower_id',uid).eq('followed_id',person.user_id):await db.from('community_follows').insert({follower_id:uid,followed_id:person.user_id});if(res.error)throw res.error;await render();window.hnCommunityFollowLoad?.();window.hnCommunityDirectoryLoad?.()}catch(e){setStatus('Aktion fehlgeschlagen: '+(e?.message||'Unbekannter Fehler'));button.disabled=false}};
-   card.append(avatar,info,button);target.append(card)
+   const header=document.createElement('div');header.className='hn-social-person-header';header.append(avatar,name,button);card.append(header,info);target.append(card)
   }
  }catch(e){setStatus('Community konnte nicht geladen werden: '+(e?.message||'Fehler'))}
 }
@@ -2593,4 +2593,13 @@ show(null);new MutationObserver(()=>{if(!$('hnAccountDialog').hidden)refresh()})
 #community .hn-social-person .hn-social-info strong,#community .hn-social-person .hn-social-info p{width:100%!important;max-width:100%!important;overflow-wrap:anywhere!important;word-break:normal!important;white-space:normal!important;line-height:1.5!important;text-align:start!important;unicode-bidi:plaintext}
 #community .hn-social-person button{grid-column:auto!important;grid-row:auto!important;align-self:flex-start!important;justify-self:auto!important;max-width:100%!important;white-space:normal!important;margin-top:auto!important}
 @media(max-width:480px){#community .hn-social-grid{gap:8px!important}#community .hn-social-person{padding:10px!important;border-radius:13px!important}#community .hn-social-person .hn-social-info strong{font-size:13px!important}#community .hn-social-person .hn-social-info p{font-size:12px!important;line-height:1.55!important}#community .hn-social-person button{font-size:12px!important;padding:7px 9px!important}}
+</style><style id="hn-v78-follow-top-layout">
+#community .hn-social-person{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:9px!important}
+#community .hn-social-person-header{display:flex!important;align-items:center!important;gap:clamp(5px,.8vw,10px)!important;width:100%!important;min-width:0!important}
+#community .hn-social-person-header .hn-social-avatar{width:clamp(30px,4vw,48px)!important;height:clamp(30px,4vw,48px)!important;flex:0 0 auto!important}
+#community .hn-social-person-header strong{min-width:0!important;flex:1 1 auto!important;overflow-wrap:anywhere!important;line-height:1.3!important;text-align:start!important;unicode-bidi:plaintext}
+#community .hn-social-person-header button{flex:0 0 auto!important;align-self:center!important;margin:0!important;white-space:nowrap!important;font-size:clamp(10px,1.1vw,13px)!important;padding:7px 9px!important}
+#community .hn-social-person .hn-social-info{width:100%!important;min-width:0!important}
+#community .hn-social-person .hn-social-info p{margin:0!important;line-height:1.6!important;text-align:start!important}
+@media(max-width:430px){#community .hn-social-person-header{flex-wrap:wrap!important}#community .hn-social-person-header button{margin-left:auto!important}#community .hn-social-person-header strong{font-size:12px!important}}
 </style></body></html>
