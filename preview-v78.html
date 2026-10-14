@@ -1745,6 +1745,45 @@ async function hnLoadSessions(){
  }
 }
 hnV38El('hnSessionRefresh').onclick=hnLoadSessions;
+
+/* V116: playlist handlers share module-scoped state and helpers. */
+/* HamNava V62: public display deduplication and owner-scoped private playlists */
+function hnSimpleCreate(){
+ const name=prompt('Name der neuen Playlist:');if(name===null||!name.trim())return;
+ $('playlistName').value=name.trim();$('playlistForm').requestSubmit();
+}
+$('hnSimpleNew').onclick=hnSimpleCreate;
+$('hnSimpleAdd').onclick=()=>{
+ const p=$('playlistSelect').value;if(!p)return;
+ const dialog=document.createElement('dialog');dialog.className='hn-simple-song-dialog';
+ const h=document.createElement('h3');h.textContent='Lied zur Playlist hinzufügen';
+ const input=document.createElement('input');input.type='search';input.placeholder='Song oder Künstler suchen';
+ const list=document.createElement('div');list.className='hn-simple-song-results';
+ const close=document.createElement('button');close.type='button';close.className='alt';close.textContent='Schließen';close.onclick=()=>dialog.close();
+ function render(){list.replaceChildren();const q=input.value.toLocaleLowerCase();for(const song of songs.filter(s=>(s.title+' '+s.artist).toLocaleLowerCase().includes(q)).slice(0,60)){
+ const b=document.createElement('button');b.type='button';b.className='alt';b.textContent='＋ '+song.artist+' — '+song.title;
+ b.onclick=async()=>{const {error}=await db.from('playlist_songs').insert({playlist_id:p,song_id:song.id,added_by:user.id});if(error){say(error.code==='23505'?'Song bereits vorhanden.':error.message);return}dialog.close();await loadPlaylist();await hnRefreshPlaylistCovers();say('Song hinzugefügt')};list.append(b)} }
+ input.oninput=render;dialog.append(h,input,list,close);document.body.append(dialog);dialog.addEventListener('close',()=>dialog.remove());render();dialog.showModal();input.focus();
+};
+$('hnSimpleMore').onclick=()=>{const n=$('hnSimpleOptions');n.hidden=!n.hidden;$('hnSimpleMore').setAttribute('aria-expanded',String(!n.hidden))};
+$('hnSimpleRename').onclick=async()=>{const id=$('playlistSelect').value,p=playlists.find(x=>x.id===id);if(!p)return;const name=prompt('Neuer Playlistname:',p.name);if(name===null||!name.trim()||name.trim()===p.name)return;const {error}=await db.from('playlists').update({name:name.trim()}).eq('id',id).eq('owner_id',user.id);if(error){say(error.message);return}await loadAll();say('Playlist umbenannt')};
+$('hnSimpleDelete').onclick=()=> $('playlistDelete').click();
+// Keep playlist detail options collapsed when opening a different playlist.
+const hnOriginalUpdatePlaylistHeroV61=hnUpdatePlaylistHero;
+hnUpdatePlaylistHero=function(){hnOriginalUpdatePlaylistHeroV61();const p=playlists.find(x=>x.id===$('playlistSelect').value);$('hnSimpleRename').hidden=!p||!(p.owner_id===user?.id||isAdmin);$('hnSimpleDelete').hidden=!p||!(p.owner_id===user?.id||isAdmin)};
+// Navigation aus jeder Suche heraus: Suchtext, Ergebnisse und Filter zurücksetzen.
+document.addEventListener('click',e=>{
+ const a=e.target.closest('a[href^="#"]');if(!a||!a.getAttribute('href').slice(1))return;
+ const id=a.getAttribute('href').slice(1);
+ if(!['home','library','artists','favorites','playlists','ai','admin','users'].includes(id))return;
+ for(const key of ['hnGlobalSearch','homeSearch','search','hnAdvText','hnAdvArtist','hnAdvGenre','hnAdvSource']){const field=$(key);if(field)field.value=''}
+ if($('hnAdvSort'))$('hnAdvSort').value='newest';
+ if($('artistFilter'))$('artistFilter').value='';
+ if(typeof hnSelectedGenre!=='undefined')hnSelectedGenre='';
+ if(id==='artists'){chosenArtist='';renderArtists()}
+ if(user){renderSongs('songs','library');renderHome()}
+},true);
+
 </script><script src="languages.js?v=10.0.0" defer></script><script id="hamnava-v27-language-move">
 /* Vorhandene Sprachauswahl von languages.js verschieben, ohne ihre Funktion zu verändern. */
 (function(){
@@ -2016,44 +2055,6 @@ document.addEventListener('click',async e=>{
  root.addEventListener('mouseenter',()=>clearInterval(timer));root.addEventListener('mouseleave',reset);show(0);reset();window.addEventListener('pagehide',()=>clearInterval(timer),{once:true});
 })();
 
-/* HamNava V62: public display deduplication and owner-scoped private playlists */
-// V115: restore the DOM lookup helper for this standalone script.
-const $ = id => document.getElementById(id);
-function hnSimpleCreate(){
- const name=prompt('Name der neuen Playlist:');if(name===null||!name.trim())return;
- $('playlistName').value=name.trim();$('playlistForm').requestSubmit();
-}
-$('hnSimpleNew').onclick=hnSimpleCreate;
-$('hnSimpleAdd').onclick=()=>{
- const p=$('playlistSelect').value;if(!p)return;
- const dialog=document.createElement('dialog');dialog.className='hn-simple-song-dialog';
- const h=document.createElement('h3');h.textContent='Lied zur Playlist hinzufügen';
- const input=document.createElement('input');input.type='search';input.placeholder='Song oder Künstler suchen';
- const list=document.createElement('div');list.className='hn-simple-song-results';
- const close=document.createElement('button');close.type='button';close.className='alt';close.textContent='Schließen';close.onclick=()=>dialog.close();
- function render(){list.replaceChildren();const q=input.value.toLocaleLowerCase();for(const song of songs.filter(s=>(s.title+' '+s.artist).toLocaleLowerCase().includes(q)).slice(0,60)){
- const b=document.createElement('button');b.type='button';b.className='alt';b.textContent='＋ '+song.artist+' — '+song.title;
- b.onclick=async()=>{const {error}=await db.from('playlist_songs').insert({playlist_id:p,song_id:song.id,added_by:user.id});if(error){say(error.code==='23505'?'Song bereits vorhanden.':error.message);return}dialog.close();await loadPlaylist();await hnRefreshPlaylistCovers();say('Song hinzugefügt')};list.append(b)} }
- input.oninput=render;dialog.append(h,input,list,close);document.body.append(dialog);dialog.addEventListener('close',()=>dialog.remove());render();dialog.showModal();input.focus();
-};
-$('hnSimpleMore').onclick=()=>{const n=$('hnSimpleOptions');n.hidden=!n.hidden;$('hnSimpleMore').setAttribute('aria-expanded',String(!n.hidden))};
-$('hnSimpleRename').onclick=async()=>{const id=$('playlistSelect').value,p=playlists.find(x=>x.id===id);if(!p)return;const name=prompt('Neuer Playlistname:',p.name);if(name===null||!name.trim()||name.trim()===p.name)return;const {error}=await db.from('playlists').update({name:name.trim()}).eq('id',id).eq('owner_id',user.id);if(error){say(error.message);return}await loadAll();say('Playlist umbenannt')};
-$('hnSimpleDelete').onclick=()=> $('playlistDelete').click();
-// Keep playlist detail options collapsed when opening a different playlist.
-const hnOriginalUpdatePlaylistHeroV61=hnUpdatePlaylistHero;
-hnUpdatePlaylistHero=function(){hnOriginalUpdatePlaylistHeroV61();const p=playlists.find(x=>x.id===$('playlistSelect').value);$('hnSimpleRename').hidden=!p||!(p.owner_id===user?.id||isAdmin);$('hnSimpleDelete').hidden=!p||!(p.owner_id===user?.id||isAdmin)};
-// Navigation aus jeder Suche heraus: Suchtext, Ergebnisse und Filter zurücksetzen.
-document.addEventListener('click',e=>{
- const a=e.target.closest('a[href^="#"]');if(!a||!a.getAttribute('href').slice(1))return;
- const id=a.getAttribute('href').slice(1);
- if(!['home','library','artists','favorites','playlists','ai','admin','users'].includes(id))return;
- for(const key of ['hnGlobalSearch','homeSearch','search','hnAdvText','hnAdvArtist','hnAdvGenre','hnAdvSource']){const field=$(key);if(field)field.value=''}
- if($('hnAdvSort'))$('hnAdvSort').value='newest';
- if($('artistFilter'))$('artistFilter').value='';
- if(typeof hnSelectedGenre!=='undefined')hnSelectedGenre='';
- if(id==='artists'){chosenArtist='';renderArtists()}
- if(user){renderSongs('songs','library');renderHome()}
-},true);
 </script><script id="hn-advanced-ui">(()=>{const $=id=>document.getElementById(id),toggle=$('hnAdvancedToggle'),panel=$('hnAdvancedPanel');if(!toggle||!panel)return;function refresh(){let data=window.hnAdvancedSearchData?.();if(!data)return;for(const [id,values] of [['hnAdvArtist',data.artists],['hnAdvGenre',data.genres]]){const el=$(id),current=el.value;el.replaceChildren(el.options[0]);for(const value of values){const o=document.createElement('option');o.value=value;o.textContent=value;el.append(o)}el.value=current}}function setOpen(open){panel.hidden=!open;toggle.setAttribute('aria-expanded',String(open));if(open)refresh()}toggle.addEventListener('click',()=>setOpen(panel.hidden));$('hnAdvApply').addEventListener('click',()=>{const q={query:$('hnAdvText').value,artist:$('hnAdvArtist').value,genre:$('hnAdvGenre').value,source:$('hnAdvSource').value,sort:$('hnAdvSort').value};if(typeof window.hnAdvancedSearchApply==='function'){window.hnAdvancedSearchApply(q);setOpen(false)}});$('hnAdvReset').addEventListener('click',()=>{for(const id of ['hnAdvText','hnAdvArtist','hnAdvGenre','hnAdvSource'])$(id).value='';$('hnAdvSort').value='newest';window.hnAdvancedSearchApply?.({});setOpen(false)});$('hnGlobalSearch')?.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();$('hnAdvText').value=e.target.value;refresh();$('hnAdvApply').click()}});document.addEventListener('keydown',e=>{if(e.key==='Escape')setOpen(false)});document.addEventListener('click',e=>{if(!panel.hidden&&!panel.contains(e.target)&&!toggle.contains(e.target))setOpen(false)});})();</script><script id="hn-v43-management-script">(function(){
 const valid=['users','sessions','publish','allplaylists','stats'];
 window.hnManageDesired='users';
