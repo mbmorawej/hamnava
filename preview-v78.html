@@ -1256,6 +1256,14 @@ function hnUpdatePlaylistHero(){const p=playlists.find(x=>x.id===$('playlistSele
 let hnPlaylistQueue=[],hnPlaylistQueueIndex=-1,hnPlaylistQueueId=null,hnQueueInternalPlay=false;
 
 function hnPlayFromCard(song,visibleList,mode){
+ if(mode!=='playlist'&&mode!=='public'){
+  document.body.classList.add('hn-v151-single-track');
+  hnStopPlaylistQueue();
+  $('audioPlayer').pause();
+  hnCloseExternal();
+  play(song);
+  return;
+ }
  const list=visibleList.slice();
  const index=list.findIndex(s=>s.id===song.id);
  if(index<0)return;
@@ -2609,6 +2617,14 @@ let running=false;const obs=new MutationObserver(()=>{if(running)return;running=
 html body.hn-v151-single-track.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-v79-actions>button:not(.hn-v79-play){display:none!important}
 html body.hn-v151-single-track.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-v79-actions{display:flex!important;gap:0!important}
 html body.hn-v151-single-track.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-v79-play{display:flex!important;align-items:center!important;justify-content:center!important}
+</style><style id="hn-v152-unified-song-and-playback">
+/* Three cover actions in library/favorites: play, favorite, add. */
+#songs article.song .actions>button:nth-child(-n+3),#favoriteSongs article.song .actions>button:nth-child(-n+3){display:flex!important}
+#songs article.song .actions>button:nth-child(n+4),#favoriteSongs article.song .actions>button:nth-child(n+4){display:none!important}
+@media(max-width:760px){
+#songs article.song .hn-v140-glass-actions,#favoriteSongs article.song .hn-v140-glass-actions,#playlistTracks article.song .hn-v140-glass-actions,#hnPublicTracks article.song .hn-v140-glass-actions{position:absolute!important;left:9px!important;right:auto!important;top:50%!important;bottom:auto!important;transform:translateY(-50%)!important;display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;gap:12px!important;width:52px!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
+#songs article.song .hn-v140-glass-actions>button:nth-child(-n+3),#favoriteSongs article.song .hn-v140-glass-actions>button:nth-child(-n+3){display:flex!important;align-items:center!important;justify-content:center!important;width:48px!important;height:48px!important;min-width:48px!important;max-width:48px!important;background:transparent!important;border:0!important;box-shadow:none!important}
+}
 </style><style id="hn-v72-playlist-dark-palette">
 /* V72: scoped palette override for playlist navigation; retain all existing handlers. */
 #playlists #hnV71Landing .hn-v71-section{background:#152238!important;border:1px solid #47516c!important;box-shadow:0 10px 28px #050b1b35}
