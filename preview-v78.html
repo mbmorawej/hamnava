@@ -2574,7 +2574,18 @@ let busy=false;const obs=new MutationObserver(()=>{if(busy)return;busy=true;obs.
 #favoriteSongs article.song .hn-v97-uploader-name{font-size:14px!important}
 #favoriteSongs article.song .hn-favorite-action.hn-v145-favorited .hn-v141-symbol{stroke:#ed355f!important;fill:#ed355f!important}
 }
-</style><style id="hn-v72-playlist-dark-palette">
+</style><style id="hn-v148-single-play-action">
+#songs article.song .actions>button:not(.hn-v148-play-only),#favoriteSongs article.song .actions>button:not(.hn-v148-play-only){display:none!important}
+#songs article.song .hn-v97-follow,#favoriteSongs article.song .hn-v97-follow{display:none!important}
+@media(max-width:760px){
+#songs article.song .hn-v140-glass-actions,#favoriteSongs article.song .hn-v140-glass-actions{left:9px!important;top:50%!important;right:auto!important;bottom:auto!important;transform:translateY(-50%)!important;display:flex!important;width:52px!important;background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important}
+#songs article.song .hn-v140-glass-actions>button.hn-v148-play-only,#favoriteSongs article.song .hn-v140-glass-actions>button.hn-v148-play-only{display:flex!important;align-items:center!important;justify-content:center!important;width:48px!important;height:48px!important;min-width:48px!important;background:transparent!important;border:0!important;box-shadow:none!important}
+}
+</style><script id="hn-v148-single-play-action-script">(()=>{
+function sync(){for(const id of ['songs','favoriteSongs']){const root=document.getElementById(id);if(!root)continue;for(const card of root.querySelectorAll('article.song')){const actions=card.querySelector('.actions');if(!actions)continue;for(const btn of actions.querySelectorAll('button')){const label=(btn.textContent||'').trim();const isPlay=/Abspielen|^▶|^▷/.test(label)&&!/Playlist abspielen/.test(label);btn.classList.toggle('hn-v148-play-only',isPlay)} }}
+}
+let running=false;const obs=new MutationObserver(()=>{if(running)return;running=true;obs.disconnect();sync();obs.observe(document.body,{childList:true,subtree:true});running=false});function init(){sync();obs.observe(document.body,{childList:true,subtree:true})}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();</script><style id="hn-v72-playlist-dark-palette">
 /* V72: scoped palette override for playlist navigation; retain all existing handlers. */
 #playlists #hnV71Landing .hn-v71-section{background:#152238!important;border:1px solid #47516c!important;box-shadow:0 10px 28px #050b1b35}
 #playlists #hnV71Landing .hn-v71-section:nth-child(2){border-color:#73517e!important}
