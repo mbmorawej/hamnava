@@ -25,7 +25,7 @@ body.hn-player-fullscreen #hnV78Expand{display:none}
 @media(max-width:760px){#hnExternalPlayer.hn-v78-docked{bottom:calc(76px + env(safe-area-inset-bottom,0px))!important}}
 `;document.head.append(css);
 function setup(){const player=$('.hn-player-window'),audio=$('#audioPlayer'),modal=$('#hnExternalPlayer');if(!player||!audio||!modal)return;
-const expand=document.createElement('button');expand.id='hnV78Expand';expand.type='button';expand.title='Player vergrößern';expand.setAttribute('aria-label','Player vergrößern');expand.textContent='⛶';expand.addEventListener('click',()=>$('#hnPlayerFullscreen')?.click());$('.hn-player-transport')?.append(expand);
+document.body.classList.add('hn-v78-dock-ready');const expand=document.createElement('button');expand.id='hnV78Expand';expand.type='button';expand.title='Player vergrößern';expand.setAttribute('aria-label','Player vergrößern');expand.textContent='⛶';expand.addEventListener('click',()=>$('#hnPlayerFullscreen')?.click());$('.hn-player-transport')?.append(expand);
 player.addEventListener('click',e=>{if(e.target.closest('button,a,audio,input'))return;$('#hnPlayerFullscreen')?.click()});
 const observer=new MutationObserver(()=>{if(!modal.hidden){modal.classList.add('hn-v78-docked');external=true;document.body.classList.remove('hn-playing')}else{modal.classList.remove('hn-v78-docked');external=false}});
 observer.observe(modal,{attributes:true,attributeFilter:['hidden']});if(!modal.hidden)observer.takeRecords(),modal.classList.add('hn-v78-docked');
