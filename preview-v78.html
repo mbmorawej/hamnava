@@ -1094,9 +1094,6 @@ function hnArtistTracks(){
 }
 function hnLeaveArtist(){
  chosenArtist='';
- hnStopPlaylistQueue();
- hnCloseExternal();
- hnStopPlayer();
  renderArtists();
 }
 function hnPlayArtistSong(song){
@@ -1147,7 +1144,7 @@ function renderArtistChips(id,limit){
   const portrait=/^hayedeh?$/i.test(name.trim())?'hayede-portrait.jpg':(sample?.artist_image_url||sample?.cover_url);if(portrait){const img=el('img');img.src=portrait;img.alt=name;img.loading='lazy';img.onerror=()=>{if(img.src.endsWith('/hayede-portrait.jpg')&&sample?.cover_url&&/^https:\/\//i.test(sample.cover_url)){img.onerror=()=>{img.replaceWith(el('span','♫','artist-placeholder'))};img.src=sample.cover_url}else img.replaceWith(el('span','♫','artist-placeholder'))};btn.append(img)}
   else btn.append(el('span','♫','artist-placeholder'));
   const artistInfo=el('span',null,'hn-artist-info');artistInfo.append(el('span',name,'hn-artist-name'));const count=songs.filter(song=>song.artist===name).length;artistInfo.append(el('span',`♫ ${count} ${count===1?'Song':'Songs'}`,'hn-artist-count'));btn.append(artistInfo);
-  btn.dataset.artist=name;btn.onclick=()=>{if(chosenArtist!==name){hnStopPlaylistQueue();hnCloseExternal();hnStopPlayer();}chosenArtist=name;location.hash='#artists';renderArtists()};root.append(btn);
+  btn.dataset.artist=name;btn.onclick=()=>{chosenArtist=name;location.hash='#artists';renderArtists()};root.append(btn);
  }
 }
 $('homeSearch').addEventListener('input',renderHome);
