@@ -2432,6 +2432,11 @@ observer.observe(privateRoot,{childList:true});observer.observe(publicRoot,{chil
 #playlists #hnPlaylistQuickList>button,#playlists #hnPublicPlaylists>button{overflow:hidden!important;border-radius:13px!important}
 #playlists .hn-v128-menu{max-height:110px;overflow:auto}
 #playlists .hn-v128-menu[hidden]{display:none!important}
+</style><style id="hn-v133-public-detail-cleanup">
+/* Public playlist detail: one contextual back button, no duplicate group heading. */
+#playlists:has(#hnPublicActive:not([hidden])) #hnV71Back{display:none!important}
+#playlists:has(#hnPublicActive:not([hidden])) .hn-public-wrap>h2{display:none!important}
+#playlists:has(#hnPublicActive:not([hidden])) #hnPublicBack{display:inline-flex!important}
 </style><style id="hn-v72-playlist-dark-palette">
 /* V72: scoped palette override for playlist navigation; retain all existing handlers. */
 #playlists #hnV71Landing .hn-v71-section{background:#152238!important;border:1px solid #47516c!important;box-shadow:0 10px 28px #050b1b35}
