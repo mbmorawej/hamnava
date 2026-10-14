@@ -2399,6 +2399,29 @@ more.onclick=e=>{e.stopPropagation();for(const other of landing.querySelectorAll
 card.append(more,actions);
 }}
 const observer=new MutationObserver(()=>{observer.disconnect();decorate();observer.observe(landing,{childList:true,subtree:true})});observer.observe(landing,{childList:true,subtree:true});decorate();
+})();</script><style id="hn-v128-real-card-options">
+#playlists #hnV71SectionOptions{display:none!important}
+#playlists #hnV71Landing .hn-v71-head>.hn-v71-options{display:none!important}
+#playlists #hnPlaylistQuickList>button,#playlists #hnPublicPlaylists>button{position:relative!important;overflow:visible!important}
+#playlists .hn-v128-more{position:absolute!important;top:5px;right:5px;z-index:12;display:flex;align-items:center;justify-content:center;width:29px;height:27px;border:1px solid #b391c8;border-radius:8px;background:#302741eb;color:#fff;font-size:19px;font-weight:bold;cursor:pointer}
+#playlists .hn-v128-menu{position:absolute;top:35px;right:5px;z-index:15;min-width:160px;max-width:200px;padding:6px;border:1px solid #856b9d;border-radius:10px;background:#20273d;box-shadow:0 12px 30px #000b}
+#playlists .hn-v128-menu[hidden]{display:none!important}
+#playlists .hn-v128-action{display:block;width:100%;padding:8px 6px;color:#fff;text-align:left;border-radius:6px;cursor:pointer;font-size:12px}
+#playlists .hn-v128-action:hover{background:#453357}
+</style><script id="hn-v128-real-card-options-script">(()=>{
+const privateRoot=document.getElementById('hnPlaylistQuickList'),publicRoot=document.getElementById('hnPublicPlaylists');if(!privateRoot||!publicRoot)return;
+function decorate(root,kind){for(const card of root.querySelectorAll(':scope > button')){if(card.querySelector('.hn-v128-more'))continue;
+const more=document.createElement('span');more.className='hn-v128-more';more.textContent='⋯';more.setAttribute('role','button');more.setAttribute('tabindex','0');more.setAttribute('aria-label','Optionen für '+card.textContent.trim());
+const menu=document.createElement('span');menu.className='hn-v128-menu';menu.hidden=true;
+const add=(label,fn)=>{const a=document.createElement('span');a.className='hn-v128-action';a.textContent=label;a.setAttribute('role','button');a.setAttribute('tabindex','0');a.onclick=e=>{e.stopPropagation();menu.hidden=true;fn()};a.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();a.click()}};menu.append(a)};
+add('▶ Playlist öffnen',()=>card.click());
+add('▶ Abspielen',()=>{card.click();setTimeout(()=>document.getElementById(kind==='private'?'hnPlaylistPlay':'hnPublicPlay')?.click(),350)});
+if(kind==='private'){add('✎ Umbenennen',()=>{card.click();setTimeout(()=>document.getElementById('hnSimpleRename')?.click(),350)});add('Playlist löschen',()=>{card.click();setTimeout(()=>document.getElementById('hnSimpleDelete')?.click(),350)})}
+more.onclick=e=>{e.stopPropagation();document.querySelectorAll('.hn-v128-menu').forEach(m=>{if(m!==menu)m.hidden=true});menu.hidden=!menu.hidden};more.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();more.click()}};
+menu.onclick=e=>e.stopPropagation();card.append(more,menu);
+}}
+const observer=new MutationObserver(()=>{observer.disconnect();decorate(privateRoot,'private');decorate(publicRoot,'public');observer.observe(privateRoot,{childList:true});observer.observe(publicRoot,{childList:true})});
+observer.observe(privateRoot,{childList:true});observer.observe(publicRoot,{childList:true});decorate(privateRoot,'private');decorate(publicRoot,'public');
 })();</script><style id="hn-v72-playlist-dark-palette">
 /* V72: scoped palette override for playlist navigation; retain all existing handlers. */
 #playlists #hnV71Landing .hn-v71-section{background:#152238!important;border:1px solid #47516c!important;box-shadow:0 10px 28px #050b1b35}
