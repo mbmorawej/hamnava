@@ -2370,6 +2370,14 @@ show('home');
 })();</script><style id="hn-v124-hide-repeated-group-tiles">
 /* V124: legacy V71 !important grid overrides inline display:none; hide switch in every state. */
 #playlists #hnV66Switch{display:none!important}
+</style><style id="hn-v125-private-cards-equal-public">
+/* Match private playlist cards to public cover cards without changing playlist data or handlers. */
+#playlists #hnPlaylistQuickList.hn-playlist-overview{grid-template-columns:repeat(auto-fill,minmax(138px,138px))!important;gap:10px!important;margin-top:14px!important}
+#playlists #hnPlaylistQuickList button{position:relative!important;display:flex!important;align-items:flex-end!important;justify-content:flex-start!important;width:138px!important;min-height:145px!important;height:145px!important;padding:12px!important;overflow:hidden!important;isolation:isolate;border-radius:13px!important;text-align:left!important}
+#playlists #hnPlaylistQuickList button .hn-quick-cover{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;border-radius:0!important;z-index:-2!important;background-size:cover!important;background-position:center!important}
+#playlists #hnPlaylistQuickList button:before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(3,12,25,.92),rgba(3,12,25,.12) 75%);z-index:-1;pointer-events:none}
+#playlists #hnPlaylistQuickList button>span:last-child{position:relative;z-index:1;font-size:14px;font-weight:800;line-height:1.3;color:#fff;text-shadow:0 2px 8px #000;overflow-wrap:anywhere}
+@media(max-width:600px){#playlists #hnPlaylistQuickList.hn-playlist-overview{grid-template-columns:repeat(2,minmax(0,1fr))!important}#playlists #hnPlaylistQuickList button{width:100%!important}}
 </style><style id="hn-v72-playlist-dark-palette">
 /* V72: scoped palette override for playlist navigation; retain all existing handlers. */
 #playlists #hnV71Landing .hn-v71-section{background:#152238!important;border:1px solid #47516c!important;box-shadow:0 10px 28px #050b1b35}
