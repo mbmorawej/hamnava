@@ -2456,6 +2456,17 @@ html body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-v137-next{
 function install(){const dock=document.querySelector('.hn-player-window .hn-v79-actions');if(!dock||dock.querySelector('.hn-v137-prev'))return;const make=(cls,label,source)=>{const b=document.createElement('button');b.type='button';b.className=cls;b.textContent=label;b.setAttribute('aria-label',label==='⏮'?'Vorheriger Song':'Nächster Song');b.title=b.getAttribute('aria-label');b.addEventListener('click',()=>document.getElementById(source)?.click());return b};dock.prepend(make('hn-v137-prev','⏮','hnPreviousSong'));dock.insertBefore(make('hn-v137-next','⏭','hnNextSong'),dock.children[1]||null)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install);else install();
 const observer=new MutationObserver(()=>install());observer.observe(document.documentElement,{childList:true,subtree:true});
+})();</script><style id="hn-v138-mobile-skip-icons">
+@media(max-width:760px){
+html body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-v137-prev,
+html body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-v137-next{font-size:0!important;line-height:0!important}
+html body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-v137-prev svg,
+html body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-v137-next svg{width:19px!important;height:19px!important;display:block!important;stroke:#fff!important;fill:none!important;stroke-width:2.3!important;stroke-linecap:round!important;stroke-linejoin:round!important}
+}
+</style><script id="hn-v138-mobile-skip-icons-script">(()=>{
+function replaceIcons(){if(!matchMedia('(max-width:760px)').matches)return;const icons=[['.hn-v137-prev','<path d="M19 20 9 12l10-8v16Z"/><path d="M5 19V5"/>'],['.hn-v137-next','<path d="m5 4 10 8-10 8V4Z"/><path d="M19 5v14"/>']];for(const [selector,paths] of icons){const b=document.querySelector('.hn-player-window '+selector);if(!b||b.querySelector('svg'))continue;b.textContent='';const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('aria-hidden','true');svg.innerHTML=paths;b.append(svg)}}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',replaceIcons);else replaceIcons();
+new MutationObserver(replaceIcons).observe(document.documentElement,{childList:true,subtree:true});
 })();</script><style id="hn-v72-playlist-dark-palette">
 /* V72: scoped palette override for playlist navigation; retain all existing handlers. */
 #playlists #hnV71Landing .hn-v71-section{background:#152238!important;border:1px solid #47516c!important;box-shadow:0 10px 28px #050b1b35}
