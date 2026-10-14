@@ -1569,7 +1569,7 @@ async function hnLoadPublicPlaylists(){
   };
  }
  if(linksError)hnV38Msg('hnPublicStatus','Duplikate konnten nicht geprüft werden. Keine Playlist wurde entfernt.');
- else hnV38Msg('hnPublicStatus',duplicateHidden.length?duplicateHidden.length+' doppelte öffentliche Playlist(s) in der Übersicht ausgeblendet. Keine Daten gelöscht.'+(duplicateEmpty.length?' '+duplicateEmpty.length+' davon leer und für Admin-Löschung prüfbar.':''):'');
+ else hnV38Msg('hnPublicStatus',''); // Duplicate details belong in Admin tools, not public browsing.
 }
 async function hnOpenPublicPlaylist(id){
  const p=hnPublicPlaylists.find(x=>x.id===id);if(!p)return;
