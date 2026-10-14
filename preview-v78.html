@@ -2467,6 +2467,27 @@ html body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-v137-next 
 function replaceIcons(){if(!matchMedia('(max-width:760px)').matches)return;const icons=[['.hn-v137-prev','<path d="M19 20 9 12l10-8v16Z"/><path d="M5 19V5"/>'],['.hn-v137-next','<path d="m5 4 10 8-10 8V4Z"/><path d="M19 5v14"/>']];for(const [selector,paths] of icons){const b=document.querySelector('.hn-player-window '+selector);if(!b||b.querySelector('svg'))continue;b.textContent='';const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('aria-hidden','true');svg.innerHTML=paths;b.append(svg)}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',replaceIcons);else replaceIcons();
 new MutationObserver(replaceIcons).observe(document.documentElement,{childList:true,subtree:true});
+})();</script><style id="hn-v139-mobile-dock-and-playlist-actions">
+/* In playlist detail, avoid offering to add the song to the playlist being viewed. */
+#playlists:has(#hnSimpleDetail:not([hidden])) #playlistTracks .actions button.hn-v139-add-to-list,
+#playlists:has(#hnPublicActive:not([hidden])) #hnPublicTracks .actions button.hn-v139-add-to-list{display:none!important}
+@media(max-width:760px){
+html body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-v137-prev,
+html body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-v137-next{font-size:0!important}
+html body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-v137-prev .hn-v139-icon,
+html body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-v137-next .hn-v139-icon{display:block!important;width:19px!important;height:19px!important;fill:#fff!important}
+}
+</style><script id="hn-v139-mobile-dock-and-playlist-actions-script">(()=>{
+function fix(){
+for(const root of [document.getElementById('playlistTracks'),document.getElementById('hnPublicTracks')])if(root)for(const b of root.querySelectorAll('.actions button'))if(b.textContent.includes('Zu meiner Playlist'))b.classList.add('hn-v139-add-to-list');
+for(const [cls,path] of [['hn-v137-prev','M7 5v14H5V5h2Zm12 0v14l-11-7 11-7Z'],['hn-v137-next','M17 5v14h2V5h-2ZM5 5v14l11-7L5 5Z']]){
+const b=document.querySelector('.hn-player-window .'+cls);if(!b)continue;
+if(b.querySelector('.hn-v139-icon'))continue;
+b.replaceChildren();const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('class','hn-v139-icon');svg.setAttribute('aria-hidden','true');const p=document.createElementNS('http://www.w3.org/2000/svg','path');p.setAttribute('d',path);svg.append(p);b.append(svg)
+}}
+let busy=false;const observer=new MutationObserver(()=>{if(busy)return;busy=true;observer.disconnect();fix();observer.observe(document.body,{childList:true,subtree:true});busy=false});
+function init(){fix();observer.observe(document.body,{childList:true,subtree:true})}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();</script><style id="hn-v72-playlist-dark-palette">
 /* V72: scoped palette override for playlist navigation; retain all existing handlers. */
 #playlists #hnV71Landing .hn-v71-section{background:#152238!important;border:1px solid #47516c!important;box-shadow:0 10px 28px #050b1b35}
