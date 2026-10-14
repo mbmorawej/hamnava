@@ -2663,4 +2663,42 @@ window.hnMemberProfileLoad=load;
 #member-profile .hn-member-song::after{content:'▶';font-size:15px;color:#bd81ef;padding:0 9px}
 #member-profile #hnMemberAboutPanel{line-height:1.8;color:#ccc4d3}#member-profile #hnMemberAboutBio{white-space:pre-wrap;text-align:start;unicode-bidi:plaintext}
 @media(max-width:540px){#member-profile .hn-member-hero{padding-top:15px!important;min-height:0!important}#member-profile #hnMemberBack{margin-bottom:25px!important}#member-profile .hn-member-hero-content{align-items:flex-start;gap:15px}#member-profile #hnMemberAvatar{width:100px!important;height:100px!important}#member-profile .hn-member-intro{min-width:140px}#member-profile #hnMemberName{font-size:clamp(28px,7vw,42px)!important}#member-profile .hn-member-song img{width:52px!important;height:52px!important}}
-</style><script id="hn-v78-member-modern-tabs">(function(){const tabs=document.querySelectorAll('#member-profile [data-hn-member-tab]');function select(key){tabs.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.hnMemberTab===key)));document.querySelectorAll('#member-profile .hn-member-section').forEach((section,i)=>{section.hidden=(key!==(i===0?'songs':'favorites'));section.style.display=section.hidden?'none':''});const about=document.getElementById('hnMemberAboutPanel');about.hidden=key!=='about';about.style.display=about.hidden?'none':''}tabs.forEach(b=>b.addEventListener('click',()=>select(b.dataset.hnMemberTab)));select('songs');const bio=document.getElementById('hnMemberBio'),aboutBio=document.getElementById('hnMemberAboutBio');new MutationObserver(()=>{aboutBio.textContent=bio.textContent}).observe(bio,{childList:true,characterData:true,subtree:true})})();</script></body></html>
+</style><script id="hn-v78-member-modern-tabs">(function(){const tabs=document.querySelectorAll('#member-profile [data-hn-member-tab]');function select(key){tabs.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.hnMemberTab===key)));document.querySelectorAll('#member-profile .hn-member-section').forEach((section,i)=>{section.hidden=(key!==(i===0?'songs':'favorites'));section.style.display=section.hidden?'none':''});const about=document.getElementById('hnMemberAboutPanel');about.hidden=key!=='about';about.style.display=about.hidden?'none':''}tabs.forEach(b=>b.addEventListener('click',()=>select(b.dataset.hnMemberTab)));select('songs');const bio=document.getElementById('hnMemberBio'),aboutBio=document.getElementById('hnMemberAboutBio');new MutationObserver(()=>{aboutBio.textContent=bio.textContent}).observe(bio,{childList:true,characterData:true,subtree:true})})();</script><style id="hn-v78-fixed-bottom-player">
+/* Persistent Spotify-inspired bottom dock: audio element is never recreated on navigation or scroll. */
+body.hn-playing:not(.hn-player-fullscreen) .hn-player-window,
+body.hn-playing.hn-player-mini:not(.hn-player-fullscreen) .hn-player-window{
+position:fixed!important;inset:auto 0 0 0!important;top:auto!important;bottom:0!important;left:0!important;right:0!important;
+width:100%!important;max-width:100%!important;height:auto!important;min-height:0!important;
+border-radius:15px 15px 0 0!important;border:1px solid #4d3a5c!important;border-bottom:0!important;
+background:#100e16!important;box-shadow:0 -8px 36px #000a!important;z-index:9000!important;overflow:hidden!important;
+touch-action:pan-y!important}
+body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-player-background{opacity:.12!important;filter:blur(18px)!important}
+body.hn-playing:not(.hn-player-fullscreen) .hn-player-window::before{background:#0e0c14e8!important}
+body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-player-content{
+display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;grid-template-rows:auto auto!important;
+gap:5px 14px!important;align-items:center!important;min-height:0!important;
+padding:9px max(16px,env(safe-area-inset-right)) calc(9px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))!important;
+text-shadow:none!important}
+body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-player-center{grid-column:1!important;grid-row:1!important;display:flex!important;min-height:0!important;align-items:center!important;gap:11px!important}
+body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .player-icon{display:grid!important;width:48px!important;height:48px!important;flex:0 0 48px!important;border-radius:7px!important}
+body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-player-meta{padding:0!important;gap:2px!important;min-width:0!important}
+body.hn-playing:not(.hn-player-fullscreen) .hn-player-window #nowPlaying{font-size:14px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+body.hn-playing:not(.hn-player-fullscreen) .hn-player-window #hnPlayerArtist{font-size:12px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;color:#bfb7c8!important}
+body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-player-header{grid-column:2!important;grid-row:1!important;display:flex!important;justify-content:flex-end!important;gap:5px!important}
+body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-player-label{display:none!important}
+body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-player-buttons{display:flex!important;gap:5px!important}
+body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-player-buttons button{font-size:11px!important;padding:7px 9px!important;border-radius:22px!important;background:#292039!important;color:#eee!important;border:1px solid #66517a!important}
+body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-player-transport{grid-column:2!important;grid-row:2!important;display:flex!important;gap:4px!important;align-items:center!important}
+body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-player-transport button{font-size:12px!important;padding:5px 8px!important;background:#282034!important;color:#fff!important;border:0!important;border-radius:20px!important}
+body.hn-playing:not(.hn-player-fullscreen) .hn-player-window audio{grid-column:1!important;grid-row:2!important;width:100%!important;min-width:0!important;height:34px!important;display:block!important}
+body.hn-playing:not(.hn-player-fullscreen){padding-bottom:calc(132px + env(safe-area-inset-bottom))!important}
+body.hn-playing:not(.hn-player-fullscreen) main{padding-top:0!important}
+@media(max-width:600px){
+body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-player-content{gap:4px 6px!important;padding:8px 10px calc(8px + env(safe-area-inset-bottom))!important}
+body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .player-icon{width:42px!important;height:42px!important;flex-basis:42px!important}
+body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-player-buttons button{font-size:10px!important;padding:6px!important}
+body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-player-transport button{font-size:11px!important;padding:4px!important}
+body.hn-playing:not(.hn-player-fullscreen) .hn-player-window .hn-player-transport #hnShuffleSongs{display:none!important}
+body.hn-playing:not(.hn-player-fullscreen){padding-bottom:calc(130px + env(safe-area-inset-bottom))!important}
+}
+</style></body></html>
