@@ -2625,6 +2625,15 @@ html body.hn-v151-single-track.hn-playing:not(.hn-player-fullscreen) .hn-player-
 #songs article.song .hn-v140-glass-actions,#favoriteSongs article.song .hn-v140-glass-actions,#playlistTracks article.song .hn-v140-glass-actions,#hnPublicTracks article.song .hn-v140-glass-actions{position:absolute!important;left:9px!important;right:auto!important;top:50%!important;bottom:auto!important;transform:translateY(-50%)!important;display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;gap:12px!important;width:52px!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
 #songs article.song .hn-v140-glass-actions>button:nth-child(-n+3),#favoriteSongs article.song .hn-v140-glass-actions>button:nth-child(-n+3){display:flex!important;align-items:center!important;justify-content:center!important;width:48px!important;height:48px!important;min-width:48px!important;max-width:48px!important;background:transparent!important;border:0!important;box-shadow:none!important}
 }
+</style><style id="hn-v153-favorites-match-library">
+/* Favorite cards use the same cover overlay and icon styling as library cards. */
+#favoriteSongs article.song .hn-song-art-wrap{position:relative!important;overflow:hidden!important}
+@media(max-width:760px){
+#favoriteSongs article.song .hn-v140-glass-actions{position:absolute!important;left:9px!important;right:auto!important;top:50%!important;bottom:auto!important;transform:translateY(-50%)!important;width:52px!important;max-width:52px!important;display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;gap:13px!important;padding:5px!important;border:0!important;border-radius:0!important;background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:none!important}
+#favoriteSongs article.song .hn-v140-glass-actions>button:nth-child(-n+3){display:flex!important;align-items:center!important;justify-content:center!important;flex:0 0 48px!important;width:48px!important;height:48px!important;min-width:48px!important;max-width:48px!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;color:#fff!important;font-size:0!important;text-shadow:0 2px 8px #000!important;box-shadow:none!important;filter:drop-shadow(0 2px 4px #000c)}
+#favoriteSongs .hn-v141-symbol{display:block!important;width:30px!important;height:30px!important;fill:none!important;stroke:currentColor!important;stroke-width:2.2!important;stroke-linecap:round!important;stroke-linejoin:round!important}
+#favoriteSongs .hn-v141-symbol.hn-v141-filled{fill:currentColor!important}
+}
 </style><style id="hn-v72-playlist-dark-palette">
 /* V72: scoped palette override for playlist navigation; retain all existing handlers. */
 #playlists #hnV71Landing .hn-v71-section{background:#152238!important;border:1px solid #47516c!important;box-shadow:0 10px 28px #050b1b35}
