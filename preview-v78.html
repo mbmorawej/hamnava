@@ -2017,6 +2017,8 @@ document.addEventListener('click',async e=>{
 })();
 
 /* HamNava V62: public display deduplication and owner-scoped private playlists */
+// V115: restore the DOM lookup helper for this standalone script.
+const $ = id => document.getElementById(id);
 function hnSimpleCreate(){
  const name=prompt('Name der neuen Playlist:');if(name===null||!name.trim())return;
  $('playlistName').value=name.trim();$('playlistForm').requestSubmit();
