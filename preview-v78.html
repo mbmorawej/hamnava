@@ -2545,6 +2545,15 @@ html,body{max-width:100%;overflow-x:clip}
 </style><script id="hn-v143-favorite-state">(()=>{
 function update(){for(const b of document.querySelectorAll('.hn-favorite-action')){const active=/♥/.test(b.textContent);b.setAttribute('aria-pressed',String(active));const svg=b.querySelector('.hn-v141-symbol');if(svg){svg.style.fill=active?'#a94edb':'none';svg.style.stroke=active?'#a94edb':'white'}}}
 let busy=false;const obs=new MutationObserver(()=>{if(busy)return;busy=true;obs.disconnect();update();obs.observe(document.body,{childList:true,subtree:true});busy=false});function init(){update();obs.observe(document.body,{childList:true,subtree:true})}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();</script><style id="hn-v144-follow-heart">
+@media(max-width:760px){
+#songs .hn-v140-glass-actions .hn-favorite-action .hn-v141-symbol,#popularSongs .hn-v140-glass-actions .hn-favorite-action .hn-v141-symbol,#homeSongs .hn-v140-glass-actions .hn-favorite-action .hn-v141-symbol{stroke:#fff!important;fill:none!important}
+#songs .hn-v140-glass-actions .hn-favorite-action.hn-v144-following .hn-v141-symbol,#popularSongs .hn-v140-glass-actions .hn-favorite-action.hn-v144-following .hn-v141-symbol,#homeSongs .hn-v140-glass-actions .hn-favorite-action.hn-v144-following .hn-v141-symbol{stroke:#ed355f!important;fill:#ed355f!important}
+}
+</style><script id="hn-v144-follow-heart-script">(()=>{
+const roots=['songs','popularSongs','homeSongs'];
+function sync(){for(const id of roots){const root=document.getElementById(id);if(!root)continue;for(const card of root.querySelectorAll('article.song')){const heart=card.querySelector('.hn-v140-glass-actions .hn-favorite-action');if(!heart)continue;const follow=card.querySelector('.hn-v97-follow');const uid=card.dataset.uploader;const active=!!(uid&&window.hnV100Following?.has(uid));heart.classList.toggle('hn-v144-following',active);heart.setAttribute('aria-label',active?'Nicht mehr folgen':'Folgen');heart.setAttribute('aria-pressed',String(active));heart.title=active?'Nicht mehr folgen':'Folgen';if(!heart.dataset.hnV144Bound){heart.dataset.hnV144Bound='1';heart.addEventListener('click',e=>{if(window.innerWidth>760)return;e.stopImmediatePropagation();e.preventDefault();const b=card.querySelector('.hn-v97-follow');if(b&&!b.disabled){b.click()}else if(!card.dataset.uploader){const a=card.querySelector('.hn-v97-uploader-name');if(a)a.click()}},true)}}}}
+let busy=false;const obs=new MutationObserver(()=>{if(busy)return;busy=true;obs.disconnect();sync();obs.observe(document.body,{childList:true,subtree:true});busy=false});function init(){sync();obs.observe(document.body,{childList:true,subtree:true})}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();</script><style id="hn-v72-playlist-dark-palette">
 /* V72: scoped palette override for playlist navigation; retain all existing handlers. */
 #playlists #hnV71Landing .hn-v71-section{background:#152238!important;border:1px solid #47516c!important;box-shadow:0 10px 28px #050b1b35}
