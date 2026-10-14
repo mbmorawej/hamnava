@@ -2515,7 +2515,18 @@ display:flex!important;align-items:center!important;justify-content:center!impor
 const glyphs=[['play','<path d="m8 5 12 7-12 7V5Z"/>'],['heart','<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>'],['plus','<path d="M12 5v14M5 12h14"/>']];
 function fix(){for(const rootId of ['songs','popularSongs','homeSongs']){const root=document.getElementById(rootId);if(!root)continue;for(const actions of root.querySelectorAll('.hn-v140-glass-actions')){const buttons=[...actions.querySelectorAll(':scope > button')];for(let i=0;i<Math.min(3,buttons.length);i++){const b=buttons[i];if(b.querySelector('.hn-v141-symbol'))continue;const [name,paths]=glyphs[i];b.setAttribute('aria-label',b.textContent.trim());b.title=b.textContent.trim();const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('class','hn-v141-symbol');svg.setAttribute('aria-hidden','true');svg.innerHTML=paths;b.append(svg)}}}}
 let busy=false;const obs=new MutationObserver(()=>{if(busy)return;busy=true;obs.disconnect();fix();obs.observe(document.body,{childList:true,subtree:true});busy=false});function init(){fix();obs.observe(document.body,{childList:true,subtree:true})}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
-})();</script><style id="hn-v72-playlist-dark-palette">
+})();</script><style id="hn-v142-ios-playlist-dialog-sizing">
+@media(max-width:760px){
+html,body{max-width:100%;overflow-x:clip}
+.hn-modal{position:fixed!important;inset:0!important;width:100%!important;max-width:100vw!important;box-sizing:border-box!important;padding:12px!important;overflow-x:hidden!important}
+.hn-modal-panel{width:100%!important;max-width:min(100%,530px)!important;min-width:0!important;box-sizing:border-box!important;padding:18px 14px!important;overflow-x:hidden!important;max-height:calc(100dvh - 32px)!important}
+.hn-modal-search-label,.hn-modal-search-label input,#hnModalSearch,.hn-modal-list,.hn-modal-option{box-sizing:border-box!important;min-width:0!important;max-width:100%!important}
+#hnModalSearch{display:block!important;width:100%!important;font-size:16px!important}
+.hn-modal-option{overflow:hidden!important;white-space:normal!important}
+.hn-modal-actions{flex-wrap:wrap!important}
+.hn-modal-actions>button{max-width:100%!important;min-width:0!important;flex:1 1 160px!important;white-space:normal!important}
+}
+</style><style id="hn-v72-playlist-dark-palette">
 /* V72: scoped palette override for playlist navigation; retain all existing handlers. */
 #playlists #hnV71Landing .hn-v71-section{background:#152238!important;border:1px solid #47516c!important;box-shadow:0 10px 28px #050b1b35}
 #playlists #hnV71Landing .hn-v71-section:nth-child(2){border-color:#73517e!important}
