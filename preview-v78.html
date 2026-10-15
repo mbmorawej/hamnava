@@ -3305,4 +3305,40 @@ function tab(view){page.querySelector('[data-hn-social-tab="'+view+'"]')?.click(
 dashboard.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.view){tab(b.dataset.view);return}if(b.dataset.go){location.hash='#'+b.dataset.go;return}if(b.id==='hnV168Share'){const url=location.origin+location.pathname+'#community';if(navigator.share)navigator.share({title:'HamNava Community',url}).catch(()=>{});else if(navigator.clipboard?.writeText)navigator.clipboard.writeText(url).then(()=>alert('Link kopiert')).catch(()=>prompt('Profil-Link',url));else prompt('Profil-Link',url);return}if(['hnV168Edit','hnV168Settings','hnV168BioEdit'].includes(b.id)){const open=document.querySelector('[data-open-account],#hnProfileBtn,#hnAccountButton,[data-hn-open-profile]');if(open)open.click();else{const modal=document.querySelector('.hn-account-modal');if(modal){modal.classList.remove('hidden');modal.hidden=false;modal.style.display='flex'}else location.hash='#profile'}if(b.id==='hnV168BioEdit')setTimeout(()=>document.getElementById('hnCommunityBio')?.focus(),200)}});
 async function refresh(){const name=document.getElementById('hnV168Name'),avatar=document.getElementById('hnV168Avatar');const input=document.getElementById('hnAccountName');name.textContent=input?.value?.trim()||document.getElementById('hnCommunityDisplayName')?.textContent?.trim()||'Mein Community-Profil';const image=document.getElementById('hnAvatarPreview');if(image?.src)avatar.src=image.src;else avatar.style.visibility='hidden';const bio=document.getElementById('hnCommunityBio')?.value?.trim();if(bio)document.getElementById('hnV168BioText').textContent=bio;for(const [source,target] of [['hnCommunityFollowing','hnV168Following'],['hnCommunityFollowers','hnV168Followers']]){const t=document.getElementById(source)?.textContent||'';document.getElementById(target).textContent=t.match(/\d+/)?.[0]||'–'}}
 refresh();let timer=0;const observer=new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(refresh,180)});for(const id of ['hnCommunityDisplayName','hnCommunityFollowing','hnCommunityFollowers']){const el=document.getElementById(id);if(el)observer.observe(el,{childList:true,subtree:true,characterData:true})}page.addEventListener('click',()=>refresh(),{passive:true});
+})();</script><style id="hn-v169-community-clean-layout">
+/* One profile, one action row, one set of social navigation tabs. */
+#community #hnV168Shortcuts{display:none!important}
+#community #hnV168Bio{border:0!important;background:transparent!important;padding:0 4px!important;margin:0!important}
+#community #hnV168BioText{font-size:13px!important;line-height:1.55!important;color:#c7cfdf!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
+#community #hnV168BioEdit{display:none!important}
+#community #hnV168Dashboard{gap:9px!important;margin-bottom:10px!important}
+#community #hnV168Hero{padding:12px!important;border-radius:16px!important}
+#community #hnV168Avatar{width:68px!important;height:68px!important;flex:0 0 68px!important}
+#community #hnV168Name{font-size:20px!important}
+#community #hnV168Stats{margin-top:3px!important}
+#community #hnV168Stats strong{font-size:19px!important}
+#community #hnV168Primary button{min-height:48px!important;padding:6px 3px!important;font-size:11px!important;line-height:1.25!important}
+#community #hnV168Primary button span{font-size:17px!important;margin-bottom:2px!important}
+#community .hn-social-tabs{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important;margin:8px 0 12px!important}
+#community .hn-social-tabs button{padding:10px 2px!important;min-height:43px!important;font-size:12px!important}
+#community .hn-social-tabs button[aria-pressed="true"]{background:#773db4!important;color:#fff!important}
+#community #hnV168BioText:empty{display:none!important}
+#community #hnSocialStatus:empty{display:none!important}
+</style><script id="hn-v169-community-consolidation">(()=>{
+function simplify(){
+ const page=document.getElementById('community');if(!page)return;
+ const dashboard=document.getElementById('hnV168Dashboard');if(!dashboard)return;
+ // Remove duplicate shortcut bar rather than presenting the same destinations twice.
+ document.getElementById('hnV168Shortcuts')?.remove();
+ const bio=document.getElementById('hnV168Bio'),bioText=document.getElementById('hnV168BioText');
+ if(bio&&bioText){const hero=document.getElementById('hnV168Hero');if(hero&&bio.parentElement===dashboard)hero.after(bio);const raw=document.getElementById('hnCommunityBio')?.value?.trim();if(raw)bioText.textContent=raw}
+ // Reuse the existing, functional three social tabs; the counters use those same handlers.
+ const tabs=page.querySelector('.hn-social-tabs');if(tabs)tabs.setAttribute('aria-label','Community-Navigation');
+ // The recent public song feed is not part of the compact Community experience.
+ const feed=document.getElementById('hnV97RecentSongs');if(feed){const section=feed.closest('section')||feed.parentElement;if(section){const heading=section.querySelector('h2,h3,h4');if(heading&&/Neueste öffentliche Songs|öffentliche Songs/i.test(heading.textContent||'')){section.hidden=true;section.style.setProperty('display','none','important')}else{feed.hidden=true;feed.style.setProperty('display','none','important');section.querySelector('.hn-v102-more')?.remove();if(heading&&/öffentliche Songs/i.test(heading.textContent||''))heading.hidden=true}}}
+ // Avoid the duplicated legacy own-profile summary if it is inside the Community panel.
+ for(const node of page.querySelectorAll('[id]')){if(node===dashboard||dashboard.contains(node))continue;if(node.matches('#hnSocialPeople,#hnSocialStatus'))continue;if(node.matches('.hn-social-tabs'))continue;if(node.id==='hnV97RecentSongs')continue;if(node.matches('[id*="ProfileSummary"],[id*="ProfileHero"],[id*="OwnProfileHeader"]'))node.hidden=true}
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',simplify);else simplify();
+let attempts=0;const retry=setInterval(()=>{simplify();if(++attempts>=12)clearInterval(retry)},750);
 })();</script></body></html>
