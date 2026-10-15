@@ -3494,4 +3494,46 @@ let count=0;const retry=setInterval(()=>{repair();if(++count>=15)clearInterval(r
 #community .hn-v178-profile>.hn-v178-old-action-row:empty{display:none!important}
 #community .hn-v178-blank{display:none!important}
 #community #hnSocialStatus:empty{display:none!important}
-</style><style id="hn-v179-v176-direct-fix">#community .hn-v176-original-actions .hn-v176-gear-only{display:flex!important;visibility:visible!important;opacity:1!important;position:relative!important;inset:auto!important;min-width:38px!important;min-height:38px!important;width:38px!important;height:38px!important;padding:0!important;font-size:0!important}#community .hn-v176-original-actions .hn-v176-gear-only span{font-size:23px!important}#community #hnSocialStatus:empty{display:none!important}</style></body></html>
+</style><style id="hn-v179-v176-direct-fix">#community .hn-v176-original-actions .hn-v176-gear-only{display:flex!important;visibility:visible!important;opacity:1!important;position:relative!important;inset:auto!important;min-width:38px!important;min-height:38px!important;width:38px!important;height:38px!important;padding:0!important;font-size:0!important}#community .hn-v176-original-actions .hn-v176-gear-only span{font-size:23px!important}#community #hnSocialStatus:empty{display:none!important}</style><style id="hn-v180-original-profile-actions">
+#community .hn-v180-profile-card{position:relative!important}
+#community .hn-v180-profile-card>.hn-v180-gear{position:absolute!important;right:12px!important;top:12px!important;left:auto!important;bottom:auto!important;z-index:90!important;width:43px!important;height:43px!important;min-width:43px!important;min-height:43px!important;max-width:43px!important;max-height:43px!important;border-radius:50%!important;padding:0!important;margin:0!important;display:flex!important;align-items:center!important;justify-content:center!important;border:1px solid #a34fd2!important;background:#36244f!important;color:#fff!important;font-size:25px!important;line-height:1!important}
+#community .hn-v180-hide{display:none!important}
+#community .hn-v180-share{display:flex!important}
+</style><script id="hn-v180-original-profile-actions">(()=>{
+const page=document.getElementById('community');if(!page)return;
+function apply(){
+ const norm=b=>(b.textContent||'').replace(/\s+/g,' ').trim().toLowerCase();
+ const btns=[...page.querySelectorAll('button')].filter(b=>!b.closest('#hnV168Dashboard'));
+ const edit=btns.find(b=>norm(b)==='profil bearbeiten'||norm(b)==='✎ profil bearbeiten'||norm(b)==='✏ profil bearbeiten');
+ const settings=btns.find(b=>/community.einstellungen/.test(norm(b)));
+ const share=btns.find(b=>/profil teilen/.test(norm(b)));
+ if(!edit&&!settings)return;
+ const source=edit||settings;
+ let card=source.parentElement;
+ while(card&&card!==page){
+  const hasAvatar=!!card.querySelector('img');
+  const hasCounts=/follower/i.test(card.textContent||'');
+  if(hasAvatar&&hasCounts)break;
+  card=card.parentElement;
+ }
+ if(!card||card===page)return;
+ card.classList.add('hn-v180-profile-card');
+ const gear=edit||settings;
+ if(!gear.classList.contains('hn-v180-gear')){
+  gear.classList.remove('hn-v180-hide','hn-v177-gear','hn-v178-gear','hn-v176-gear-only');
+  gear.removeAttribute('hidden');
+  gear.removeAttribute('style');
+  card.appendChild(gear);
+  gear.classList.add('hn-v180-gear');
+  gear.textContent='⚙';
+  gear.title='Profil bearbeiten und Einstellungen';
+  gear.setAttribute('aria-label','Profil bearbeiten und Einstellungen');
+ }
+ if(settings&&settings!==gear)settings.classList.add('hn-v180-hide');
+ if(edit&&edit!==gear)edit.classList.add('hn-v180-hide');
+ if(share){share.classList.remove('hn-v180-hide');share.classList.add('hn-v180-share')}
+ // Do not hide editable fields or change click handlers.
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply);else apply();
+let n=0;const timer=setInterval(()=>{apply();if(++n>=30)clearInterval(timer)},700);
+})();</script></body></html>
