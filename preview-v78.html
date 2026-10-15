@@ -3383,4 +3383,39 @@ function init(){
  for(const h of page.querySelectorAll('h1,h2,h3,h4,strong')){if(h.textContent.trim()==='Mein Community-Profil'&&!dashboard.contains(h)){const block=h.closest('article,.hn-profile-card,.hn-community-card')||h.parentElement;if(block&&block!==page)block.style.display='none'}}
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
-})();</script><style id="hn-v174-community-visibility-repair">#community[data-page="community"]{visibility:visible!important;opacity:1!important}#community #hnV168Dashboard{display:grid!important}#community .hn-social-tabs,#community #hnSocialPeople{visibility:visible!important;opacity:1!important}#community #hnV168Hero,#community #hnV168Primary,#community #hnV168Bio{display:flex}#community #hnV168Primary{display:flex!important}#community #hnV168Bio{display:block!important}</style></body></html>
+})();</script><style id="hn-v174-community-visibility-repair">#community[data-page="community"]{visibility:visible!important;opacity:1!important}#community #hnV168Dashboard{display:grid!important}#community .hn-social-tabs,#community #hnSocialPeople{visibility:visible!important;opacity:1!important}#community #hnV168Hero,#community #hnV168Primary,#community #hnV168Bio{display:flex}#community #hnV168Primary{display:flex!important}#community #hnV168Bio{display:block!important}</style><style id="hn-v175-community-reference">
+/* Approved reference: single profile card, integrated icon actions, three tabs. */
+#community{overflow-x:hidden!important}
+#community #hnV168Dashboard{display:block!important;margin:0 0 16px!important}
+#community #hnV168Hero{position:relative!important;display:grid!important;grid-template-columns:clamp(68px,20vw,105px) minmax(0,1fr) auto!important;grid-template-rows:auto auto!important;align-items:start!important;column-gap:11px!important;row-gap:14px!important;padding:15px!important;padding-bottom:16px!important;border:1.5px solid #8945b6!important;border-radius:23px!important;background:linear-gradient(125deg,#1b233c,#142b43)!important;min-height:0!important}
+#community #hnV168Avatar{grid-column:1!important;grid-row:1!important;width:100%!important;height:auto!important;aspect-ratio:1!important;max-width:105px!important;object-fit:cover!important;border:3px solid #a64bd6!important;flex:none!important}
+#community #hnV168Identity{grid-column:2!important;grid-row:1!important;min-width:0!important;padding:0!important}
+#community #hnV168Name{font-size:clamp(18px,5vw,26px)!important;line-height:1.2!important;font-weight:750!important}
+#community #hnV168Stats{display:flex!important;gap:13px!important;margin-top:13px!important}
+#community #hnV168Stats button{background:transparent!important;border:0!important;padding:0!important;min-width:0!important;text-align:center!important;font-size:12px!important;color:#c9bfd7!important}
+#community #hnV168Stats strong{font-size:22px!important;line-height:1.2!important}
+#community #hnV168Primary{position:static!important;grid-column:3!important;grid-row:1!important;display:flex!important;gap:6px!important;margin:0!important;width:auto!important;align-self:start!important}
+#community #hnV168Primary #hnV168Edit{display:none!important}
+#community #hnV168Primary button{width:35px!important;height:35px!important;min-width:35px!important;min-height:35px!important;max-width:35px!important;padding:0!important;border:1px solid #9146c0!important;border-radius:50%!important;background:#36244fbb!important;font-size:0!important;display:flex!important;align-items:center!important;justify-content:center!important}
+#community #hnV168Primary button span{font-size:20px!important;line-height:1!important;margin:0!important}
+#community #hnV168Bio{grid-column:1/-1!important;grid-row:2!important;display:block!important;margin:0!important;padding:0!important;background:transparent!important;border:0!important}
+#community #hnV168BioText{display:block!important;-webkit-line-clamp:unset!important;overflow:visible!important;font-size:clamp(13px,3.6vw,17px)!important;line-height:1.65!important;color:#c5cad8!important;overflow-wrap:anywhere!important}
+#community #hnV168Shortcuts,#community #hnV168BioEdit{display:none!important}
+#community .hn-social-tabs{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:9px!important;margin:17px 0!important}
+#community .hn-social-tabs button{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:8px!important;min-height:94px!important;padding:11px 2px!important;border:1.5px solid #8646b5!important;border-radius:17px!important;background:linear-gradient(145deg,#30253f,#1a2942)!important;font-size:clamp(11px,3vw,15px)!important;font-weight:700!important}
+#community .hn-social-tabs button .hn-v171-tab-icon{font-size:26px!important;color:#d8a2f1!important}
+#community #hnV171Search{margin:6px 0 16px!important}
+@media(max-width:430px){#community #hnV168Hero{grid-template-columns:70px minmax(0,1fr) auto!important;padding:12px!important;column-gap:8px!important}#community #hnV168Primary{gap:4px!important}#community #hnV168Primary button{width:30px!important;height:30px!important;min-width:30px!important;min-height:30px!important;max-width:30px!important}#community #hnV168Primary button span{font-size:18px!important}#community #hnV168Stats{gap:9px!important}#community #hnV168Stats strong{font-size:19px!important}#community .hn-social-tabs button{min-height:80px!important}}
+</style><script id="hn-v175-community-safe-layout">(()=>{
+function arrange(){
+ const page=document.getElementById('community'),hero=document.getElementById('hnV168Hero');if(!page||!hero)return;
+ const primary=document.getElementById('hnV168Primary'),bio=document.getElementById('hnV168Bio');
+ if(primary&&primary.parentElement!==hero)hero.appendChild(primary);
+ if(bio&&bio.parentElement!==hero)hero.appendChild(bio);
+ const share=document.getElementById('hnV168Share'),settings=document.getElementById('hnV168Settings');
+ if(share){share.innerHTML='<span aria-hidden="true">↗</span>';share.title='Profil teilen';share.setAttribute('aria-label','Profil teilen')}
+ if(settings){settings.innerHTML='<span aria-hidden="true">⚙</span>';settings.title='Profileinstellungen';settings.setAttribute('aria-label','Profileinstellungen')}
+ // Do not remove, hide, or replace the Community page or its functional containers.
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',arrange);else arrange();
+})();</script></body></html>
