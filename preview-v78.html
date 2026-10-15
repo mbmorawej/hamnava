@@ -3418,4 +3418,39 @@ function arrange(){
  // Do not remove, hide, or replace the Community page or its functional containers.
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',arrange);else arrange();
+})();</script><style id="hn-v176-original-profile-only">
+/* Keep the ORIGINAL Community profile, remove the later duplicate dashboard. */
+#community #hnV168Dashboard{display:none!important}
+#community .hn-social-heading{display:none!important}
+#community .hn-social-tabs{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:9px!important;margin:16px 0!important}
+#community .hn-social-tabs button{min-height:84px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:7px!important;background:linear-gradient(135deg,#31243e,#1c2941)!important;border:1.5px solid #8e48bc!important;border-radius:17px!important;padding:10px 3px!important;font-size:clamp(11px,3vw,15px)!important}
+#community .hn-social-tabs .hn-v171-tab-icon{font-size:27px!important;color:#dba7ef!important}
+#community .hn-v176-original-actions{display:flex!important;justify-content:flex-end!important;gap:8px!important;position:absolute!important;right:13px!important;top:13px!important;z-index:4!important}
+#community .hn-v176-original-actions button{width:39px!important;height:39px!important;min-width:39px!important;min-height:39px!important;max-width:39px!important;border-radius:50%!important;padding:0!important;display:flex!important;align-items:center!important;justify-content:center!important;background:#352349b8!important;border:1px solid #9a4aca!important;color:#fff!important;font-size:0!important}
+#community .hn-v176-original-actions button span{font-size:22px!important;line-height:1!important}
+#community .hn-v176-original-card{position:relative!important;border:1.5px solid #8945b6!important;border-radius:22px!important;padding:16px!important;background:linear-gradient(130deg,#1b233b,#142940)!important;overflow:hidden!important}
+#community .hn-v176-original-card .hn-v176-original-actions{position:absolute!important}
+@media(max-width:420px){#community .hn-v176-original-actions button{width:32px!important;height:32px!important;min-width:32px!important;min-height:32px!important;max-width:32px!important}#community .hn-v176-original-actions button span{font-size:19px!important}}
+</style><script id="hn-v176-use-original-profile">(()=>{
+function repair(){
+ const page=document.getElementById('community');if(!page)return;
+ const dash=document.getElementById('hnV168Dashboard');if(dash)dash.style.setProperty('display','none','important');
+ const all=Array.from(page.querySelectorAll('button')).filter(b=>!b.closest('#hnV168Dashboard'));
+ const find=(part)=>all.find(b=>b.textContent.trim().toLocaleLowerCase().includes(part));
+ const edit=find('profil bearbeiten'),settings=find('community-einstellungen')||find('einstellungen'),share=find('profil teilen');
+ if(!edit&&!settings&&!share)return;
+ // Original upper profile remains the source of truth; change its existing actions, no new buttons.
+ const first=edit||settings||share;let card=first.parentElement;
+ while(card&&card!==page&&!card.querySelector('img'))card=card.parentElement;
+ if(!card||card===page){card=first.parentElement?.parentElement;if(!card||card===page)return}
+ card.classList.add('hn-v176-original-card');
+ let actions=card.querySelector('.hn-v176-original-actions');
+ if(!actions){actions=document.createElement('div');actions.className='hn-v176-original-actions';card.append(actions)}
+ if(edit){edit.style.setProperty('display','none','important')}
+ if(share){actions.append(share);share.innerHTML='<span aria-hidden="true">↗</span>';share.title='Profil teilen';share.setAttribute('aria-label','Profil teilen')}
+ if(settings){actions.append(settings);settings.innerHTML='<span aria-hidden="true">⚙</span>';settings.title='Profil bearbeiten und Einstellungen';settings.setAttribute('aria-label','Profil bearbeiten und Einstellungen')}
+ // Remove visually empty decorative elements directly under the original profile, but retain functional controls.
+ for(const child of Array.from(card.children)){if(child===actions||child.querySelector('button,input,textarea,select,img,svg,a')||child.textContent.trim())continue;if(child.getBoundingClientRect().height>12)child.style.display='none'}
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',repair);else repair();
 })();</script></body></html>
