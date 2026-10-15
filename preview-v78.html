@@ -3346,23 +3346,7 @@ let attempts=0;const retry=setInterval(()=>{simplify();if(++attempts>=12)clearIn
 #community #hnV168Primary button{width:48px!important;height:48px!important;min-width:48px!important;min-height:48px!important;max-width:48px!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:0!important;overflow:hidden!important;font-size:0!important;border-radius:50%!important;background:rgba(100,58,150,.3)!important;border:1px solid #9664c2!important;box-shadow:0 3px 12px #080b1880!important}
 #community #hnV168Primary button span{font-size:22px!important;margin:0!important;color:white!important;line-height:1!important}
 #community #hnV168Primary button:focus-visible{outline:2px solid #fff!important;outline-offset:3px!important}
-</style><script id="hn-v170-remove-legacy-community-profile">(()=>{
-function cleanup(){
- const page=document.getElementById('community');if(!page)return;
- const buttons=[['hnV168Edit','Profil bearbeiten','✎'],['hnV168Share','Profil teilen','↗'],['hnV168Settings','Einstellungen','⚙']];
- for(const [id,label,icon] of buttons){const b=document.getElementById(id);if(b){b.setAttribute('aria-label',label);b.setAttribute('title',label);b.innerHTML='<span aria-hidden="true">'+icon+'</span>'}}
- // Old profile card is an obsolete duplicate; preserve the new dashboard and account editor.
- const scope=document.querySelectorAll('#community, [data-page="community"], [data-page="profile"], #profile, #communityProfile');
- for(const root of scope){for(const h of root.querySelectorAll('h1,h2,h3,h4,strong,div,span')){if(h.children.length>0||h.closest('#hnV168Dashboard'))continue;if(h.textContent.trim()!=='Mein Community-Profil')continue;
- const card=h.closest('article,.hn-profile-card,.hn-community-card,.hn-profile-overview,.hn-v97-profile-overview')||h.parentElement?.parentElement;
- if(card&&!card.contains(document.getElementById('hnV168Dashboard'))&&card!==root){card.remove()}
- }}
- // Remove purely decorative empty bordered containers, never controls or live status regions.
- for(const root of scope){for(const el of root.querySelectorAll('div')){if(el.id||el.querySelector('button,input,textarea,select,img,svg,a,[role="status"]'))continue;if(el.textContent.trim())continue;if(el.children.length>0)continue;const style=getComputedStyle(el);if(style.borderTopStyle!=='none'&&parseFloat(style.borderTopWidth)>0&&el.getBoundingClientRect().height>24)el.remove()}}
-}
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',cleanup);else cleanup();
-let n=0;const t=setInterval(()=>{cleanup();if(++n===16)clearInterval(t)},800);
-})();</script><style id="hn-v171-community-precise-layout">
+</style><style id="hn-v171-community-precise-layout">
 #community #hnV168Dashboard{gap:14px!important}
 #community #hnV168Hero{position:relative!important;flex-wrap:wrap!important;padding:18px!important;border-radius:22px!important}
 #community #hnV168Identity{padding-right:108px!important}
@@ -3399,4 +3383,4 @@ function init(){
  for(const h of page.querySelectorAll('h1,h2,h3,h4,strong')){if(h.textContent.trim()==='Mein Community-Profil'&&!dashboard.contains(h)){const block=h.closest('article,.hn-profile-card,.hn-community-card')||h.parentElement;if(block&&block!==page)block.style.display='none'}}
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
-})();</script></body></html>
+})();</script><style id="hn-v174-community-visibility-repair">#community[data-page="community"]{visibility:visible!important;opacity:1!important}#community #hnV168Dashboard{display:grid!important}#community .hn-social-tabs,#community #hnSocialPeople{visibility:visible!important;opacity:1!important}#community #hnV168Hero,#community #hnV168Primary,#community #hnV168Bio{display:flex}#community #hnV168Primary{display:flex!important}#community #hnV168Bio{display:block!important}</style></body></html>
