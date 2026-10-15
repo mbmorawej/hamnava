@@ -3227,4 +3227,30 @@ html body #playlists :is(#playlistTracks,#hnPublicTracks) article.song .hn-song-
 </style><script id="hn-v165-restore-track-controls">(()=>{
 function repair(){for(const id of ['playlistTracks','hnPublicTracks']){const root=document.getElementById(id);if(!root)continue;for(const card of root.querySelectorAll('article.song')){const actions=card.querySelector('.hn-v140-glass-actions'),trash=card.querySelector('.hn-v154-remove-track');if(!actions||!trash)continue;if(trash.parentElement!==actions)actions.appendChild(trash);trash.textContent='';for(const prop of ['position','top','right','left','bottom','z-index','display'])trash.style.removeProperty(prop);trash.setAttribute('aria-label','Aus dieser Playlist entfernen')}}}
 let scheduled=false;function init(){repair();const obs=new MutationObserver(()=>{if(scheduled)return;scheduled=true;requestAnimationFrame(()=>{obs.disconnect();repair();obs.observe(document.body,{childList:true,subtree:true});scheduled=false})});obs.observe(document.body,{childList:true,subtree:true})}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init()
+})();</script><style id="hn-v166-mobile-visual-fixes">
+/* Never show the empty legacy popover: only the unified floating menu. */
+#hnV161FloatingMenu[hidden]{display:none!important}
+#playlists #hnV71Landing .hn-v127-actions,#playlists #hnV71Landing .hn-v127-actions:not([hidden]){display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+@media(max-width:760px){
+/* Keep song actions in one column, including the remove control. */
+#playlists :is(#playlistTracks,#hnPublicTracks) article.song .hn-song-art-wrap>.hn-v140-glass-actions{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:10px!important;top:50%!important;left:9px!important;right:auto!important;bottom:auto!important;transform:translateY(-50%)!important;min-height:0!important;height:auto!important}
+#playlists :is(#playlistTracks,#hnPublicTracks) article.song .hn-song-art-wrap>.hn-v140-glass-actions>button{position:static!important;inset:auto!important;transform:none!important;display:flex!important;flex:0 0 48px!important;width:48px!important;height:48px!important;min-width:48px!important;min-height:48px!important;max-height:48px!important;margin:0!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
+#playlists :is(#playlistTracks,#hnPublicTracks) article.song .hn-song-art-wrap>.hn-v140-glass-actions>button.hn-v154-remove-track{order:10!important;font-size:0!important}
+#playlists :is(#playlistTracks,#hnPublicTracks) article.song .hn-song-art-wrap>.hn-v140-glass-actions>button.hn-v154-remove-track::after{content:'✕'!important;display:block!important;width:auto!important;height:auto!important;font-size:32px!important;font-weight:400!important;color:white!important;background:none!important;mask:none!important;-webkit-mask:none!important}
+/* Labels stay legible, action icons do not overlap media badges. */
+:is(#songs,#favoriteSongs) article.song .hn-song-art-wrap .hn-v140-glass-actions{z-index:7!important}
+:is(#songs,#favoriteSongs) article.song .hn-song-art-wrap .hn-v140-glass-actions>button{min-width:44px!important}
+:is(#songs,#favoriteSongs) article.song .hn-song-art-wrap .hn-song-type{pointer-events:none!important}
+/* Artist song cards must not inherit full-width uploader imagery. */
+#artists #artistSongs article.song{display:flex!important;flex-direction:row!important;align-items:flex-start!important;gap:12px!important;min-width:0!important}
+#artists #artistSongs article.song .hn-song-art-wrap{width:88px!important;min-width:88px!important;max-width:88px!important;flex:0 0 88px!important}
+#artists #artistSongs article.song .songBody{flex:1 1 0!important;min-width:0!important;max-width:calc(100% - 100px)!important}
+#artists #artistSongs article.song .songBody img:not(.hn-song-cover){width:38px!important;height:38px!important;max-width:38px!important;max-height:38px!important;object-fit:cover!important;border-radius:50%!important}
+#artists #artistSongs article.song .songBody :is(.hn-uploader,.hn-publisher-row,.hn-publisher-avatar,.hn-song-publisher){max-width:100%!important;min-width:0!important}
+}
+</style><script id="hn-v166-visual-repair">(()=>{
+const landing=document.getElementById('hnV71Landing');
+if(landing){landing.addEventListener('click',e=>{const b=e.target.closest('.hn-v127-more');if(!b)return;const old=b.closest('.hn-v71-item')?.querySelector('.hn-v127-actions');if(old){old.hidden=true;old.style.setProperty('display','none','important')}},true)}
+function fix(){for(const id of ['playlistTracks','hnPublicTracks']){const root=document.getElementById(id);if(!root)continue;for(const card of root.querySelectorAll('article.song')){const actions=card.querySelector('.hn-v140-glass-actions'),trash=card.querySelector('.hn-v154-remove-track');if(!actions||!trash)continue;if(trash.parentElement!==actions)actions.appendChild(trash);trash.style.removeProperty('top');trash.style.removeProperty('right');trash.style.removeProperty('left');trash.style.removeProperty('position');trash.textContent='';trash.setAttribute('aria-label','Aus Playlist entfernen')}}}
+let queued=false;function init(){fix();const obs=new MutationObserver(()=>{if(queued)return;queued=true;requestAnimationFrame(()=>{obs.disconnect();fix();obs.observe(document.body,{subtree:true,childList:true});queued=false})});obs.observe(document.body,{subtree:true,childList:true})}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init()
 })();</script></body></html>
