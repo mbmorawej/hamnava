@@ -3453,4 +3453,42 @@ function repair(){
  for(const child of Array.from(card.children)){if(child===actions||child.querySelector('button,input,textarea,select,img,svg,a')||child.textContent.trim())continue;if(child.getBoundingClientRect().height>12)child.style.display='none'}
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',repair);else repair();
+})();</script><style id="hn-v177-community-gear-and-cleanup">
+#community #hnSocialStatus:empty{display:none!important}
+#community .hn-v177-gear{position:absolute!important;top:14px!important;right:14px!important;z-index:15!important;width:43px!important;height:43px!important;min-width:43px!important;min-height:43px!important;max-width:43px!important;padding:0!important;border:1.5px solid #9b4bd1!important;border-radius:50%!important;background:#35254d!important;color:white!important;display:flex!important;align-items:center!important;justify-content:center!important;font-size:0!important;box-shadow:0 3px 12px #0005!important}
+#community .hn-v177-gear .hn-v177-icon{font-size:24px!important;line-height:1!important}
+#community .hn-v177-profile{position:relative!important}
+#community .hn-v177-empty{display:none!important}
+</style><script id="hn-v177-community-original-gear">(()=>{
+function fix(){
+ const page=document.getElementById('community');if(!page)return;
+ const buttons=[...page.querySelectorAll('button')].filter(b=>!b.closest('#hnV168Dashboard'));
+ const edit=buttons.find(b=>/^(?:✎\\s*)?Profil bearbeiten$/i.test(b.textContent.trim()))||buttons.find(b=>b.textContent.trim()==='Profil bearbeiten');
+ if(edit){
+   let card=edit.parentElement;
+   while(card&&card!==page&&!card.querySelector('img'))card=card.parentElement;
+   if(!card||card===page){card=edit.parentElement?.parentElement}
+   if(card&&card!==page){
+     card.classList.add('hn-v177-profile');
+     if(!edit.classList.contains('hn-v177-gear')){
+       card.append(edit);edit.classList.add('hn-v177-gear');edit.innerHTML='<span class="hn-v177-icon" aria-hidden="true">⚙</span>';edit.title='Profil bearbeiten';edit.setAttribute('aria-label','Profil bearbeiten');
+     }
+   }
+ }
+ // Hide the blank purple outline/status directly between profile and social tabs.
+ const tabs=page.querySelector('.hn-social-tabs');
+ if(tabs){
+   let sibling=tabs.previousElementSibling;
+   while(sibling&&sibling!==page.firstElementChild){
+     const previous=sibling.previousElementSibling;
+     if(sibling.id==='hnV171Search')break;
+     if(sibling.id==='hnSocialStatus'&&!sibling.textContent.trim())sibling.classList.add('hn-v177-empty');
+     else if(!sibling.querySelector('button,input,textarea,select,img,svg,a')&&!sibling.textContent.trim()&&sibling.getBoundingClientRect().height>12)sibling.classList.add('hn-v177-empty');
+     else if(sibling.querySelector('img'))break;
+     sibling=previous;
+   }
+ }
+ const status=document.getElementById('hnSocialStatus');if(status&&!status.textContent.trim())status.classList.add('hn-v177-empty');
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',fix);else fix();
 })();</script></body></html>
