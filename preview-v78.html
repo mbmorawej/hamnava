@@ -3491,4 +3491,62 @@ function fix(){
  const status=document.getElementById('hnSocialStatus');if(status&&!status.textContent.trim())status.classList.add('hn-v177-empty');
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',fix);else fix();
+})();</script><style id="hn-v178-profile-top-gear">
+#community .hn-v178-profile{position:relative!important}
+#community button.hn-v178-gear{position:absolute!important;top:12px!important;right:12px!important;left:auto!important;bottom:auto!important;z-index:60!important;display:flex!important;align-items:center!important;justify-content:center!important;width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;max-width:44px!important;max-height:44px!important;padding:0!important;margin:0!important;border-radius:50%!important;border:1.5px solid #ad62d5!important;background:#382451!important;color:white!important;opacity:1!important;visibility:visible!important;font-size:0!important;line-height:1!important}
+#community button.hn-v178-gear .hn-v178-gear-icon{font-size:25px!important;line-height:1!important}
+#community .hn-v178-profile>.hn-v178-old-action-row:empty{display:none!important}
+#community .hn-v178-blank{display:none!important}
+#community #hnSocialStatus:empty{display:none!important}
+</style><script id="hn-v178-profile-real-dom-repair">(()=>{
+function fix(){
+ const page=document.getElementById('community');if(!page)return;
+ const norm=b=>(b.textContent||'').replace(/\\s+/g,' ').trim().toLocaleLowerCase('de');
+ const all=[...page.querySelectorAll('button')].filter(b=>!b.closest('#hnV168Dashboard'));
+ let edit=all.find(b=>norm(b)==='profil bearbeiten'||norm(b)==='✎ profil bearbeiten'||norm(b)==='✏ profil bearbeiten');
+ if(!edit)edit=all.find(b=>/profil bearbeiten/i.test(b.getAttribute('aria-label')||'')&&!b.classList.contains('hn-v178-gear'));
+ if(edit){
+  let profile=edit.parentElement;
+  while(profile&&profile!==page){
+   const imgs=profile.querySelectorAll('img');
+   const hasName=[...profile.querySelectorAll('h1,h2,h3,h4,strong')].some(n=>n.textContent.trim().length>0);
+   if(imgs.length&&hasName)break;
+   profile=profile.parentElement;
+  }
+  if(!profile||profile===page){
+   profile=edit.closest('article,.profile-card,.hn-profile-card,.hn-community-card')||edit.parentElement?.parentElement;
+  }
+  if(profile&&profile!==page&&!profile.contains(page.querySelector('.hn-social-tabs'))){
+   profile.classList.add('hn-v178-profile');
+   const old=edit.parentElement;
+   if(!edit.classList.contains('hn-v178-gear')){
+    edit.style.removeProperty('display');edit.removeAttribute('hidden');
+    profile.appendChild(edit);
+    edit.classList.add('hn-v178-gear');
+    edit.innerHTML='<span class="hn-v178-gear-icon" aria-hidden="true">⚙</span>';
+    edit.title='Profil bearbeiten';edit.setAttribute('aria-label','Profil bearbeiten');
+   }
+   if(old&&old!==profile&&!old.textContent.trim()&&!old.querySelector('button,input,textarea,select,a'))old.classList.add('hn-v178-blank');
+  }
+ }
+ const tabs=page.querySelector('.hn-social-tabs');
+ if(tabs){
+  let n=tabs.previousElementSibling;
+  for(let i=0;n&&i<7;i++,n=n.previousElementSibling){
+   if(n.id==='hnV171Search'||n.id==='hnV168Dashboard')break;
+   if(n.id==='hnSocialStatus'&&!n.textContent.trim())n.classList.add('hn-v178-blank');
+   if(!n.textContent.trim()&&!n.querySelector('button,input,textarea,select,img,svg,a')&&n.getBoundingClientRect().height>10)n.classList.add('hn-v178-blank');
+  }
+ }
+ // Empty status panel can appear between the profile and social tabs, not only immediately above tabs.
+ for(const node of page.querySelectorAll('div,p,section')){
+  if(node===page||node.closest('#hnV168Dashboard')||node.classList.contains('hn-social-grid')||node.contains(page.querySelector('.hn-social-tabs')))continue;
+  if(node.children.length===0&&!node.textContent.trim()&&!node.querySelector('input')&&node.getBoundingClientRect().height>=30&&node.getBoundingClientRect().height<=110&&node.getBoundingClientRect().width>150){
+   const css=getComputedStyle(node);if(css.borderTopStyle!=='none'&&css.borderTopWidth!=='0px')node.classList.add('hn-v178-blank');
+  }
+ }
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',fix);else fix();
+window.addEventListener('hashchange',()=>setTimeout(fix,150));
+let runs=0;const timer=setInterval(()=>{fix();if(++runs>=12)clearInterval(timer)},600);
 })();</script></body></html>
