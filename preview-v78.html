@@ -690,7 +690,7 @@ body .hn-artist-count{font-size:clamp(10px,2.4vw,12px)!important;font-weight:400
 <div id="hnSidebarManage" class="hn-sidebar-manage"></div><div class="side-footer">Musik, Freunde, Erinnerungen<br/>HamNava · Version 36</div></aside><div id="navBackdrop" class="nav-backdrop" hidden></div><main><header><button id="menuToggle" class="menu-toggle alt" type="button" aria-label="Menü öffnen" aria-expanded="false">☰</button><div><h1><img class="logo" src="hamnava-logo.webp" alt=""/> Ham<span class="gold">Nava</span></h1><p>Gute Songs, gute Freunde, gemeinsame Erinnerungen</p></div><div id="identity"></div></header><div id="hnAdvancedPanel" hidden role="region" aria-label="Erweiterte Suche"><div class="hn-filter-grid"><label>Song oder Interpret<input id="hnAdvText" type="search" placeholder="Songtitel oder Künstlername"></label><label>Interpret<select id="hnAdvArtist"><option value="">Alle Interpreten</option></select></label><label>Musikrichtung<select id="hnAdvGenre"><option value="">Alle Musikrichtungen</option></select></label><label>Quelle<select id="hnAdvSource"><option value="">Alle Quellen</option><option value="hosted">MP3</option><option value="youtube">YouTube</option><option value="spotify">Spotify</option></select></label><label>Sortieren<select id="hnAdvSort"><option value="newest">Neueste zuerst</option><option value="oldest">Älteste zuerst</option><option value="az">Titel A–Z</option><option value="artist">Interpret A–Z</option></select></label></div><div class="hn-filter-actions"><button type="button" id="hnAdvApply">⌕ Suchen</button><button type="button" id="hnAdvReset">↺ Zurücksetzen</button></div></div>
 <section class="hero hidden hn-hero-carousel" dir="ltr" id="home" aria-label="HamNava Highlights"><div class="hn-hero-slides" aria-hidden="true"><div class="hn-hero-slide is-active"></div><div class="hn-hero-slide"></div><div class="hn-hero-slide"></div></div><div class="hero-copy"><div class="eyebrow">MUSIK · FREUNDE · ERINNERUNGEN</div><h2>Willkommen bei<br/><em>HamNava</em></h2><p>Entdecke Musik, die verbindet.</p><a href="#homeMusic" id="heroDiscover">Jetzt Musik entdecken ↗</a></div><img class="hero-portrait" src="hero-artist.webp" alt="Illustration eines Sängers"/><div class="hero-quote">„Gute Musik verbindet Menschen – heute und immer.“</div><div class="hn-hero-controls"><button type="button" id="hnHeroPrev" aria-label="Vorheriger Banner">‹</button><div id="hnHeroDots" aria-label="Banner auswählen"></div><button type="button" id="hnHeroNext" aria-label="Nächster Banner">›</button></div></section>
 <section class="panel hidden" id="member-profile" data-page="member-profile"><div class="hn-member-hero"><div class="hn-member-hero-art" aria-hidden="true"></div><button type="button" id="hnMemberBack" class="alt">← Community</button><div class="hn-member-hero-content"><img id="hnMemberAvatar" alt="Profilbild"><div class="hn-member-intro"><h2 id="hnMemberName" dir="auto"></h2><p id="hnMemberBio" dir="auto"></p><div class="hn-member-actions"><button type="button" id="hnMemberFollow" class="alt"></button></div></div></div></div><div class="hn-member-tabs" role="group" aria-label="Profilbereiche"><button type="button" data-hn-member-tab="songs" aria-pressed="true">♫ Songs</button><button type="button" data-hn-member-tab="favorites" aria-pressed="false">♡ Favoriten</button><button type="button" data-hn-member-tab="about" aria-pressed="false">♙ Über</button></div><div id="hnMemberAboutPanel" hidden><h3>Über dieses Mitglied</h3><p id="hnMemberAboutBio" dir="auto"></p></div><div class="hn-member-section"><h3>🎵 Veröffentlichte Songs</h3><p id="hnMemberSongsStatus" class="muted"></p><div id="hnMemberSongs" class="hn-member-song-grid"></div></div><div class="hn-member-section"><h3>♥ Öffentlich geteilte Favoriten</h3><p id="hnMemberFavoritesStatus" class="muted"></p><div id="hnMemberFavorites" class="hn-member-song-grid"></div></div></section><section class="panel hidden" id="community" data-page="community"><div class="hn-social-heading"><h2>👥 Community</h2><p>Entdecke Musikfreunde, folge anderen und sieh deine Community.</p></div><div class="hn-social-tabs" role="group" aria-label="Community-Bereiche"><button type="button" data-hn-social-tab="discover" aria-pressed="true">Entdecken</button><button type="button" data-hn-social-tab="following" aria-pressed="false">Folge ich</button><button type="button" data-hn-social-tab="followers" aria-pressed="false">Follower</button></div><p id="hnSocialStatus" class="muted" role="status"></p><div id="hnSocialPeople" class="hn-social-grid" aria-live="polite"></div></section><section class="panel" id="homeMusic" data-page="home"><div class="home-heading"><div><h2>Entdecke deine Musik</h2><p>Musik, Freunde und gemeinsame Erinnerungen.</p></div></div><label class="home-search">Songs oder Künstler suchen<input id="homeSearch" type="search" placeholder="Songtitel oder Künstlername eingeben" autocomplete="off"></label><h2>🔥 Meistgehörte Songs</h2><p class="home-hint" id="popularHint">Beliebte Lieder aus der Musikbibliothek</p><div class="songs featured-songs" id="popularSongs"></div><div class="hn-section-heading"><h2>💿 Beliebte Alben und Singles</h2><a href="#library">Alle anzeigen →</a></div><p class="hn-section-note">Singles aus unserer Musikbibliothek</p><div id="hnSingles" class="hn-shelf"></div><div class="hn-section-heading"><h2>📈 Empfohlene Charts</h2><a href="#library">Alle anzeigen →</a></div><div id="hnCharts" class="hn-shelf"></div><div class="hn-section-heading"><h2>📻 Beliebte Radios</h2><a href="#library">Alle anzeigen →</a></div><div id="hnRadios" class="hn-shelf"></div><div class="hn-section-heading"><h2>🎤 Künstler von A–Z</h2><a href="#artists">Alle anzeigen →</a></div><div id="homeArtists" class="artist-chips artist-portraits"></div><div class="hn-section-heading"><h2>🆕 Neu hinzugefügt</h2><a href="#library">Alle anzeigen →</a></div><div class="songs" id="homeSongs"></div></section>
-<section class="panel" id="artists" data-page="artists"><div class="hn-artist-titlebar"><h2>🎤 Künstler von A–Z</h2><div id="hnArtistBackSlot"></div></div><div id="artistsList" class="artist-chips"></div><div id="artistSongs" class="songs featured-songs"></div></section>
+<section class="panel" id="artists" data-page="artists"><div class="hn-artist-titlebar"><h2>🎤 Künstler von A–Z</h2><div id="hnArtistBackSlot"></div></div><div id="artistsList" class="artist-chips"></div><div id="artistSongs" class="songs"></div></section>
 <section class="panel" id="favoritesPage" data-page="favorites"><h2>♥ Meine Favoriten</h2><p>Deine gespeicherten Lieblingslieder</p><div id="favoriteSongs" class="songs"></div></section>
 <section class="panel hidden" id="setup"><h2>Mit Supabase verbinden</h2><p>Projekt-URL und öffentlichen Publishable/anon-Key eingeben. Niemals Secret oder service_role verwenden.</p><label>Project URL<input id="url" placeholder="https://xxxx.supabase.co"/></label><label>Publishable / anon key<input id="key"/></label><button id="connect">Verbinden</button></section>
 <section class="panel hidden" id="auth"><h2>Anmelden oder registrieren</h2><div class="grid"><label>E-Mail<input autocomplete="email" id="email" type="email"/></label><label>Passwort<input autocomplete="current-password" id="password" minlength="6" type="password"/></label></div><div class="actions"><button id="login">Anmelden</button><button class="alt" id="signup">Registrieren</button><button class="alt" id="hnForgotPassword" type="button">Passwort vergessen?</button><button class="alt" id="changeConfig">Verbindung ändern</button></div><p class="status" id="authStatus" role="status"></p><div id="hnRecoveryBox" hidden><h3>Neues Passwort festlegen</h3><label>Neues Passwort<input id="hnRecoveryPassword" type="password" autocomplete="new-password" minlength="12" placeholder="Mindestens 12 Zeichen"></label><button id="hnRecoverySave" type="button">Neues Passwort speichern</button><p id="hnRecoveryStatus" class="status" role="status"></p></div></section>
@@ -2285,42 +2285,42 @@ const observer=new MutationObserver(sync);for(const id of ['hnSimpleDetail','pla
 #artists #artistSongs,#playlists #playlistTracks,#playlists #hnPublicTracks{
 display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:12px!important;width:100%!important;min-width:0!important
 }
-#artists #artistSongs>article.song,#playlists #playlistTracks>article.song,#playlists #hnPublicTracks>article.song{
+#playlists #playlistTracks>article.song,#playlists #hnPublicTracks>article.song{
 width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important;
 display:grid!important;grid-template-columns:84px minmax(0,1fr)!important;align-items:start!important;
 column-gap:12px!important;row-gap:0!important;padding:12px!important;overflow:hidden!important;
 border-radius:16px!important
 }
-#artists #artistSongs article.song .hn-song-art-wrap,#playlists #playlistTracks article.song .hn-song-art-wrap,#playlists #hnPublicTracks article.song .hn-song-art-wrap{
+#playlists #playlistTracks article.song .hn-song-art-wrap,#playlists #hnPublicTracks article.song .hn-song-art-wrap{
 grid-column:1!important;grid-row:1!important;width:84px!important;min-width:0!important;max-width:84px!important;align-self:start!important
 }
-#artists #artistSongs article.song .hn-song-art-wrap .art,#playlists #playlistTracks article.song .hn-song-art-wrap .art,#playlists #hnPublicTracks article.song .hn-song-art-wrap .art{
+#playlists #playlistTracks article.song .hn-song-art-wrap .art,#playlists #hnPublicTracks article.song .hn-song-art-wrap .art{
 width:84px!important;height:84px!important;aspect-ratio:1!important;object-fit:cover!important;border-radius:12px!important
 }
-#artists #artistSongs article.song .hn-song-art-wrap .hn-source-badge,#playlists #playlistTracks article.song .hn-song-art-wrap .hn-source-badge,#playlists #hnPublicTracks article.song .hn-song-art-wrap .hn-source-badge{
+#playlists #playlistTracks article.song .hn-song-art-wrap .hn-source-badge,#playlists #hnPublicTracks article.song .hn-song-art-wrap .hn-source-badge{
 position:static!important;display:block!important;margin-top:5px!important;padding:4px!important;
 font-size:10px!important;line-height:1.2!important;text-align:center!important;white-space:normal!important
 }
-#artists #artistSongs article.song .songBody,#playlists #playlistTracks article.song .songBody,#playlists #hnPublicTracks article.song .songBody{
+#playlists #playlistTracks article.song .songBody,#playlists #hnPublicTracks article.song .songBody{
 grid-column:2!important;grid-row:1!important;display:flex!important;flex-direction:column!important;
 width:100%!important;min-width:0!important;max-width:100%!important;padding:0!important;margin:0!important
 }
-#artists #artistSongs article.song h3,#playlists #playlistTracks article.song h3,#playlists #hnPublicTracks article.song h3{
+#playlists #playlistTracks article.song h3,#playlists #hnPublicTracks article.song h3{
 font-size:16px!important;line-height:1.35!important;margin:0 0 5px!important;overflow-wrap:anywhere!important
 }
-#artists #artistSongs article.song .actions,#playlists #playlistTracks article.song .actions,#playlists #hnPublicTracks article.song .actions{
+#playlists #playlistTracks article.song .actions,#playlists #hnPublicTracks article.song .actions{
 display:flex!important;flex-wrap:wrap!important;align-items:stretch!important;gap:7px!important;
 width:100%!important;min-width:0!important;margin-top:12px!important
 }
-#artists #artistSongs article.song .actions button,#playlists #playlistTracks article.song .actions button,#playlists #hnPublicTracks article.song .actions button{
+#playlists #playlistTracks article.song .actions button,#playlists #hnPublicTracks article.song .actions button{
 position:static!important;transform:none!important;max-width:100%!important;min-width:0!important;
 width:auto!important;flex:1 1 95px!important;white-space:normal!important;overflow-wrap:anywhere!important;
 font-size:12px!important;line-height:1.3!important;padding:9px 7px!important;border-radius:11px!important
 }
 @media(max-width:390px){
-#artists #artistSongs>article.song,#playlists #playlistTracks>article.song,#playlists #hnPublicTracks>article.song{grid-template-columns:68px minmax(0,1fr)!important;column-gap:10px!important;padding:10px!important}
-#artists #artistSongs article.song .hn-song-art-wrap,#playlists #playlistTracks article.song .hn-song-art-wrap,#playlists #hnPublicTracks article.song .hn-song-art-wrap{width:68px!important;max-width:68px!important}
-#artists #artistSongs article.song .hn-song-art-wrap .art,#playlists #playlistTracks article.song .hn-song-art-wrap .art,#playlists #hnPublicTracks article.song .hn-song-art-wrap .art{width:68px!important;height:68px!important}
+#playlists #playlistTracks>article.song,#playlists #hnPublicTracks>article.song{grid-template-columns:68px minmax(0,1fr)!important;column-gap:10px!important;padding:10px!important}
+#playlists #playlistTracks article.song .hn-song-art-wrap,#playlists #hnPublicTracks article.song .hn-song-art-wrap{width:68px!important;max-width:68px!important}
+#playlists #playlistTracks article.song .hn-song-art-wrap .art,#playlists #hnPublicTracks article.song .hn-song-art-wrap .art{width:68px!important;height:68px!important}
 }
 </style><style id="hn-v71-playlist-navigation">
 #playlists #hnV66Switch{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
@@ -2402,6 +2402,7 @@ show('home');
 const landing=document.getElementById('hnV71Landing');if(!landing)return;
 function decorate(){for(const card of landing.querySelectorAll('.hn-v71-item')){if(card.querySelector('.hn-v127-more'))continue;
 const kind=card.closest('.hn-v71-section')===landing.querySelector('.hn-v71-section')?'public':'private';
+if(kind==='public'&&!isAdmin)continue;
 const more=document.createElement('button');more.type='button';more.className='hn-v127-more';more.textContent='⋯';more.title='Optionen';more.setAttribute('aria-label','Optionen: '+card.textContent.trim());
 const actions=document.createElement('div');actions.className='hn-v127-actions';actions.hidden=true;
 const add=(label,fn)=>{const b=document.createElement('button');b.type='button';b.textContent=label;b.onclick=e=>{e.stopPropagation();actions.hidden=true;fn()};actions.append(b)};
@@ -3262,15 +3263,6 @@ let queued=false;function init(){fix();const obs=new MutationObserver(()=>{if(qu
 :is(#songs,#favoriteSongs,#artistSongs) article.song .hn-song-art-wrap>.hn-v140-glass-actions>button:nth-child(-n+3){display:flex!important;align-items:center!important;justify-content:center!important;flex:0 0 32px!important;width:32px!important;height:32px!important;min-width:32px!important;max-width:32px!important;min-height:32px!important;padding:0!important;margin:0!important;background:transparent!important;border:0!important;box-shadow:none!important;font-size:0!important}
 :is(#songs,#favoriteSongs,#artistSongs) article.song .hn-song-art-wrap>.hn-v140-glass-actions .hn-v141-symbol{width:23px!important;height:23px!important}
 :is(#songs,#favoriteSongs,#artistSongs) article.song .hn-song-art-wrap>.hn-v140-glass-actions>button:nth-child(n+4){display:none!important}
-/* Artist track cards match the Musikbibliothek two-column grid. */
-#artists #artistSongs{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;align-items:stretch!important}
-#artists #artistSongs>article.song{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:8px!important;padding:8px!important;min-width:0!important;overflow:hidden!important}
-#artists #artistSongs>article.song .hn-song-art-wrap{position:relative!important;display:block!important;width:100%!important;min-width:0!important;max-width:100%!important;flex:none!important;aspect-ratio:1/1!important;overflow:hidden!important;border-radius:14px!important}
-#artists #artistSongs>article.song .hn-song-art-wrap>.art{display:block!important;width:100%!important;height:100%!important;max-width:100%!important;object-fit:cover!important}
-#artists #artistSongs>article.song .songBody{width:100%!important;max-width:100%!important;min-width:0!important;flex:1 1 auto!important}
-#artists #artistSongs>article.song .songBody h3{overflow-wrap:anywhere!important}
-#artists #artistSongs>article.song .songBody img:not(.hn-song-cover){width:30px!important;height:30px!important;max-width:30px!important;max-height:30px!important;border-radius:50%!important;object-fit:cover!important}
-}
 #playlists #hnV71Landing .hn-v71-section.hn-v167-public-nonadmin .hn-v127-more{display:none!important;visibility:hidden!important;pointer-events:none!important}
 </style><script id="hn-v167-public-and-artist-cards">(()=>{
 const icons=['<path d="m8 5 12 7-12 7V5Z"/>','<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>','<path d="M12 5v14M5 12h14"/>'];
