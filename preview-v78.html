@@ -2843,7 +2843,7 @@ async function render(){
   if(seq!==sequence)return;
   const following=new Set((followingResult.data||[]).map(x=>x.followed_id));
   const followers=new Set((followersResult.data||[]).map(x=>x.follower_id));
-  const people=(profilesResult.data||[]).filter(p=>p.user_id!==uid&&(tab==='discover'||(tab==='following'?following:followers).has(p.user_id)));
+  const people=(profilesResult.data||[]).filter(p=>p.user_id!==uid&&((tab==='discover'?!following.has(p.user_id):(tab==='following'?following:followers).has(p.user_id))));
   setStatus('');window.hnCommunityProfileOverviewRefresh?.();
   if(!people.length){const p=document.createElement('p');p.className='muted';p.textContent=tab==='discover'?'Noch keine anderen öffentlichen Profile vorhanden.':tab==='following'?'Du folgst noch niemandem.':'Noch keine Follower mit öffentlichem Profil.';target.append(p);return}
   for(const person of people){
@@ -3362,4 +3362,41 @@ function cleanup(){
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',cleanup);else cleanup();
 let n=0;const t=setInterval(()=>{cleanup();if(++n===16)clearInterval(t)},800);
+})();</script><style id="hn-v171-community-precise-layout">
+#community #hnV168Dashboard{gap:14px!important}
+#community #hnV168Hero{position:relative!important;flex-wrap:wrap!important;padding:18px!important;border-radius:22px!important}
+#community #hnV168Identity{padding-right:108px!important}
+#community #hnV168Primary{position:absolute!important;right:16px!important;top:22px!important;display:flex!important;gap:8px!important;margin:0!important}
+#community #hnV168Primary #hnV168Edit{display:none!important}
+#community #hnV168Primary button{width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;border-radius:50%!important}
+#community #hnV168Bio{padding:0 4px!important}
+#community #hnV168BioText{-webkit-line-clamp:unset!important;display:block!important;overflow:visible!important}
+#community .hn-social-tabs{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:9px!important}
+#community .hn-social-tabs button{min-height:75px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:6px!important;font-size:13px!important;border-radius:17px!important}
+#community .hn-social-tabs button .hn-v171-tab-icon{font-size:26px!important;line-height:1!important}
+#hnV171Search{width:100%!important;min-height:44px!important;margin:0 0 15px!important;padding:10px 14px!important;border-radius:14px!important;background:#192b42!important;color:#fff!important;border:1px solid #8052ad!important;font-size:16px!important}
+#community #hnV168Avatar{width:76px!important;height:76px!important;flex:0 0 76px!important}
+@media(max-width:440px){#community #hnV168Identity{padding-right:0!important;min-width:calc(100% - 94px)!important}#community #hnV168Primary{top:auto!important;bottom:12px!important;right:12px!important}#community #hnV168Hero{padding-bottom:65px!important}#community .hn-social-tabs button{font-size:12px!important;min-height:66px!important}}
+</style><script id="hn-v171-community-actions-search">(()=>{
+function init(){
+ const page=document.getElementById('community');if(!page||document.getElementById('hnV171Search'))return;
+ const dashboard=document.getElementById('hnV168Dashboard');if(!dashboard)return;
+ const edit=document.getElementById('hnV168Edit');if(edit)edit.remove();
+ const settings=document.getElementById('hnV168Settings');if(settings){settings.title='Profil und Einstellungen bearbeiten';settings.setAttribute('aria-label','Profil und Einstellungen bearbeiten');settings.innerHTML='<span aria-hidden="true">⚙</span>'}
+ const share=document.getElementById('hnV168Share');if(share){share.title='Profil teilen';share.setAttribute('aria-label','Profil teilen');share.innerHTML='<span aria-hidden="true">↗</span>'}
+ const tabs=page.querySelector('.hn-social-tabs');const people=document.getElementById('hnSocialPeople');if(!tabs||!people)return;
+ const names={discover:['⌕','Entdecken'],following:['♥','Gefolgt'],followers:['♙','Follower']};
+ for(const b of tabs.querySelectorAll('[data-hn-social-tab]')){const a=names[b.dataset.hnSocialTab];if(a){b.replaceChildren();const icon=document.createElement('span');icon.className='hn-v171-tab-icon';icon.textContent=a[0];icon.setAttribute('aria-hidden','true');b.append(icon,document.createTextNode(a[1]))}}
+ const search=document.createElement('input');search.id='hnV171Search';search.type='search';search.placeholder='Mitglieder suchen …';search.setAttribute('aria-label','Community-Mitglieder nach Namen suchen');search.autocomplete='off';tabs.after(search);
+ function filter(){const term=search.value.trim().toLocaleLowerCase();for(const card of people.querySelectorAll('.hn-social-person')){const name=card.querySelector('.hn-social-info strong,.hn-social-person-header strong')?.textContent||'';card.hidden=!!term&&!name.toLocaleLowerCase().includes(term);card.style.display=card.hidden?'none':''}}
+ search.addEventListener('input',filter);
+ const observer=new MutationObserver(filter);observer.observe(people,{childList:true});
+ tabs.addEventListener('click',()=>{search.value='';filter()});
+ // The settings icon opens the existing account editor as a dedicated full-screen settings view.
+ const style=document.createElement('style');style.id='hnV171SettingsScreen';style.textContent='#hnAccountDialog:not([hidden]) .hn-account-card{width:min(100%,680px)!important;max-height:100dvh!important;height:100dvh!important;border-radius:0!important;overflow-y:auto!important}';document.head.append(style);
+ settings?.addEventListener('click',()=>{setTimeout(()=>{const d=document.getElementById('hnAccountDialog');if(d&&!d.hidden){d.querySelector('#hnAccountTitle').textContent='⚙ Profileinstellungen'}},100)},true);
+ // Legacy profile header is duplicated by the modern dashboard, so hide only the obsolete visual group.
+ for(const h of page.querySelectorAll('h1,h2,h3,h4,strong')){if(h.textContent.trim()==='Mein Community-Profil'&&!dashboard.contains(h)){const block=h.closest('article,.hn-profile-card,.hn-community-card')||h.parentElement;if(block&&block!==page)block.style.display='none'}}
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();</script></body></html>
