@@ -1037,9 +1037,9 @@ function route(){
  $('home').classList.toggle('hn-current',!!user && page==='home');
  document.querySelectorAll('.side-link[href^="#"]').forEach(n=>n.classList.toggle('active',n.getAttribute('href')==='#'+page));
  document.body.classList.remove('nav-open');$('menuToggle').setAttribute('aria-expanded','false');
- if(page==='community' && user)window.hnCommunityPageLoad?.();if(page==='member-profile' && user)window.hnMemberProfileLoad?.();if(page==='admin' && user && isAdmin)window.hnManageOpen?.(window.hnManageDesired||'users');if(page==='home' && user)renderHome();if(page==='users' && user && isAdmin)hnLoadUsers(true);
+ if(page==='community' && user)window.hnCommunityPageLoad?.();if(page==='member-profile' && user)window.hnMemberProfileLoad?.();if(page==='admin' && user && isAdmin)window.hnManageOpen?.(window.hnManageDesired||'users');if(user){if(page==='home')renderHome();else if(page==='library')renderSongs('songs','library');else if(page==='favorites')renderSongs('favoriteSongs','favorites');else if(page==='artists')renderArtists()}if(page==='users' && user && isAdmin)hnLoadUsers(true);
 }
-function renderEverything(){renderSongs('songs','library');renderSongs('favoriteSongs','favorites');renderHome();renderArtists();}
+function renderEverything(){if(!user)return;const page=(location.hash||'#home').slice(1);if(page==='library')renderSongs('songs','library');else if(page==='favorites')renderSongs('favoriteSongs','favorites');else if(page==='artists')renderArtists();else if(page==='home')renderHome();}
 function hnDiscoverProvider(song){
  const source=String(song?.source_type||'').toLowerCase();
  if(source==='youtube'||source==='spotify')return source;
