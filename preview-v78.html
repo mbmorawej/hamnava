@@ -3173,4 +3173,23 @@ let busy=false;const observer=new MutationObserver(()=>{if(busy)return;busy=true
 </style><script id="hn-v160-menu-accessibility">(()=>{
 function fix(){const landing=document.getElementById('hnV71Landing');if(!landing)return;for(const card of landing.querySelectorAll('.hn-v71-item')){const more=card.querySelector('.hn-v127-more'),menu=card.querySelector('.hn-v127-actions');if(!more||!menu||more.dataset.v160)return;more.dataset.v160='1';more.setAttribute('aria-haspopup','menu');more.setAttribute('aria-expanded',String(!menu.hidden));more.addEventListener('click',()=>queueMicrotask(()=>more.setAttribute('aria-expanded',String(!menu.hidden))));more.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();more.click()}});menu.addEventListener('click',()=>more.setAttribute('aria-expanded','false'))}}
 const root=document.getElementById('hnV71Landing');if(root){const observer=new MutationObserver(()=>{observer.disconnect();fix();observer.observe(root,{childList:true,subtree:true})});observer.observe(root,{childList:true,subtree:true});fix()}
+})();</script><style id="hn-v161-unified-playlist-options">
+/* Hide legacy controls inside a playlist, including duplicated rename/delete buttons. */
+body #playlists #hnSimpleDetail .hn-simple-detail-actions #hnSimpleMore,
+body #playlists #hnSimpleDetail #hnSimpleOptions,
+body #playlists #hnV71Controls #hnV71SectionOptions,
+body #playlists #hnV71SectionMenu{display:none!important;visibility:hidden!important}
+#hnV161FloatingMenu{position:fixed!important;z-index:2147483000!important;width:min(230px,calc(100vw - 24px))!important;max-height:min(330px,55vh)!important;overflow-y:auto!important;overscroll-behavior:contain!important;padding:7px!important;border:1px solid #a58bc0!important;border-radius:14px!important;background:#1d2439!important;box-shadow:0 14px 38px #000d!important}
+#hnV161FloatingMenu[hidden]{display:none!important}
+#hnV161FloatingMenu>button{display:block!important;width:100%!important;min-height:41px!important;margin:0 0 3px!important;padding:10px 12px!important;text-align:left!important;white-space:normal!important;line-height:1.3!important;border:0!important;border-radius:8px!important;color:#fff!important;background:#302c49!important;font-size:14px!important}
+#hnV161FloatingMenu>button:last-child{margin-bottom:0!important}
+#hnV161FloatingMenu>button:active{background:#644583!important}
+</style><script id="hn-v161-unified-playlist-options-script">(()=>{
+const landing=document.getElementById('hnV71Landing');if(!landing)return;
+const floating=document.createElement('div');floating.id='hnV161FloatingMenu';floating.hidden=true;floating.setAttribute('role','menu');document.body.append(floating);
+let active=null;
+function close(){floating.hidden=true;active=null}
+function open(card,trigger){close();active=card;const original=card.querySelector('.hn-v127-actions');if(!original)return;const buttons=[...original.querySelectorAll(':scope > button')];floating.replaceChildren();for(const src of buttons){const button=document.createElement('button');button.type='button';button.textContent=src.textContent;button.setAttribute('role','menuitem');button.onclick=e=>{e.stopPropagation();close();src.click()};floating.append(button)}const rect=trigger.getBoundingClientRect(),w=Math.min(230,innerWidth-24);let x=Math.max(12,Math.min(innerWidth-w-12,rect.right-w));const menuHeight=Math.min(330,buttons.length*45+14),below=innerHeight-rect.bottom;let y=below>=menuHeight+12?rect.bottom+6:Math.max(12,rect.top-menuHeight-6);floating.style.left=x+'px';floating.style.top=y+'px';floating.hidden=false}
+landing.addEventListener('click',e=>{const trigger=e.target.closest('.hn-v127-more');if(!trigger||!landing.contains(trigger))return;e.preventDefault();e.stopImmediatePropagation();const card=trigger.closest('.hn-v71-item');if(!card)return;if(active===card&&!floating.hidden)close();else open(card,trigger)},true);
+document.addEventListener('click',e=>{if(!floating.contains(e.target))close()});document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});window.addEventListener('scroll',close,true);window.addEventListener('resize',close);
 })();</script></body></html>
