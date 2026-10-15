@@ -3399,4 +3399,42 @@ function init(){
  for(const h of page.querySelectorAll('h1,h2,h3,h4,strong')){if(h.textContent.trim()==='Mein Community-Profil'&&!dashboard.contains(h)){const block=h.closest('article,.hn-profile-card,.hn-community-card')||h.parentElement;if(block&&block!==page)block.style.display='none'}}
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();</script><style id="hn-v172-reference-exact-community">
+/* Reference image: exactly one profile card and three social navigation tiles. */
+#community{overflow-x:hidden!important}
+#community #hnV168Dashboard{display:block!important;margin:0 0 18px!important}
+#community #hnV168Hero{display:grid!important;grid-template-columns:clamp(66px,19vw,108px) minmax(0,1fr) auto!important;grid-template-rows:auto auto!important;align-items:start!important;column-gap:12px!important;row-gap:14px!important;padding:17px!important;background:linear-gradient(135deg,#17253d,#132942)!important;border:1.5px solid #8545b3!important;border-radius:22px!important;min-height:0!important}
+#community #hnV168Avatar{width:100%!important;height:auto!important;aspect-ratio:1!important;max-width:108px!important;object-fit:cover!important;grid-column:1!important;grid-row:1!important;flex:none!important;border:3px solid #a44fd7!important}
+#community #hnV168Identity{grid-column:2!important;grid-row:1!important;padding:0!important;min-width:0!important}
+#community #hnV168Name{font-size:clamp(18px,5vw,28px)!important;line-height:1.2!important;font-weight:750!important;overflow-wrap:anywhere!important}
+#community #hnV168Stats{display:flex!important;gap:16px!important;margin-top:12px!important}
+#community #hnV168Stats button{display:block!important;min-width:0!important;padding:0!important;background:none!important;border:0!important;font-size:12px!important;text-align:center!important;white-space:nowrap!important}
+#community #hnV168Stats strong{font-size:22px!important;line-height:1.25!important}
+#community #hnV168Primary{position:static!important;grid-column:3!important;grid-row:1!important;display:flex!important;gap:7px!important;align-items:center!important;justify-content:flex-end!important;margin:0!important;width:auto!important}
+#community #hnV168Primary #hnV168Edit{display:none!important}
+#community #hnV168Primary button{display:flex!important;align-items:center!important;justify-content:center!important;min-width:36px!important;width:36px!important;height:36px!important;min-height:36px!important;max-width:36px!important;padding:0!important;border:1px solid #8c4ab9!important;background:#35204f99!important;border-radius:50%!important;font-size:0!important}
+#community #hnV168Primary button span{font-size:20px!important;margin:0!important}
+#community #hnV168Bio{grid-column:1/-1!important;grid-row:2!important;margin:0!important;padding:0!important;border:0!important;background:none!important;min-width:0!important}
+#community #hnV168BioText{font-size:clamp(13px,3.7vw,17px)!important;color:#c6cbda!important;line-height:1.65!important;white-space:pre-wrap!important;display:block!important;-webkit-line-clamp:unset!important;overflow-wrap:anywhere!important}
+#community #hnV168BioEdit,#community #hnV168Shortcuts{display:none!important}
+#community .hn-social-tabs{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:9px!important;margin:16px 0!important}
+#community .hn-social-tabs button{background:linear-gradient(140deg,#30253f,#1b233b)!important;border:1.5px solid #8849b5!important;border-radius:16px!important;min-height:90px!important;padding:12px 2px!important;font-size:clamp(11px,3vw,15px)!important;font-weight:700!important}
+#community .hn-social-tabs button[aria-pressed=true]{background:linear-gradient(135deg,#64319b,#362351)!important}
+#community .hn-social-tabs .hn-v171-tab-icon{font-size:26px!important;color:#d3a0ef!important}
+#community #hnV171Search{margin:8px 0 15px!important}
+#community #hnV168Dashboard > :not(#hnV168Hero){display:none!important}
+#community > :not(#hnV168Dashboard):not(.hn-social-tabs):not(#hnV171Search):not(#hnSocialStatus):not(#hnSocialPeople){display:none!important}
+@media(max-width:410px){#community #hnV168Hero{grid-template-columns:70px minmax(0,1fr) auto!important;gap:9px!important;padding:12px!important}#community #hnV168Primary{gap:4px!important}#community #hnV168Primary button{width:31px!important;min-width:31px!important;max-width:31px!important;height:31px!important;min-height:31px!important}#community #hnV168Primary button span{font-size:17px!important}#community #hnV168Stats{gap:9px!important}#community #hnV168Stats strong{font-size:19px!important}#community .hn-social-tabs button{min-height:75px!important}}
+</style><script id="hn-v172-reference-profile-structure">(()=>{
+function apply(){
+ const page=document.getElementById('community'),hero=document.getElementById('hnV168Hero');if(!page||!hero)return;
+ const actions=document.getElementById('hnV168Primary'),bio=document.getElementById('hnV168Bio');if(actions&&actions.parentElement!==hero)hero.append(actions);if(bio&&bio.parentElement!==hero)hero.append(bio);
+ document.getElementById('hnV168Edit')?.remove();
+ const share=document.getElementById('hnV168Share'),settings=document.getElementById('hnV168Settings');
+ if(share){share.innerHTML='<span aria-hidden="true">↗</span>';share.title='Profil teilen'}
+ if(settings){settings.innerHTML='<span aria-hidden="true">⚙</span>';settings.title='Profil bearbeiten und Einstellungen'}
+ // Existing profile overview outside the modern dashboard is not needed in this page.
+ for(const el of Array.from(page.children)){if(!['hnV168Dashboard','hnV171Search','hnSocialStatus','hnSocialPeople'].includes(el.id)&&!el.classList.contains('hn-social-tabs'))el.hidden=true}
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply);else apply();
 })();</script></body></html>
