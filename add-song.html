@@ -30,8 +30,25 @@ $('songForm').onsubmit=async e=>{
   if(file?.size){path=user.id+'/'+crypto.randomUUID()+'.mp3';const {error}=await db.storage.from('hamnava-audio').upload(path,file,{contentType:'audio/mpeg',upsert:false});if(error)throw Error('MP3-Upload: '+error.message);uploaded.push({bucket:'hamnava-audio',path})}
   async function uploadImage(f,kind){
    if(!f?.size)return null;
-   const imagePath=user.id+'/'+kind+'-'+crypto.randomUUID()+imageTypes[f.type];
-   const {error}=await db.storage.from('hamnava-images').upload(imagePath,f,{contentType:f.type,upsert:false});
+   let image=f;
+   try{
+    const bitmap=await createImageBitmap(f);
+    try{
+     const maxSide=kind==='cover'?720:640;
+     const scale=Math.min(1,maxSide/Math.max(bitmap.width,bitmap.height));
+     const canvas=document.createElement('canvas');
+     canvas.width=Math.max(1,Math.round(bitmap.width*scale));
+     canvas.height=Math.max(1,Math.round(bitmap.height*scale));
+     const ctx=canvas.getContext('2d');
+     if(!ctx)throw Error('Canvas nicht verfügbar');
+     ctx.drawImage(bitmap,0,0,canvas.width,canvas.height);
+     const optimized=await new Promise(resolve=>canvas.toBlob(resolve,'image/webp',0.8));
+     if(optimized?.type==='image/webp'&&optimized.size>0&&optimized.size<f.size)image=optimized;
+    }finally{bitmap.close()}
+   }catch(error){console.warn('Bildoptimierung nicht verfügbar, Original wird verwendet:',error)}
+   const type=image.type;
+   const imagePath=user.id+'/'+kind+'-'+crypto.randomUUID()+imageTypes[type];
+   const {error}=await db.storage.from('hamnava-images').upload(imagePath,image,{contentType:type,upsert:false,cacheControl:'3600'});
    if(error)throw Error(kind+'-Upload: '+error.message+' (bitte SQL-Einrichtung prüfen)');
    uploaded.push({bucket:'hamnava-images',path:imagePath});
    return db.storage.from('hamnava-images').getPublicUrl(imagePath).data.publicUrl;
