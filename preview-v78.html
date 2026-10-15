@@ -1089,7 +1089,7 @@ function renderDiscover(){
  if(!artistGroups.size)radios.append(el('p','Noch keine Radios verfügbar.'));
 }
 function renderHome(){renderSongs('homeSongs','home');renderSongs('popularSongs','popular');renderArtistChips('homeArtists',true);renderDiscover();}
-$('hnPopularShowAll').addEventListener('click',()=>{hnPopularVisible+=20;renderSongs('popularSongs','popular')});
+$('hnPopularShowAll').addEventListener('click',()=>{hnPopularVisible=hnPopularVisible===8?20:hnPopularVisible+20;renderSongs('popularSongs','popular')});
 $('hnPopularShowLess').addEventListener('click',()=>{hnPopularVisible=8;renderSongs('popularSongs','popular')});
 function hnArtistTracks(){
  return chosenArtist ? songs.filter(s=>(s.artist||'').trim().toLocaleLowerCase()===chosenArtist.trim().toLocaleLowerCase()) : [];
