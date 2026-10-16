@@ -1965,7 +1965,7 @@ document.addEventListener('click',e=>{
  }
  function langOf(option){const v=((option?.value||'')+' '+(option?.textContent||'')).toLowerCase();return /pers|فارسی|farsi|\bfa\b|iran/.test(v)?'fa':/arab|العرب|\bar\b/.test(v)?'ar':/engl|english|\ben\b/.test(v)?'en':'de'}
  function init(){
-   const root=document.getElementById('languageControl');
+   const root=document.querySelector('.hn-topbar .hn-actions #languageControl');
    const select=root?.querySelector('select');
    if(!root||!select||root.querySelector('#hnFlagButton'))return;
    const btn=document.createElement('button');btn.type='button';btn.id='hnFlagButton';btn.setAttribute('aria-label','Sprache auswählen');btn.setAttribute('aria-haspopup','true');btn.setAttribute('aria-expanded','false');
@@ -1984,7 +1984,7 @@ document.addEventListener('click',e=>{
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
  window.addEventListener('load',init);
- const obs=new MutationObserver(()=>{if(document.querySelector('#languageControl select'))init()});obs.observe(document.documentElement,{childList:true,subtree:true});
+ const obs=new MutationObserver(()=>{if(document.querySelector('.hn-topbar .hn-actions #languageControl select'))init()});obs.observe(document.documentElement,{childList:true,subtree:true});
 })();
 </script>
 <script id="hamnava-mobile-sidebar-controller-v3">
@@ -3577,16 +3577,15 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   observer.observe(profileDialog,{attributes:true,attributeFilter:['hidden']});
  }
 
+ const language=document.getElementById('languageControl');
  const profileCard=document.querySelector('#hnAccountDialog .hn-account-card>.hn-account-row:first-child');
  const desktopActions=document.querySelector('#hnTopbar .hn-actions');
  function placeLanguage(){
-  const language=document.getElementById('languageControl');
   if(!language||!profileCard||!desktopActions)return;
   const target=mobileOnly()?profileCard:desktopActions;
-  const before=mobileOnly()?document.getElementById('hnAccountClose'):document.getElementById('hnProfile');
-  if(language.parentElement!==target)target.insertBefore(language,before&&before.parentElement===target?before:null);
+  if(language.parentElement!==target)target.insertBefore(language,mobileOnly()?document.getElementById('hnAccountClose'):document.getElementById('hnProfile'));
  }
- const languageObserver=new MutationObserver(()=>{if(mobileOnly())placeLanguage()});
+ const languageObserver=new MutationObserver(()=>{if(mobileOnly()&&language&&profileCard&&language.parentElement!==profileCard)placeLanguage()});
  if(profileCard)languageObserver.observe(profileCard,{childList:true});
  document.querySelectorAll('#hnMobileQuickNav a').forEach(link=>{
   link.addEventListener('click',event=>{
