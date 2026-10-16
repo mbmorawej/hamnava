@@ -364,7 +364,8 @@ body.hn-ready main > #hnFooter:not(.hn-current),body.logged-out main > #hnFooter
  body.nav-open #navBackdrop{display:block!important;position:fixed!important;inset:65px 0 0!important;background:#000b!important;z-index:103!important}
  body:not(.logged-out) main{display:block!important;min-height:100dvh!important;padding-top:12px!important}
  body:not(.logged-out):has(#member-profile.hn-current) main{padding-top:85px!important}
- body:not(.logged-out) main>header{display:flex!important;flex-wrap:wrap!important;min-height:0!important;height:auto!important;margin-top:0!important;margin-bottom:20px!important;justify-content:flex-start!important}
+ body:not(.logged-out) main>header{display:none!important;flex-wrap:wrap!important;min-height:0!important;height:auto!important;margin-top:0!important;margin-bottom:0!important;justify-content:flex-start!important}
+ body:not(.logged-out):has(#member-profile.hn-current) main>header{display:flex!important;margin-bottom:20px!important}
  body:not(.logged-out) main>#hnFooter{margin-top:36px!important}
  body.logged-out #hnMobileNavButton{display:none!important}
 }
