@@ -1146,7 +1146,7 @@ $('playlistForm').onsubmit=async e=>{e.preventDefault();let {error}=await db.fro
 $('playlistAdd').onclick=async()=>{let playlist_id=$('playlistSelect').value,song_id=$('playlistSong').value;if(!playlist_id||!song_id){say('Bitte Playlist und Lied auswählen');return}let {error}=await db.from('playlist_songs').insert({playlist_id,song_id,added_by:user.id});if(error)say(error.code==='23505'?'Dieser Song ist bereits in dieser Playlist.':error.message);else {await loadPlaylist();await hnRefreshPlaylistCovers()}};
 $('playlistDelete').onclick=async()=>{let id=$('playlistSelect').value,p=playlists.find(x=>x.id===id);if(!p||!(p.owner_id===user.id||isAdmin)){say('Nur Eigentümer oder Administrator dürfen Playlists löschen');return}if(!confirm('Playlist wirklich löschen?'))return;let {error}=await db.from('playlists').delete().eq('id',id);if(error)say(error.message);else await loadAll()};
 $('playlistSelect').onchange=loadPlaylist;
-async function loadPlaylist(){let id=$('playlistSelect').value;$('playlistTracks').replaceChildren();if(!id)return;let {data,error}=await db.from('playlist_songs').select('song_id,added_by').eq('playlist_id',id);if(error){say(error.message);return}items=data||[];const tracks=items.map(x=>songs.find(song=>song.id===x.song_id)).filter(Boolean);renderSongs('playlistTracks','playlist',tracks);const cards=[...$('playlistTracks').querySelectorAll('article.song')];for(let i=0;i<tracks.length;i++){const song=tracks[i],item=items.find(x=>x.song_id===song.id);const owner=playlists.find(x=>x.id===id)?.owner_id;if(item&&(item.added_by===user?.id||owner===user?.id||isAdmin)){const actions=cards[i]?.querySelector('.actions');if(actions){const del=el('button','','warn small hn-v154-remove-track');del.type='button';del.setAttribute('aria-label','Aus dieser Playlist entfernen');del.onclick=async()=>{const {error}=await db.from('playlist_songs').delete().eq('playlist_id',id).eq('song_id',song.id);if(error)say(error.message);else{await loadPlaylist();await hnRefreshPlaylistCovers()}};actions.append(del)}}}}
+async function loadPlaylist(){let id=$('playlistSelect').value;$('playlistTracks').replaceChildren();if(!id)return;let {data,error}=await db.from('playlist_songs').select('song_id,added_by').eq('playlist_id',id);if(error){say(error.message);return}items=data||[];const tracks=items.map(x=>songs.find(song=>song.id===x.song_id)).filter(Boolean);renderSongs('playlistTracks','playlist',tracks);const cards=[...$('playlistTracks').querySelectorAll('article.song')];for(let i=0;i<tracks.length;i++){const song=tracks[i],item=items.find(x=>x.song_id===song.id);const owner=playlists.find(x=>x.id===id)?.owner_id;if(item&&(item.added_by===user?.id||owner===user?.id||isAdmin)){const actions=cards[i]?.querySelector('.actions');if(actions){const del=el('button','','warn small hn-v154-remove-track');del.type='button';del.setAttribute('aria-label','Aus dieser Playlist entfernen');del.onclick=async()=>{const {error}=await db.from('playlist_songs').delete().eq('playlist_id',id).eq('song_id',song.id);if(error)say(error.message);else{hnOnPlaylistSongRemoved(id,song.id);await loadPlaylist();await hnRefreshPlaylistCovers()}};actions.append(del)}}}}
 
 // HamNava 36: Browser-lokale Admin-Entwürfe; keine angebliche Audiogenerierung.
 let hnStudioMode='song';
@@ -1452,6 +1452,27 @@ function hnUpdateExternalNav(){
  status.textContent=valid?(hnPlaylistQueueIndex+1)+' / '+hnPlaylistQueue.length+' · '+(hnPlaylistQueueId?.startsWith('artist:')?chosenArtist:'Ausgewählte Liste'):'Keine Songliste ausgewählt';
 }
 function hnStopPlaylistQueue(){hnPlaylistQueue=[];hnPlaylistQueueIndex=-1;hnPlaylistQueueId=null;hnUpdateExternalNav();}
+function hnOnPlaylistSongRemoved(playlistId,songId){
+ const queueId=String(hnPlaylistQueueId||'');
+ if(queueId!==String(playlistId)&&queueId!=='playlist:'+playlistId&&queueId!=='public:'+playlistId)return;
+ const removedIndex=hnPlaylistQueue.findIndex(song=>song.id===songId);
+ if(removedIndex<0)return;
+ const active=hnPlaylistQueueIndex>=0&&hnPlaylistQueue[hnPlaylistQueueIndex]?.id===songId;
+ if(active){
+  $('audioPlayer').pause();
+  $('audioPlayer').removeAttribute('src');
+  $('audioPlayer').load();
+  hnCloseExternal();
+  playingSongId=null;
+  document.body.classList.remove('hn-playing','hn-player-mini','hn-player-fullscreen');
+  hnStopPlaylistQueue();
+  return;
+ }
+ hnPlaylistQueue.splice(removedIndex,1);
+ if(removedIndex<hnPlaylistQueueIndex)hnPlaylistQueueIndex--;
+ if(!hnPlaylistQueue.length)hnStopPlaylistQueue();else hnUpdateExternalNav();
+}
+
 function hnPlayPlaylistAt(index){
  document.body.classList.remove('hn-v151-single-track');
  if(index<0||index>=hnPlaylistQueue.length){hnStopPlaylistQueue();return;}
@@ -1761,7 +1782,7 @@ async function hnOpenPublicPlaylist(id){
  if(error){hnV38Msg('hnPublicStatus',error.message);return}
  hnPublicSongs=(data||[]).map(x=>songs.find(s=>s.id===x.song_id)).filter(Boolean);
  hnV38El('hnPublicTitle').textContent=p.name+' · '+hnPublicSongs.length+' Songs';
- const root=hnV38El('hnPublicTracks');window.hnV154ActivePublicPlaylistId=id;renderSongs('hnPublicTracks','playlist',hnPublicSongs);if(isAdmin){const cards=[...root.querySelectorAll('article.song')];hnPublicSongs.forEach((song,i)=>{const actions=cards[i]?.querySelector('.actions');if(!actions)return;const remove=el('button','✕','warn small hn-v154-remove-track');remove.type='button';remove.setAttribute('aria-label','Aus dieser Playlist entfernen');remove.onclick=async()=>{const {error}=await db.from('hn_public_playlist_songs').delete().eq('playlist_id',id).eq('song_id',song.id);if(error)hnV38Msg('hnPublicStatus',error.message);else await hnOpenPublicPlaylist(id)};actions.append(remove)})}
+ const root=hnV38El('hnPublicTracks');window.hnV154ActivePublicPlaylistId=id;renderSongs('hnPublicTracks','playlist',hnPublicSongs);if(isAdmin){const cards=[...root.querySelectorAll('article.song')];hnPublicSongs.forEach((song,i)=>{const actions=cards[i]?.querySelector('.actions');if(!actions)return;const remove=el('button','✕','warn small hn-v154-remove-track');remove.type='button';remove.setAttribute('aria-label','Aus dieser Playlist entfernen');remove.onclick=async()=>{const {error}=await db.from('hn_public_playlist_songs').delete().eq('playlist_id',id).eq('song_id',song.id);if(error)hnV38Msg('hnPublicStatus',error.message);else{hnOnPlaylistSongRemoved(id,song.id);await hnOpenPublicPlaylist(id)}};actions.append(remove)})}
  hnV38El('hnPublicActive').hidden=false;hnV38El('hnPublicPlaylists').hidden=true;
  hnV38El('hnPublicPlay').onclick=()=>hnPlayPublicAt(0,id);
 }
