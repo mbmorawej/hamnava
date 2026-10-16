@@ -20,7 +20,7 @@ body{background:#090909!important} .sidebar{background:#080808!important;border-
 <style id="hn-v240-mobile-navigation">
 #hnMobileQuickNav,#hnMobileSideNav,#hnMobileGenrePicker{display:none}
 @media(max-width:760px){
- body:not(.logged-out):has(#homeMusic.hn-current) #hnMobileQuickNav{display:flex;position:fixed;bottom:calc(env(safe-area-inset-bottom,0px) + 78px);left:50%;transform:translateX(-50%);z-index:102;gap:clamp(9px,3vw,18px);align-items:center;pointer-events:none}
+ body:not(.logged-out):not(:has(#community.hn-current)) #hnMobileQuickNav{display:flex;position:fixed;bottom:calc(env(safe-area-inset-bottom,0px) + 78px);left:50%;transform:translateX(-50%);z-index:102;gap:clamp(9px,3vw,18px);align-items:center;pointer-events:none}
  body:not(.logged-out) #hnMobileSideNav{display:flex;position:fixed;right:8px;top:34%;z-index:102;flex-direction:column;gap:13px;pointer-events:none}
  #hnMobileQuickNav a,#hnMobileSideNav a,#hnMobileSideNav button{pointer-events:auto;display:grid;place-items:center;width:49px;height:49px;border-radius:50%;background:rgba(32,39,55,.19);border:1px solid rgba(255,255,255,.28);box-shadow:inset 0 1px 0 rgba(255,255,255,.19),0 4px 16px rgba(0,0,0,.14);color:#f7f5ff;text-decoration:none;font-size:25px;line-height:1;-webkit-backdrop-filter:blur(9px);backdrop-filter:blur(9px);padding:0;cursor:pointer}
  #hnMobileSideNav a,#hnMobileSideNav button{width:43px;height:43px;font-size:22px}
@@ -48,6 +48,21 @@ body{background:#090909!important} .sidebar{background:#080808!important;border-
  #hnAccountDialog #hnFlagButton img{max-width:29px;height:auto}
  #hnAccountDialog #hnFlagMenu{position:absolute!important;top:41px!important;right:0!important;left:auto!important;z-index:6!important}
  #hnAccountDialog .hn-account-card{overflow-y:auto}
+}
+</style>
+<style id="hn-v242-mobile-nav-polish">
+@media(max-width:760px){
+ body:not(.logged-out) #hnMobileQuickNav{bottom:calc(env(safe-area-inset-bottom,0px) + 8px)!important;gap:clamp(10px,3.5vw,19px)}
+ body.hn-playing:not(.hn-player-fullscreen) #hnMobileQuickNav{bottom:calc(env(safe-area-inset-bottom,0px) + 87px)!important}
+ body:not(.logged-out) #hnMobileQuickNav a{background:rgba(16,24,38,.10)!important;border-color:rgba(255,255,255,.33)!important}
+ body:not(.logged-out) #hnMobileSideNav a,body:not(.logged-out) #hnMobileSideNav button{width:48px!important;height:48px!important;background:rgba(12,19,30,.08)!important;border:1px solid rgba(255,255,255,.35)!important;box-shadow:0 3px 12px #0003,inset 0 1px 0 #ffffff26!important;color:#fff!important}
+ #hnMobileQuickNav svg,#hnMobileSideNav svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.85;stroke-linecap:round;stroke-linejoin:round}
+ #hnMobileSideNav svg{width:29px;height:29px}
+ body:not(.logged-out) #hnMobileQuickNav a[aria-current="page"],body:not(.logged-out) #hnMobileSideNav a[aria-current="page"]{background:rgba(22,23,34,.13)!important}
+ body:not(.logged-out) #community .hn-social-tabs{bottom:calc(env(safe-area-inset-bottom,0px) + 8px)!important}
+ body.hn-playing:not(.hn-player-fullscreen) #community .hn-social-tabs{bottom:calc(env(safe-area-inset-bottom,0px) + 87px)!important}
+ body:not(.logged-out) main{padding-bottom:110px!important}
+ body.hn-player-fullscreen #hnMobileQuickNav,body.hn-player-fullscreen #hnMobileSideNav{display:none!important}
 }
 </style>
 <style id="hamnava-v8-design">
@@ -729,15 +744,15 @@ body .hn-artist-name{font-size:clamp(11px,2.7vw,15px)!important;font-weight:700!
 body .hn-artist-count{font-size:clamp(10px,2.4vw,12px)!important;font-weight:400!important;color:#9cacc1!important;white-space:normal!important}
 @media(max-width:400px){body #homeArtists.artist-chips,body #artistsList.artist-chips{gap:8px!important}body #homeArtists button.artist-chip,body #artistsList button.artist-chip{gap:7px!important;padding:7px!important;min-height:80px!important}body #homeArtists button.artist-chip img,body #artistsList button.artist-chip img,body #homeArtists .artist-placeholder,body #artistsList .artist-placeholder{width:46px!important;height:46px!important;flex-basis:46px!important}}
 </style><!-- V117: removed missing design-system-v74.css reference; existing inline styles preserved. -->\n</head><body class="logged-out"><nav id="hnMobileQuickNav" aria-label="Musiknavigation">
-<a href="#library" aria-label="Musikbibliothek" title="Musikbibliothek">♫</a>
-<a href="#artists" aria-label="Künstler A–Z" title="Künstler A–Z">♬</a>
-<a href="#favorites" aria-label="Favorit" title="Favorit">♡</a>
-<a href="#playlists" aria-label="Meine Playlists" title="Meine Playlists">▤</a>
+<a href="#library" aria-label="Musikbibliothek" title="Musikbibliothek"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h4v14H4zM10 3h4v16h-4zM16 7h4v12h-4z"/></svg></a>
+<a href="#artists" aria-label="Künstler A–Z" title="Künstler A–Z"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2M17 4h5M19.5 4v11a2.5 2.5 0 1 1-2.5-2.5"/></svg></a>
+<a href="#favorites" aria-label="Favorit" title="Favorit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 5.8a5.3 5.3 0 0 0-7.5 0L12 7.1l-1.3-1.3a5.3 5.3 0 0 0-7.5 7.5L12 22l8.8-8.7a5.3 5.3 0 0 0 0-7.5Z"/></svg></a>
+<a href="#playlists" aria-label="Meine Playlists" title="Meine Playlists"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h9M3 20h9M17 13v8M17 13l5-1v7a2 2 0 1 1-2-2"/></svg></a>
 </nav>
 <nav id="hnMobileSideNav" aria-label="Weitere Bereiche">
-<button type="button" id="hnMobileProfile" aria-label="Mein Profil" title="Mein Profil">♙</button>
-<a href="#community" aria-label="Community" title="Community">♧</a>
-<button type="button" id="hnMobileGenres" aria-label="Musikrichtung" aria-expanded="false" aria-controls="hnMobileGenrePicker" title="Musikrichtung">≋</button>
+<button type="button" id="hnMobileProfile" aria-label="Mein Profil" title="Mein Profil"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg></button>
+<a href="#community" aria-label="Community" title="Community"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="18" cy="9" r="2"/><path d="M2 21v-2a7 7 0 0 1 14 0v2M17 15a5 5 0 0 1 5 5v1"/></svg></a>
+<button type="button" id="hnMobileGenres" aria-label="Musikrichtung" aria-expanded="false" aria-controls="hnMobileGenrePicker" title="Musikrichtung"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/><circle cx="9" cy="7" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="11" cy="17" r="2"/></svg></button>
 </nav>
 <div id="hnMobileGenrePicker" role="group" aria-label="Musikrichtung auswählen" hidden></div>
 <div class="hn-topbar" id="hnTopbar" role="navigation" aria-label="Hauptnavigation"><button type="button" id="hnMobileNavButton" aria-label="Seitenmenü öffnen" aria-controls="siteSidebar" aria-expanded="false">☰</button><a class="hn-home" href="#home" aria-label="Startseite">⌂</a><label class="hn-search-wrap"><span class="hn-search-icon">⌕</span><input id="hnGlobalSearch" type="search" placeholder="Was möchtest du hören?" autocomplete="off" aria-label="Musik durchsuchen"/><button id="hnAdvancedToggle" type="button" aria-expanded="false" aria-controls="hnAdvancedPanel" title="Erweiterte Suche">☷ <span>Filter</span></button></label><div class="hn-actions"><a class="hn-desktop-action" href="#playlists">Meine Playlists</a><a class="hn-desktop-action" href="#favorites" aria-label="Favoriten" title="Favoriten">♡</a><button class="hn-avatar" id="hnProfile" type="button" title="Mein Profil" aria-label="Profil">☺</button></div></div><aside class="sidebar" dir="ltr" id="siteSidebar"><a class="brand" href="#home"><img class="brand-mark" src="hamnava-logo.webp" alt="HamNava Logo"/><span>HamNava</span></a><div class="side-caption">Deine Bibliothek</div><a class="side-link active" href="#home"><span>⌂</span><span>Startseite</span></a><a class="side-link" href="#library"><span>♫</span><span>Musikbibliothek</span></a><a class="side-link" href="#artists"><span>♬</span><span>Künstler A–Z</span></a><a class="side-link" href="#favorites"><span>♥</span><span>Favoriten</span></a><a class="side-link" href="#playlists"><span>▤</span><span>Meine Playlists</span></a><a class="side-link" href="#community"><span>👥</span><span>Community</span></a><a class="side-link" href="#ai"><span>✨</span><span>AI Music Studio</span></a><a class="side-link hidden" id="hnManageNav" href="#admin"><span>⚙️</span><span>Verwaltung</span></a><a class="side-link" href="add-song.html"><span>＋</span><span>Lied hinzufügen</span></a><div class="hn-create-area"><div class="hn-library-head"><span>▤ Bibliothek</span><button id="hnCreateBtn" type="button" aria-expanded="false">＋ Erstellen</button></div><div id="hnCreateMenu" class="hn-create-menu" hidden><button id="hnCreatePlaylist" type="button">♫ &nbsp; Playlist erstellen</button><button type="button" disabled title="Benötigt Datenbank-Erweiterung">♧ &nbsp; Gemeinsamer Mix · bald</button><button type="button" disabled title="Benötigt Datenbank-Erweiterung">▱ &nbsp; Ordner · bald</button></div></div><div id="hnPlaylistSidebar" class="hn-playlist-sidebar" aria-label="Meine Playlists"></div><div class="hn-genre-sidebar"><div class="side-caption">Musikrichtungen</div><div id="hnGenreSidebarLinks" class="hn-genre-sidebar-links"></div></div>
@@ -3530,6 +3545,14 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  }
  const languageObserver=new MutationObserver(()=>{if(mobileOnly()&&language&&profileCard&&language.parentElement!==profileCard)placeLanguage()});
  if(profileCard)languageObserver.observe(profileCard,{childList:true});
+ document.querySelectorAll('#hnMobileQuickNav a').forEach(link=>{
+  link.addEventListener('click',event=>{
+   if(!mobileOnly())return;
+   if(location.hash===link.getAttribute('href')){
+    event.preventDefault();location.hash='#home';window.scrollTo({top:0,behavior:'instant'});
+   }
+  });
+ });
  document.getElementById('hnMobileProfile').addEventListener('click',()=>{placeLanguage();setTimeout(placeLanguage,0)});
  window.addEventListener('resize',placeLanguage);
  document.addEventListener('DOMContentLoaded',placeLanguage);
