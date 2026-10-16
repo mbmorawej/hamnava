@@ -871,7 +871,7 @@ function hnEditSongImages(song){
   let image=f;
   try{const bitmap=await createImageBitmap(f);try{const scale=Math.min(1,(kind==='cover'?720:640)/Math.max(bitmap.width,bitmap.height));const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(bitmap.width*scale));canvas.height=Math.max(1,Math.round(bitmap.height*scale));const ctx=canvas.getContext('2d');if(!ctx)throw Error('Canvas nicht verfügbar');ctx.drawImage(bitmap,0,0,canvas.width,canvas.height);const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/webp',0.8));if(blob?.type==='image/webp'&&blob.size>0&&blob.size<f.size)image=blob}finally{bitmap.close()}}catch(error){console.warn('Bildoptimierung nicht verfügbar:',error)}
   const ext={'image/jpeg':'jpg','image/png':'png','image/webp':'webp'}[image.type],path=user.id+'/'+kind+'-'+crypto.randomUUID()+'.'+ext;
-  const {error}=await db.storage.from('hamnava-images').upload(path,image,{contentType:image.type,upsert:false,cacheControl:'3600'});if(error)throw error;
+  const {error}=await db.storage.from('hamnava-images').upload(path,image,{contentType:image.type,upsert:false,cacheControl:'31536000'});if(error)throw error;
   created.push(path);return db.storage.from('hamnava-images').getPublicUrl(path).data.publicUrl;
  }
  save.onclick=async()=>{
@@ -934,7 +934,7 @@ async function hnUploadArtistImage(file){
  if(file.size>3*1024*1024)throw new Error('Bild darf höchstens 3 MB groß sein.');
  const ext=({'image/jpeg':'jpg','image/png':'png','image/webp':'webp'})[file.type];
  const path=user.id+'/'+crypto.randomUUID()+'.'+ext;
- const result=await db.storage.from('hamnava-images').upload(path,file,{contentType:file.type,upsert:false,cacheControl:'3600'});
+ const result=await db.storage.from('hamnava-images').upload(path,file,{contentType:file.type,upsert:false,cacheControl:'31536000'});
  if(result.error)throw new Error('Bild-Upload fehlgeschlagen: '+result.error.message+' (Bucket hamnava-images und Storage-RLS prüfen)');
  const {data}=db.storage.from('hamnava-images').getPublicUrl(path);
  return data.publicUrl;
