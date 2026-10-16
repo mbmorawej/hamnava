@@ -38,12 +38,12 @@ body{background:#090909!important} .sidebar{background:#080808!important;border-
 <style id="hn-v241-mobile-navigation">
 @media(max-width:760px){
  body:not(.logged-out) #hnTopbar{display:none!important}
- body:not(.logged-out) main{padding-top:0!important;margin-top:0!important;row-gap:0!important;gap:0!important}
+ body:not(.logged-out) main{padding-top:calc(env(safe-area-inset-top,0px) + 12px)!important}
  body:not(.logged-out) main>header{display:none!important}
  body:not(.logged-out) #hnMobileSideNav{top:calc(env(safe-area-inset-top,0px) + 80px)}
  body:not(.logged-out) #hnMobileQuickNav{bottom:calc(env(safe-area-inset-bottom,0px) + 78px)}
  #hnAccountDialog .hn-account-card>.hn-account-row:first-child{position:relative;padding-right:53px}
- #hnAccountDialog #languageControl{position:absolute!important;display:flex!important;visibility:visible!important;top:0!important;right:48px!important;left:auto!important;bottom:auto!important;margin:0!important;width:38px!important;height:38px!important;min-width:38px!important;padding:0!important;z-index:5!important;background:transparent!important;box-shadow:none!important}
+ #hnAccountDialog #languageControl{position:absolute!important;display:flex!important;top:0!important;right:48px!important;left:auto!important;bottom:auto!important;margin:0!important;width:38px!important;height:38px!important;min-width:38px!important;padding:0!important;z-index:5!important;background:transparent!important;box-shadow:none!important}
  #hnAccountDialog #hnFlagButton{width:38px!important;height:38px!important;min-width:38px!important;padding:2px!important}
  #hnAccountDialog #hnFlagButton img{max-width:29px;height:auto}
  #hnAccountDialog #hnFlagMenu{position:absolute!important;top:41px!important;right:0!important;left:auto!important;z-index:6!important}
@@ -83,17 +83,6 @@ body{background:#090909!important} .sidebar{background:#080808!important;border-
  body:not(.logged-out):has(#library.hn-current) #library>.songs{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:15px!important}
  body:not(.logged-out):has(#library.hn-current) #library>.songs>.song{width:100%!important;max-width:none!important;min-width:0!important}
  body:not(.logged-out):has(#library.hn-current) #library>.songs>.song .hn-song-art-wrap{width:100%!important;max-width:none!important}
-}
-</style>
-<style id="hn-v245-mobile-compact-top">
-@media(max-width:760px){
- body:not(.logged-out) main{padding-top:0!important;margin-top:0!important;gap:0!important;align-content:start!important}
- body:not(.logged-out) main>header{display:none!important}
- body:not(.logged-out) #homeMusic,body:not(.logged-out) #app{margin-top:0!important;padding-top:0!important}
- body:not(.logged-out) #community,body:not(.logged-out) #library{margin-top:0!important}
- body:not(.logged-out) #library>h2{margin-top:0!important}
- #hnAccountDialog #languageControl #hnFlagButton{display:grid!important;visibility:visible!important;place-items:center!important}
- #hnAccountDialog #languageControl #hnFlagMenu:not([hidden]){display:flex!important;visibility:visible!important}
 }
 </style>
 <style id="hamnava-v8-design">
@@ -774,7 +763,7 @@ body #homeArtists .hn-artist-info,body #artistsList .hn-artist-info{display:flex
 body .hn-artist-name{font-size:clamp(11px,2.7vw,15px)!important;font-weight:700!important;line-height:1.3!important;color:#f5f8ff!important}
 body .hn-artist-count{font-size:clamp(10px,2.4vw,12px)!important;font-weight:400!important;color:#9cacc1!important;white-space:normal!important}
 @media(max-width:400px){body #homeArtists.artist-chips,body #artistsList.artist-chips{gap:8px!important}body #homeArtists button.artist-chip,body #artistsList button.artist-chip{gap:7px!important;padding:7px!important;min-height:80px!important}body #homeArtists button.artist-chip img,body #artistsList button.artist-chip img,body #homeArtists .artist-placeholder,body #artistsList .artist-placeholder{width:46px!important;height:46px!important;flex-basis:46px!important}}
-</style><!-- V117: removed missing design-system-v74.css reference; existing inline styles preserved. --></head><body class="logged-out"><nav id="hnMobileQuickNav" aria-label="Musiknavigation">
+</style><!-- V117: removed missing design-system-v74.css reference; existing inline styles preserved. -->\n</head><body class="logged-out"><nav id="hnMobileQuickNav" aria-label="Musiknavigation">
 <a href="#library" aria-label="Musikbibliothek" title="Musikbibliothek"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h4v14H4zM10 3h4v16h-4zM16 7h4v12h-4z"/></svg></a>
 <a href="#artists" aria-label="Künstler A–Z" title="Künstler A–Z"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2M17 4h5M19.5 4v11a2.5 2.5 0 1 1-2.5-2.5"/></svg></a>
 <a href="#favorites" aria-label="Favorit" title="Favorit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 5.8a5.3 5.3 0 0 0-7.5 0L12 7.1l-1.3-1.3a5.3 5.3 0 0 0-7.5 7.5L12 22l8.8-8.7a5.3 5.3 0 0 0 0-7.5Z"/></svg></a>
@@ -3588,15 +3577,15 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   observer.observe(profileDialog,{attributes:true,attributeFilter:['hidden']});
  }
 
+ const language=document.getElementById('languageControl');
  const profileCard=document.querySelector('#hnAccountDialog .hn-account-card>.hn-account-row:first-child');
  const desktopActions=document.querySelector('#hnTopbar .hn-actions');
  function placeLanguage(){
-  const language=document.getElementById('languageControl');
   if(!language||!profileCard||!desktopActions)return;
   const target=mobileOnly()?profileCard:desktopActions;
   if(language.parentElement!==target)target.insertBefore(language,mobileOnly()?document.getElementById('hnAccountClose'):document.getElementById('hnProfile'));
  }
- const languageObserver=new MutationObserver(()=>{if(mobileOnly())placeLanguage()});
+ const languageObserver=new MutationObserver(()=>{if(mobileOnly()&&language&&profileCard&&language.parentElement!==profileCard)placeLanguage()});
  if(profileCard)languageObserver.observe(profileCard,{childList:true});
  document.querySelectorAll('#hnMobileQuickNav a').forEach(link=>{
   link.addEventListener('click',event=>{
