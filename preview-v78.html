@@ -72,6 +72,19 @@ body{background:#090909!important} .sidebar{background:#080808!important;border-
  #hnMobileSectionClose svg{width:30px;height:30px;stroke-width:2}
 }
 </style>
+<style id="hn-v244-mobile-genre">
+@media(max-width:760px){
+ body:not(.logged-out) #hnMobileGenrePicker:not([hidden]){background:rgba(16,25,43,.48)!important;border:1px solid rgba(255,255,255,.28)!important;box-shadow:0 12px 38px rgba(0,0,0,.26),inset 0 1px 0 rgba(255,255,255,.14)!important;-webkit-backdrop-filter:blur(22px) saturate(130%)!important;backdrop-filter:blur(22px) saturate(130%)!important}
+ #hnMobileGenrePicker button{background:rgba(255,255,255,.065)!important;border:1px solid rgba(255,255,255,.18)!important;color:#fff!important;border-radius:13px!important;margin:5px 0!important;font-size:15px!important;font-weight:600!important;padding:11px 13px!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)!important}
+ #hnMobileGenrePicker button[aria-pressed="true"]{background:rgba(177,139,225,.24)!important;border-color:rgba(231,205,255,.65)!important}
+ body:not(.logged-out):has(#library.hn-current) #library>.actions{display:none!important}
+ body:not(.logged-out):has(#library.hn-current) #library>.hn-legacy-library-filters{display:none!important}
+ body:not(.logged-out):has(#library.hn-current) #library>h2{margin:0 0 14px!important;font-size:23px!important}
+ body:not(.logged-out):has(#library.hn-current) #library>.songs{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:15px!important}
+ body:not(.logged-out):has(#library.hn-current) #library>.songs>.song{width:100%!important;max-width:none!important;min-width:0!important}
+ body:not(.logged-out):has(#library.hn-current) #library>.songs>.song .hn-song-art-wrap{width:100%!important;max-width:none!important}
+}
+</style>
 <style id="hamnava-v8-design">
 :root{--bg:#071120;--panel:#0e1b2d;--line:#23354a;--ink:#f5f8ff;--muted:#a8b8ce;--mint:#17b8ae;--gold:#f2ad52}
 html{scroll-padding-top:80px}body,body.ltr{background:var(--bg)!important;color:var(--ink);font-family:system-ui,-apple-system,'Segoe UI',Arial,sans-serif!important;padding-top:0!important;overflow-x:hidden}
@@ -3608,6 +3621,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   if(!original)return;
   picker.replaceChildren();
   original.querySelectorAll('button.hn-genre-link').forEach(source=>{
+   if(source.querySelector('.hn-genre-name')?.textContent.trim()==='Alle Musikrichtungen')return;
    const btn=document.createElement('button');btn.type='button';
    btn.textContent=source.querySelector('.hn-genre-name')?.textContent||source.textContent.trim();
    btn.setAttribute('aria-pressed',source.getAttribute('aria-pressed')||'false');
