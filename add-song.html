@@ -48,7 +48,7 @@ $('songForm').onsubmit=async e=>{
    }catch(error){console.warn('Bildoptimierung nicht verfügbar, Original wird verwendet:',error)}
    const type=image.type;
    const imagePath=user.id+'/'+kind+'-'+crypto.randomUUID()+imageTypes[type];
-   const {error}=await db.storage.from('hamnava-images').upload(imagePath,image,{contentType:type,upsert:false,cacheControl:'3600'});
+   const {error}=await db.storage.from('hamnava-images').upload(imagePath,image,{contentType:type,upsert:false,cacheControl:'31536000'});
    if(error)throw Error(kind+'-Upload: '+error.message+' (bitte SQL-Einrichtung prüfen)');
    uploaded.push({bucket:'hamnava-images',path:imagePath});
    return db.storage.from('hamnava-images').getPublicUrl(imagePath).data.publicUrl;
