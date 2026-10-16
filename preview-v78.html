@@ -20,7 +20,7 @@ body{background:#090909!important} .sidebar{background:#080808!important;border-
 <style id="hn-v240-mobile-navigation">
 #hnMobileQuickNav,#hnMobileSideNav,#hnMobileGenrePicker{display:none}
 @media(max-width:760px){
- body:not(.logged-out) #hnMobileQuickNav{display:flex;position:fixed;bottom:calc(env(safe-area-inset-bottom,0px) + 78px);left:50%;transform:translateX(-50%);z-index:102;gap:clamp(9px,3vw,18px);align-items:center;pointer-events:none}
+ body:not(.logged-out):has(#homeMusic.hn-current) #hnMobileQuickNav{display:flex;position:fixed;bottom:calc(env(safe-area-inset-bottom,0px) + 78px);left:50%;transform:translateX(-50%);z-index:102;gap:clamp(9px,3vw,18px);align-items:center;pointer-events:none}
  body:not(.logged-out) #hnMobileSideNav{display:flex;position:fixed;right:8px;top:34%;z-index:102;flex-direction:column;gap:13px;pointer-events:none}
  #hnMobileQuickNav a,#hnMobileSideNav a,#hnMobileSideNav button{pointer-events:auto;display:grid;place-items:center;width:49px;height:49px;border-radius:50%;background:rgba(32,39,55,.19);border:1px solid rgba(255,255,255,.28);box-shadow:inset 0 1px 0 rgba(255,255,255,.19),0 4px 16px rgba(0,0,0,.14);color:#f7f5ff;text-decoration:none;font-size:25px;line-height:1;-webkit-backdrop-filter:blur(9px);backdrop-filter:blur(9px);padding:0;cursor:pointer}
  #hnMobileSideNav a,#hnMobileSideNav button{width:43px;height:43px;font-size:22px}
@@ -33,6 +33,21 @@ body{background:#090909!important} .sidebar{background:#080808!important;border-
  body:not(.logged-out) #hnTopbar .hn-avatar{display:none!important}
  body:not(.logged-out) #hnMobileQuickNav{max-width:calc(100vw - 20px)}
  #library.hn-current{scroll-margin-top:75px}
+}
+</style>
+<style id="hn-v241-mobile-navigation">
+@media(max-width:760px){
+ body:not(.logged-out) #hnTopbar{display:none!important}
+ body:not(.logged-out) main{padding-top:calc(env(safe-area-inset-top,0px) + 12px)!important}
+ body:not(.logged-out) main>header{display:none!important}
+ body:not(.logged-out) #hnMobileSideNav{top:calc(env(safe-area-inset-top,0px) + 80px)}
+ body:not(.logged-out) #hnMobileQuickNav{bottom:calc(env(safe-area-inset-bottom,0px) + 78px)}
+ #hnAccountDialog .hn-account-card>.hn-account-row:first-child{position:relative;padding-right:53px}
+ #hnAccountDialog #languageControl{position:absolute!important;display:flex!important;top:0!important;right:48px!important;left:auto!important;bottom:auto!important;margin:0!important;width:38px!important;height:38px!important;min-width:38px!important;padding:0!important;z-index:5!important;background:transparent!important;box-shadow:none!important}
+ #hnAccountDialog #hnFlagButton{width:38px!important;height:38px!important;min-width:38px!important;padding:2px!important}
+ #hnAccountDialog #hnFlagButton img{max-width:29px;height:auto}
+ #hnAccountDialog #hnFlagMenu{position:absolute!important;top:41px!important;right:0!important;left:auto!important;z-index:6!important}
+ #hnAccountDialog .hn-account-card{overflow-y:auto}
 }
 </style>
 <style id="hamnava-v8-design">
@@ -3505,6 +3520,21 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  const picker=document.getElementById('hnMobileGenrePicker');
  const toggle=document.getElementById('hnMobileGenres');
  const mobileOnly=()=>window.matchMedia('(max-width:760px)').matches;
+ const language=document.getElementById('languageControl');
+ const profileCard=document.querySelector('#hnAccountDialog .hn-account-card>.hn-account-row:first-child');
+ const desktopActions=document.querySelector('#hnTopbar .hn-actions');
+ function placeLanguage(){
+  if(!language||!profileCard||!desktopActions)return;
+  const target=mobileOnly()?profileCard:desktopActions;
+  if(language.parentElement!==target)target.insertBefore(language,mobileOnly()?document.getElementById('hnAccountClose'):document.getElementById('hnProfile'));
+ }
+ const languageObserver=new MutationObserver(()=>{if(mobileOnly()&&language&&profileCard&&language.parentElement!==profileCard)placeLanguage()});
+ if(profileCard)languageObserver.observe(profileCard,{childList:true});
+ document.getElementById('hnMobileProfile').addEventListener('click',()=>{placeLanguage();setTimeout(placeLanguage,0)});
+ window.addEventListener('resize',placeLanguage);
+ document.addEventListener('DOMContentLoaded',placeLanguage);
+ placeLanguage();
+
  function close(){picker.hidden=true;toggle.setAttribute('aria-expanded','false')}
  function updateActive(){
   const hash=location.hash||'#home';
