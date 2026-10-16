@@ -284,7 +284,8 @@ body.hn-player-fullscreen .hn-player-window audio{max-width:100%}
 #hnFlagMenu{position:absolute;right:0;top:calc(100% + 9px);z-index:10010;background:#14243a;border:1px solid #3a5670;border-radius:12px;padding:6px;box-shadow:0 14px 35px #0009;display:grid;gap:4px;min-width:52px}
 #hnFlagMenu[hidden]{display:none!important}
 #hnFlagMenu button{display:grid;place-items:center;background:transparent;color:#fff;border:0;border-radius:8px;font-size:25px;width:42px;height:38px;padding:0;cursor:pointer}
-#hnFlagButton img,#hnFlagMenu button img{display:block;width:38px;height:25px;object-fit:cover;border-radius:3px;box-shadow:0 1px 4px #0008}\n#hnFlagMenu button:hover,#hnFlagMenu button:focus-visible{background:#30485e;outline:2px solid #17b8ae}
+#hnFlagButton img,#hnFlagMenu button img{display:block;width:38px;height:25px;object-fit:cover;border-radius:3px;box-shadow:0 1px 4px #0008}
+#hnFlagMenu button:hover,#hnFlagMenu button:focus-visible{background:#30485e;outline:2px solid #17b8ae}
 </style><style id="hnProfileStyles">
 #hnAccountDialog[hidden]{display:none!important}#hnAccountDialog{position:fixed;inset:0;z-index:30000;display:grid;place-items:center;padding:14px}#hnAccountDialog .hn-account-shade{position:absolute;inset:0;background:#020916dd;backdrop-filter:blur(7px)}#hnAccountDialog .hn-account-card{position:relative;background:#102238;color:#f4f8ff;border:1px solid #35516b;border-radius:22px;padding:24px;width:min(530px,100%);max-height:92dvh;overflow:auto;box-shadow:0 24px 70px #0009}#hnAccountDialog h2{margin:0 0 8px}#hnAccountDialog h3{font-size:16px;margin:20px 0 10px}#hnAccountDialog label{display:block;margin:10px 0;font-size:13px;color:#b8cde0}#hnAccountDialog input{display:block;width:100%;margin-top:5px;padding:11px;border:1px solid #3b5268;background:#091829;color:#fff;border-radius:10px}#hnAccountDialog .hn-account-row{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}#hnAccountDialog button{border-radius:11px;padding:10px 14px}#hnAccountDialog .hn-account-muted{color:#a9bfd2;font-size:13px;overflow-wrap:anywhere}#hnAccountDialog .hn-account-buttons{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}#hnAccountDialog .hn-account-buttons button{flex:1}#hnAccountDialog .hn-account-status{min-height:22px;color:#70e6d5;margin-top:12px;font-size:13px}#hnProfile{cursor:pointer}#hnAccountDialog .hn-account-fold{border:1px solid #74559d;border-radius:16px;background:#182a43;margin:14px 0;overflow:hidden}#hnAccountDialog .hn-account-fold>summary{list-style:none;display:flex;align-items:center;gap:14px;cursor:pointer;min-height:68px;padding:12px 16px;font-weight:700;color:#f5edff}#hnAccountDialog .hn-account-fold>summary::-webkit-details-marker{display:none}#hnAccountDialog .hn-account-fold>summary span:first-child{font-size:27px}#hnAccountDialog .hn-account-fold>summary:after{content:"⌄";margin-left:auto;font-size:22px;color:#d7b3f7}#hnAccountDialog .hn-account-fold[open]>summary:after{content:"⌃"}#hnAccountDialog .hn-account-fold>label,#hnAccountDialog .hn-account-fold>p,#hnAccountDialog .hn-account-fold>.hn-account-buttons,#hnAccountDialog .hn-account-fold>#hnMfaEnroll{margin-left:16px;margin-right:16px}#hnAccountDialog .hn-account-fold>summary:focus-visible{outline:2px solid #e7b4ff;outline-offset:-3px}
 </style><style id="hamnava-v35-playlist-cover">
@@ -767,7 +768,8 @@ body #homeArtists .hn-artist-info,body #artistsList .hn-artist-info{display:flex
 body .hn-artist-name{font-size:clamp(11px,2.7vw,15px)!important;font-weight:700!important;line-height:1.3!important;color:#f5f8ff!important}
 body .hn-artist-count{font-size:clamp(10px,2.4vw,12px)!important;font-weight:400!important;color:#9cacc1!important;white-space:normal!important}
 @media(max-width:400px){body #homeArtists.artist-chips,body #artistsList.artist-chips{gap:8px!important}body #homeArtists button.artist-chip,body #artistsList button.artist-chip{gap:7px!important;padding:7px!important;min-height:80px!important}body #homeArtists button.artist-chip img,body #artistsList button.artist-chip img,body #homeArtists .artist-placeholder,body #artistsList .artist-placeholder{width:46px!important;height:46px!important;flex-basis:46px!important}}
-</style><!-- V117: removed missing design-system-v74.css reference; existing inline styles preserved. -->\n<style id="hn-v248-admin-spotify-and-mobile-library">
+</style><!-- V117: removed missing design-system-v74.css reference; existing inline styles preserved. -->
+<style id="hn-v248-admin-spotify-and-mobile-library">
 #hnAdminSpotifyLinks .hn-admin-spotify-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px;border-bottom:1px solid #ffffff25}
 #hnAdminSpotifyLinks .hn-admin-spotify-row span{overflow-wrap:anywhere}
 #hnAdminSpotifySearch{width:100%;max-width:440px;margin:12px 0}
@@ -3292,6 +3294,13 @@ body.hn-playing.hn-community-bottom-player:not(.hn-player-fullscreen) .hn-player
 }
 </style><style id="hn-v156-library-parity">
 /* Same layout rules for all song grids; no playlist-specific shrink. */
+/* V251: remove redundant framed panel around song cards without changing cards or controls. */
+:is(#library,#favoritesPage,#artists,#playlists,#homeMusic).hn-current:has(:is(#songs,#favoriteSongs,#artistSongs,#playlistTracks,#hnPublicTracks,#popularSongs)>article.song){border-color:transparent!important;box-shadow:none!important;background:transparent!important}
+@media(max-width:760px){
+:is(#library,#favoritesPage,#artists,#playlists,#homeMusic).hn-current:has(:is(#songs,#favoriteSongs,#artistSongs,#playlistTracks,#hnPublicTracks,#popularSongs)>article.song){padding-top:0!important}
+:is(#songs,#favoriteSongs,#artistSongs,#playlistTracks,#hnPublicTracks,#popularSongs){margin-top:0!important}
+}
+
 :is(#songs,#favoriteSongs,#playlistTracks,#hnPublicTracks){grid-template-columns:repeat(auto-fill,minmax(210px,1fr))!important;gap:12px!important}
 :is(#playlistTracks,#hnPublicTracks)>article.song{display:flex!important;flex-direction:column!important;width:100%!important;min-width:0!important;box-sizing:border-box!important}
 :is(#playlistTracks,#hnPublicTracks)>article.song .hn-song-art-wrap{position:relative!important;aspect-ratio:1/1!important;width:100%!important;min-height:0!important;max-height:none!important;overflow:hidden!important}
