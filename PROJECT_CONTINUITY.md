@@ -6,7 +6,7 @@ Last verified: 2026-10-16. This is the canonical handoff document for future Cha
 - Repository: https://github.com/mbmorawej/hamnava
 - Branch: `main`
 - Current development preview: `preview-v78.html`
-- Preview URL: https://mbmorawej.github.io/hamnava/preview-v78.html?v=236
+- Preview URL: https://mbmorawej.github.io/hamnava/preview-v78.html?v=252
 - Main preview companion script: `scripts/hamnava-v78-community-preview-v181.js`
 - Other relevant upload page: `add-song.html`
 - Supabase: external backend for authentication, database, storage; NEVER commit private keys or user credentials to this document.
@@ -65,3 +65,5 @@ Assistant should fetch this file from main, verify latest source and current pre
 - 2026-10-16 V250: Removed the `Meine Favoriten` heading and subtitle from the original `#favoritesPage` HTML. Extended existing V239 mobile header CSS so, only while Favoriten is current, the logo/tagline block is hidden and top spacing removed; navigation toggle, account identity, song cards and player remain intact. Backup `backup-before-v250-favorites-clean-header-20261016`. Verified GitHub readback, no physical iPhone test claimed. Preview `preview-v78.html?v=250`.
 
 - 2026-10-16 V251: Replaced two stray literal `\\n` text artifacts in HTML/CSS boundaries with actual line breaks, preserving JavaScript string escapes and CSV parsing. Updated the existing `hn-v156-library-parity` CSS to remove redundant outer panel border/background/shadow only on active song-list pages with rendered song articles and reduce mobile top whitespace in song grids. Kept individual song cards, navigation and player unchanged. Backup branch `backup-before-v251-song-card-layout-20261016`. GitHub file reread verified; visual iPhone verification pending. Preview `preview-v78.html?v=251`.
+
+- 2026-10-16 V252: Corrected the existing shared mobile `main` layout rule in `hamnava-mobile-sidebar-access-v3`, reducing authenticated page top padding from 85px to 12px. Explicitly retained 85px for active `#member-profile` as requested. No card, player, navigation or data logic changed. Backup: `backup-before-v252-mobile-top-gap-20261016`. HTML GitHub readback verified; iPhone visual verification pending. Preview `preview-v78.html?v=252`.
