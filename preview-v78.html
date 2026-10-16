@@ -3294,9 +3294,10 @@ body.hn-playing.hn-community-bottom-player:not(.hn-player-fullscreen) .hn-player
 </style><style id="hn-v156-library-parity">
 /* Same layout rules for all song grids; no playlist-specific shrink. */
 /* V251: remove redundant framed panel around song cards without changing cards or controls. */
+/* V261: mobile artist/playlist page shells are unframed; inner cards and playlist sections retain their own frames. */
 :is(#library,#favoritesPage,#artists,#playlists,#homeMusic).hn-current:has(:is(#songs,#favoriteSongs,#artistSongs,#playlistTracks,#hnPublicTracks,#popularSongs)>article.song){border-color:transparent!important;box-shadow:none!important;background:transparent!important}
 @media(max-width:760px){
-
+body.hn-ready:not(.logged-out) :is(section#artists.panel,section#playlists.panel).hn-current{border:0!important;outline:0!important;box-shadow:none!important;background:transparent!important;padding:0!important}
 :is(#library,#favoritesPage,#artists,#playlists,#homeMusic).hn-current:has(:is(#songs,#favoriteSongs,#artistSongs,#playlistTracks,#hnPublicTracks,#popularSongs)>article.song){padding-top:0!important}
 :is(#songs,#favoriteSongs,#artistSongs,#playlistTracks,#hnPublicTracks,#popularSongs){margin-top:0!important}
 }
