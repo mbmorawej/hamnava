@@ -55,3 +55,5 @@ Assistant should fetch this file from main, verify latest source and current pre
 
 ## Change log
 - 2026-10-16: Created canonical continuity document. No runtime/application code changed in this documentation commit.
+
+- 2026-10-16 V247: Added admin-only `Spotify-Link bearbeiten` action to existing song cards in `preview-v78.html`. It updates the existing Supabase `songs` row `url` and `external_id` (and resets/refetches cover) without changing the song ID, preserving favorites and playlist references. Backup branch `backup-before-v247-spotify-link-editor-20261016`. Test target: Ebi Arezou, Spotify `https://open.spotify.com/track/5WC0p8exH1UlVFKI7paK81`. This was not tested on a real iPhone or live Supabase by the assistant; user must verify.
