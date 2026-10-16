@@ -43,7 +43,6 @@ body{background:#090909!important} .sidebar{background:#080808!important;border-
 @media(max-width:760px){
  body:not(.logged-out) #hnTopbar{display:none!important}
  body:not(.logged-out) main{padding-top:calc(env(safe-area-inset-top,0px) + 12px)!important}
- body:not(.logged-out) main>header{display:none!important}
  body:not(.logged-out) #hnMobileSideNav{top:calc(env(safe-area-inset-top,0px) + 80px)}
  body:not(.logged-out) #hnMobileQuickNav{bottom:calc(env(safe-area-inset-bottom,0px) + 78px)}
  #hnAccountDialog .hn-account-card>.hn-account-row:first-child{position:relative;padding-right:53px}
@@ -327,7 +326,6 @@ body.hn-ready main > #hnFooter:not(.hn-current),body.logged-out main > #hnFooter
 /* Mobile: Inhalt unmittelbar unter der fixierten Navigationsleiste starten. */
 @media (max-width:760px){
   body:not(.logged-out) main{
-    padding-top:76px!important;
     justify-content:flex-start!important;
     align-content:start!important;
   }
