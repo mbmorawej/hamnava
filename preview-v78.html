@@ -65,6 +65,13 @@ body{background:#090909!important} .sidebar{background:#080808!important;border-
  body.hn-player-fullscreen #hnMobileQuickNav,body.hn-player-fullscreen #hnMobileSideNav{display:none!important}
 }
 </style>
+<style id="hn-v243-mobile-close">
+#hnMobileSectionClose[hidden]{display:none!important}
+@media(max-width:760px){
+ body:not(.logged-out) #hnMobileSideNav #hnMobileSectionClose:not([hidden]){display:grid!important;background:rgba(13,21,33,.12)!important;border:1px solid rgba(255,255,255,.52)!important;box-shadow:inset 0 1px 0 #ffffff33,0 3px 12px #0003!important}
+ #hnMobileSectionClose svg{width:30px;height:30px;stroke-width:2}
+}
+</style>
 <style id="hamnava-v8-design">
 :root{--bg:#071120;--panel:#0e1b2d;--line:#23354a;--ink:#f5f8ff;--muted:#a8b8ce;--mint:#17b8ae;--gold:#f2ad52}
 html{scroll-padding-top:80px}body,body.ltr{background:var(--bg)!important;color:var(--ink);font-family:system-ui,-apple-system,'Segoe UI',Arial,sans-serif!important;padding-top:0!important;overflow-x:hidden}
@@ -753,6 +760,7 @@ body .hn-artist-count{font-size:clamp(10px,2.4vw,12px)!important;font-weight:400
 <button type="button" id="hnMobileProfile" aria-label="Mein Profil" title="Mein Profil"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg></button>
 <a href="#community" aria-label="Community" title="Community"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="18" cy="9" r="2"/><path d="M2 21v-2a7 7 0 0 1 14 0v2M17 15a5 5 0 0 1 5 5v1"/></svg></a>
 <button type="button" id="hnMobileGenres" aria-label="Musikrichtung" aria-expanded="false" aria-controls="hnMobileGenrePicker" title="Musikrichtung"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/><circle cx="9" cy="7" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="11" cy="17" r="2"/></svg></button>
+<button type="button" id="hnMobileSectionClose" aria-label="Schließen und zur Startseite" title="Zur Startseite" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
 </nav>
 <div id="hnMobileGenrePicker" role="group" aria-label="Musikrichtung auswählen" hidden></div>
 <div class="hn-topbar" id="hnTopbar" role="navigation" aria-label="Hauptnavigation"><button type="button" id="hnMobileNavButton" aria-label="Seitenmenü öffnen" aria-controls="siteSidebar" aria-expanded="false">☰</button><a class="hn-home" href="#home" aria-label="Startseite">⌂</a><label class="hn-search-wrap"><span class="hn-search-icon">⌕</span><input id="hnGlobalSearch" type="search" placeholder="Was möchtest du hören?" autocomplete="off" aria-label="Musik durchsuchen"/><button id="hnAdvancedToggle" type="button" aria-expanded="false" aria-controls="hnAdvancedPanel" title="Erweiterte Suche">☷ <span>Filter</span></button></label><div class="hn-actions"><a class="hn-desktop-action" href="#playlists">Meine Playlists</a><a class="hn-desktop-action" href="#favorites" aria-label="Favoriten" title="Favoriten">♡</a><button class="hn-avatar" id="hnProfile" type="button" title="Mein Profil" aria-label="Profil">☺</button></div></div><aside class="sidebar" dir="ltr" id="siteSidebar"><a class="brand" href="#home"><img class="brand-mark" src="hamnava-logo.webp" alt="HamNava Logo"/><span>HamNava</span></a><div class="side-caption">Deine Bibliothek</div><a class="side-link active" href="#home"><span>⌂</span><span>Startseite</span></a><a class="side-link" href="#library"><span>♫</span><span>Musikbibliothek</span></a><a class="side-link" href="#artists"><span>♬</span><span>Künstler A–Z</span></a><a class="side-link" href="#favorites"><span>♥</span><span>Favoriten</span></a><a class="side-link" href="#playlists"><span>▤</span><span>Meine Playlists</span></a><a class="side-link" href="#community"><span>👥</span><span>Community</span></a><a class="side-link" href="#ai"><span>✨</span><span>AI Music Studio</span></a><a class="side-link hidden" id="hnManageNav" href="#admin"><span>⚙️</span><span>Verwaltung</span></a><a class="side-link" href="add-song.html"><span>＋</span><span>Lied hinzufügen</span></a><div class="hn-create-area"><div class="hn-library-head"><span>▤ Bibliothek</span><button id="hnCreateBtn" type="button" aria-expanded="false">＋ Erstellen</button></div><div id="hnCreateMenu" class="hn-create-menu" hidden><button id="hnCreatePlaylist" type="button">♫ &nbsp; Playlist erstellen</button><button type="button" disabled title="Benötigt Datenbank-Erweiterung">♧ &nbsp; Gemeinsamer Mix · bald</button><button type="button" disabled title="Benötigt Datenbank-Erweiterung">▱ &nbsp; Ordner · bald</button></div></div><div id="hnPlaylistSidebar" class="hn-playlist-sidebar" aria-label="Meine Playlists"></div><div class="hn-genre-sidebar"><div class="side-caption">Musikrichtungen</div><div id="hnGenreSidebarLinks" class="hn-genre-sidebar-links"></div></div>
@@ -3535,6 +3543,27 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  const picker=document.getElementById('hnMobileGenrePicker');
  const toggle=document.getElementById('hnMobileGenres');
  const mobileOnly=()=>window.matchMedia('(max-width:760px)').matches;
+ const sectionClose=document.getElementById('hnMobileSectionClose');
+ const profileDialog=document.getElementById('hnAccountDialog');
+ function syncClose(){
+  const active=mobileOnly()&&!document.body.classList.contains('logged-out')&&
+    ((location.hash||'#home')==='#community'||!picker.hidden||!!profileDialog&&!profileDialog.hidden);
+  sectionClose.hidden=!active;
+ }
+ function returnHome(){
+  if(!mobileOnly())return;
+  if(profileDialog&&!profileDialog.hidden)document.getElementById('hnAccountClose')?.click();
+  picker.hidden=true;toggle.setAttribute('aria-expanded','false');
+  if(location.hash!=='#home')location.hash='#home';
+  else window.scrollTo({top:0,behavior:'instant'});
+  syncClose();
+ }
+ sectionClose.addEventListener('click',returnHome);
+ if(profileDialog){
+  const observer=new MutationObserver(syncClose);
+  observer.observe(profileDialog,{attributes:true,attributeFilter:['hidden']});
+ }
+
  const language=document.getElementById('languageControl');
  const profileCard=document.querySelector('#hnAccountDialog .hn-account-card>.hn-account-row:first-child');
  const desktopActions=document.querySelector('#hnTopbar .hn-actions');
@@ -3558,14 +3587,14 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  document.addEventListener('DOMContentLoaded',placeLanguage);
  placeLanguage();
 
- function close(){picker.hidden=true;toggle.setAttribute('aria-expanded','false')}
+ function close(){picker.hidden=true;toggle.setAttribute('aria-expanded','false');syncClose()}
  function updateActive(){
   const hash=location.hash||'#home';
   document.querySelectorAll('#hnMobileQuickNav a,#hnMobileSideNav a').forEach(a=>{
    if(a.getAttribute('href')===hash)a.setAttribute('aria-current','page');
    else a.removeAttribute('aria-current');
   });
-  close();
+  close();syncClose();
  }
  document.getElementById('hnMobileProfile').addEventListener('click',()=>{
   if(!mobileOnly())return;
@@ -3585,13 +3614,13 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
    btn.addEventListener('click',()=>{source.click();close();window.scrollTo({top:0,behavior:'instant'})});
    picker.append(btn);
   });
-  picker.hidden=false;toggle.setAttribute('aria-expanded','true');
+  picker.hidden=false;toggle.setAttribute('aria-expanded','true');syncClose();
  });
  document.addEventListener('click',e=>{if(!picker.hidden&&!picker.contains(e.target)&&!toggle.contains(e.target))close()});
  document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
  window.addEventListener('hashchange',()=>{updateActive();if(mobileOnly())window.scrollTo({top:0,behavior:'instant'})});
- window.addEventListener('resize',()=>{if(!mobileOnly())close()});
- updateActive();
+ window.addEventListener('resize',()=>{if(!mobileOnly())close();syncClose()});
+ updateActive();syncClose();
 })();
 </script>
 </body></html>
