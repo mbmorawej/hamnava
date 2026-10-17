@@ -2563,7 +2563,7 @@ font-size:12px!important;line-height:1.3!important;padding:9px 7px!important;bor
 #playlists.hn-v71-home .hn-public-wrap,#playlists.hn-v71-home .hn-simple-head,#playlists.hn-v71-home #hnPlaylistQuickList,#playlists.hn-v71-home #hnSimpleDetail,#playlists.hn-v71-home #playlistTracks,#playlists.hn-v71-home .hn-playlist-hero{display:none!important}
 #playlists.hn-v71-home #hnV66Switch{display:none!important}
 #playlists.hn-v71-home #hnV71Landing{display:grid!important}
-#hnV71Landing{display:none;gap:18px}
+#hnV71Landing{display:none;gap:18px}#hnV71OverviewHeader{display:flex;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:10px}#hnV71OverviewHeader h2{margin:0;font-size:clamp(18px,3vw,24px)}#hnV71OverviewHeader #hnV71Controls{margin:0}#playlists:not(.hn-v71-home) .hn-simple-head #hnSimpleNew{display:none!important}
 .hn-v71-section{min-width:0;border:1px solid #40536d;border-radius:18px;padding:14px;background:#14233b}
 .hn-v71-head{display:flex;align-items:center;gap:10px;justify-content:space-between;margin-bottom:12px}
 .hn-v71-title{font-size:18px;font-weight:800;color:#f4f7ff}
@@ -2575,7 +2575,7 @@ font-size:12px!important;line-height:1.3!important;padding:9px 7px!important;bor
 .hn-v71-more,.hn-v71-options,.hn-v71-back{background:#273650!important;color:#fff!important;border:1px solid #56657f!important;border-radius:10px!important;padding:9px 12px!important}
 .hn-v71-menu{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
 .hn-v71-menu[hidden]{display:none!important}
-#playlists.hn-v71-home #hnV71Back,#playlists.hn-v71-home #hnV71SectionOptions{display:none!important}
+#playlists.hn-v71-home #hnV71Back{display:none!important}
 #hnV71Controls{display:flex;gap:8px;align-items:center;justify-content:flex-start;flex-wrap:wrap;margin-bottom:12px}#hnV71HomeActions{display:flex;gap:8px;align-items:center;justify-content:flex-start;flex-wrap:wrap;margin-left:0}#hnV71HomeActions[hidden]{display:none!important}
 #hnV71SectionMenu[hidden]{display:none!important}
 @media(max-width:480px){#hnV71Landing{gap:12px}.hn-v71-list{grid-template-columns:1fr}.hn-v71-cover{height:108px}#playlists #hnV66Switch button{min-height:100px;padding:10px!important;font-size:13px}}
@@ -2586,9 +2586,9 @@ const pub=$('hnPublicPlaylists'),priv=$('hnPlaylistQuickList'),sw=$('hnV66Switch
 const landing=document.createElement('div');landing.id='hnV71Landing';panel.insertBefore(landing,sw);
 const controls=document.createElement('div');controls.id='hnV71Controls';controls.innerHTML='<button type="button" class="hn-v71-back" id="hnV71Back">← Alle Playlists</button><span id="hnV71HomeActions"><button type="button" class="hn-v71-options" id="hnV71NewPlaylist">＋ Neue Playlist</button><button type="button" class="hn-v71-options" id="hnV71SectionOptions" aria-expanded="false">⋯ Optionen</button></span>';
 panel.insertBefore(controls,sw);
-const playlistHeading=panel.querySelector('.hn-playlist-hero #hnPlaylistTitle');if(playlistHeading){playlistHeading.insertAdjacentElement('afterend',controls)}
+const overviewHeader=document.createElement('div');overviewHeader.id='hnV71OverviewHeader';const overviewTitle=document.createElement('h2');overviewTitle.textContent='Meine Playlists';overviewHeader.append(overviewTitle,controls);landing.prepend(overviewHeader)
 const menu=document.createElement('div');menu.id='hnV71SectionMenu';menu.className='hn-v71-menu';menu.hidden=true;panel.insertBefore(menu,sw);
-if(playlistHeading){controls.insertAdjacentElement('afterend',menu)}
+overviewHeader.insertAdjacentElement('afterend',menu)
 let state='home',expanded={public:false,private:false};
 const photos=['photo-1516280440614-37939bbacd81','photo-1459749411175-04bf5292ceea','photo-1500534623283-312aade485b7','photo-1493225457124-a3eb161ffa5f'];
 const img=(name,kind)=>{let t=String(name||'').toLowerCase();let id=/reise|travel|safar|mosaf|مسافر/.test(t)?photos[2]:/love|liebe|عاشق/.test(t)?'photo-1518199266791-5375a83190b7':/party|dance|رقص/.test(t)?photos[1]:kind==='public'?photos[1]:photos[0];return 'https://images.unsplash.com/'+id+'?w=520&q=75'};
