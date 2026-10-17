@@ -3325,7 +3325,7 @@ body.hn-playing.hn-community-bottom-player:not(.hn-player-fullscreen) .hn-player
 :is(#songs,#favoriteSongs,#artistSongs,#playlistTracks,#hnPublicTracks,#homeSongs,#popularSongs) .hn-v154-uploader-avatar{width:30px!important;height:30px!important;min-width:30px!important;border-radius:50%!important;object-fit:cover!important;cursor:pointer}
 :is(#songs,#favoriteSongs,#artistSongs,#playlistTracks,#hnPublicTracks,#homeSongs,#popularSongs) .hn-v97-uploader-name{flex:1!important;min-width:0!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer}
 :is(#playlistTracks,#hnPublicTracks) .hn-v154-remove-track{font-size:0!important}
-:is(#playlistTracks,#hnPublicTracks) .hn-v154-remove-track::after{content:'✕';font-size:25px!important}
+:is(#playlistTracks,#hnPublicTracks) .hn-v154-remove-track::after{content:''!important;display:block!important;width:26px!important;height:26px!important;font-size:0!important;background:#fff!important;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='black' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 7h16M10 4h4M6.5 7l.8 13h9.4l.8-13M10 11v6M14 11v6'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat!important;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='black' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 7h16M10 4h4M6.5 7l.8 13h9.4l.8-13M10 11v6M14 11v6'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat!important}
 @media(max-width:760px){
 :is(#playlistTracks,#hnPublicTracks){grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
 :is(#playlistTracks,#hnPublicTracks)>article.song{padding:8px!important}
@@ -3342,7 +3342,7 @@ body.hn-playing.hn-community-bottom-player:not(.hn-player-fullscreen) .hn-player
 :is(#playlistTracks,#hnPublicTracks)>article.song .hn-song-art-wrap>.art{width:100%!important;height:100%!important;aspect-ratio:1/1!important;object-fit:cover!important}
 :is(#playlistTracks,#hnPublicTracks)>article.song .songBody{width:100%!important;display:block!important}
 :is(#playlistTracks,#hnPublicTracks) article.song .hn-v140-glass-actions>button.hn-v154-remove-track{display:flex!important;visibility:visible!important;opacity:1!important;position:absolute!important;right:8px!important;top:8px!important;left:auto!important;bottom:auto!important;z-index:30!important;width:38px!important;height:38px!important;min-width:38px!important;min-height:38px!important;flex:0 0 38px!important;background:rgba(75,20,38,.65)!important;border:1px solid #ffffff70!important;border-radius:50%!important}
-:is(#playlistTracks,#hnPublicTracks) article.song .hn-v140-glass-actions>button.hn-v154-remove-track::after{content:'✕';font-size:23px!important;color:#fff!important}
+:is(#playlistTracks,#hnPublicTracks) article.song .hn-v140-glass-actions>button.hn-v154-remove-track::after{content:'';font-size:0!important;color:#fff!important}
 @media(max-width:760px){
 :is(#playlistTracks,#hnPublicTracks){grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
 :is(#playlistTracks,#hnPublicTracks)>article.song{padding:8px!important}
@@ -3376,7 +3376,7 @@ body.hn-ready:not(.logged-out) :is(section#artists.panel,section#playlists.panel
 #favoriteSongs>article.song .hn-song-art-wrap>.art{width:100%!important;height:100%!important;object-fit:cover!important}
 :is(#playlistTracks,#hnPublicTracks)>article.song{padding:8px!important}
 :is(#playlistTracks,#hnPublicTracks) article.song .hn-v140-glass-actions>button.hn-v154-remove-track{display:flex!important;position:absolute!important;right:6px!important;left:auto!important;top:6px!important;bottom:auto!important;transform:none!important;width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;max-width:40px!important;max-height:40px!important;border-radius:50%!important;background:rgba(95,25,50,.85)!important}
-:is(#playlistTracks,#hnPublicTracks) article.song .hn-v140-glass-actions>button.hn-v154-remove-track::after{content:'✕';font-size:25px!important}
+:is(#playlistTracks,#hnPublicTracks) article.song .hn-v140-glass-actions>button.hn-v154-remove-track::after{content:'';font-size:0!important}
 }
 </style><style id="hn-v157-playlist-full-card-layout">
 /* On narrow screens playlist tracks are full-size square cover cards, not horizontal list rows. */
