@@ -2576,7 +2576,7 @@ font-size:12px!important;line-height:1.3!important;padding:9px 7px!important;bor
 .hn-v71-menu{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
 .hn-v71-menu[hidden]{display:none!important}
 #playlists.hn-v71-home #hnV71Back,#playlists.hn-v71-home #hnV71SectionOptions{display:none!important}
-#hnV71Controls{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:12px}
+#hnV71Controls{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:12px}#hnV71HomeActions{display:flex;gap:8px;align-items:center;justify-content:flex-end;flex-wrap:wrap;margin-left:auto}#hnV71HomeActions[hidden]{display:none!important}
 #hnV71SectionMenu[hidden]{display:none!important}
 @media(max-width:480px){#hnV71Landing{gap:12px}.hn-v71-list{grid-template-columns:1fr}.hn-v71-cover{height:108px}#playlists #hnV66Switch button{min-height:100px;padding:10px!important;font-size:13px}}
 </style>
@@ -2584,7 +2584,7 @@ font-size:12px!important;line-height:1.3!important;padding:9px 7px!important;bor
 const $=id=>document.getElementById(id),panel=$('playlists');if(!panel||$('hnV71Landing'))return;
 const pub=$('hnPublicPlaylists'),priv=$('hnPlaylistQuickList'),sw=$('hnV66Switch');if(!pub||!priv||!sw)return;
 const landing=document.createElement('div');landing.id='hnV71Landing';panel.insertBefore(landing,sw);
-const controls=document.createElement('div');controls.id='hnV71Controls';controls.innerHTML='<button type="button" class="hn-v71-back" id="hnV71Back">← Alle Playlists</button><button type="button" class="hn-v71-options" id="hnV71SectionOptions" aria-expanded="false">⋯ Optionen</button>';
+const controls=document.createElement('div');controls.id='hnV71Controls';controls.innerHTML='<button type="button" class="hn-v71-back" id="hnV71Back">← Alle Playlists</button><span id="hnV71HomeActions"><button type="button" class="hn-v71-options" id="hnV71NewPlaylist">＋ Neue Playlist</button><button type="button" class="hn-v71-options" id="hnV71SectionOptions" aria-expanded="false">⋯ Optionen</button></span>';
 panel.insertBefore(controls,sw);
 const menu=document.createElement('div');menu.id='hnV71SectionMenu';menu.className='hn-v71-menu';menu.hidden=true;panel.insertBefore(menu,sw);
 let state='home',expanded={public:false,private:false};
@@ -2592,7 +2592,7 @@ const photos=['photo-1516280440614-37939bbacd81','photo-1459749411175-04bf5292ce
 const img=(name,kind)=>{let t=String(name||'').toLowerCase();let id=/reise|travel|safar|mosaf|مسافر/.test(t)?photos[2]:/love|liebe|عاشق/.test(t)?'photo-1518199266791-5375a83190b7':/party|dance|رقص/.test(t)?photos[1]:kind==='public'?photos[1]:photos[0];return 'https://images.unsplash.com/'+id+'?w=520&q=75'};
 function buttons(kind){return [...(kind==='public'?pub:priv).querySelectorAll('button')].filter(b=>!b.closest('[hidden]'))}
 function syncMenu(){menu.replaceChildren();menu.hidden=true;
-if(state==='private'){
+if(state==='home'){
  const selector=document.createElement('select');selector.setAttribute('aria-label','Private Playlist auswählen');
  const placeholder=document.createElement('option');placeholder.value='';placeholder.textContent='Playlist auswählen';selector.append(placeholder);
  for(const original of buttons('private')){const option=document.createElement('option');option.value=String(selector.options.length);option.textContent=(original.getAttribute('data-playlist-name')||original.textContent||'Playlist').trim();option._original=original;selector.append(option)}
@@ -2600,9 +2600,9 @@ if(state==='private'){
  const add=(label,id)=>{const btn=document.createElement('button');btn.type='button';btn.className='hn-v71-options';btn.textContent=label;btn.onclick=()=>{const chosen=selector.selectedOptions[0]?._original;if(!chosen)return;menu.hidden=true;chosen.click();setTimeout(()=>{const action=$(id);if(action&&!action.hidden)action.click()},120)};menu.append(btn)};
  add('✎ Umbenennen','hnSimpleRename');add('🗑 Playlist löschen','hnSimpleDelete');
 }
-$('hnV71SectionOptions').hidden=state!=='private';
+$('hnV71HomeActions').hidden=state!=='home';
 }
-function show(which){state=which;panel.classList.toggle('hn-v71-home',which==='home');menu.hidden=true;$('hnV71Back').hidden=which==='home';$('hnV71SectionOptions').hidden=which!=='private';
+function show(which){state=which;panel.classList.toggle('hn-v71-home',which==='home');menu.hidden=true;$('hnV71Back').hidden=which==='home';$('hnV71HomeActions').hidden=which!=='home';
 if(which==='home'){landing.hidden=false;sw.style.display='none';$('hnPublicBack')?.click();$('hnPlaylistBack')?.click();renderLanding()}
 else{landing.hidden=true;const kind=which.startsWith('public')?'public':'private';const b=sw.querySelectorAll('button')[kind==='public'?0:1];if(b&&!which.endsWith('-detail'))b.click();sw.style.display='none'}
 syncMenu();}
@@ -2610,6 +2610,7 @@ function renderLanding(){landing.replaceChildren();for(const kind of ['public','
 const list=document.createElement('div');list.className='hn-v71-list';for(const original of source.slice(0,expanded[kind]?source.length:3)){const b=document.createElement('button');b.type='button';b.className='hn-v71-item';const picture=document.createElement('img');picture.loading='lazy';picture.alt='';picture.src=original.querySelector('img')?.src||img(original.textContent,kind);const name=document.createElement('span');name.textContent=(original.querySelector('.hn-public-cover-name')?.textContent||[...original.children].find(x=>x.tagName==='SPAN'&&!x.classList.contains('hn-quick-cover')&&!x.classList.contains('hn-v128-more')&&!x.classList.contains('hn-v128-menu'))?.textContent||original.getAttribute('data-playlist-name')||'Playlist').trim();b.append(picture,name);b.onclick=()=>{show(kind);original.click();setTimeout(()=>show(kind+'-detail'),50)};list.append(b)}section.append(list);
 if(source.length>3){const more=document.createElement('button');more.type='button';more.className='hn-v71-more';more.textContent=expanded[kind]?'Weniger anzeigen':'Alle anzeigen →';more.onclick=()=>{expanded[kind]=!expanded[kind];renderLanding()};section.append(more)}landing.append(section)}}
 $('hnV71Back').onclick=()=>show('home');
+$('hnV71NewPlaylist').onclick=()=>{show('private');$('hnSimpleNew')?.click()};
 $('hnV71SectionOptions').onclick=()=>{menu.hidden=!menu.hidden;$('hnV71SectionOptions').setAttribute('aria-expanded',String(!menu.hidden))};
 pub.addEventListener('click',e=>{if(e.target.closest('button'))setTimeout(()=>{if(state==='public')show('public-detail')},60)});
 priv.addEventListener('click',e=>{if(e.target.closest('button'))setTimeout(()=>{if(state==='private')show('private-detail')},60)});
@@ -3401,7 +3402,7 @@ body #playlists #hnSimpleDetail #hnSimpleOptions{display:none!important;visibili
 #hnV161FloatingMenu>button:last-child{margin-bottom:0!important}
 #hnV161FloatingMenu>button:active{background:#644583!important}
 
-#playlists #hnV71Controls #hnV71SectionOptions:not([hidden]){display:inline-flex!important;visibility:visible!important;margin-left:auto!important}
+#playlists #hnV71Controls #hnV71HomeActions #hnV71SectionOptions{display:inline-flex!important;visibility:visible!important}
 #playlists #hnV71SectionMenu:not([hidden]){display:flex!important;visibility:visible!important;justify-content:flex-end!important;align-items:center!important;gap:8px!important;flex-wrap:wrap!important}
 #playlists #hnV71SectionMenu select{max-width:100%;min-height:40px;border-radius:10px;background:#202c45;color:#fff;border:1px solid #71809b;padding:8px}
 </style><script id="hn-v161-unified-playlist-options-script">(()=>{
