@@ -1170,6 +1170,10 @@ f.onclick=async e=>{
    if(button.dataset.songId!==String(s.id))continue;
    button.setAttribute('aria-pressed',String(active));
    button.classList.toggle('hn-v141-filled',active);
+   button.classList.toggle('hn-v145-favorited',active);
+   const label=active?'Aus Favoriten entfernen':'Zu Favoriten hinzufügen';
+   button.setAttribute('aria-label',label);
+   button.title=label;
    const symbol=button.querySelector('.hn-v141-symbol');
    if(symbol)symbol.classList.toggle('hn-v141-filled',active);
    else button.textContent=active?'♥ Favorit':'♡ Favorit';
@@ -2800,7 +2804,7 @@ html,body{max-width:100%;overflow-x:clip}
 #songs .hn-v140-glass-actions .hn-favorite-action[aria-pressed=true] .hn-v141-symbol,#popularSongs .hn-v140-glass-actions .hn-favorite-action[aria-pressed=true] .hn-v141-symbol,#homeSongs .hn-v140-glass-actions .hn-favorite-action[aria-pressed=true] .hn-v141-symbol{fill:#a94edb!important;stroke:#a94edb!important}
 }
 </style><script id="hn-v143-favorite-state">(()=>{
-function update(){for(const b of document.querySelectorAll('.hn-favorite-action')){const active=/♥/.test(b.textContent);b.setAttribute('aria-pressed',String(active));const svg=b.querySelector('.hn-v141-symbol');if(svg){svg.style.fill=active?'#a94edb':'none';svg.style.stroke=active?'#a94edb':'white'}}}
+function update(){for(const b of document.querySelectorAll('.hn-favorite-action')){const active=b.getAttribute('aria-pressed')==='true';b.classList.toggle('hn-v145-favorited',active);const svg=b.querySelector('.hn-v141-symbol');if(svg){svg.classList.toggle('hn-v141-filled',active);svg.style.fill=active?'#ed355f':'none';svg.style.stroke=active?'#ed355f':'white'}}}
 let busy=false;const obs=new MutationObserver(()=>{if(busy)return;busy=true;obs.disconnect();update();obs.observe(document.body,{childList:true,subtree:true});busy=false});function init(){update();obs.observe(document.body,{childList:true,subtree:true})}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();</script><style id="hn-v145-separate-favorite-follow">
 @media(max-width:760px){
@@ -2809,7 +2813,7 @@ let busy=false;const obs=new MutationObserver(()=>{if(busy)return;busy=true;obs.
 #songs article.song .hn-v97-follow,#popularSongs article.song .hn-v97-follow,#homeSongs article.song .hn-v97-follow{display:inline-flex!important;align-items:center!important;justify-content:center!important;margin-left:9px!important;padding:5px 10px!important;font-size:12px!important;line-height:1.2!important}
 }
 </style><script id="hn-v145-separate-favorite-follow-script">(()=>{
-function sync(){for(const rootId of ['songs','popularSongs','homeSongs','favoriteSongs']){const root=document.getElementById(rootId);if(!root)continue;for(const heart of root.querySelectorAll('.hn-v140-glass-actions .hn-favorite-action')){const active=heart.textContent.includes('♥');heart.classList.toggle('hn-v145-favorited',active);heart.classList.remove('hn-v144-following');heart.setAttribute('aria-pressed',String(active));heart.setAttribute('aria-label',active?'Aus Favoriten entfernen':'Zu Favoriten hinzufügen');heart.title=active?'Aus Favoriten entfernen':'Zu Favoriten hinzufügen'}}}
+function sync(){for(const rootId of ['songs','popularSongs','homeSongs','favoriteSongs','playlistTracks','hnPublicTracks']){const root=document.getElementById(rootId);if(!root)continue;for(const heart of root.querySelectorAll('.hn-v140-glass-actions .hn-favorite-action')){const active=heart.getAttribute('aria-pressed')==='true';heart.classList.toggle('hn-v145-favorited',active);heart.classList.remove('hn-v144-following');const label=active?'Aus Favoriten entfernen':'Zu Favoriten hinzufügen';heart.setAttribute('aria-label',label);heart.title=label}}}
 let busy=false;const obs=new MutationObserver(()=>{if(busy)return;busy=true;obs.disconnect();sync();obs.observe(document.body,{childList:true,subtree:true});busy=false});function init(){sync();obs.observe(document.body,{childList:true,subtree:true})}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();</script><style id="hn-v146-simple-glass-playlist-picker">
 #hnPlaylistDialog .hn-modal-panel{background:#122137ed!important;border:1px solid #ffffff38!important;box-shadow:0 16px 50px #0008!important}
@@ -2827,7 +2831,7 @@ let busy=false;const obs=new MutationObserver(()=>{if(busy)return;busy=true;obs.
 #favoriteSongs article.song .hn-v140-glass-actions>button{background:transparent!important;border:0!important;color:white!important;box-shadow:none!important;padding:5px!important;min-width:45px!important}
 #favoriteSongs article.song .hn-v97-follow{display:inline-flex!important}
 #favoriteSongs article.song .hn-v97-uploader-name{font-size:14px!important}
-#favoriteSongs article.song .hn-favorite-action.hn-v145-favorited .hn-v141-symbol{stroke:#ed355f!important;fill:#ed355f!important}
+#favoriteSongs article.song .hn-favorite-action.hn-v145-favorited .hn-v141-symbol,#playlists :is(#playlistTracks,#hnPublicTracks) article.song .hn-favorite-action.hn-v145-favorited .hn-v141-symbol{stroke:#ed355f!important;fill:#ed355f!important}
 }
 </style><style id="hn-v148-single-play-action">
 #songs article.song .actions>button:not(.hn-v148-play-only),#favoriteSongs article.song .actions>button:not(.hn-v148-play-only){display:none!important}
