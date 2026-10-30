@@ -823,6 +823,19 @@ html body :is(#songs,#favoriteSongs,#artistSongs) article.song .hn-song-art-wrap
 html body :is(#songs,#favoriteSongs,#artistSongs) article.song .hn-song-art-wrap>.hn-v140-glass-actions>button:nth-child(-n+3){flex:0 0 44px!important;width:44px!important;height:44px!important;min-width:44px!important;max-width:44px!important;min-height:44px!important}
 html body :is(#songs,#favoriteSongs,#artistSongs) article.song .hn-song-art-wrap>.hn-v140-glass-actions .hn-v141-symbol{width:29px!important;height:29px!important}
 }
+</style><style id="hn-v302-playlist-tabs">
+#hnV302Tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;width:100%;margin:4px 0 22px;border:0;border-bottom:1px solid rgba(255,255,255,.13)}
+#hnV302Tabs button{position:relative;display:flex;align-items:center;justify-content:center;min-height:44px;padding:8px 12px!important;margin:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#aeb8c8!important;font-size:15px;font-weight:650;cursor:pointer;transform:none!important}
+#hnV302Tabs button::after{content:"";position:absolute;left:12%;right:12%;bottom:-1px;height:3px;border-radius:3px 3px 0 0;background:transparent;transition:background .18s}
+#hnV302Tabs button[aria-selected="true"]{color:#fff!important}
+#hnV302Tabs button[aria-selected="true"]::after{background:#1ed760}
+#hnV302Tabs button:focus-visible{outline:2px solid #1ed760;outline-offset:-3px}
+#hnV71OverviewHeader{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+#hnV71OverviewHeader h2{margin:0;font-size:clamp(18px,3vw,24px)}
+#hnV71Controls{display:flex;gap:8px;align-items:center;justify-content:flex-end;flex-wrap:wrap;margin:0}
+#hnV71HomeActions{display:flex;gap:8px;align-items:center;justify-content:flex-end;flex-wrap:wrap;margin:0}
+#hnV71HomeActions[hidden]{display:none!important}
+@media(max-width:480px){#hnV302Tabs{margin-bottom:16px}#hnV302Tabs button{min-height:42px;font-size:14px}}
 </style></head><body class="logged-out"><nav id="hnMobileQuickNav" aria-label="Musiknavigation">
 <a href="#library" aria-label="Musikbibliothek" title="Musikbibliothek"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h4v14H4zM10 3h4v16h-4zM16 7h4v12h-4z"/></svg></a>
 <a href="#artists" aria-label="Künstler A–Z" title="Künstler A–Z"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2M17 4h5M19.5 4v11a2.5 2.5 0 1 1-2.5-2.5"/></svg></a>
@@ -2633,18 +2646,16 @@ font-size:12px!important;line-height:1.3!important;padding:9px 7px!important;bor
 <script id="hn-v71-playlist-navigation-script">(()=>{
 const $=id=>document.getElementById(id),panel=$('playlists');if(!panel||$('hnV71Landing'))return;
 const pub=$('hnPublicPlaylists'),priv=$('hnPlaylistQuickList'),sw=$('hnV66Switch');if(!pub||!priv||!sw)return;
-const landing=document.createElement('div');landing.id='hnV71Landing';panel.insertBefore(landing,sw);
-const controls=document.createElement('div');controls.id='hnV71Controls';controls.innerHTML='<button type="button" class="hn-v71-back" id="hnV71Back">← Alle Playlists</button><span id="hnV71HomeActions"><button type="button" class="hn-v71-options" id="hnV71NewPlaylist">＋ Neue Playlist</button><button type="button" class="hn-v71-options" id="hnV71SectionOptions" aria-expanded="false">⋯ Optionen</button></span>';
-panel.insertBefore(controls,sw);
-const overviewHeader=document.createElement('div');overviewHeader.id='hnV71OverviewHeader';const overviewTitle=document.createElement('h2');overviewTitle.textContent='Meine Playlists';overviewHeader.append(overviewTitle,controls);landing.prepend(overviewHeader)
-const menu=document.createElement('div');menu.id='hnV71SectionMenu';menu.className='hn-v71-menu';menu.hidden=true;panel.insertBefore(menu,sw);
-overviewHeader.insertAdjacentElement('afterend',menu)
-let state='home',expanded={public:false,private:false};
-const photos=['photo-1516280440614-37939bbacd81','photo-1459749411175-04bf5292ceea','photo-1500534623283-312aade485b7','photo-1493225457124-a3eb161ffa5f'];
-const img=(name,kind)=>{let t=String(name||'').toLowerCase();let id=/reise|travel|safar|mosaf|مسافر/.test(t)?photos[2]:/love|liebe|عاشق/.test(t)?'photo-1518199266791-5375a83190b7':/party|dance|رقص/.test(t)?photos[1]:kind==='public'?photos[1]:photos[0];return 'https://images.unsplash.com/'+id+'?w=520&q=75'};
+const landing=document.createElement('div');landing.id='hnV71Landing';landing.hidden=true;panel.insertBefore(landing,sw);
+const controls=document.createElement('div');controls.id='hnV71Controls';controls.innerHTML='<button type="button" class="hn-v71-back" id="hnV71Back" hidden>← Alle Playlists</button><span id="hnV71HomeActions"><button type="button" class="hn-v71-options" id="hnV71NewPlaylist">＋ Neue Playlist</button><button type="button" class="hn-v71-options" id="hnV71SectionOptions" aria-expanded="false">⋯ Optionen</button></span>';
+const overviewHeader=document.createElement('div');overviewHeader.id='hnV71OverviewHeader';const overviewTitle=document.createElement('h2');overviewTitle.textContent='Meine Playlists';overviewHeader.append(overviewTitle,controls);panel.insertBefore(overviewHeader,sw);
+const tabs=document.createElement('nav');tabs.id='hnV302Tabs';tabs.setAttribute('aria-label','Playlist-Bereiche');
+const publicTab=document.createElement('button'),privateTab=document.createElement('button');publicTab.type=privateTab.type='button';publicTab.textContent='Öffentlich';privateTab.textContent='Privat';publicTab.setAttribute('role','tab');privateTab.setAttribute('role','tab');tabs.append(publicTab,privateTab);overviewHeader.insertAdjacentElement('afterend',tabs);
+const menu=document.createElement('div');menu.id='hnV71SectionMenu';menu.className='hn-v71-menu';menu.hidden=true;tabs.insertAdjacentElement('afterend',menu);
+let state='public';
 function buttons(kind){return [...(kind==='public'?pub:priv).querySelectorAll('button')].filter(b=>!b.closest('[hidden]'))}
 function syncMenu(){menu.replaceChildren();menu.hidden=true;
-if(state==='home'){
+if(state.startsWith('private')){
  const selector=document.createElement('select');selector.setAttribute('aria-label','Private Playlist auswählen');
  const placeholder=document.createElement('option');placeholder.value='';placeholder.textContent='Playlist auswählen';selector.append(placeholder);
  for(const original of buttons('private')){const option=document.createElement('option');option.value=String(selector.options.length);option.textContent=(original.getAttribute('data-playlist-name')||original.textContent||'Playlist').trim();option._original=original;selector.append(option)}
@@ -2652,25 +2663,34 @@ if(state==='home'){
  const add=(label,id)=>{const btn=document.createElement('button');btn.type='button';btn.className='hn-v71-options';btn.textContent=label;btn.onclick=()=>{const chosen=selector.selectedOptions[0]?._original;if(!chosen)return;menu.hidden=true;chosen.click();setTimeout(()=>{const action=$(id);if(action&&!action.hidden)action.click()},120)};menu.append(btn)};
  add('✎ Umbenennen','hnSimpleRename');add('🗑 Playlist löschen','hnSimpleDelete');
 }
-$('hnV71HomeActions').hidden=state!=='home';
+$('hnV71HomeActions').hidden=!state.startsWith('private');
 }
-function show(which){state=which;panel.classList.toggle('hn-v71-home',which==='home');menu.hidden=true;$('hnV71Back').hidden=which==='home';$('hnV71HomeActions').hidden=which!=='home';
-if(which==='home'){landing.hidden=false;sw.style.display='none';$('hnPublicBack')?.click();$('hnPlaylistBack')?.click();renderLanding()}
-else{landing.hidden=true;const kind=which.startsWith('public')?'public':'private';const b=sw.querySelectorAll('button')[kind==='public'?0:1];if(b&&!which.endsWith('-detail'))b.click();sw.style.display='none'}
-syncMenu();}
-function renderLanding(){landing.replaceChildren(overviewHeader);for(const kind of ['public','private']){const source=buttons(kind);const section=document.createElement('section');section.className='hn-v71-section';const head=document.createElement('div');head.className='hn-v71-head';const title=document.createElement('strong');title.className='hn-v71-title';title.textContent=kind==='public'?'🌍 Öffentliche Playlists':'🔒 Meine Playlists';title.setAttribute('role','button');title.setAttribute('tabindex','0');title.style.cursor='pointer';title.onclick=()=>show(kind);title.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show(kind)}};head.append(title);section.append(head);const cover=document.createElement('img');cover.className='hn-v71-cover';cover.loading='lazy';cover.alt=title.textContent;cover.src=img('',kind);cover.onclick=()=>show(kind);cover.setAttribute('role','button');cover.setAttribute('tabindex','0');cover.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show(kind)}};section.append(cover);
-const list=document.createElement('div');list.className='hn-v71-list';for(const original of source.slice(0,expanded[kind]?source.length:3)){const b=document.createElement('button');b.type='button';b.className='hn-v71-item';const picture=document.createElement('img');picture.loading='lazy';picture.alt='';picture.src=original.querySelector('img')?.src||img(original.textContent,kind);const name=document.createElement('span');name.textContent=(original.querySelector('.hn-public-cover-name')?.textContent||[...original.children].find(x=>x.tagName==='SPAN'&&!x.classList.contains('hn-quick-cover')&&!x.classList.contains('hn-v128-more')&&!x.classList.contains('hn-v128-menu'))?.textContent||original.getAttribute('data-playlist-name')||'Playlist').trim();b.append(picture,name);b.onclick=()=>{show(kind);original.click();setTimeout(()=>show(kind+'-detail'),50)};list.append(b)}section.append(list);
-if(source.length>3){const more=document.createElement('button');more.type='button';more.className='hn-v71-more';more.textContent='Alle anzeigen →';more.onclick=()=>show(kind);section.append(more)}landing.append(section)}}
-$('hnV71Back').onclick=()=>show('home');
+function show(which){
+ if(which==='home')which='public';
+ state=which;
+ const kind=which.startsWith('public')?'public':'private';
+ panel.classList.remove('hn-v71-home');
+ landing.hidden=true;
+ sw.style.display='none';
+ $('hnV71Back').hidden=true;
+ publicTab.setAttribute('aria-selected',String(kind==='public'));
+ privateTab.setAttribute('aria-selected',String(kind==='private'));
+ publicTab.tabIndex=kind==='public'?0:-1;privateTab.tabIndex=kind==='private'?0:-1;
+ $('hnPublicBack')?.click();
+ if(kind==='private')$('hnPlaylistBack')?.click();
+ const b=sw.querySelectorAll('button')[kind==='public'?0:1];if(b&&!which.endsWith('-detail'))b.click();
+ syncMenu();
+}
+publicTab.onclick=()=>show('public');privateTab.onclick=()=>show('private');
+publicTab.onkeydown=privateTab.onkeydown=e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();const next=e.currentTarget===publicTab?privateTab:publicTab;next.focus();next.click()}};
 $('hnV71NewPlaylist').onclick=()=>{show('private');$('hnSimpleNew')?.click()};
 $('hnV71SectionOptions').onclick=()=>{menu.hidden=!menu.hidden;$('hnV71SectionOptions').setAttribute('aria-expanded',String(!menu.hidden))};
 pub.addEventListener('click',e=>{if(e.target.closest('button'))setTimeout(()=>{if(state==='public')show('public-detail')},60)});
 priv.addEventListener('click',e=>{if(e.target.closest('button'))setTimeout(()=>{if(state==='private')show('private-detail')},60)});
-const observer=new MutationObserver(()=>{if(state==='home'&&!landing.hidden){clearTimeout(landing._refresh);landing._refresh=setTimeout(renderLanding,180)}});observer.observe(pub,{childList:true,subtree:true});observer.observe(priv,{childList:true,subtree:true});
-document.querySelectorAll('a[href="#playlists"]').forEach(a=>a.addEventListener('click',()=>setTimeout(()=>show('home'),0)));
+document.querySelectorAll('a[href="#playlists"]').forEach(a=>a.addEventListener('click',()=>setTimeout(()=>show(/Meine Playlists/i.test(a.textContent)?'private':'public'),0)));
 $('hnPublicBack')?.addEventListener('click',()=>{if(state==='public-detail')setTimeout(()=>show('public'),0)});
 $('hnPlaylistBack')?.addEventListener('click',()=>{if(state==='private-detail')setTimeout(()=>show('private'),0)});
-show('home');
+show('public');
 })();</script><style id="hn-v124-hide-repeated-group-tiles">
 /* V124: legacy V71 !important grid overrides inline display:none; hide switch in every state. */
 #playlists #hnV66Switch{display:none!important}
