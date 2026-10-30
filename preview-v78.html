@@ -54,6 +54,47 @@ body{background:#090909!important} .sidebar{background:#080808!important;border-
 }
 </style>
 <style id="hn-v242-mobile-nav-polish">
+/* V294: one shared glass frame around the existing four quick-navigation links. */
+#hnMobileQuickNav{
+ padding:8px 10px!important;
+ gap:8px!important;
+ border:1px solid rgba(255,255,255,.24);
+ border-radius:22px;
+ background:rgba(13,22,36,.48);
+ box-shadow:0 8px 28px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.16);
+ -webkit-backdrop-filter:blur(18px);
+ backdrop-filter:blur(18px);
+}
+#hnMobileQuickNav a{
+ display:grid;
+ place-items:center;
+ width:48px;
+ height:48px;
+ border:0!important;
+ border-radius:14px!important;
+ background:transparent!important;
+ box-shadow:none!important;
+ -webkit-backdrop-filter:none!important;
+ backdrop-filter:none!important;
+}
+#hnMobileQuickNav a[aria-current="page"]{background:rgba(255,255,255,.14)!important}
+@media(min-width:761px){
+ body:not(.logged-out):not(:has(#community.hn-current)) #hnMobileQuickNav{
+  display:flex!important;
+  position:fixed;
+  left:50%;
+  bottom:18px;
+  transform:translateX(-50%);
+  z-index:102;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  pointer-events:none;
+ }
+ body:not(.logged-out) #hnMobileQuickNav a{pointer-events:auto}
+ body.hn-playing:not(.hn-player-fullscreen) #hnMobileQuickNav{bottom:86px}
+ body.hn-player-fullscreen #hnMobileQuickNav{display:none!important}
+}
 @media(max-width:760px){
  body:not(.logged-out) #hnMobileQuickNav{bottom:calc(env(safe-area-inset-bottom,0px) + 8px)!important;gap:clamp(10px,3.5vw,19px)}
  body.hn-playing:not(.hn-player-fullscreen) #hnMobileQuickNav{bottom:calc(env(safe-area-inset-bottom,0px) + 87px)!important}
@@ -65,6 +106,8 @@ body{background:#090909!important} .sidebar{background:#080808!important;border-
  body:not(.logged-out) #community .hn-social-tabs{bottom:calc(env(safe-area-inset-bottom,0px) + 8px)!important}
  body.hn-playing:not(.hn-player-fullscreen) #community .hn-social-tabs{bottom:calc(env(safe-area-inset-bottom,0px) + 87px)!important}
  body:not(.logged-out) main{padding-bottom:110px!important}
+ body:not(.logged-out) #hnMobileQuickNav a{background:transparent!important;border:0!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+ body:not(.logged-out) #hnMobileQuickNav a[aria-current="page"]{background:rgba(255,255,255,.14)!important}
  body.hn-player-fullscreen #hnMobileQuickNav,body.hn-player-fullscreen #hnMobileSideNav{display:none!important}
 }
 </style>
