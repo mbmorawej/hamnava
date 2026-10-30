@@ -138,3 +138,46 @@ shareButton.onclick=async()=>{const id=window.hnBulkUserId?.(),db=window.hnBulkD
 (()=>{const css=document.createElement('style');css.textContent='@media(max-width:760px){html{width:100%;max-width:100%;overflow-x:clip}body{width:100%;max-width:100%;min-width:0!important;overflow-x:clip!important}body main,body header,body .panel,body .songs,body .song,body .hn-v97-recent{max-width:100%!important;min-width:0!important;box-sizing:border-box!important}body .hn-hero,body .hero,body .hn-social-heading{max-width:100%!important;min-width:0!important;overflow-wrap:anywhere}body img{max-width:100%}body .songs{grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))!important}body .hn-member-song-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))!important}body h1,body h2,body h3,body p{overflow-wrap:anywhere}}';document.head.append(css);function init(){const own=document.querySelector('#community .hn-v97-recent h3');if(own)own.textContent='🎵 Meine letzten 5 öffentlichen Songs';const member=document.querySelector('#member-profile .hn-member-section h3');if(member)member.textContent='🎵 Letzte 5 öffentliche Songs';window.addEventListener('hashchange',()=>{if(location.hash==='#community')setTimeout(()=>window.hnV97RenderRecent?.(),500)})}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init()})();
 /* V100: followed state styling and refresh on return to app. */
 (()=>{const style=document.createElement('style');style.textContent='.hn-v97-follow.hn-v100-followed{background:#523d6c!important;border-color:#bda0dc!important}.hn-v100-status{font-size:11px;color:#d9b9fa;font-weight:700}.hn-v100-status[hidden]{display:none!important}';document.head.append(style);document.addEventListener('visibilitychange',()=>{if(!document.hidden)window.hnV97Refresh?.()});window.addEventListener('focus',()=>window.hnV97Refresh?.());window.addEventListener('hashchange',()=>setTimeout(()=>window.hnV97Refresh?.(),250))})();
+
+/* V303: align the existing Community edit, settings and publish/share actions in one row. */
+(()=>{function init(){
+ const page=document.getElementById('community');
+ if(!page||page.dataset.hnV303ActionsReady==='1')return;
+ const profile=page.querySelector('.hn-v95-profile');
+ const edit=page.querySelector('.hn-v95-edit');
+ const gear=page.querySelector('.hn-v181-profile-gear');
+ const publish=page.querySelector('.hn-v183-profile-share');
+ if(!profile||!edit||!gear||!publish)return;
+ page.dataset.hnV303ActionsReady='1';
+ let row=page.querySelector('.hn-v303-profile-actions');
+ if(!row){row=document.createElement('div');row.className='hn-v303-profile-actions';row.hidden=true;profile.after(row)}
+ if(edit.parentElement!==row)row.append(edit);
+ if(gear.parentElement!==row)row.append(gear);
+ if(publish.parentElement!==row)row.append(publish);
+ edit.textContent='Edit';
+ edit.setAttribute('aria-label','Profil bearbeiten');
+ edit.title='Profil bearbeiten';
+ gear.textContent='⚙ Einstellungen';
+ gear.setAttribute('aria-label','Community-Einstellungen');
+ gear.title='Community-Einstellungen';
+ publish.textContent='↗ Veröffentlichen';
+ publish.setAttribute('aria-label','Profil veröffentlichen und teilen');
+ publish.title='Profil veröffentlichen und teilen';
+ const style=document.createElement('style');
+ style.id='hn-v303-community-actions-row';
+ style.textContent=`
+ #community .hn-v303-profile-actions{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:9px!important;width:100%!important;min-width:0!important;margin:0 0 14px!important;flex-wrap:nowrap!important}
+ #community .hn-v303-profile-actions[hidden]{display:none!important}
+ #community .hn-v303-profile-actions button{position:static!important;inset:auto!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:6px!important;flex:1 1 0!important;width:auto!important;min-width:0!important;max-width:none!important;height:auto!important;min-height:40px!important;padding:9px 10px!important;margin:0!important;border:1px solid #965dc5!important;border-radius:11px!important;background:#35234e!important;color:#fff!important;box-shadow:none!important;font-size:13px!important;font-weight:700!important;line-height:1.2!important;white-space:nowrap!important;cursor:pointer!important}
+ #community .hn-v303-profile-actions button[hidden]{display:none!important}
+ #community .hn-v303-profile-actions #hnV95Edit{display:inline-flex!important}
+ #community .hn-v303-profile-actions button:focus-visible{outline:2px solid #fff!important;outline-offset:2px!important}
+ @media(max-width:430px){#community .hn-v303-profile-actions{gap:6px!important}#community .hn-v303-profile-actions button{min-height:38px!important;padding:8px 5px!important;font-size:11px!important;gap:4px!important}}
+ `;
+ document.head.append(style);
+ const sync=()=>{row.hidden=edit.hidden||gear.hidden||publish.hidden};
+ new MutationObserver(sync).observe(row,{attributes:true,attributeFilter:['hidden'],subtree:true});
+ sync();
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
