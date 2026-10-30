@@ -2365,7 +2365,7 @@ window.hnManageOpen=function(which){
 <script id="hn-pwa-v44">
 (function(){
  if('serviceWorker' in navigator&&location.protocol==='https:'){
-  window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js?v=48',{scope:'./',updateViaCache:'none'}).catch(err=>console.warn('PWA:',err)));
+  window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js?v=49',{scope:'./',updateViaCache:'none'}).catch(err=>console.warn('PWA:',err)));
  }
  const box=document.getElementById('hnPwaInstall'),action=document.getElementById('hnPwaAction'),help=document.getElementById('hnPwaHelp');
  let deferred=null;
