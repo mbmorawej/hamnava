@@ -3801,4 +3801,14 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  updateActive();syncClose();
 })();
 </script>
+<style id="hn-v297-community-profile-edit-visibility">
+/* V297: the active mobile Community profile must not remain hidden by V176. */
+@media(max-width:760px){
+ #community #hnV168Dashboard{display:block!important;visibility:visible!important;opacity:1!important}
+ #community #hnV168AvatarActions{grid-column:1!important;grid-row:1!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;width:100%!important;min-width:0!important}
+ #community #hnV168AvatarActions #hnMobileProfile{display:grid!important;place-items:center!important;width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;max-width:40px!important;max-height:40px!important;margin:0!important;padding:0!important;border:1px solid rgba(255,255,255,.38)!important;border-radius:50%!important;background:rgba(18,29,46,.78)!important;color:#fff!important;box-shadow:0 4px 14px #0005,inset 0 1px 0 #ffffff30!important;cursor:pointer!important}
+ #community #hnV168AvatarActions #hnMobileProfile svg{display:block!important;width:20px!important;height:20px!important;fill:none!important;stroke:currentColor!important;stroke-width:1.9!important;stroke-linecap:round!important;stroke-linejoin:round!important}
+ #community #hnV168Bio{grid-column:1/-1!important;grid-row:2!important;position:static!important;min-width:0!important;overflow-wrap:anywhere!important}
+}
+</style>
 </body></html>
