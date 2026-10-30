@@ -3801,14 +3801,43 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  updateActive();syncClose();
 })();
 </script>
-<style id="hn-v297-community-profile-edit-visibility">
-/* V297: the active mobile Community profile must not remain hidden by V176. */
+<!-- V298: restore the approved V95 Community profile; V297 dashboard visibility override removed. -->
+<style id="hn-v298-approved-profile-edit">
 @media(max-width:760px){
- #community #hnV168Dashboard{display:block!important;visibility:visible!important;opacity:1!important}
- #community #hnV168AvatarActions{grid-column:1!important;grid-row:1!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;width:100%!important;min-width:0!important}
- #community #hnV168AvatarActions #hnMobileProfile{display:grid!important;place-items:center!important;width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;max-width:40px!important;max-height:40px!important;margin:0!important;padding:0!important;border:1px solid rgba(255,255,255,.38)!important;border-radius:50%!important;background:rgba(18,29,46,.78)!important;color:#fff!important;box-shadow:0 4px 14px #0005,inset 0 1px 0 #ffffff30!important;cursor:pointer!important}
- #community #hnV168AvatarActions #hnMobileProfile svg{display:block!important;width:20px!important;height:20px!important;fill:none!important;stroke:currentColor!important;stroke-width:1.9!important;stroke-linecap:round!important;stroke-linejoin:round!important}
- #community #hnV168Bio{grid-column:1/-1!important;grid-row:2!important;position:static!important;min-width:0!important;overflow-wrap:anywhere!important}
+ #community .hn-v298-avatar-actions{display:flex!important;flex:0 0 auto!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;min-width:0!important}
+ #community .hn-v298-avatar-actions .hn-v95-avatar{display:block!important}
+ #community .hn-v298-avatar-actions #hnMobileProfile{display:grid!important;place-items:center!important;width:38px!important;height:38px!important;min-width:38px!important;min-height:38px!important;max-width:38px!important;max-height:38px!important;margin:0!important;padding:0!important;border:1px solid rgba(255,255,255,.38)!important;border-radius:50%!important;background:rgba(18,29,46,.78)!important;color:#fff!important;box-shadow:0 4px 14px #0005,inset 0 1px 0 #ffffff30!important;cursor:pointer!important}
+ #community .hn-v298-avatar-actions #hnMobileProfile svg{display:block!important;width:19px!important;height:19px!important;fill:none!important;stroke:currentColor!important;stroke-width:1.9!important;stroke-linecap:round!important;stroke-linejoin:round!important}
+ #community .hn-v95-profile{align-items:center!important}
 }
 </style>
+<script id="hn-v298-approved-profile-edit-script">(()=>{
+ const page=document.getElementById('community');
+ if(!page||page.dataset.hnV298EditReady==='1')return;
+ page.dataset.hnV298EditReady='1';
+ function place(){
+  const profile=page.querySelector('.hn-v95-profile');
+  const avatar=profile?.querySelector('.hn-v95-avatar');
+  const button=document.getElementById('hnMobileProfile');
+  if(!profile||!avatar||!button)return;
+  let wrapper=profile.querySelector('.hn-v298-avatar-actions');
+  if(!wrapper){
+   wrapper=document.createElement('div');
+   wrapper.className='hn-v298-avatar-actions';
+   avatar.before(wrapper);
+   wrapper.append(avatar);
+  }else if(avatar.parentElement!==wrapper)wrapper.append(avatar);
+  if(button.parentElement!==wrapper)wrapper.append(button);
+  button.setAttribute('aria-label','Mein Profil bearbeiten');
+  button.title='Mein Profil bearbeiten';
+  button.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"/></svg>';
+ }
+ place();
+ const observer=new MutationObserver(place);
+ observer.observe(page,{childList:true,subtree:true});
+ const retry=()=>{place();if(page.querySelector('.hn-v95-profile')?.hidden===false)observer.disconnect()};
+ page.addEventListener('click',()=>{place();setTimeout(place,0)},{passive:true});
+ window.addEventListener('hashchange',()=>setTimeout(place,120));
+ setTimeout(retry,250);
+})();</script>
 </body></html>
