@@ -176,7 +176,8 @@ shareButton.onclick=async()=>{const id=window.hnBulkUserId?.(),db=window.hnBulkD
  `;
  document.head.append(style);
  const sync=()=>{row.hidden=edit.hidden||gear.hidden||publish.hidden};
- new MutationObserver(sync).observe(row,{attributes:true,attributeFilter:['hidden'],subtree:true});
+ const visibilityObserver=new MutationObserver(sync);
+ [edit,gear,publish].forEach(button=>visibilityObserver.observe(button,{attributes:true,attributeFilter:['hidden']}));
  sync();
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
