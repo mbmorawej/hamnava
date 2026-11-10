@@ -151,7 +151,6 @@ shareButton.onclick=async()=>{const id=window.hnBulkUserId?.(),db=window.hnBulkD
  page.dataset.hnV303ActionsReady='1';
  let row=page.querySelector('.hn-v303-profile-actions');
  if(!row){row=document.createElement('div');row.className='hn-v303-profile-actions';row.hidden=true;profile.after(row)}
- if(edit.parentElement!==row)row.append(edit);
  if(gear.parentElement!==row)row.append(gear);
  if(publish.parentElement!==row)row.append(publish);
  edit.textContent='Edit';
@@ -175,9 +174,9 @@ shareButton.onclick=async()=>{const id=window.hnBulkUserId?.(),db=window.hnBulkD
  @media(max-width:430px){#community .hn-v303-profile-actions{gap:6px!important}#community .hn-v303-profile-actions button{min-height:38px!important;padding:8px 5px!important;font-size:11px!important;gap:4px!important}}
  `;
  document.head.append(style);
- const sync=()=>{row.hidden=edit.hidden||gear.hidden||publish.hidden};
+ const sync=()=>{row.hidden=gear.hidden||publish.hidden};
  const visibilityObserver=new MutationObserver(sync);
- [edit,gear,publish].forEach(button=>visibilityObserver.observe(button,{attributes:true,attributeFilter:['hidden']}));
+ [gear,publish].forEach(button=>visibilityObserver.observe(button,{attributes:true,attributeFilter:['hidden']}));
  sync();
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
